@@ -1,0 +1,22 @@
+using UnityEngine;
+
+public interface IInteractable
+{
+
+}
+
+public interface IEscalable
+{
+    public Vector3 GetMinScale();
+    public Vector3 GetMaxScale();
+}
+public interface IRotable
+{
+    public bool CanRotateInY();
+    public bool CanRotateInZ();
+}
+public interface IPaintable
+{
+    public void InteractWithBrush(bool isOn2D);
+    public void DropWithBrush(bool isOn2D);
+}

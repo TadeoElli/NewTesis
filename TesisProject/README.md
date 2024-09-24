@@ -1,2 +1,0 @@
-# TesisProject
-La tesis

@@ -7,6 +7,7 @@ public class SquadTool : Tools
     private Rigidbody objectiveRB;
     private Transform objectiveTr;
     [SerializeField] private Transform gimball;
+    [SerializeField] private GameObject gimballGizmo2D, gimballGizmoPerspective;
     [Header("Parameters")]
     [SerializeField] private float rotationSpeed = 1f;  // Sensibilidad de rotación
     private Vector3 lastMousePosition;                  // Última posición del mouse para calcular el movimiento
@@ -15,17 +16,28 @@ public class SquadTool : Tools
     public override void Awake()
     {
         base.Awake();
-        playerController.OnPerspectiveSwitch += DropInteractable;
-        playerController.OnToolDesinteract += DropInteractable;
     }
 
     public override void Interact(GameObject interactable, bool isPerspective2D)
     {
         if(!interactable.TryGetComponent<IRotable>(out IRotable component))
             return;
+        playerController.OnPerspectiveSwitch += DropInteractable;
+        playerController.OnToolDesinteract += DropInteractable;
+        playerController.OnToolSwitchCheck += DropInteractable;
+        base.Interact(interactable, isPerspective2D); // Llama a la lógica común de interactuar
         canRotateInY = component.CanRotateInY();
         canRotateInZ = component.CanRotateInZ();
-        base.Interact(interactable, isPerspective2D); // Llama a la lógica común de interactuar
+        if (isOn2D)
+        {
+            gimballGizmo2D.SetActive(true);
+            gimballGizmo2D.transform.localScale = objective.transform.localScale / 3;
+        }
+        else
+        {
+            gimballGizmoPerspective.SetActive(true);
+            gimballGizmoPerspective.transform.localScale = objective.transform.localScale / 3;
+        }
         objectiveRB = objective.GetComponent<Rigidbody>();
         objectiveRB.isKinematic = true;
         objectiveTr = objective.GetComponent<Transform>();
@@ -42,6 +54,9 @@ public class SquadTool : Tools
         objectiveTr = null;
         ResetGimball();
         base.DropInteractable();
+        playerController.OnPerspectiveSwitch -= DropInteractable;
+        playerController.OnToolDesinteract -= DropInteractable;
+        playerController.OnToolSwitchCheck -= DropInteractable;
     }
 
     private void ResetGimball()
@@ -49,6 +64,10 @@ public class SquadTool : Tools
         gimball.position = Vector3.zero;
         gimball.rotation = Quaternion.identity;
         gimball.localScale = Vector3.one;
+        gimballGizmo2D.SetActive(false);   
+        gimballGizmoPerspective.SetActive(false);
+        gimballGizmo2D.transform.localScale = Vector3.one;
+        gimballGizmoPerspective.transform.localScale = Vector3.one;
     }
 
     // Update is called once per frame

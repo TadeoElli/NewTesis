@@ -96,27 +96,22 @@ public class MouseController : MonoBehaviour
         {
             case ToolTypes.Brush:
                 spriteRenderer.sprite = brushSprite;
-                activeTool?.DropInteractable();
                 activeTool = brushTool;
                 break;
             case ToolTypes.Ruler:
                 spriteRenderer.sprite = rulerSprite;
-                activeTool?.DropInteractable();
                 activeTool = rulerTool;
                 break;
             case ToolTypes.Squad:
                 spriteRenderer.sprite = squadSprite;
-                activeTool?.DropInteractable();
                 activeTool = squadTool;
                 break;
             case ToolTypes.Compass:
                 spriteRenderer.sprite = compassSprite;
-                activeTool?.DropInteractable();
                 activeTool = compassTool;
                 break;
             case ToolTypes.Eraser:
                 spriteRenderer.sprite = eraserSprite;
-                activeTool?.DropInteractable();
                 activeTool = eraseTool;
                 break;
             default:

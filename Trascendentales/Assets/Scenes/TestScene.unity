@@ -2571,10 +2571,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   brushSprite: {fileID: 21300000, guid: 335a783214c0199409e4217427b6e9c2, type: 3}
-  rulerSprite: {fileID: 0}
-  squadSprite: {fileID: 0}
-  compassSprite: {fileID: 0}
-  eraserSprite: {fileID: 0}
+  rulerSprite: {fileID: 21300000, guid: 516822657a61ce8418470a65a83ea6ea, type: 3}
+  squadSprite: {fileID: 21300000, guid: a6e27c50ec91f7e4195d64bf28b64b5b, type: 3}
+  compassSprite: {fileID: 21300000, guid: 776d08160e5463542a7c3d604d9982e1, type: 3}
+  eraserSprite: {fileID: 21300000, guid: 6688753378ea4c24db0650f17359a8b4, type: 3}
   planeOffset: 5
   brushTool: {fileID: 1735323471}
   rulerTool: {fileID: 41969146}
@@ -2701,6 +2701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b04dd67aa4d7641b97b54697535117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rb: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -4965,8 +4966,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf732279fa87b142938982810849f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oldPosition: {x: 10, y: -1.58, z: 28}
-  newPosition: {x: 10, y: -1.58, z: 5}
+  oldPosition: {x: 77, y: -1.58, z: 28}
+  newPosition: {x: 77, y: -1.58, z: 5}
   interactionForBrush: 1
   interactionForEraser: 0
 --- !u!114 &1939451964

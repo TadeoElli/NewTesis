@@ -6,12 +6,11 @@ using UnityEngine.Animations;
 public class CompassTool : Tools
 {
     [SerializeField] private Transform gimball;
+    [SerializeField] private float maxRadius; // Radio máximo permitido
     [SerializeField] private LayerMask interactableLayer;
-    private float maxRadius; // Radio máximo permitido
     private ParentConstraint parentConstraint; // El constraint para la rotación
     private Vector3 initialMousePosition;
     private GameObject firstObject;
-    private ICompassable compassable;
     private GameObject secondObject;
     private float currentRadius;
     private bool isDragging = false;
@@ -23,24 +22,20 @@ public class CompassTool : Tools
 
     public override void Interact(GameObject interactable, bool isPerspective2D)
     {
+        playerController.OnToolDesinteract += TryAttachObject;
         playerController.OnToolDesinteract += DropInteractable;
-        playerController.OnPerspectiveSwitch += ResetDragging;
-        playerController.OnPerspectiveSwitch += DropInteractable;
         if(!interactable.TryGetComponent<ICompassable>(out ICompassable component))
             return;
-        compassable = component;
-        compassable.OnEraserInteract += ResetDragging; // Accionar la interacción del primer objeto
-        compassable.OnEraserInteract += DropInteractable; // Accionar la interacción del primer objeto
         if (isDragging)
         {
             ResetConstraint();
         }
         ResetGimball();
-        gimball.position = interactable.transform.position;
         gimball.SetParent(interactable.transform);
         firstObject = gimball.gameObject;
         maxRadius = component.GetMaxRadius();
         base.Interact(interactable, isPerspective2D);
+        //firstObject.InteractWithCompass(); // Accionar la interacción del primer objeto
         isDragging = true;
         initialMousePosition = Input.mousePosition;
     }
@@ -59,15 +54,11 @@ public class CompassTool : Tools
         {
             // En 2D, circunferencia en el eje Z
             Debug.DrawLine(firstObject.transform.position, firstObject.transform.position + Vector3.right * currentRadius, Color.red);
-            if(parentConstraint != null)
-                parentConstraint.translationAxis = Axis.X | Axis.Y;
         }
         else
         {
             // En 2.5D, circunferencia en el eje Y
             Debug.DrawLine(firstObject.transform.position, firstObject.transform.position + Vector3.forward * currentRadius, Color.red);
-            if(parentConstraint != null)
-                parentConstraint.translationAxis = Axis.X | Axis.Z;
         }
     }
 
@@ -80,27 +71,20 @@ public class CompassTool : Tools
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, interactableLayer))
         {
             if (!hit.collider.TryGetComponent<IInteractable>(out IInteractable component))
-            {
-                isDragging = false;
                 return;
-            }
             // Si el objeto es interactuable, atachear al gimball
-            if (!component.IsAtachable() || hit.collider.gameObject == objective)
+            if (!component.IsAtachable())
             {
                 isDragging = false;
                 return;
             }
 
             secondObject = hit.collider.gameObject;
-            secondObject.GetComponent<Rigidbody>().isKinematic = true;
             //secondObject.InteractWithCompass();
 
             // Configurar el constraint para que el segundo objeto siga la rotación del gimball
             if (parentConstraint != null)
-            {
-                isDragging = false;
                 return;
-            }
             ParentConstraint constraint = secondObject.AddComponent<ParentConstraint>();
             parentConstraint = constraint;
             ConstraintSource source = new ConstraintSource();
@@ -112,22 +96,15 @@ public class CompassTool : Tools
             parentConstraint.constraintActive = true;
 
             parentConstraint.locked = true; // Mantener el offset original de la relación
-
-            
         }
         else
-        {
             isDragging = false;
-        }
     }
 
     public override void DropInteractable()
     {
-        if (isDragging)
-            TryAttachObject();        
         if (!isDragging)
         {
-            ResetConstraint();
             if (firstObject != null)
             {
                 //firstObject.DropWithCompass();
@@ -135,23 +112,13 @@ public class CompassTool : Tools
             }
             if (secondObject != null)
             {
-                secondObject.GetComponent<Rigidbody>().isKinematic = false;
                 //secondObject.DropWithCompass();
                 secondObject = null;
             }
-            compassable.OnEraserInteract -= ResetDragging;
-            compassable.OnEraserInteract -= DropInteractable;
-            compassable = null;
-            ResetGimball();
         }
-        base.DropInteractable();
+        playerController.OnToolDesinteract -= TryAttachObject;
         playerController.OnToolDesinteract -= DropInteractable;
-    }
-    private void ResetDragging()
-    {
-        isDragging = false;
-        playerController.OnPerspectiveSwitch -= ResetDragging;
-        playerController.OnPerspectiveSwitch -= DropInteractable;
+        base.DropInteractable();
     }
     private void ResetGimball()
     {
@@ -163,8 +130,6 @@ public class CompassTool : Tools
     private void ResetConstraint()
     {
         currentRadius = 0f;
-        if (parentConstraint == null)
-            return;
         // Desactivar el constraint y limpiar la fuente
         parentConstraint.constraintActive = false;
         parentConstraint.RemoveSource(0);

@@ -20,7 +20,6 @@ public class BrushTool : Tools
             return;
         playerController.OnPerspectiveSwitch += DropInteractable;
         playerController.OnToolDesinteract += DropInteractable;
-        playerController.OnToolSwitchCheck += DropInteractable;
         currentInteractable = interactuable;
         base.Interact(objective, isPerspective2D);
 
@@ -47,7 +46,6 @@ public class BrushTool : Tools
     {
         base.DropInteractable();
         playerController.OnPerspectiveSwitch -= DropInteractable;
-        playerController.OnToolSwitchCheck -= DropInteractable;
         playerController.OnToolDesinteract -= DropInteractable;
         if (currentInteractable != null)
         {

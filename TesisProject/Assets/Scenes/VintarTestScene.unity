@@ -974,6 +974,7 @@ GameObject:
   - component: {fileID: 866596672}
   - component: {fileID: 866596671}
   - component: {fileID: 866596675}
+  - component: {fileID: 866596676}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1063,7 +1064,7 @@ Transform:
   m_GameObject: {fileID: 866596670}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.27, y: 1.12, z: 0}
+  m_LocalPosition: {x: 16.102, y: 2.32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1081,6 +1082,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42923df4ffb7fe74fad5aaa043f7a120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rb: {fileID: 866596676}
+--- !u!54 &866596676
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 866596670}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,7 +1176,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 32887
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1307,7 +1336,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 979219983}
-  - component: {fileID: 979219982}
   - component: {fileID: 979219981}
   - component: {fileID: 979219980}
   - component: {fileID: 979219979}
@@ -1390,18 +1418,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &979219982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979219978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8233d90336aea43098adf6dbabd606a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &979219983
 Transform:
   m_ObjectHideFlags: 0
@@ -1511,7 +1527,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1141279514}
   - component: {fileID: 1141279513}
-  - component: {fileID: 1141279512}
   m_Layer: 0
   m_Name: MouseCamera
   m_TagString: Untagged
@@ -1519,14 +1534,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1141279512
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1141279511}
-  m_Enabled: 1
 --- !u!20 &1141279513
 Camera:
   m_ObjectHideFlags: 0
@@ -2021,7 +2028,7 @@ GameObject:
   - component: {fileID: 1710077954}
   - component: {fileID: 1710077953}
   - component: {fileID: 1710077952}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2323,7 +2330,7 @@ GameObject:
   - component: {fileID: 2013928884}
   - component: {fileID: 2013928883}
   - component: {fileID: 2013928882}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Floor (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2456,7 +2463,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2140827903}
-  - component: {fileID: 2140827902}
   - component: {fileID: 2140827901}
   - component: {fileID: 2140827900}
   - component: {fileID: 2140827899}
@@ -2541,18 +2547,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2140827902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2140827898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8233d90336aea43098adf6dbabd606a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2140827903
 Transform:
   m_ObjectHideFlags: 0

@@ -4,12 +4,15 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private PlayerController playerController;
-    private bool is2D = false;
+    public bool is2D
+    {
+         get; private set;
+    }
     private Vector3 initialPosition;
     private Quaternion initialRotation;
     [SerializeField] private float orthographicSize = 5f; // Tamaño de la cámara ortográfica en modo 2D
-    [SerializeField] private Vector3 camera2DPosition = new Vector3(0, 10, -10); // Posición de la cámara en modo 2D
-    [SerializeField] private Quaternion camera2DRotation = Quaternion.Euler(0, 0, 0); // Cámara mirando hacia abajo en modo 2D
+    [SerializeField]private Vector3 camera2DPosition = new Vector3(0, 10, -10); // Posición de la cámara en modo 2D
+    [SerializeField]private Quaternion camera2DRotation = Quaternion.Euler(90, 0, 0); // Cámara mirando hacia abajo en modo 2D
 
     private void Awake()
     {

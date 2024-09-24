@@ -1,11 +1,8 @@
-using System;
 using UnityEngine;
 
 public interface IInteractable
 {
     public bool IsAtachable();
-    public bool IsAtached();
-    public void SetIsAtached(bool newAtached);
 }
 
 public interface IEscalable
@@ -22,15 +19,10 @@ public interface IPaintable
 {
     public void InteractWithBrush(bool isOn2D);
     public void DropWithBrush(bool isOn2D);
-    public void InteractWithEraser(bool isOn2D);
-    public void DropWithEraser(bool isOn2D);
 }
 public interface ICompassable
 {
     public float GetMaxRadius();
     public void InteractWithCompass(bool isOn2D);
-    public void InteractWithEraser(bool isOn2D);
-    public void DropWithEraser(bool isOn2D);
-    public event Action OnEraserInteract;
 
 }

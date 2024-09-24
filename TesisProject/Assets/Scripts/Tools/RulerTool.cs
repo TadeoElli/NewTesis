@@ -7,9 +7,9 @@ public class RulerTool : Tools
     private Rigidbody objectiveRB;
     private Transform objectiveTr;
     [SerializeField] private Transform gimball;
-    [SerializeField] private GameObject gimballGizmo2D, gimballGizmoPerspective;
     private Vector3 initialScale;
     private Vector3 initialMousePosition;
+
     [Header("Parameters")]
     private Vector3 minScale; // Escala mínima permitida
     private Vector3 maxScale; // Escala máxima permitida
@@ -25,7 +25,6 @@ public class RulerTool : Tools
         if(!interactable.TryGetComponent<IEscalable>(out IEscalable component)) 
             return;
         playerController.OnToolDesinteract += DropInteractable;
-        playerController.OnToolSwitchCheck += DropInteractable;
         playerController.OnPerspectiveSwitch += DropInteractable;
         minScale = component.GetMinScale();
         maxScale = component.GetMaxScale();
@@ -49,33 +48,6 @@ public class RulerTool : Tools
         objectiveTr.SetParent(gimball);
         gimball.localScale = objectiveTr.localScale;
         gimball.localRotation = objectiveTr.localRotation;
-        if (isOn2D)
-        {
-            gimballGizmo2D.SetActive(true);
-            AdjustGizmoScale(gimballGizmo2D);
-        }
-        else
-        {
-            gimballGizmo2D.SetActive(true);
-            gimballGizmoPerspective.SetActive(true);
-            AdjustGizmoScale(gimballGizmo2D);
-            AdjustGizmoScale(gimballGizmoPerspective);
-        }
-    }
-    // Método para ajustar la escala del gizmo de acuerdo a la escala del gimball
-    private void AdjustGizmoScale(GameObject gizmo)
-    {
-        // Ajustamos la escala del gizmo para que no se vea afectada por la escala del gimball
-        Vector3 adjustedScale = objectiveTr.localScale; // La escala deseada (escala del objeto)
-        gizmo.transform.localScale = new Vector3(
-            adjustedScale.x / gimball.localScale.x,
-            adjustedScale.y / gimball.localScale.y,
-            adjustedScale.z / gimball.localScale.z
-        );
-        Vector3 scale = gizmo.transform.localScale;
-        scale = scale / 5;
-        scale = new Vector3(Mathf.Clamp(scale.x, 0.3f, 1), Mathf.Clamp(scale.y, 0.3f, 1), Mathf.Clamp(scale.z, 0.3f, 1));
-        gizmo.transform.localScale = scale;
     }
     public override void DropInteractable()
     {
@@ -87,7 +59,6 @@ public class RulerTool : Tools
         ResetGimball();
         base.DropInteractable();
         playerController.OnToolDesinteract -= DropInteractable;
-        playerController.OnToolSwitchCheck -= DropInteractable;
         playerController.OnPerspectiveSwitch -= DropInteractable;
     }
     private void ResetGimball()
@@ -95,10 +66,6 @@ public class RulerTool : Tools
         gimball.position = Vector3.zero;
         gimball.rotation = Quaternion.identity;
         gimball.localScale = Vector3.one;
-        gimballGizmo2D.SetActive(false);
-        gimballGizmoPerspective.SetActive(false);
-        gimballGizmo2D.transform.localScale = Vector3.one;
-        gimballGizmoPerspective.transform.localScale = Vector3.one;
 
     }
 
@@ -110,18 +77,17 @@ public class RulerTool : Tools
         if (objective == null)
         return;
         Vector3 currentMousePosition = Input.mousePosition;
-        float scaleFactorX = (currentMousePosition.x - initialMousePosition.x) * mouseSensitiviy;
-        float scaleFactorY = (currentMousePosition.y - initialMousePosition.y) * mouseSensitiviy;
+        float scaleFactor = (currentMousePosition.x - initialMousePosition.x) * mouseSensitiviy;
 
         if (isOn2D)
         {
-            Vector3 newScale = initialScale + new Vector3(scaleFactorX + scaleFactorY, scaleFactorX + scaleFactorY, 0f);
+            Vector3 newScale = initialScale + new Vector3(scaleFactor, scaleFactor, 0f);
             newScale = new Vector3(Mathf.Clamp(newScale.x, minScale.x, maxScale.x), Mathf.Clamp(newScale.y, minScale.y, maxScale.y), Mathf.Clamp(newScale.z, minScale.z, maxScale.z));
             gimball.localScale = newScale;
         }
         else
         {
-            Vector3 newScale = initialScale + new Vector3(scaleFactorX + scaleFactorY, scaleFactorX + scaleFactorY, scaleFactorX + scaleFactorY);
+            Vector3 newScale = initialScale + new Vector3(scaleFactor, scaleFactor, scaleFactor);
             newScale = new Vector3(Mathf.Clamp(newScale.x, minScale.x, maxScale.x), Mathf.Clamp(newScale.y, minScale.y, maxScale.y), Mathf.Clamp(newScale.z, minScale.z, maxScale.z));
             gimball.localScale = newScale;
         }

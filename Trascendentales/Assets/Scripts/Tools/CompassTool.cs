@@ -6,7 +6,6 @@ using UnityEngine.Animations;
 public class CompassTool : Tools
 {
     [SerializeField] private Transform gimball;
-    [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private GameObject compassGizmo;
     private float maxRadius; // Radio máximo permitido
     private ParentConstraint parentConstraint; // El constraint para la rotación
@@ -81,7 +80,7 @@ public class CompassTool : Tools
     private void TryAttachObject()
     {
         // Hacer un raycast para ver si el jugador suelta el clic sobre otro objeto interactuable
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, interactableLayer))

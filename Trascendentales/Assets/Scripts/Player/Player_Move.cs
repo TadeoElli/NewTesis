@@ -37,7 +37,7 @@ public class Player_Move
     {
         Vector3 _move = (new Vector3(x, 0, y).normalized) * _speed;
         _rb.velocity = new Vector3(_move.x, _rb.velocity.y, _move.z);
-        Debug.Log(_move);
+        //Debug.Log(_move);
     }
 
     public void OrtoView(float x, float y)

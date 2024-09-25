@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     public Rigidbody _rb;
 
+    private Vector3 spawnPosition;
     Player_Move _myMove;
 
     LayerMask layerMask;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         _myMove = new Player_Move(_rb, this);
         layerMask = LayerMask.GetMask("Ground");
+        spawnPosition = transform.position;
     }
 
     private void Update()
@@ -67,6 +69,10 @@ public class PlayerController : MonoBehaviour
         {
             OnPerspectiveSwitch?.Invoke();
             _myMove.CheckPerspective();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            transform.position = spawnPosition;
         }
 
         MoveCheck();

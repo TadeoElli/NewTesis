@@ -7,6 +7,7 @@ public class EraserTool : Tools
 {
     private IPaintable currentPaintable;
     private ICompassable currentCompassable;
+    
     [SerializeField] private GameObject chargeCursor;
     [SerializeField] private Image image;
     [SerializeField] private float holdTimeThreshold = 1f; // Tiempo necesario para activar la interacción
@@ -45,8 +46,19 @@ public class EraserTool : Tools
 
     void Update()
     {
+
+        
         if (isHolding)
         {
+            if (!IsMouseOverObject())
+            {
+                // Si el mouse deja de apuntar al objeto, se reinicia el progreso
+                isHolding = false;
+                holdTime = 0f;
+                image.fillAmount = 0f;
+                chargeCursor.SetActive(false);
+                return;
+            }
             holdTime += Time.deltaTime;
             image.fillAmount = holdTime / holdTimeThreshold;
             // Si se cumple el tiempo de hold, se activa la interacción

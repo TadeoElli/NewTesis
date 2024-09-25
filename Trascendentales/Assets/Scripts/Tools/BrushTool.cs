@@ -40,6 +40,15 @@ public class BrushTool : Tools
 
         if (isHolding)
         {
+            if (!IsMouseOverObject())
+            {
+                // Si el mouse deja de apuntar al objeto, se reinicia el progreso
+                isHolding = false;
+                holdTime = 0f;
+                image.fillAmount = 0f;
+                chargeCursor.SetActive(false);
+                return;
+            }
             holdTime += Time.deltaTime;
             image.fillAmount = holdTime / holdTimeThreshold;
             // Si se cumple el tiempo de hold, se activa la interacción

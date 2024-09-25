@@ -22,25 +22,35 @@ public class SquadTool : Tools
     {
         if(!interactable.TryGetComponent<IRotable>(out IRotable component))
             return;
+        objectiveTr = interactable.GetComponent<Transform>();
         playerController.OnPerspectiveSwitch += DropInteractable;
         playerController.OnToolDesinteract += DropInteractable;
         playerController.OnToolSwitchCheck += DropInteractable;
         base.Interact(interactable, isPerspective2D); // Llama a la lógica común de interactuar
         canRotateInY = component.CanRotateInY();
         canRotateInZ = component.CanRotateInZ();
-        if (isOn2D)
+        Renderer objRenderer = objective.GetComponent<Renderer>();
+        if (objRenderer != null)
         {
-            gimballGizmo2D.SetActive(true);
-            gimballGizmo2D.transform.localScale = objective.transform.localScale / 3;
-        }
-        else
-        {
-            gimballGizmoPerspective.SetActive(true);
-            gimballGizmoPerspective.transform.localScale = objective.transform.localScale / 3;
+            // Dimensiones reales del objeto en cada eje
+            Vector3 objectSize = objRenderer.bounds.size;
+
+            // Obtener el mayor valor entre X, Y, Z para mantener el gizmo como un círculo en cada eje
+            float largestDimension = Mathf.Max(objectSize.x, objectSize.y, objectSize.z);
+
+            if (isOn2D)
+            {
+                gimballGizmo2D.SetActive(true);
+                gimballGizmo2D.transform.localScale = new Vector3(largestDimension / 3, largestDimension / 3, largestDimension / 3);
+            }
+            else
+            {
+                gimballGizmoPerspective.SetActive(true);
+                gimballGizmoPerspective.transform.localScale = new Vector3(largestDimension / 3, largestDimension / 3, largestDimension / 3);
+            }
         }
         objectiveRB = objective.GetComponent<Rigidbody>();
         objectiveRB.isKinematic = true;
-        objectiveTr = objective.GetComponent<Transform>();
         gimball.position = objectiveTr.position;
         objectiveTr.SetParent(gimball);
         lastMousePosition = Input.mousePosition;  // Guarda la posición actual del mouse al iniciar la interacción

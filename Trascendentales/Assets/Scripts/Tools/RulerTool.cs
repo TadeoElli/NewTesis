@@ -47,8 +47,19 @@ public class RulerTool : Tools
     {
         gimball.position = objectiveTr.position;
         objectiveTr.SetParent(gimball);
-        gimball.localScale = objectiveTr.localScale;
+        // Obtener el tamaño real del objeto usando su renderer
+        Renderer objRenderer = objectiveTr.GetComponent<Renderer>();
+        if (objRenderer != null)
+        {
+            Vector3 objectSize = objRenderer.bounds.size;
+            float largestDimension = Mathf.Max(objectSize.x, objectSize.y, objectSize.z);
+
+            // Ajustar la escala del gimball para que no dependa de la escala actual del objeto
+            gimball.localScale = new Vector3(largestDimension, largestDimension, largestDimension);
+        }
+
         gimball.localRotation = objectiveTr.localRotation;
+
         if (isOn2D)
         {
             gimballGizmo2D.SetActive(true);

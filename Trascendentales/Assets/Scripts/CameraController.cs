@@ -44,4 +44,8 @@ public class CameraController : MonoBehaviour
 
         is2D = !is2D;
     }
+    private void Update()
+    {
+        transform.position = new Vector3(playerController.transform.position.x,transform.position.y,transform.position.z);
+    }
 }

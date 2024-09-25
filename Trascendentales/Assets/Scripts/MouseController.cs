@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static Unity.VisualScripting.Dependencies.Sqlite.SQLite3;
 
 public class MouseController : MonoBehaviour
 {

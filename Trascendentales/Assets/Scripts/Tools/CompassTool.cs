@@ -7,6 +7,7 @@ public class CompassTool : Tools
 {
     [SerializeField] private Transform gimball;
     [SerializeField] private LayerMask interactableLayer;
+    [SerializeField] private GameObject compassGizmo;
     private float maxRadius; // Radio máximo permitido
     private ParentConstraint parentConstraint; // El constraint para la rotación
     private Vector3 initialMousePosition;
@@ -15,6 +16,7 @@ public class CompassTool : Tools
     private GameObject secondObject;
     private float currentRadius;
     private bool isDragging = false;
+    private bool wasClicked = false;
 
     public override void Awake()
     {
@@ -41,19 +43,24 @@ public class CompassTool : Tools
         firstObject = gimball.gameObject;
         maxRadius = component.GetMaxRadius();
         base.Interact(interactable, isPerspective2D);
+        compassGizmo.SetActive(true);
+        compassGizmo.transform.position = gimball.position;
+        if(isOn2D) compassGizmo.transform.rotation = Quaternion.Euler(0,0,0);
+        else compassGizmo.transform.rotation = Quaternion.Euler(-90, 0, 0);
         isDragging = true;
+        wasClicked = true;
         initialMousePosition = Input.mousePosition;
     }
 
     void Update()
     {
-        if (!isDragging) return;
+        if (!isDragging || !wasClicked) return;
 
         // Mientras se mantenga el clic, dibujar la circunferencia y ajustar el radio
         Vector3 currentMousePosition = Input.mousePosition;
         float distance = Vector3.Distance(initialMousePosition, currentMousePosition);
         currentRadius = Mathf.Min(distance * 0.01f, maxRadius); // Ajusta el radio y lo clampa al máximo
-
+        compassGizmo.transform.localScale = new Vector3(currentRadius /1.5f, currentRadius /1.5f, 0.1f );
         // Dependiendo de la perspectiva, dibuja la circunferencia en el eje correcto
         if (isOn2D)
         {
@@ -123,6 +130,7 @@ public class CompassTool : Tools
 
     public override void DropInteractable()
     {
+        wasClicked = false;
         if (isDragging)
             TryAttachObject();        
         if (!isDragging)
@@ -139,10 +147,13 @@ public class CompassTool : Tools
                 //secondObject.DropWithCompass();
                 secondObject = null;
             }
+            if (compassable != null) { 
             compassable.OnEraserInteract -= ResetDragging;
             compassable.OnEraserInteract -= DropInteractable;
             compassable = null;
+            }
             ResetGimball();
+            compassGizmo.SetActive(false);
         }
         base.DropInteractable();
         playerController.OnToolDesinteract -= DropInteractable;

@@ -21,9 +21,9 @@ public interface IRotable
 public interface IPaintable
 {
     public void InteractWithBrush(bool isOn2D);
-    public void DropWithBrush(bool isOn2D);
     public void InteractWithEraser(bool isOn2D);
-    public void DropWithEraser(bool isOn2D);
+    public bool CanInteractWithBrush(bool isOn2D);
+    public bool CanInteractWithEraser(bool isOn2D);
 }
 public interface ICompassable
 {

@@ -6,56 +6,19 @@ public class PaintableObject : MonoBehaviour, IPaintable
     [SerializeField] private Vector3 newPosition;
     [SerializeField] private InteractionsByPerspectiveTypes interactionForBrush, interactionForEraser;
     private bool wasInteracted = false;
-    public void DropWithBrush(bool isOn2D)
-    {
-    }
 
-    public void DropWithEraser(bool isOn2D)
-    {
-    }
 
     public void InteractWithBrush(bool isOn2D)
     {
         if(wasInteracted)
             return;
-        switch (interactionForBrush)
-        {
-            case InteractionsByPerspectiveTypes.BothPerspectives:
-                InteractionWithBrush();
-                break;
-            case InteractionsByPerspectiveTypes.Only2D:
-                if(isOn2D)
-                    InteractionWithBrush();
-                break;
-            case InteractionsByPerspectiveTypes.Only3D:
-                if(!isOn2D)
-                    InteractionWithBrush();
-                break;
-            default:
-                break;
-        }
-
+        InteractionWithBrush();
     }
     public void InteractWithEraser(bool isOn2D)
     {
         if (!wasInteracted)
             return;
-        switch (interactionForEraser)
-        {
-            case InteractionsByPerspectiveTypes.BothPerspectives:
-                InteractionWithEraser();
-                break;
-            case InteractionsByPerspectiveTypes.Only2D:
-                if (isOn2D)
-                    InteractionWithEraser();
-                break;
-            case InteractionsByPerspectiveTypes.Only3D:
-                if (!isOn2D)
-                    InteractionWithEraser();
-                break;
-            default:
-                break;
-        }
+        InteractionWithEraser();
     }
 
     public virtual void InteractionWithBrush()
@@ -67,6 +30,31 @@ public class PaintableObject : MonoBehaviour, IPaintable
     {
         transform.position = oldPosition;
         wasInteracted = false;
+    }
+
+    public bool CanInteractWithBrush(bool isOn2D)
+    {
+        return CheckInteractions(interactionForBrush, isOn2D);
+    }
+    public bool CanInteractWithEraser(bool isOn2D)
+    {
+        return CheckInteractions(interactionForEraser, isOn2D);
+    }
+    private bool CheckInteractions(InteractionsByPerspectiveTypes type, bool isOn2D)
+    {
+        switch (type)
+        {
+            case InteractionsByPerspectiveTypes.BothPerspectives:
+                return true;
+            case InteractionsByPerspectiveTypes.Only2D:
+                if (isOn2D) return true;
+                else return false;
+            case InteractionsByPerspectiveTypes.Only3D:
+                if (!isOn2D) return true;
+                else return false;
+            default:
+                return false;
+        }
     }
 }
 public enum InteractionsByPerspectiveTypes

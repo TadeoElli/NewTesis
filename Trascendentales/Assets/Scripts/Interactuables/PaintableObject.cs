@@ -2,8 +2,7 @@
 [RequireComponent (typeof(InteractuableObject))]
 public class PaintableObject : MonoBehaviour, IPaintable
 {
-    [SerializeField] private Vector3 oldPosition;
-    [SerializeField] private Vector3 newPosition;
+    
     [SerializeField] private InteractionsByPerspectiveTypes interactionForBrush, interactionForEraser;
     private bool wasInteracted = false;
 
@@ -23,12 +22,10 @@ public class PaintableObject : MonoBehaviour, IPaintable
 
     public virtual void InteractionWithBrush()
     {
-        transform.position = newPosition;
         wasInteracted = true;
     }
     public virtual void InteractionWithEraser()
     {
-        transform.position = oldPosition;
         wasInteracted = false;
     }
 

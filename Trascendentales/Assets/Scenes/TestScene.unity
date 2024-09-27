@@ -1935,7 +1935,7 @@ MonoBehaviour:
   squadTool: {fileID: 221211527}
   compassTool: {fileID: 354596999}
   eraseTool: {fileID: 1977505896}
-  drawObjectsTool: {fileID: 0}
+  drawObjectsTool: {fileID: 1735323473}
 --- !u!1 &760460090
 GameObject:
   m_ObjectHideFlags: 0
@@ -2377,7 +2377,7 @@ Transform:
   m_GameObject: {fileID: 919042274}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.35, y: 4.56, z: 9.84}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4975,11 +4975,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caeb6feb30ea736468f8e7a6eee4ca62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOn2D: 0
+  mainCamera: {fileID: 963194227}
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 192
   cubePrefab: {fileID: 919042274}
-  lineLifetime: 10
-  minPoints: 50
-  squareThreshold: 0.1
-  minSize: 0.5
+  spherePrefab: {fileID: 979219978}
+  rectanglePrefab: {fileID: 1913483633}
 --- !u!1 &1830243130
 GameObject:
   m_ObjectHideFlags: 0

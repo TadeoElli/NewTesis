@@ -37,6 +37,7 @@ public class MouseController : MonoBehaviour
         playerController.OnToolSwitch += SetTool; // Unifica el evento de cambio de herramienta
         playerController.OnPerspectiveSwitch += SwitchView;
         playerController.OnLeftClickPress += PerformRaycastForLeftClick;
+        playerController.OnRightClickPress += PerformRaycastForRightClick;
     }
 
     private void Start()

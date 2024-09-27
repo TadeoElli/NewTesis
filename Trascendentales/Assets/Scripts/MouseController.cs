@@ -17,13 +17,17 @@ public class MouseController : MonoBehaviour
     [SerializeField] private Sprite brushSprite, rulerSprite, squadSprite, compassSprite, eraserSprite;
     [SerializeField] private float planeOffset;
 
-    [Header("Tools")]
+    [Header("LeftClickTools")]
     [SerializeField] private Tools brushTool;
     [SerializeField] private Tools rulerTool;
     [SerializeField] private Tools squadTool;
     [SerializeField] private Tools compassTool;
     [SerializeField] private Tools eraseTool;
-    private Tools activeTool; // Herramienta activa
+
+    [Header("RightClickTools")]
+    [SerializeField] private Tools drawObjectsTool;
+
+    private Tools leftClickTool, rightClickTool; // Herramienta activa
     private ToolTypes currentToolType;
 
     private bool is2DView = false;   // Indica si estamos en la vista 2D o 2.5D
@@ -32,7 +36,7 @@ public class MouseController : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
         playerController.OnToolSwitch += SetTool; // Unifica el evento de cambio de herramienta
         playerController.OnPerspectiveSwitch += SwitchView;
-        playerController.OnToolInteract += PerformRaycast;
+        playerController.OnLeftClickPress += PerformRaycastForLeftClick;
     }
 
     private void Start()
@@ -62,7 +66,7 @@ public class MouseController : MonoBehaviour
     }
 
     // Lanza un Raycast desde la cámara hacia la posición del cursor en el mundo
-    private void PerformRaycast()
+    private void PerformRaycastForLeftClick()
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -74,10 +78,14 @@ public class MouseController : MonoBehaviour
                 Debug.Log("It Was not possible to interact with: " + hit.collider.name);
                 return;
             }
-            activeTool?.Interact(hit.collider.gameObject, is2DView);
+            leftClickTool?.Interact(hit.collider.gameObject, is2DView);
             Debug.Log("Interacted with: " + hit.collider.name);
             
         }
+    }
+    private void PerformRaycastForRightClick()
+    {
+        rightClickTool?.Interact(null , is2DView);
     }
 
 
@@ -95,23 +103,24 @@ public class MouseController : MonoBehaviour
         {
             case ToolTypes.Brush:
                 spriteRenderer.sprite = brushSprite;
-                activeTool = brushTool;
+                leftClickTool = brushTool;
+                rightClickTool = drawObjectsTool;
                 break;
             case ToolTypes.Ruler:
                 spriteRenderer.sprite = rulerSprite;
-                activeTool = rulerTool;
+                leftClickTool = rulerTool;
                 break;
             case ToolTypes.Squad:
                 spriteRenderer.sprite = squadSprite;
-                activeTool = squadTool;
+                leftClickTool = squadTool;
                 break;
             case ToolTypes.Compass:
                 spriteRenderer.sprite = compassSprite;
-                activeTool = compassTool;
+                leftClickTool = compassTool;
                 break;
             case ToolTypes.Eraser:
                 spriteRenderer.sprite = eraserSprite;
-                activeTool = eraseTool;
+                leftClickTool = eraseTool;
                 break;
             default:
                 break;

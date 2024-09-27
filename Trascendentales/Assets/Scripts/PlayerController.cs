@@ -8,8 +8,10 @@ public class PlayerController : MonoBehaviour
     public event Action<ToolTypes> OnToolSwitch;
     public event Action OnToolSwitchCheck;
     public event Action OnPerspectiveSwitch;
-    public event Action OnToolInteract;
-    public event Action OnToolDesinteract;
+    public event Action OnLeftClickPress;
+    public event Action OnLeftClickDrop;
+    public event Action OnRightClickPress;
+    public event Action OnRightClickDrop;
 
     public Rigidbody _rb;
 
@@ -59,10 +61,16 @@ public class PlayerController : MonoBehaviour
         }
 
         if (Input.GetMouseButtonDown(0))
-            OnToolInteract?.Invoke();
+            OnLeftClickPress?.Invoke();
 
         if (Input.GetMouseButtonUp(0))
-            OnToolDesinteract?.Invoke();
+            OnLeftClickDrop?.Invoke();
+
+        if (Input.GetMouseButtonDown(1))
+            OnRightClickPress?.Invoke();
+
+        if (Input.GetMouseButtonUp(1))
+            OnRightClickDrop?.Invoke();
         #endregion
 
         if (Input.GetKeyDown(KeyCode.Tab))

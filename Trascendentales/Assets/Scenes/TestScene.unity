@@ -1935,6 +1935,7 @@ MonoBehaviour:
   squadTool: {fileID: 221211527}
   compassTool: {fileID: 354596999}
   eraseTool: {fileID: 1977505896}
+  drawObjectsTool: {fileID: 0}
 --- !u!1 &760460090
 GameObject:
   m_ObjectHideFlags: 0
@@ -4918,6 +4919,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1735323470}
   - component: {fileID: 1735323471}
+  - component: {fileID: 1735323473}
   m_Layer: 0
   m_Name: BrushTool
   m_TagString: Untagged
@@ -4961,6 +4963,23 @@ MonoBehaviour:
   image: {fileID: 254769304}
   holdTimeThreshold: 1
   isHolding: 0
+--- !u!114 &1735323473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735323469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caeb6feb30ea736468f8e7a6eee4ca62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cubePrefab: {fileID: 919042274}
+  lineLifetime: 10
+  minPoints: 50
+  squareThreshold: 0.1
+  minSize: 0.5
 --- !u!1 &1830243130
 GameObject:
   m_ObjectHideFlags: 0

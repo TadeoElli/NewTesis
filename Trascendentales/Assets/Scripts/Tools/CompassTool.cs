@@ -24,7 +24,7 @@ public class CompassTool : Tools
 
     public override void Interact(GameObject interactable, bool isPerspective2D)
     {
-        playerController.OnToolDesinteract += DropInteractable;
+        playerController.OnLeftClickDrop += DropInteractable;
         playerController.OnPerspectiveSwitch += ResetDragging;
         playerController.OnPerspectiveSwitch += DropInteractable;
         if(!interactable.TryGetComponent<ICompassable>(out ICompassable component))
@@ -155,7 +155,7 @@ public class CompassTool : Tools
             compassGizmo.SetActive(false);
         }
         base.DropInteractable();
-        playerController.OnToolDesinteract -= DropInteractable;
+        playerController.OnLeftClickDrop -= DropInteractable;
     }
     private void ResetDragging()
     {

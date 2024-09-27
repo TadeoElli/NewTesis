@@ -24,7 +24,7 @@ public class RulerTool : Tools
     {
         if(!interactable.TryGetComponent<IEscalable>(out IEscalable component)) 
             return;
-        playerController.OnToolDesinteract += DropInteractable;
+        playerController.OnLeftClickDrop += DropInteractable;
         playerController.OnToolSwitchCheck += DropInteractable;
         playerController.OnPerspectiveSwitch += DropInteractable;
         minScale = component.GetMinScale();
@@ -97,7 +97,7 @@ public class RulerTool : Tools
         objectiveTr = null;
         ResetGimball();
         base.DropInteractable();
-        playerController.OnToolDesinteract -= DropInteractable;
+        playerController.OnLeftClickDrop -= DropInteractable;
         playerController.OnToolSwitchCheck -= DropInteractable;
         playerController.OnPerspectiveSwitch -= DropInteractable;
     }

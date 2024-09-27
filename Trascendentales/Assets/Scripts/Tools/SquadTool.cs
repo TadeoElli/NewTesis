@@ -24,7 +24,7 @@ public class SquadTool : Tools
             return;
         objectiveTr = interactable.GetComponent<Transform>();
         playerController.OnPerspectiveSwitch += DropInteractable;
-        playerController.OnToolDesinteract += DropInteractable;
+        playerController.OnLeftClickDrop += DropInteractable;
         playerController.OnToolSwitchCheck += DropInteractable;
         base.Interact(interactable, isPerspective2D); // Llama a la lógica común de interactuar
         canRotateInY = component.CanRotateInY();
@@ -65,7 +65,7 @@ public class SquadTool : Tools
         ResetGimball();
         base.DropInteractable();
         playerController.OnPerspectiveSwitch -= DropInteractable;
-        playerController.OnToolDesinteract -= DropInteractable;
+        playerController.OnLeftClickDrop -= DropInteractable;
         playerController.OnToolSwitchCheck -= DropInteractable;
     }
 

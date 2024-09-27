@@ -34,7 +34,7 @@ public class EraserTool : Tools
         if(currentPaintable ==  null && currentCompassable == null)
             return;
         playerController.OnPerspectiveSwitch += DropInteractable;
-        playerController.OnToolDesinteract += DropInteractable;
+        playerController.OnLeftClickDrop += DropInteractable;
         playerController.OnToolSwitchCheck += DropInteractable;
         chargeCursor.SetActive(true);
         image.fillAmount = 0f; // Reiniciar el fillAmount a 0
@@ -76,7 +76,7 @@ public class EraserTool : Tools
         base.DropInteractable();
         playerController.OnPerspectiveSwitch -= DropInteractable;
         playerController.OnToolSwitchCheck -= DropInteractable;
-        playerController.OnToolDesinteract -= DropInteractable;
+        playerController.OnLeftClickDrop -= DropInteractable;
         chargeCursor.SetActive(false);
         image.fillAmount = 0f;
         if (currentCompassable != null)

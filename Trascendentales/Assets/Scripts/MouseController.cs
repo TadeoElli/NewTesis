@@ -26,6 +26,7 @@ public class MouseController : MonoBehaviour
 
     [Header("RightClickTools")]
     [SerializeField] private Tools drawObjectsTool;
+    [SerializeField] private Tools dragAtachableObjectsTool;
 
     private Tools leftClickTool, rightClickTool; // Herramienta activa
     private ToolTypes currentToolType;
@@ -86,7 +87,15 @@ public class MouseController : MonoBehaviour
     }
     private void PerformRaycastForRightClick()
     {
-        rightClickTool?.Interact(null , is2DView);
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            rightClickTool?.Interact(hit.collider.gameObject, is2DView);
+            Debug.Log("Interacted with: " + hit.collider.name);
+
+        }
     }
 
 
@@ -118,6 +127,7 @@ public class MouseController : MonoBehaviour
             case ToolTypes.Compass:
                 spriteRenderer.sprite = compassSprite;
                 leftClickTool = compassTool;
+                rightClickTool = dragAtachableObjectsTool;
                 break;
             case ToolTypes.Eraser:
                 spriteRenderer.sprite = eraserSprite;

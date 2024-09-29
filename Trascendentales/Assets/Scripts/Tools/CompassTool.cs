@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.Animations;
 
@@ -96,10 +97,10 @@ public class CompassTool : Tools
                 isDragging = false;
                 return;
             }
+            component.SetIsAtached(objective);
 
             secondObject = hit.collider.gameObject;
             secondObject.GetComponent<Rigidbody>().isKinematic = true;
-            //secondObject.InteractWithCompass();
 
             // Configurar el constraint para que el segundo objeto siga la rotación del gimball
             if (parentConstraint != null)
@@ -137,13 +138,15 @@ public class CompassTool : Tools
             ResetConstraint();
             if (firstObject != null)
             {
-                //firstObject.DropWithCompass();
                 firstObject = null;
             }
             if (secondObject != null)
             {
                 secondObject.GetComponent<Rigidbody>().isKinematic = false;
-                //secondObject.DropWithCompass();
+                if (secondObject.TryGetComponent<IInteractable>(out IInteractable component))
+                {
+                    component.SetUnatached();
+                }
                 secondObject = null;
             }
             if (compassable != null) { 
@@ -183,4 +186,3 @@ public class CompassTool : Tools
         Destroy(secondObject.GetComponent<ParentConstraint>());
     }
 }
-

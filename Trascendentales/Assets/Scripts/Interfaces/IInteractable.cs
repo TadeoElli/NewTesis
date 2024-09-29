@@ -5,7 +5,9 @@ public interface IInteractable
 {
     public bool IsAtachable();
     public bool IsAtached();
-    public void SetIsAtached(bool newAtached);
+    public void SetIsAtached(GameObject parent);
+    public void SetUnatached();
+    public GameObject GetParent();
 }
 
 public interface IEscalable

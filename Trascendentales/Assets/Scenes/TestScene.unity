@@ -398,7 +398,6 @@ GameObject:
   - component: {fileID: 190772542}
   - component: {fileID: 190772546}
   - component: {fileID: 190772545}
-  - component: {fileID: 190772547}
   m_Layer: 6
   m_Name: Floor (7)
   m_TagString: Untagged
@@ -533,19 +532,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 4
   m_CollisionDetection: 0
---- !u!114 &190772547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 190772540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42bcb6908ebef844e8dc9349d9c12811, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxRadius: 0
 --- !u!1 &212989487
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,6 +1105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 354596998}
   - component: {fileID: 354596999}
+  - component: {fileID: 354597000}
   m_Layer: 0
   m_Name: CompassTool
   m_TagString: Untagged
@@ -1160,6 +1147,24 @@ MonoBehaviour:
     m_Bits: 64
   gimball: {fileID: 2077937467}
   compassGizmo: {fileID: 760460090}
+--- !u!114 &354597000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354596997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a96f5fb33335064ea582543e3dc1d2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOn2D: 0
+  mainCamera: {fileID: 963194227}
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  constraint: {fileID: 0}
 --- !u!1 &381752571
 GameObject:
   m_ObjectHideFlags: 0
@@ -1740,7 +1745,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 14
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &718628998
 MonoBehaviour:
@@ -1936,6 +1941,7 @@ MonoBehaviour:
   compassTool: {fileID: 354596999}
   eraseTool: {fileID: 1977505896}
   drawObjectsTool: {fileID: 1735323473}
+  dragAtachableObjectsTool: {fileID: 354597000}
 --- !u!1 &760460090
 GameObject:
   m_ObjectHideFlags: 0
@@ -2123,7 +2129,7 @@ Transform:
   m_GameObject: {fileID: 866596670}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.47, y: 2.32, z: 0}
+  m_LocalPosition: {x: 33.99, y: 2.32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4979,7 +4985,7 @@ MonoBehaviour:
   mainCamera: {fileID: 963194227}
   interactableLayer:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 193
   cubePrefab: {fileID: 919042274}
   spherePrefab: {fileID: 979219978}
   rectanglePrefab: {fileID: 1913483633}

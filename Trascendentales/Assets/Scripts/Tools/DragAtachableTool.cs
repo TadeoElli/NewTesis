@@ -19,9 +19,9 @@ public class DragAtachableTool : Tools {
     {
         if(!objective.TryGetComponent<IInteractable>(out  IInteractable interactable))
             return;
-        if(!interactable.IsAtachable())
+        if(!interactable.IsAtachableForCompass())
             return;
-        parent = interactable.GetParent();
+        parent = interactable.GetCompassParent();
         if(!parent.TryGetComponent<ICompassable>(out ICompassable compassable))
             return;
         maxRadius = compassable.GetMaxRadius();

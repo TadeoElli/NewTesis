@@ -3,17 +3,26 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    public bool IsAtachable();
-    public bool IsAtached();
-    public void SetIsAtached(GameObject parent);
-    public void SetUnatached();
-    public GameObject GetParent();
+    public bool IsAtachableForCompass();
+    public bool IsAtachableForRuler();
+    public bool IsAtachedToCompass();
+    public bool IsAtachedToRuler();
+    public void SetIsAtachedToCompass(GameObject parent);
+    public void SetIsAtachedToRuler(GameObject parent);
+    public void SetUnatachedToCompass();
+    public void SetUnatachedToRuler();
+    public GameObject GetCompassParent();
+    public GameObject GetRulerParent();
 }
 
 public interface IEscalable
 {
     public Vector3 GetMinScale();
     public Vector3 GetMaxScale();
+    public bool CanAttachOthers();
+    public float GetMaxRadius();
+    public void InteractWithEraser(bool isOn2D);
+    public event Action OnEraserInteract;
 }
 public interface IRotable
 {

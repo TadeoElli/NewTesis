@@ -26,6 +26,7 @@ public class MouseController : MonoBehaviour
 
     [Header("RightClickTools")]
     [SerializeField] private Tools drawObjectsTool;
+    [SerializeField] private Tools setScaleParentTool;
     [SerializeField] private Tools dragAtachableObjectsTool;
 
     private Tools leftClickTool, rightClickTool; // Herramienta activa
@@ -119,6 +120,7 @@ public class MouseController : MonoBehaviour
             case ToolTypes.Ruler:
                 spriteRenderer.sprite = rulerSprite;
                 leftClickTool = rulerTool;
+                rightClickTool = setScaleParentTool;
                 break;
             case ToolTypes.Squad:
                 spriteRenderer.sprite = squadSprite;

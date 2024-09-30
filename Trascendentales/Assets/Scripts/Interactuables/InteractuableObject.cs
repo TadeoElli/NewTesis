@@ -2,25 +2,46 @@
 
 public class InteractuableObject : MonoBehaviour, IInteractable
 {
-    [SerializeField] protected bool isAtacheable;
-    [SerializeField] private bool isAtached = false;
-    private GameObject parent = null;
-    public bool IsAtachable() => isAtacheable;
-    public bool IsAtached() => isAtached;
+    [SerializeField] protected bool isAtacheableForCompass;
+    [SerializeField] protected bool isAtacheableForRuler;
+    [SerializeField] private bool isAtachedToCompass = false;
+    [SerializeField] private bool isAtachedToRuler = false;
+    private GameObject compassParent = null;
+    private GameObject rulerParent = null;
+    public bool IsAtachableForCompass() => isAtacheableForCompass;
+    public bool IsAtachableForRuler() => isAtacheableForRuler;
+    public bool IsAtachedToCompass() => isAtachedToCompass;
+    public bool IsAtachedToRuler() => isAtachedToRuler;
 
-    public void SetIsAtached(GameObject gameObject)
+    public void SetIsAtachedToCompass(GameObject gameObject)
     {
-        isAtached = true;
-        parent = gameObject;
+        isAtachedToCompass = true;
+        compassParent = gameObject;
     }
-    public void SetUnatached()
+    public void SetUnatachedToCompass()
     {
-        isAtached = false;
-        parent = null;
+        isAtachedToCompass = false;
+        compassParent = null;
     }
-    public GameObject GetParent()
+    public GameObject GetCompassParent()
     {
-        return parent;
+        return compassParent;
     }
 
+    public void SetIsAtachedToRuler(GameObject gameObject)
+    {
+        isAtachedToRuler = true;
+        rulerParent = gameObject;
+    }
+
+    public void SetUnatachedToRuler()
+    {
+        isAtachedToRuler = false;
+        rulerParent = null;
+    }
+
+    public GameObject GetRulerParent()
+    {
+        return rulerParent;
+    }
 }

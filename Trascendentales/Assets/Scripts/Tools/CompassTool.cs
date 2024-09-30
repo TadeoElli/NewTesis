@@ -92,12 +92,12 @@ public class CompassTool : Tools
                 return;
             }
             // Si el objeto es interactuable, atachear al gimball
-            if (!component.IsAtachable() || hit.collider.gameObject == objective)
+            if (!component.IsAtachableForCompass() || hit.collider.gameObject == objective)
             {
                 isDragging = false;
                 return;
             }
-            component.SetIsAtached(objective);
+            component.SetIsAtachedToCompass(objective);
 
             secondObject = hit.collider.gameObject;
             secondObject.GetComponent<Rigidbody>().isKinematic = true;
@@ -145,7 +145,7 @@ public class CompassTool : Tools
                 secondObject.GetComponent<Rigidbody>().isKinematic = false;
                 if (secondObject.TryGetComponent<IInteractable>(out IInteractable component))
                 {
-                    component.SetUnatached();
+                    component.SetUnatachedToCompass();
                 }
                 secondObject = null;
             }

@@ -5,14 +5,11 @@ public interface IInteractable
 {
     public bool IsAtachableForCompass();
     public bool IsAtachableForRuler();
+    public bool IsAtachableForSquad();
     public bool IsAtachedToCompass();
-    public bool IsAtachedToRuler();
     public void SetIsAtachedToCompass(GameObject parent);
-    public void SetIsAtachedToRuler(GameObject parent);
     public void SetUnatachedToCompass();
-    public void SetUnatachedToRuler();
     public GameObject GetCompassParent();
-    public GameObject GetRulerParent();
 }
 
 public interface IEscalable
@@ -28,6 +25,10 @@ public interface IRotable
 {
     public bool CanRotateInY();
     public bool CanRotateInZ();
+    public bool CanAttachOthers();
+    public float GetMaxRadius();
+    public void InteractWithEraser(bool isOn2D);
+    public event Action OnEraserInteract;
 }
 public interface IPaintable
 {

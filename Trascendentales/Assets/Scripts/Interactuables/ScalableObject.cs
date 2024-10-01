@@ -15,21 +15,13 @@ public class ScalableObject : MonoBehaviour, IEscalable
 
     public Vector3 GetMinScale() => minScale;
     public Vector3 GetMaxScale() => maxScale;
+    public bool CanAttachOthers() => canAttachOthers;
+    public float GetMaxRadius() => maxRadius;
 
     public void SetScaleConstraints(Vector3 minScale, Vector3 maxScale)
     {
         this.minScale = minScale;
         this.maxScale = maxScale;
-    }
-
-    public bool CanAttachOthers()
-    {
-        return canAttachOthers;
-    }
-
-    public float GetMaxRadius()
-    {
-        return maxRadius;
     }
 
     public void InteractWithEraser(bool isOn2D)

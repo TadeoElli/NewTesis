@@ -1,14 +1,14 @@
 using UnityEngine;
 using UnityEngine.Animations;
 
-public class SetScaleParentTool : Tools
+public class SetRotationParentTool : Tools
 {
     private bool isDragging = false;
     private GameObject firstObject;
-    private IEscalable scalable;
+    private IRotable rotable;
     private GameObject secondObject;
     private float maxRadius;
-    private ScaleConstraint constraint;
+    private RotationConstraint constraint;
 
     public override void Awake()
     {
@@ -17,21 +17,21 @@ public class SetScaleParentTool : Tools
 
     public override void Interact(GameObject interactable, bool isPerspective2D)
     {
-        if (!interactable.TryGetComponent<IEscalable>(out IEscalable scalableComponent))
+        if (!interactable.TryGetComponent<IRotable>(out IRotable rotableComponent))
             return;
 
-        scalable = scalableComponent;
+        rotable = rotableComponent;
 
-        if (!scalable.CanAttachOthers())
+        if (!rotable.CanAttachOthers())
             return;
         if (isDragging)
         {
             ResetConstraint();
         }
-        scalable.OnEraserInteract += ResetDragging;
-        scalable.OnEraserInteract += DropInteractable;
+        rotable.OnEraserInteract += ResetDragging;
+        rotable.OnEraserInteract += DropInteractable;
         firstObject = interactable;
-        maxRadius = scalable.GetMaxRadius();
+        maxRadius = rotable.GetMaxRadius();
         isDragging = true;
         playerController.OnRightClickDrop += DropInteractable; // Limpiamos la interacción al soltar clic derecho
         base.Interact(interactable, isPerspective2D);
@@ -45,7 +45,7 @@ public class SetScaleParentTool : Tools
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, interactableLayer))
         {
-            if (!hit.collider.TryGetComponent<IInteractable>(out IInteractable interactable) || !interactable.IsAtachableForRuler())
+            if (!hit.collider.TryGetComponent<IInteractable>(out IInteractable interactable) || !interactable.IsAtachableForSquad())
             {
                 isDragging = false;
                 return;
@@ -62,20 +62,20 @@ public class SetScaleParentTool : Tools
             }
             secondObject.GetComponent<Rigidbody>().isKinematic = true;
             // Agrega el ScaleConstraint
-            AddScaleConstraint(secondObject);
+            AddRotationConstraint(secondObject);
         }
         else
             isDragging = false;
     }
 
-    private void AddScaleConstraint(GameObject targetObject)
+    private void AddRotationConstraint(GameObject targetObject)
     {
-        if (targetObject.TryGetComponent<ScaleConstraint>(out ScaleConstraint scaleConstraint))
+        if (targetObject.TryGetComponent<RotationConstraint>(out RotationConstraint rotationConstraint))
         {
             isDragging = false;
             return ;
         }
-        constraint = targetObject.AddComponent<ScaleConstraint>();
+        constraint = targetObject.AddComponent<RotationConstraint>();
         // Guardamos la escala inicial del objeto antes de agregar el constraint
         Vector3 initialTargetScale = targetObject.transform.localScale;
 
@@ -84,18 +84,8 @@ public class SetScaleParentTool : Tools
         source.weight = 1.0f;
         constraint.AddSource(source);
         constraint.constraintActive = true;
-        // Calcular el "ScaleOffset" multiplicando la escala inicial del target por el inverso de la escala del primer objeto
-        Vector3 inverseFirstScale = new Vector3(
-            1.0f / firstObject.transform.localScale.x,
-            1.0f / firstObject.transform.localScale.y,
-            1.0f / firstObject.transform.localScale.z
-        );
-        Vector3 scaleOffset = Vector3.Scale(initialTargetScale, inverseFirstScale);
-        constraint.scaleOffset = scaleOffset;
+        constraint.rotationOffset = secondObject.transform.rotation.eulerAngles - firstObject.transform.rotation.eulerAngles;
 
-
-        // Aplica la escala actual
-        //targetObject.transform.localScale = firstObject.transform.localScale;
     }
 
     public override void DropInteractable()
@@ -110,11 +100,11 @@ public class SetScaleParentTool : Tools
             firstObject = null;
             secondObject.GetComponent<Rigidbody>().isKinematic = false;
             secondObject = null;
-            if(scalable != null)
+            if(rotable != null)
             {
-                scalable.OnEraserInteract -= ResetDragging;
-                scalable.OnEraserInteract -= DropInteractable;
-                scalable = null;
+                rotable.OnEraserInteract -= ResetDragging;
+                rotable.OnEraserInteract -= DropInteractable;
+                rotable = null;
             }
         }
         base.DropInteractable();
@@ -128,15 +118,12 @@ public class SetScaleParentTool : Tools
     {
         if (constraint == null)
             return;
-        // Guardar la escala actual del objeto antes de eliminar el constraint
-        //Vector3 currentScale = secondObject.transform.localScale;
         // Desactivar el constraint y limpiar la fuente
         constraint.enabled = false;
         constraint.RemoveSource(0);
         Destroy(constraint);
         constraint = null;
-        // Aplicar la escala guardada
-        //secondObject.transform.localScale = currentScale;
+
     }
 }
 

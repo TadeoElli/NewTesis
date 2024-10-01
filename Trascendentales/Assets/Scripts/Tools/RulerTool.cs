@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class RulerTool : Tools
 {
-    private Rigidbody objectiveRB;
     private Transform objectiveTr;
+    private IEscalable scalable;
     [SerializeField] private Transform gimball;
     [SerializeField] private GameObject gimballGizmo2D, gimballGizmoPerspective;
     private Vector3 initialScale;
@@ -24,6 +24,8 @@ public class RulerTool : Tools
     {
         if(!interactable.TryGetComponent<IEscalable>(out IEscalable component)) 
             return;
+        if (!component.CanScale())
+            return;
         playerController.OnLeftClickDrop += DropInteractable;
         playerController.OnToolSwitchCheck += DropInteractable;
         playerController.OnPerspectiveSwitch += DropInteractable;
@@ -31,8 +33,8 @@ public class RulerTool : Tools
         maxScale = component.GetMaxScale();
         base.Interact(interactable, isPerspective2D); // Llama a la lógica común de interactuar
         //Desactivo la colision
-        objectiveRB = objective.GetComponent<Rigidbody>();
-        objectiveRB.isKinematic = true;
+        if(objective.TryGetComponent<Rigidbody>(out Rigidbody objectiveRB))
+            objectiveRB.isKinematic = true;
         //Seteo el Gimball
         objectiveTr = objective.GetComponent<Transform>();
         SetGimball();
@@ -91,8 +93,8 @@ public class RulerTool : Tools
     public override void DropInteractable()
     {
         if(objective == null) return;
-        objectiveRB.isKinematic = false;
-        objectiveRB = null;
+        if(objective.TryGetComponent<Rigidbody>(out Rigidbody objectiveRB))
+            objectiveRB.isKinematic = false;
         objectiveTr.SetParent(null);
         objectiveTr = null;
         ResetGimball();
@@ -119,7 +121,8 @@ public class RulerTool : Tools
     {
         // Lógica específica de la regla: Escalar el objeto
         if (objective == null)
-        return;
+            return;
+
         Vector3 currentMousePosition = Input.mousePosition;
         float scaleFactorX = (currentMousePosition.x - initialMousePosition.x) * mouseSensitiviy;
         float scaleFactorY = (currentMousePosition.y - initialMousePosition.y) * mouseSensitiviy;

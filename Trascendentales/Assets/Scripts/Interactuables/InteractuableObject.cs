@@ -27,4 +27,8 @@ public class InteractuableObject : MonoBehaviour, IInteractable
         return compassParent;
     }
 
+    public void SetIsAtachableForRuler(bool isAtachable)
+    {
+        isAtacheableForRuler = isAtachable;
+    }
 }

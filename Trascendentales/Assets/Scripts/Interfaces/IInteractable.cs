@@ -9,6 +9,7 @@ public interface IInteractable
     public bool IsAtachedToCompass();
     public void SetIsAtachedToCompass(GameObject parent);
     public void SetUnatachedToCompass();
+    public void SetIsAtachableForRuler(bool isAtachable);
     public GameObject GetCompassParent();
 }
 
@@ -17,6 +18,7 @@ public interface IEscalable
     public Vector3 GetMinScale();
     public Vector3 GetMaxScale();
     public bool CanAttachOthers();
+    public bool CanScale();
     public float GetMaxRadius();
     public void InteractWithEraser(bool isOn2D);
     public event Action OnEraserInteract;

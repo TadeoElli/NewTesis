@@ -7,6 +7,7 @@ public class SetScaleParentTool : Tools
     private GameObject firstObject;
     private IEscalable scalable;
     private GameObject secondObject;
+    private IInteractable interactable;
     private float maxRadius;
     private ScaleConstraint constraint;
 
@@ -37,6 +38,14 @@ public class SetScaleParentTool : Tools
         base.Interact(interactable, isPerspective2D);
     }
 
+    private void Update()
+    {
+        if(interactable != null && !interactable.IsAtachableForRuler())
+        {
+            isDragging = false;
+            DropInteractable();
+        }
+    }
 
     private void TryAttachObject()
     {
@@ -45,12 +54,17 @@ public class SetScaleParentTool : Tools
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, interactableLayer))
         {
-            if (!hit.collider.TryGetComponent<IInteractable>(out IInteractable interactable) || !interactable.IsAtachableForRuler())
+            if (!hit.collider.TryGetComponent<IInteractable>(out IInteractable component1) || !component1.IsAtachableForRuler())
             {
                 isDragging = false;
                 return;
             }
-
+            if (hit.collider.gameObject == firstObject)
+            {
+                isDragging = false;
+                return;
+            }
+            interactable = component1;
             secondObject = hit.collider.gameObject;
 
             // Chequea la distancia entre los objetos
@@ -60,7 +74,10 @@ public class SetScaleParentTool : Tools
                 isDragging = false ;
                 return;
             }
-            secondObject.GetComponent<Rigidbody>().isKinematic = true;
+            if (secondObject.TryGetComponent<Rigidbody>(out Rigidbody component))
+            {
+                component.isKinematic = true;
+            }
             // Agrega el ScaleConstraint
             AddScaleConstraint(secondObject);
         }
@@ -108,7 +125,10 @@ public class SetScaleParentTool : Tools
         {
             ResetConstraint();
             firstObject = null;
-            secondObject.GetComponent<Rigidbody>().isKinematic = false;
+            if (secondObject.TryGetComponent<Rigidbody>(out Rigidbody component))
+            {
+                component.isKinematic = false;
+            }
             secondObject = null;
             if(scalable != null)
             {
@@ -116,6 +136,7 @@ public class SetScaleParentTool : Tools
                 scalable.OnEraserInteract -= DropInteractable;
                 scalable = null;
             }
+            interactable = null;
         }
         base.DropInteractable();
         playerController.OnRightClickDrop -= DropInteractable;
@@ -129,14 +150,12 @@ public class SetScaleParentTool : Tools
         if (constraint == null)
             return;
         // Guardar la escala actual del objeto antes de eliminar el constraint
-        //Vector3 currentScale = secondObject.transform.localScale;
         // Desactivar el constraint y limpiar la fuente
         constraint.enabled = false;
         constraint.RemoveSource(0);
         Destroy(constraint);
         constraint = null;
         // Aplicar la escala guardada
-        //secondObject.transform.localScale = currentScale;
     }
 }
 

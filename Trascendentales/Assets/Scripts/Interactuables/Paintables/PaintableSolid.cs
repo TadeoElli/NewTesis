@@ -8,7 +8,7 @@ public class PaintableSolid : PaintableObject
 
     private void Awake()
     {
-        InteractionWithBrush();
+        InteractionWithEraser();
     }
     public override void InteractionWithBrush()
     {

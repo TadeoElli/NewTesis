@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamagable
 {
     public event Action<ToolTypes> OnToolSwitch;
     public event Action OnToolSwitchCheck;
@@ -103,14 +103,33 @@ public class PlayerController : MonoBehaviour
             _myMove.Jump();
     }
 
+    [SerializeField] float timePass;
+
     void JumpCheck()
     {
-
-
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit info, 2, layerMask))
+        timePass += Time.deltaTime;
+        if (timePass >= 1.5f)
         {
-
-            _myMove.canJump = true;
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit info, 2))
+            {
+                timePass = 0;
+                _myMove.canJump = true;
+            }
         }
+
+    }
+
+    public void Takedmg(int dmg)
+    {
+        StartCoroutine(dmgVisual());
+    }
+
+    IEnumerator dmgVisual()
+    {
+            this.GetComponent<Renderer>().material.color = Color.red;
+        yield return new WaitForSeconds(0.25f);
+            this.GetComponent<Renderer>().material.color = Color.yellow;
+
+        yield return null;
     }
 }

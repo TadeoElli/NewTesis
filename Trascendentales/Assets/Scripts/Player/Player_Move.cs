@@ -12,15 +12,16 @@ public class Player_Move
 
     PlayerController _myControll;
 
-    float _speed = 2.5f;
+    float _speed = 5f;
 
     public bool canJump = true;
 
-    public Player_Move(Rigidbody rb, PlayerController controller)
+    public Player_Move(Rigidbody rb, PlayerController controller, float speed)
     {
         _myControll = controller;
         _rb = rb;
         CheckPerspective();
+        _speed = speed;
     }
 
     public void CheckPerspective()

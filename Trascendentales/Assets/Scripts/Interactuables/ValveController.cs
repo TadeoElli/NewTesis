@@ -12,9 +12,12 @@ public class ValveController : MonoBehaviour
     private float currentRotation = 0f; // El ángulo de rotación actual de la válvula
     private float rotationDifference;
 
+    Rigidbody rb;
+
     private void Start()
     {
         currentRotation = transform.localEulerAngles.y;
+        rb = GetComponent<Rigidbody>();
     }
     void Update()
     {
@@ -42,15 +45,15 @@ public class ValveController : MonoBehaviour
         //Reseteamos el valor previo (si, los nombres estan al reves)
         currentRotation = previousRotation;
 
-        float clampedRot = Mathf.Clamp(currentRotation, minRot, maxRotation);
+        float clampedRot = Mathf.Clamp(previousRotation, minRot, maxRotation);
         print(clampedRot);
-
-        transform.eulerAngles = new Vector3(90, clampedRot, 0);
 
   
 
         //mueve los valores entre 0 y 1
-        float progress = Mathf.InverseLerp(minRot, maxRotation, clampedRot);
+        float progress = Mathf.InverseLerp(minRot, maxRotation, rotationDifference);
+
+      
 
         // Modificamos la escala de la plataforma basándonos en el progreso
         platform.localScale = Vector3.Lerp(closedScale, openScale, progress);

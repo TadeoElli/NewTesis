@@ -7,7 +7,6 @@ public class CameraController : MonoBehaviour
     private bool is2D = false;
     private Vector3 initialPosition;
     private Quaternion initialRotation;
-    [SerializeField] private bool followPlayer = true;
     [SerializeField] private float orthographicSize = 5f; // Tamaño de la cámara ortográfica en modo 2D
     [SerializeField] private Vector3 camera2DPosition = new Vector3(0, 10, -10); // Posición de la cámara en modo 2D
     [SerializeField] private Quaternion camera2DRotation = Quaternion.Euler(0, 0, 0); // Cámara mirando hacia abajo en modo 2D
@@ -47,7 +46,6 @@ public class CameraController : MonoBehaviour
     }
     private void Update()
     {
-        if(followPlayer)
-            transform.position = new Vector3(playerController.transform.position.x,transform.position.y,transform.position.z);
+        transform.position = new Vector3(playerController.transform.position.x, playerController.transform.position.y + 4,transform.position.z);
     }
 }

@@ -11,6 +11,7 @@ public class MouseController : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Transform cursorTransform;  //transform del cursor
+    [SerializeField] public Material outline;
 
     [Header("Cursor")]
     [SerializeField] private LayerMask interactableLayer;   //layer de todos los objetos interactuables

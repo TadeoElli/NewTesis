@@ -17,11 +17,12 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     private Vector3 spawnPosition;
     Player_Move _myMove;
+    [SerializeField] float speed;
 
     LayerMask layerMask;
     private void Awake()
     {
-        _myMove = new Player_Move(_rb, this);
+        _myMove = new Player_Move(_rb, this, speed);
         layerMask = LayerMask.GetMask("Ground");
         spawnPosition = transform.position;
     }
@@ -131,5 +132,19 @@ public class PlayerController : MonoBehaviour, IDamagable
             this.GetComponent<Renderer>().material.color = Color.yellow;
 
         yield return null;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == 8)
+        {
+            transform.SetParent(other.transform);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == 8)
+        {
+            transform.SetParent(null);
+        }
     }
 }

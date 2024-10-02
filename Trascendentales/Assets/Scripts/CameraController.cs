@@ -46,6 +46,9 @@ public class CameraController : MonoBehaviour
     }
     private void Update()
     {
-        transform.position = new Vector3(playerController.transform.position.x, playerController.transform.position.y + 4,transform.position.z);
+        if(is2D)
+            transform.position = new Vector3(playerController.transform.position.x, playerController.transform.position.y,transform.position.z);
+        else
+            transform.position = new Vector3(playerController.transform.position.x, playerController.transform.position.y + 4, transform.position.z);
     }
 }

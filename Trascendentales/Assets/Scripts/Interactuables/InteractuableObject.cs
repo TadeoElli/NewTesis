@@ -31,4 +31,25 @@ public class InteractuableObject : MonoBehaviour, IInteractable
     {
         isAtacheableForRuler = isAtachable;
     }
+    private void OnMouseEnter()
+    {
+
+        var x = GetComponent<Renderer>().materials[1];
+        if (x != null)
+        {
+            print("entre");
+
+            x.SetFloat("_on_off", 1);
+        }
+
+    }
+
+    private void OnMouseExit()
+    {
+        var x = GetComponent<Renderer>().materials[1];
+        if (x != null)
+        {
+            x.SetFloat("_on_off", 0);
+        }
+    }
 }

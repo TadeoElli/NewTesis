@@ -8,6 +8,7 @@ public class MouseController : MonoBehaviour
     // Start is called before the first frame update
     [Header("Components")]
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private MouseState mouseState;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Transform cursorTransform;  //transform del cursor
@@ -38,6 +39,7 @@ public class MouseController : MonoBehaviour
     void Awake()
     {
         playerController = FindObjectOfType<PlayerController>();
+        mouseState = GetComponent<MouseState>();
         playerController.OnToolSwitch += SetTool; // Unifica el evento de cambio de herramienta
         playerController.OnPerspectiveSwitch += SwitchView;
         playerController.OnLeftClickPress += PerformRaycastForLeftClick;
@@ -111,6 +113,7 @@ public class MouseController : MonoBehaviour
     private void SetTool(ToolTypes toolType)
     {
         currentToolType = toolType;
+        mouseState.SetCurrentToolType(toolType);
 
         switch (toolType)
         {

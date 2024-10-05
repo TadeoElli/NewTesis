@@ -37,7 +37,7 @@ public class InteractuableObject : MonoBehaviour, IInteractable
         var x = GetComponent<Renderer>().materials[1];
         if (x != null)
         {
-            print("entre");
+            //print("entre");
 
             x.SetFloat("_on_off", 1);
         }

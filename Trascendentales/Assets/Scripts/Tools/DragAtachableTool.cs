@@ -26,6 +26,7 @@ public class DragAtachableTool : Tools {
             return;
         maxRadius = compassable.GetMaxRadius();
         base.Interact(objective, isPerspective2D);
+        mouseState.SetRightclickPress();
         constraint = objective.GetComponent<ParentConstraint>();
         playerController.OnRightClickDrop += DropInteractable; // Al soltar el clic derecho, limpiamos la interacción
         playerController.OnPerspectiveSwitch += DropInteractable;
@@ -113,6 +114,7 @@ public class DragAtachableTool : Tools {
         constraint.enabled = true;
 
         // Limpiar las suscripciones a los eventos
+        mouseState.DropRightClick();
         playerController.OnRightClickDrop -= DropInteractable;
         playerController.OnPerspectiveSwitch -= DropInteractable;
         playerController.OnToolSwitchCheck -= DropInteractable;

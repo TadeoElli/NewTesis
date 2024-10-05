@@ -26,6 +26,7 @@ public class RulerTool : Tools
             return;
         if (!component.CanScale())
             return;
+        mouseState.SetLeftclickPress();
         playerController.OnLeftClickDrop += DropInteractable;
         playerController.OnToolSwitchCheck += DropInteractable;
         playerController.OnPerspectiveSwitch += DropInteractable;
@@ -95,6 +96,7 @@ public class RulerTool : Tools
         if(objective == null) return;
         if(objective.TryGetComponent<Rigidbody>(out Rigidbody objectiveRB))
             objectiveRB.isKinematic = false;
+        mouseState.DropLeftClick();
         objectiveTr.SetParent(null);
         objectiveTr = null;
         ResetGimball();

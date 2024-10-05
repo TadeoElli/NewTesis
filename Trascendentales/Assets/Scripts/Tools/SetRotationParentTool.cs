@@ -28,6 +28,7 @@ public class SetRotationParentTool : Tools
         {
             ResetConstraint();
         }
+        mouseState.SetRightclickPress();
         rotable.OnEraserInteract += ResetDragging;
         rotable.OnEraserInteract += DropInteractable;
         firstObject = interactable;
@@ -107,6 +108,7 @@ public class SetRotationParentTool : Tools
                 rotable = null;
             }
         }
+        mouseState.DropRightClick();
         base.DropInteractable();
         playerController.OnRightClickDrop -= DropInteractable;
     }

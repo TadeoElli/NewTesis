@@ -25,6 +25,7 @@ public class BrushTool : Tools
         currentInteractable = interactuable;
         if(!currentInteractable.CanInteractWithBrush(isOn2D))
             return;
+        mouseState.SetLeftclickPress();
         playerController.OnPerspectiveSwitch += DropInteractable;
         playerController.OnLeftClickDrop += DropInteractable;
         playerController.OnToolSwitchCheck += DropInteractable;
@@ -63,6 +64,7 @@ public class BrushTool : Tools
     public override void DropInteractable()
     {
         base.DropInteractable();
+        mouseState.DropLeftClick();
         playerController.OnPerspectiveSwitch -= DropInteractable;
         playerController.OnToolSwitchCheck -= DropInteractable;
         playerController.OnLeftClickDrop -= DropInteractable;

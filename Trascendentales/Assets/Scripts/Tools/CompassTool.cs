@@ -30,6 +30,7 @@ public class CompassTool : Tools
         playerController.OnPerspectiveSwitch += DropInteractable;
         if(!interactable.TryGetComponent<ICompassable>(out ICompassable component))
             return;
+        mouseState.SetLeftclickPress();
         compassable = component;
         compassable.OnEraserInteract += ResetDragging; // Accionar la interacción del primer objeto
         compassable.OnEraserInteract += DropInteractable; // Accionar la interacción del primer objeto
@@ -158,6 +159,7 @@ public class CompassTool : Tools
             compassGizmo.SetActive(false);
         }
         base.DropInteractable();
+        mouseState.DropLeftClick();
         playerController.OnLeftClickDrop -= DropInteractable;
     }
     private void ResetDragging()

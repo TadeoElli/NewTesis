@@ -22,6 +22,7 @@ public class SquadTool : Tools
     {
         if(!interactable.TryGetComponent<IRotable>(out IRotable component))
             return;
+        mouseState.SetLeftclickPress();
         objectiveTr = interactable.GetComponent<Transform>();
         playerController.OnPerspectiveSwitch += DropInteractable;
         playerController.OnLeftClickDrop += DropInteractable;
@@ -63,6 +64,7 @@ public class SquadTool : Tools
         objectiveTr.SetParent(null);
         objectiveTr = null;
         ResetGimball();
+        mouseState.DropLeftClick();
         base.DropInteractable();
         playerController.OnPerspectiveSwitch -= DropInteractable;
         playerController.OnLeftClickDrop -= DropInteractable;

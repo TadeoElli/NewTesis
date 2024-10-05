@@ -20,6 +20,7 @@ public class DrawObjectTool : Tools
     public override void Interact(GameObject objective, bool isPerspective2D)
     {
         base.Interact(objective, isPerspective2D);
+        mouseState.SetRightclickPress();
         playerController.OnRightClickDrop += DropInteractable; // Al soltar el clic derecho, limpiamos la interacción
         playerController.OnPerspectiveSwitch += ResetDrawing;
         playerController.OnPerspectiveSwitch += DropInteractable;
@@ -66,6 +67,7 @@ public class DrawObjectTool : Tools
         base.DropInteractable();
         if(isDrawing)
             FinishDrawing();
+        mouseState.DropRightClick();
         playerController.OnRightClickDrop -= DropInteractable; // Al soltar el clic derecho, limpiamos la interacción
         playerController.OnPerspectiveSwitch -= ResetDrawing;
         playerController.OnPerspectiveSwitch -= DropInteractable;

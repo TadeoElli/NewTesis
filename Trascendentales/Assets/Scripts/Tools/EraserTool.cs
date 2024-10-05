@@ -38,6 +38,7 @@ public class EraserTool : Tools
         }
         if (currentPaintable ==  null && currentCompassable == null && currentEscalable == null)
             return;
+        mouseState.SetLeftclickPress();
         playerController.OnPerspectiveSwitch += DropInteractable;
         playerController.OnLeftClickDrop += DropInteractable;
         playerController.OnToolSwitchCheck += DropInteractable;
@@ -80,6 +81,7 @@ public class EraserTool : Tools
     public override void DropInteractable()
     {
         base.DropInteractable();
+        mouseState.DropLeftClick();
         playerController.OnPerspectiveSwitch -= DropInteractable;
         playerController.OnToolSwitchCheck -= DropInteractable;
         playerController.OnLeftClickDrop -= DropInteractable;

@@ -29,6 +29,7 @@ public class SetScaleParentTool : Tools
         {
             ResetConstraint();
         }
+        mouseState.SetRightclickPress();
         scalable.OnEraserInteract += ResetDragging;
         scalable.OnEraserInteract += DropInteractable;
         firstObject = interactable;
@@ -138,6 +139,7 @@ public class SetScaleParentTool : Tools
             }
             interactable = null;
         }
+        mouseState.DropRightClick();
         base.DropInteractable();
         playerController.OnRightClickDrop -= DropInteractable;
     }

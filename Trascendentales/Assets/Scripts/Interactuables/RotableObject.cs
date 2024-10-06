@@ -9,6 +9,7 @@ public class RotableObject : MonoBehaviour, IRotable
     [SerializeField] private bool canRotateInZ;
     [SerializeField] private float maxRadius;
     [SerializeField] private bool canAttachOthers;
+    [SerializeField] private Transform gimballRef;
     public event Action OnEraserInteract;
 
     public bool CanRotateInY() => canRotateInY;
@@ -20,6 +21,10 @@ public class RotableObject : MonoBehaviour, IRotable
     public void InteractWithEraser(bool isOn2D)
     {
         OnEraserInteract?.Invoke();
+    }
+    public void SetGimballRef(Transform newRef)
+    {
+        gimballRef = newRef;
     }
 
     public void SetRotationConstraints(bool canRotateInY, bool canRotateInZ)

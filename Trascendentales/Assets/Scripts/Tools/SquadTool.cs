@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class SquadTool : Tools
@@ -7,6 +8,7 @@ public class SquadTool : Tools
     private Rigidbody objectiveRB;
     private Transform objectiveTr;
     [SerializeField] private Transform gimball;
+    [SerializeField] private IRotable rotable;
     [SerializeField] private GameObject gimballGizmo2D, gimballGizmoPerspective;
     [Header("Parameters")]
     [SerializeField] private float rotationSpeed = 1f;  // Sensibilidad de rotación
@@ -22,14 +24,16 @@ public class SquadTool : Tools
     {
         if(!interactable.TryGetComponent<IRotable>(out IRotable component))
             return;
+        rotable = component;
         mouseState.SetLeftclickPress();
+        rotable.SetGimballRef(gimball);
         objectiveTr = interactable.GetComponent<Transform>();
         playerController.OnPerspectiveSwitch += DropInteractable;
         playerController.OnLeftClickDrop += DropInteractable;
         playerController.OnToolSwitchCheck += DropInteractable;
         base.Interact(interactable, isPerspective2D); // Llama a la lógica común de interactuar
-        canRotateInY = component.CanRotateInY();
-        canRotateInZ = component.CanRotateInZ();
+        canRotateInY = rotable.CanRotateInY();
+        canRotateInZ = rotable.CanRotateInZ();
         Renderer objRenderer = objective.GetComponent<Renderer>();
         if (objRenderer != null)
         {
@@ -66,6 +70,7 @@ public class SquadTool : Tools
         ResetGimball();
         mouseState.DropLeftClick();
         base.DropInteractable();
+        rotable.SetGimballRef(null);
         playerController.OnPerspectiveSwitch -= DropInteractable;
         playerController.OnLeftClickDrop -= DropInteractable;
         playerController.OnToolSwitchCheck -= DropInteractable;

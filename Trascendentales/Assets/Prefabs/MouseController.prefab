@@ -81,6 +81,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6165654701097406847}
   - component: {fileID: 2519444888325775714}
+  - component: {fileID: 9073911576350447687}
   m_Layer: 0
   m_Name: MouseController
   m_TagString: Untagged
@@ -122,9 +123,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
+  mouseState: {fileID: 0}
   spriteRenderer: {fileID: 8948166519887790638}
   mainCamera: {fileID: 0}
   cursorTransform: {fileID: 2656691352042560701}
+  outline: {fileID: 0}
   interactableLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -143,6 +146,18 @@ MonoBehaviour:
   setScaleParentTool: {fileID: 3372142096089564645}
   setRotationParentTool: {fileID: 7500145944813371781}
   dragAtachableObjectsTool: {fileID: 7039775328774301397}
+--- !u!114 &9073911576350447687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605190015852883773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c130d48f473505c4d9b4c37b4e41dab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1101196471392413115
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,9 +402,12 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 193
-  cubePrefab: {fileID: 0}
-  spherePrefab: {fileID: 0}
-  rectanglePrefab: {fileID: 0}
+  cubePrefab: {fileID: 2480493298415744116, guid: adb9e9186ccfb7041a9a19353eda4746,
+    type: 3}
+  spherePrefab: {fileID: 3868375256348824893, guid: 94fa66752e38e064b87d2a3c0c5082f9,
+    type: 3}
+  rectanglePrefab: {fileID: 3064545021292272062, guid: 44dfe98971d97024cb1f530f7de88c50,
+    type: 3}
 --- !u!1 &3235152842718352788
 GameObject:
   m_ObjectHideFlags: 0

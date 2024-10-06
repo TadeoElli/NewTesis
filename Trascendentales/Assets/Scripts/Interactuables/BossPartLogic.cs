@@ -9,13 +9,11 @@ public class BossPartLogic : MonoBehaviour
     public float scaleTolerance = 0.05f;  // Tolerancia para considerar la escala correcta
 
     private bool isInteractable = true;
-    PaintableObject paintable;
     ScalableObject scalable;
     InteractuableObject interactuable;
 
     private void Awake()
     {
-        paintable = GetComponent<PaintableObject>();
         scalable = GetComponent<ScalableObject>();
         interactuable = GetComponent<InteractuableObject>();
     }
@@ -45,7 +43,6 @@ public class BossPartLogic : MonoBehaviour
     private void DisableInteraction()
     {
         // Desactivar componentes que hacen que esta parte sea interactuable
-        Destroy(paintable);
         Destroy(scalable);
         interactuable.SetIsAtachableForRuler(false);
         //scalable.enabled = false;

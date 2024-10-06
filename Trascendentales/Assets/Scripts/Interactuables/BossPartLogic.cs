@@ -43,7 +43,7 @@ public class BossPartLogic : MonoBehaviour
     private void DisableInteraction()
     {
         // Desactivar componentes que hacen que esta parte sea interactuable
-        Destroy(scalable);
+        scalable.canScale = false;
         interactuable.SetIsAtachableForRuler(false);
         //scalable.enabled = false;
         Debug.Log($"{gameObject.name} alcanzó la escala correcta y ya no es interactuable.");

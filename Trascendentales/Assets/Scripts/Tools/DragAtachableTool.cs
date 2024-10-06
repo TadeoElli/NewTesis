@@ -36,6 +36,8 @@ public class DragAtachableTool : Tools {
         initialDistanceMouseToParent = Vector3.Distance(GetMouseWorldPosition(), parent.transform.position);
         initialObjectPosition = objective.transform.position;
         constraint.enabled = false;
+        constraint.locked = false;
+        constraint.constraintActive = false;
     }
 
     private void Update()
@@ -45,32 +47,26 @@ public class DragAtachableTool : Tools {
     }
     private void AdjustDistance()
     {
-        // Obtener la posición del mouse en el mundo
-        Vector3 currentMousePosition = GetMouseWorldPosition();
-
-        // Calcular la nueva distancia del mouse al objeto padre
-        float newDistanceMouseToParent = Vector3.Distance(currentMousePosition, parent.transform.position);
-
-        // Calcular el cambio de distancia entre el mouse y el padre
-        float distanceDelta = newDistanceMouseToParent - initialDistanceMouseToParent;
-
-        // Calcular la nueva posición del objeto objetivo basado en el cambio de distancia
+        // Obtener la dirección entre el objeto y el padre
         Vector3 direction = (objective.transform.position - parent.transform.position).normalized;
-        Vector3 newObjectivePosition = initialObjectPosition + direction * distanceDelta;
 
-        // Restringir la distancia del objetivo al objeto padre
-        float distanceToParent = Vector3.Distance(newObjectivePosition, parent.transform.position);
-        if (distanceToParent > maxRadius)
-        {
-            newObjectivePosition = parent.transform.position + direction * maxRadius;
-        }
-        else if (distanceToParent < 0.5f) // No permitir que se superpongan
-        {
-            newObjectivePosition = parent.transform.position + direction * 0.5f; // Distancia mínima
-        }
-        // Aplicar la nueva posición al objeto objetivo
+        // Obtener la distancia actual entre el objeto y el padre
+        float currentDistanceToParent = Vector3.Distance(objective.transform.position, parent.transform.position);
+
+        // Calcular la nueva distancia basándonos en el desplazamiento del mouse en el eje Y (o cualquier otro control)
+        float mouseDeltaY = Input.GetAxis("Mouse Y"); // Cambia esto si usas otro input
+        float distanceDelta = mouseDeltaY * 0.1f; // Escalar para controlar la sensibilidad del desplazamiento
+
+        // Calcular la nueva distancia final
+        float newDistanceToParent = Mathf.Clamp(currentDistanceToParent + distanceDelta, 2.5f, maxRadius); // Limitar la distancia entre 0.5 y el radio máximo
+
+        // Calcular la nueva posición del objeto basándonos en la nueva distancia
+        Vector3 newObjectivePosition = parent.transform.position + direction * newDistanceToParent;
+
+        // Aplicar la nueva posición al objeto
         objective.transform.position = newObjectivePosition;
     }
+
 
     private Vector3 GetMouseWorldPosition()
     {
@@ -102,12 +98,16 @@ public class DragAtachableTool : Tools {
     public override void DropInteractable()
     {
         isDragging = false;
+        
         ConstraintSource source = new ConstraintSource();
         source.sourceTransform = parent.transform;
         source.weight = 1.0f;
         constraint.SetSource(0,source);
-        constraint.SetTranslationOffset(0, objective.transform.position - parent.transform.position);
-        constraint.SetRotationOffset(0, objective.transform.rotation.eulerAngles - parent.transform.rotation.eulerAngles);
+        Vector3 positionOffset = parent.transform.InverseTransformPoint(objective.transform.position);
+        Quaternion rotationOffset = Quaternion.Inverse(parent.transform.rotation) * objective.transform.rotation;
+        constraint.SetTranslationOffset(0, positionOffset);
+        constraint.SetRotationOffset(0, rotationOffset.eulerAngles);
+
         constraint.constraintActive = true;
 
         constraint.locked = true; // Mantener el offset original de la relación

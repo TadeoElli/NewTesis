@@ -5,10 +5,14 @@ public class PaintableSolid : PaintableObject
     [SerializeField] private Collider col;
     [SerializeField] private Material solidMat, transparentMat;
     [SerializeField] private Renderer render;
+    [SerializeField] private bool startSolid;
 
     private void Awake()
     {
-        InteractionWithEraser();
+        if (startSolid)
+            InteractionWithBrush();
+        else
+            InteractionWithEraser();
     }
     public override void InteractionWithBrush()
     {

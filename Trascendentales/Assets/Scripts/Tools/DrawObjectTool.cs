@@ -6,7 +6,7 @@ public class DrawObjectTool : Tools
 {
 
     [SerializeField] private GameObject cubePrefab, spherePrefab, rectanglePrefab; // Prefab del cubo a spawnear
-    private GameObject selectedPrefab;
+    private GameObject selectedPrefab, spawnedObject;
 
     private bool isDrawing = false;
 
@@ -82,7 +82,9 @@ public class DrawObjectTool : Tools
         // Si hay un objeto seleccionado, spawnearlo
         if (selectedPrefab != null)
         {
-            Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
+            if(spawnedObject != null)
+                Destroy(spawnedObject);
+            spawnedObject = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
         }
     }
     private Vector3 GetMouseWorldPosition()

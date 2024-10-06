@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 9071847403314349119}
   - component: {fileID: 4646270654586461909}
   - component: {fileID: 5201249034803495606}
-  m_Layer: 0
+  - component: {fileID: 7622694557337297928}
+  m_Layer: 6
   m_Name: SpawnCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,3 +186,17 @@ MonoBehaviour:
   canRotateInZ: 1
   maxRadius: 0
   canAttachOthers: 0
+--- !u!114 &7622694557337297928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2480493298415744116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f863d796b9e3cc041b418bdc0bfc3a52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionForBrush: 0
+  interactionForEraser: 0

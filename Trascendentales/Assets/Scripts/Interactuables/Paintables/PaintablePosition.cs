@@ -9,10 +9,18 @@ public class PaintablePosition : PaintableObject
     {
         base.InteractionWithBrush();
         transform.position = newPosition;
+        if (TryGetComponent<ChangePositionByPerspective>(out ChangePositionByPerspective component))
+        {
+            component.SetNewPosition();
+        }
     }
     public override void InteractionWithEraser()
     {
         base.InteractionWithEraser();
         transform.position = oldPosition;
+        if (TryGetComponent<ChangePositionByPerspective>(out ChangePositionByPerspective component))
+        {
+            component.SetNewPosition();
+        }
     }
 }

@@ -7,12 +7,16 @@ using UnityEngine.UIElements;
 public class Balance_Atack_Method : MonoBehaviour
 {
     [SerializeField] Transform _target;
+    [SerializeField] Balance_Atack_Method _secondBalance;
 
     [SerializeField] float _speedAt;
 
     [SerializeField] float _fallSpeed;
 
+    [SerializeField] float _positionXMin;
+
     public delegate void miMetodo();
+    private int _successCount = 0;
 
     miMetodo _atack;
 
@@ -28,8 +32,8 @@ public class Balance_Atack_Method : MonoBehaviour
 
     private void Update()
     {
-
-        _atack();
+        if(_target.position.x >= _positionXMin)
+            _atack();
 
     }
 
@@ -71,6 +75,23 @@ public class Balance_Atack_Method : MonoBehaviour
         yield return new WaitForSeconds(_speedAt);
         transform.position =new Vector3(transform.position.x, 5, transform.position.z);
         _atack = FallingRise;
+    }
+    public void IncreaseSpeed()
+    {
+        _successCount++;
+        _speedAt = _speedAt - 0.3f;
+        _fallSpeed = _fallSpeed + 1f;
+        if(_successCount > 2)
+        {
+            if(_secondBalance !=null && !_secondBalance.gameObject.activeSelf)
+                _secondBalance.gameObject.SetActive(true);
+            _secondBalance.SetValues(_speedAt - 1f,_fallSpeed);
+        }
+    }
+    public void SetValues(float speedAt,float fallSpeed)
+    {
+        _speedAt = speedAt;
+        _fallSpeed = fallSpeed;
     }
 
 

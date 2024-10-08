@@ -6,7 +6,6 @@ using UnityEngine.Animations;
 public class ChangePositionByPerspective : MonoBehaviour
 {
     float oldPositionZ;
-    bool isOn2D = false;
     [SerializeField] CameraController cam;
     private ParentConstraint parentConstraint;
 

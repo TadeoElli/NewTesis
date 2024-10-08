@@ -7,7 +7,7 @@ public class SquadTool : Tools
 {
     private Rigidbody objectiveRB;
     private Transform objectiveTr;
-    [SerializeField] private Transform gimball;
+    [SerializeField] private Transform gimball, oldParent;
     [SerializeField] private IRotable rotable;
     [SerializeField] private GameObject gimballGizmo2D, gimballGizmoPerspective;
     [Header("Parameters")]
@@ -57,6 +57,7 @@ public class SquadTool : Tools
         objectiveRB = objective.GetComponent<Rigidbody>();
         objectiveRB.isKinematic = true;
         gimball.position = objectiveTr.position;
+        oldParent = objectiveTr.parent;
         objectiveTr.SetParent(gimball);
         lastMousePosition = Input.mousePosition;  // Guarda la posición actual del mouse al iniciar la interacción
     }
@@ -65,7 +66,8 @@ public class SquadTool : Tools
         if(objective == null) return;
         objectiveRB.isKinematic = false;
         objectiveRB = null;
-        objectiveTr.SetParent(null);
+        objectiveTr.SetParent(oldParent);
+        oldParent = null;
         objectiveTr = null;
         ResetGimball();
         mouseState.DropLeftClick();

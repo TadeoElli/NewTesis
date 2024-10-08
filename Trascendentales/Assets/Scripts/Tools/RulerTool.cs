@@ -6,7 +6,7 @@ public class RulerTool : Tools
 {
     private Transform objectiveTr;
     private IEscalable scalable;
-    [SerializeField] private Transform gimball;
+    [SerializeField] private Transform gimball, oldParent;
     [SerializeField] private GameObject gimballGizmo2D, gimballGizmoPerspective;
     private Vector3 initialScale;
     private Vector3 initialMousePosition;
@@ -49,6 +49,7 @@ public class RulerTool : Tools
     private void SetGimball()
     {
         gimball.position = objectiveTr.position;
+        oldParent = objectiveTr.parent;
         objectiveTr.SetParent(gimball);
         // Obtener el tamaño real del objeto usando su renderer
         Renderer objRenderer = objectiveTr.GetComponent<Renderer>();
@@ -97,7 +98,8 @@ public class RulerTool : Tools
         if(objective.TryGetComponent<Rigidbody>(out Rigidbody objectiveRB))
             objectiveRB.isKinematic = false;
         mouseState.DropLeftClick();
-        objectiveTr.SetParent(null);
+        objectiveTr.SetParent(oldParent);
+        oldParent = null;
         objectiveTr = null;
         ResetGimball();
         base.DropInteractable();

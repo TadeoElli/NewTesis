@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour, IDamagable
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            transform.position = spawnPosition;
+            SceneController.Instance.ChangeScene(Scenes.TestScene);
         }
 
         MoveCheck();

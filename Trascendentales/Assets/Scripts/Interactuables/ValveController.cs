@@ -46,7 +46,7 @@ public class ValveController : MonoBehaviour
         currentRotation = previousRotation;
 
         float clampedRot = Mathf.Clamp(previousRotation, minRot, maxRotation);
-        print(clampedRot);
+        //print(clampedRot);
 
   
 

@@ -7,12 +7,12 @@ public class ChangePositionByPerspective : MonoBehaviour
 {
     float oldPositionZ;
     bool isOn2D = false;
-    [SerializeField] PlayerController player;
+    [SerializeField] CameraController cam;
     private ParentConstraint parentConstraint;
 
     private void OnEnable()
     {
-        player.OnPerspectiveSwitch += ChangePerspective;
+        cam.OnCameraSwitch += ChangePerspective;
     }
     public void SetNewPosition()
     {
@@ -31,9 +31,8 @@ public class ChangePositionByPerspective : MonoBehaviour
             constraint.constraintActive = true;
         }
     }
-    public void ChangePerspective()
+    public void ChangePerspective(bool isOn2D)
     {
-        isOn2D = !isOn2D;
         if(isOn2D)
             SetNewPosition();
         else
@@ -42,6 +41,6 @@ public class ChangePositionByPerspective : MonoBehaviour
 
     private void OnDisable()
     {
-        player.OnPerspectiveSwitch -= ChangePerspective;
+        cam.OnCameraSwitch -= ChangePerspective;
     }
 }

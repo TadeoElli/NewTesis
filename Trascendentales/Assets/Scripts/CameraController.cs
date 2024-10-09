@@ -43,7 +43,6 @@ public class CameraController : MonoBehaviour
             mainCamera.transform.position = camera2DPosition;
             mainCamera.transform.rotation = camera2DRotation;
         }
-
         is2D = !is2D;
         OnCameraSwitch?.Invoke(is2D);
     }

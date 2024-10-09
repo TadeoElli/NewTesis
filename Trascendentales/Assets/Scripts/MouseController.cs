@@ -35,11 +35,14 @@ public class MouseController : MonoBehaviour
     private Tools leftClickTool, rightClickTool; // Herramienta activa
     private ToolTypes currentToolType;
 
+    private PS_Script psScript;
+
     private bool is2DView = false;   // Indica si estamos en la vista 2D o 2.5D
     void Awake()
     {
         playerController = FindObjectOfType<PlayerController>();
         mouseState = GetComponent<MouseState>();
+        psScript = GetComponent<PS_Script>();
         playerController.OnToolSwitch += SetTool; // Unifica el evento de cambio de herramienta
         playerController.OnPerspectiveSwitch += SwitchView;
         playerController.OnLeftClickPress += PerformRaycastForLeftClick;
@@ -87,7 +90,7 @@ public class MouseController : MonoBehaviour
             }
             leftClickTool?.Interact(hit.collider.gameObject, is2DView);
             Debug.Log("Interacted with: " + hit.collider.name);
-            
+            psScript.onParticlesMouse();
         }
     }
     private void PerformRaycastForRightClick()

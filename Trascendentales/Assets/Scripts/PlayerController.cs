@@ -84,6 +84,10 @@ public class PlayerController : MonoBehaviour, IDamagable
             SceneController.Instance.ChangeScene(Scenes.TestScene);
         }
 
+      
+    }
+    private void LateUpdate()
+    {
         MoveCheck();
 
         JumpCheck();

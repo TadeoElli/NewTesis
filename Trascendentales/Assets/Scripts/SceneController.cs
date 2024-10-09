@@ -32,8 +32,15 @@ public class SceneController : MonoBehaviour
     public void SetScene(string scene)
     {
         string sceneName = scene.ToString(); // Convierte el valor del enum a una cadena (string).
+        SceneManager.UnloadSceneAsync(sceneName);
+
         //AudioManager.Instance.PlayMusic(sceneMusic);
+        if (SceneManager.GetSceneByName(sceneName).isLoaded)
+        {
+            return;
+        }
         SceneManager.LoadScene(sceneName);
+
     }
 
 }

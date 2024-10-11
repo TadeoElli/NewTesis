@@ -24,7 +24,23 @@ public class PlayerController : MonoBehaviour, IDamagable
     {
         _myMove = new Player_Move(_rb, this, speed);
         layerMask = LayerMask.GetMask("Ground");
-        spawnPosition = transform.position;
+        LoadPlayer();
+    }
+    public void SavePlayer()
+    {
+        SaveSystem.SavePlayer(this);
+    }
+
+    public void LoadPlayer()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
+        if(data == null )
+            return;
+        Vector3 position;
+        position.x = data.lastPosition[0];
+        position.y = data.lastPosition[1];
+        position.z = data.lastPosition[2];
+        transform.position = position;  
     }
 
     private void Update()

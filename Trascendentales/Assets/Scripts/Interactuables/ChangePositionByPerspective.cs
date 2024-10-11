@@ -15,12 +15,23 @@ public class ChangePositionByPerspective : MonoBehaviour
     }
     public void SetNewPosition()
     {
-        if(TryGetComponent<ParentConstraint>(out ParentConstraint constraint))
+        if(TryGetComponent<ParentConstraint>(out ParentConstraint pConstraint))
         {
-            constraint.constraintActive = false;
+            pConstraint.constraintActive = false;
+            pConstraint.locked = false;
         }
         oldPositionZ = transform.position.z;
         transform.position = new Vector3(transform.position.x,transform.position.y,0f);
+        if (pConstraint != null)
+        {
+            Vector3 positionOffset = transform.InverseTransformPoint(pConstraint.GetSource(0).sourceTransform.position);
+            Vector3 rotationOffset = new Vector3(90,0,-90);
+            pConstraint.SetTranslationOffset(0, positionOffset);
+            pConstraint.SetRotationOffset(0, rotationOffset);
+            pConstraint.constraintActive = true;
+            pConstraint.locked = true;
+        }
+
     }
     public void ReturnToOldPosition()
     {
@@ -29,6 +40,7 @@ public class ChangePositionByPerspective : MonoBehaviour
         {
             constraint.constraintActive = true;
         }
+
     }
     public void ChangePerspective(bool isOn2D)
     {

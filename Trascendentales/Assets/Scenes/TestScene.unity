@@ -1204,7 +1204,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  - {fileID: 2100000, guid: 947884d19a2b55c4f86a34081ee6c220, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1251,6 +1251,7 @@ MonoBehaviour:
   maxRadius: 15
   canAttachOthers: 1
   canScale: 1
+  m_feedback: {fileID: 2100000, guid: f50960eaaf4ab9d44a19ae50858cea6f, type: 2}
 --- !u!114 &100281257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1267,6 +1268,9 @@ MonoBehaviour:
   isAtacheableForRuler: 1
   isAtacheableForSquad: 0
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!114 &100281258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2206,7 +2210,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  - {fileID: 2100000, guid: 947884d19a2b55c4f86a34081ee6c220, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2252,6 +2256,9 @@ MonoBehaviour:
   isAtacheableForRuler: 0
   isAtacheableForSquad: 0
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!54 &190772546
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2760,6 +2767,9 @@ MonoBehaviour:
   isAtacheableForRuler: 0
   isAtacheableForSquad: 1
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!54 &221365765
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2829,6 +2839,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3318,6 +3329,7 @@ MonoBehaviour:
   maxRadius: 10
   canAttachOthers: 1
   canScale: 1
+  m_feedback: {fileID: 2100000, guid: f50960eaaf4ab9d44a19ae50858cea6f, type: 2}
 --- !u!114 &291996770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3334,6 +3346,9 @@ MonoBehaviour:
   isAtacheableForRuler: 0
   isAtacheableForSquad: 0
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!54 &291996771
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4759,7 +4774,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  - {fileID: 2100000, guid: 947884d19a2b55c4f86a34081ee6c220, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4806,6 +4821,7 @@ MonoBehaviour:
   maxRadius: 15
   canAttachOthers: 1
   canScale: 1
+  m_feedback: {fileID: 2100000, guid: f50960eaaf4ab9d44a19ae50858cea6f, type: 2}
 --- !u!114 &412175189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4822,6 +4838,9 @@ MonoBehaviour:
   isAtacheableForRuler: 1
   isAtacheableForSquad: 0
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!114 &412175190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5612,6 +5631,50 @@ Transform:
   - {fileID: 1686014964}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &531635964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 531635965}
+  - component: {fileID: 531635966}
+  m_Layer: 0
+  m_Name: FeedbackManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &531635965
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531635964}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &531635966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531635964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85617cb290fb08458ba8f221dc69915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &544533928
 GameObject:
   m_ObjectHideFlags: 0
@@ -7159,7 +7222,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  - {fileID: 2100000, guid: 947884d19a2b55c4f86a34081ee6c220, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7248,6 +7311,7 @@ MonoBehaviour:
   maxRadius: 0
   canAttachOthers: 0
   gimballRef: {fileID: 0}
+  m_feedback: {fileID: 2100000, guid: 1d969f5824cfffb4885450f3489efdfa, type: 2}
 --- !u!114 &718628999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7261,6 +7325,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxRadius: 10
+  m_feedbackCompass: {fileID: 2100000, guid: 8f0b2c758ebb89141ac2761a6ddc1831, type: 2}
+  m_feedbackEraser: {fileID: 2100000, guid: 6fa6db23edac8e444a3cc9213e05f7b6, type: 2}
 --- !u!114 &718629000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7277,6 +7343,9 @@ MonoBehaviour:
   isAtacheableForRuler: 0
   isAtacheableForSquad: 0
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!114 &718629001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7294,6 +7363,7 @@ MonoBehaviour:
   maxRadius: 0
   canAttachOthers: 0
   canScale: 1
+  m_feedback: {fileID: 2100000, guid: f50960eaaf4ab9d44a19ae50858cea6f, type: 2}
 --- !u!114 &718629002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8114,7 +8184,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -7791486788655378091, guid: 28bae0359372e1741ac5eefc275f6a07, type: 3}
-  - {fileID: 2100000, guid: 947884d19a2b55c4f86a34081ee6c220, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8153,6 +8223,7 @@ MonoBehaviour:
   maxRadius: 15
   canAttachOthers: 0
   gimballRef: {fileID: 0}
+  m_feedback: {fileID: 2100000, guid: 1d969f5824cfffb4885450f3489efdfa, type: 2}
 --- !u!114 &796069953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8169,6 +8240,9 @@ MonoBehaviour:
   isAtacheableForRuler: 0
   isAtacheableForSquad: 0
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!54 &796069954
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9184,7 +9258,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  - {fileID: 2100000, guid: 947884d19a2b55c4f86a34081ee6c220, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9231,6 +9305,7 @@ MonoBehaviour:
   maxRadius: 15
   canAttachOthers: 1
   canScale: 1
+  m_feedback: {fileID: 2100000, guid: f50960eaaf4ab9d44a19ae50858cea6f, type: 2}
 --- !u!114 &939830877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9247,6 +9322,9 @@ MonoBehaviour:
   isAtacheableForRuler: 0
   isAtacheableForSquad: 0
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!114 &939830878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10368,6 +10446,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10414,6 +10493,7 @@ MonoBehaviour:
   maxRadius: 15
   canAttachOthers: 1
   gimballRef: {fileID: 0}
+  m_feedback: {fileID: 2100000, guid: 1d969f5824cfffb4885450f3489efdfa, type: 2}
 --- !u!114 &1054537397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10430,6 +10510,9 @@ MonoBehaviour:
   isAtacheableForRuler: 0
   isAtacheableForSquad: 0
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!54 &1054537398
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10748,6 +10831,9 @@ MonoBehaviour:
   isAtacheableForRuler: 0
   isAtacheableForSquad: 1
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!54 &1155577106
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10817,6 +10903,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11171,7 +11258,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  - {fileID: 2100000, guid: 947884d19a2b55c4f86a34081ee6c220, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11218,6 +11305,7 @@ MonoBehaviour:
   maxRadius: 15
   canAttachOthers: 1
   canScale: 1
+  m_feedback: {fileID: 2100000, guid: f50960eaaf4ab9d44a19ae50858cea6f, type: 2}
 --- !u!114 &1262593363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11234,6 +11322,9 @@ MonoBehaviour:
   isAtacheableForRuler: 1
   isAtacheableForSquad: 0
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!114 &1262593364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11520,6 +11611,9 @@ MonoBehaviour:
   isAtacheableForRuler: 1
   isAtacheableForSquad: 0
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!65 &1318388449
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11561,8 +11655,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  - {fileID: 2100000, guid: 947884d19a2b55c4f86a34081ee6c220, type: 2}
+  - {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11648,6 +11742,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionForBrush: 0
   interactionForEraser: 0
+  m_feedbackBrush: {fileID: 2100000, guid: 61ede7259f80f324ab1973dc7f4b7baa, type: 2}
+  m_feedbackEraser: {fileID: 2100000, guid: 6fa6db23edac8e444a3cc9213e05f7b6, type: 2}
   col: {fileID: 1318388449}
   solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
   transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
@@ -12072,6 +12168,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionForBrush: 0
   interactionForEraser: 0
+  m_feedbackBrush: {fileID: 2100000, guid: 61ede7259f80f324ab1973dc7f4b7baa, type: 2}
+  m_feedbackEraser: {fileID: 2100000, guid: 6fa6db23edac8e444a3cc9213e05f7b6, type: 2}
   col: {fileID: 1372576289}
   solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
   transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
@@ -12120,6 +12218,9 @@ MonoBehaviour:
   isAtacheableForRuler: 1
   isAtacheableForSquad: 0
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!65 &1372576289
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12162,7 +12263,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  - {fileID: 2100000, guid: 947884d19a2b55c4f86a34081ee6c220, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14927,7 +15028,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  - {fileID: 2100000, guid: 947884d19a2b55c4f86a34081ee6c220, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14974,6 +15075,7 @@ MonoBehaviour:
   maxRadius: 15
   canAttachOthers: 1
   canScale: 1
+  m_feedback: {fileID: 2100000, guid: f50960eaaf4ab9d44a19ae50858cea6f, type: 2}
 --- !u!114 &1594067789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14990,6 +15092,9 @@ MonoBehaviour:
   isAtacheableForRuler: 1
   isAtacheableForSquad: 0
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!114 &1594067790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16017,6 +16122,7 @@ MonoBehaviour:
   maxRadius: 15
   canAttachOthers: 0
   gimballRef: {fileID: 0}
+  m_feedback: {fileID: 2100000, guid: 1d969f5824cfffb4885450f3489efdfa, type: 2}
 --- !u!114 &1701042978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16033,6 +16139,9 @@ MonoBehaviour:
   isAtacheableForRuler: 0
   isAtacheableForSquad: 0
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!54 &1701042979
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16110,7 +16219,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -7791486788655378091, guid: 28bae0359372e1741ac5eefc275f6a07, type: 3}
-  - {fileID: 2100000, guid: 947884d19a2b55c4f86a34081ee6c220, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -18523,6 +18632,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionForBrush: 1
   interactionForEraser: 0
+  m_feedbackBrush: {fileID: 2100000, guid: 61ede7259f80f324ab1973dc7f4b7baa, type: 2}
+  m_feedbackEraser: {fileID: 2100000, guid: 6fa6db23edac8e444a3cc9213e05f7b6, type: 2}
   oldPosition: {x: 75.99, y: -1.13, z: 35.1}
   newPosition: {x: 75.99, y: -1.13, z: 8.11}
 --- !u!114 &2008791595
@@ -18541,6 +18652,9 @@ MonoBehaviour:
   isAtacheableForRuler: 0
   isAtacheableForSquad: 0
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!65 &2008791596
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18583,7 +18697,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  - {fileID: 2100000, guid: 947884d19a2b55c4f86a34081ee6c220, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19052,7 +19166,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2058367600}
-  - component: {fileID: 2058367602}
   - component: {fileID: 2058367603}
   - component: {fileID: 2058367604}
   m_Layer: 0
@@ -19078,18 +19191,6 @@ Transform:
   - {fileID: 389841939}
   m_Father: {fileID: 395545937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2058367602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2058367599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d0bf011b7b56754481735c0569d1382, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &2058367603
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19897,3 +19998,4 @@ SceneRoots:
   - {fileID: 966206441}
   - {fileID: 1538816103}
   - {fileID: 812662774}
+  - {fileID: 531635965}

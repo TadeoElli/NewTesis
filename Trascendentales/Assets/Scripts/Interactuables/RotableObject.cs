@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(InteractuableObject))]
-public class RotableObject : MonoBehaviour, IRotable
+public class RotableObject : MonoBehaviour, IRotable, IFeedback
 {
     [SerializeField] private bool canRotateInY;
     [SerializeField] private bool canRotateInZ;
@@ -11,6 +11,8 @@ public class RotableObject : MonoBehaviour, IRotable
     [SerializeField] private bool canAttachOthers;
     [SerializeField] private Transform gimballRef;
     public event Action OnEraserInteract;
+    [SerializeField] private Material m_feedback;
+    private Renderer objRenderer;
 
     public bool CanRotateInY() => canRotateInY;
     public bool CanRotateInZ() => canRotateInZ;
@@ -31,5 +33,35 @@ public class RotableObject : MonoBehaviour, IRotable
     {
         this.canRotateInY = canRotateInY;
         this.canRotateInZ = canRotateInZ;
+    }
+    private void Start()
+    {
+        objRenderer = GetComponent<Renderer>();
+    }
+    private void OnMouseOver()
+    {
+    }
+
+    private void OnMouseExit()
+    {
+    }
+
+    public void ShowFeedback()
+    {
+        if (MouseState.Instance.CurrentToolActive() == ToolTypes.Squad &&
+            !MouseState.Instance.IsLeftClickPress() &&
+            !MouseState.Instance.IsRightClickPress()
+            )
+        {
+            // Aplicar feedback si la herramienta activa es la regla y no hay clicks activos
+            FeedbackManager.Instance.ApplyFeedback(gameObject, m_feedback);
+        }
+
+
+    }
+
+    public void HideFeedback()
+    {
+        FeedbackManager.Instance.ClearFeedback(gameObject); // Limpiar el feedback al salir del objeto
     }
 }

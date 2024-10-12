@@ -60,6 +60,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -132,6 +133,7 @@ MonoBehaviour:
   isAtacheableForRuler: 1
   isAtacheableForSquad: 1
   isAtachedToCompass: 0
+  m_feedbackParent: {fileID: 0}
 --- !u!114 &4514795433426689790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +150,8 @@ MonoBehaviour:
   canRotateInZ: 1
   maxRadius: 0
   canAttachOthers: 0
+  gimballRef: {fileID: 0}
+  m_feedback: {fileID: 2100000, guid: 1d969f5824cfffb4885450f3489efdfa, type: 2}
 --- !u!114 &2898222206795698952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,6 +169,7 @@ MonoBehaviour:
   maxRadius: 0
   canAttachOthers: 0
   canScale: 1
+  m_feedback: {fileID: 2100000, guid: f50960eaaf4ab9d44a19ae50858cea6f, type: 2}
 --- !u!114 &-4521822089687581848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,6 +184,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionForBrush: 0
   interactionForEraser: 0
+  m_feedbackBrush: {fileID: 2100000, guid: 61ede7259f80f324ab1973dc7f4b7baa, type: 2}
+  m_feedbackEraser: {fileID: 2100000, guid: 6fa6db23edac8e444a3cc9213e05f7b6, type: 2}
 --- !u!135 &8943616005531247208
 SphereCollider:
   m_ObjectHideFlags: 0

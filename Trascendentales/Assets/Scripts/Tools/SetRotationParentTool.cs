@@ -9,6 +9,8 @@ public class SetRotationParentTool : Tools
     private GameObject secondObject;
     private float maxRadius;
     private RotationConstraint constraint;
+    private IInteractable interactable;
+
 
     public override void Awake()
     {
@@ -46,12 +48,12 @@ public class SetRotationParentTool : Tools
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, interactableLayer))
         {
-            if (!hit.collider.TryGetComponent<IInteractable>(out IInteractable interactable) || !interactable.IsAtachableForSquad())
+            if (!hit.collider.TryGetComponent<IInteractable>(out IInteractable component) || !component.IsAtachableForSquad())
             {
                 isDragging = false;
                 return;
             }
-
+            interactable = component;
             secondObject = hit.collider.gameObject;
 
             // Chequea la distancia entre los objetos
@@ -62,6 +64,7 @@ public class SetRotationParentTool : Tools
                 return;
             }
             secondObject.GetComponent<Rigidbody>().isKinematic = true;
+            interactable.SetIsAtachedToSquad();
             // Agrega el ScaleConstraint
             AddRotationConstraint(secondObject);
         }
@@ -121,6 +124,8 @@ public class SetRotationParentTool : Tools
         if (constraint == null)
             return;
         // Desactivar el constraint y limpiar la fuente
+        interactable.SetUnatachedToSquad();
+        interactable = null;
         constraint.enabled = false;
         constraint.RemoveSource(0);
         Destroy(constraint);

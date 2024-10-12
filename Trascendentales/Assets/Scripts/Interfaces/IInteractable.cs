@@ -7,8 +7,14 @@ public interface IInteractable
     public bool IsAtachableForRuler();
     public bool IsAtachableForSquad();
     public bool IsAtachedToCompass();
+    public bool IsAtachedToRuler();
+    public bool IsAtachedToSquad();
     public void SetIsAtachedToCompass(GameObject parent);
+    public void SetIsAtachedToRuler();
+    public void SetIsAtachedToSquad();
     public void SetUnatachedToCompass();
+    public void SetUnatachedToRuler();
+    public void SetUnatachedToSquad();
     public void SetIsAtachableForRuler(bool isAtachable);
     public GameObject GetCompassParent();
 }
@@ -43,7 +49,6 @@ public interface IPaintable
 public interface ICompassable
 {
     public float GetMaxRadius();
-    public void InteractWithCompass(bool isOn2D);
     public void InteractWithEraser(bool isOn2D);
     public void DropWithEraser(bool isOn2D);
     public event Action OnEraserInteract;

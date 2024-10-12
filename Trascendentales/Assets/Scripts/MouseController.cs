@@ -12,7 +12,6 @@ public class MouseController : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Transform cursorTransform;  //transform del cursor
-    [SerializeField] public Material outline;
 
     [Header("Cursor")]
     [SerializeField] private LayerMask interactableLayer;   //layer de todos los objetos interactuables
@@ -35,14 +34,18 @@ public class MouseController : MonoBehaviour
     private Tools leftClickTool, rightClickTool; // Herramienta activa
     private ToolTypes currentToolType;
 
-    private PS_Script psScript;
+    // Referencia al último objeto al que se le mostró feedback
+    private GameObject lastInteractedObject = null;
+
+
+    //private PS_Script psScript;
 
     private bool is2DView = false;   // Indica si estamos en la vista 2D o 2.5D
     void Awake()
     {
         playerController = FindObjectOfType<PlayerController>();
         mouseState = GetComponent<MouseState>();
-        psScript = GetComponent<PS_Script>();
+        //psScript = GetComponent<PS_Script>();
         playerController.OnToolSwitch += SetTool; // Unifica el evento de cambio de herramienta
         playerController.OnPerspectiveSwitch += SwitchView;
         playerController.OnLeftClickPress += PerformRaycastForLeftClick;
@@ -58,6 +61,8 @@ public class MouseController : MonoBehaviour
     void Update()
     {
         UpdateCursorPosition();   // Actualizar la posición del cursor en pantalla
+        PerformRaycastForFeedback(); // Llamar al raycast para actualizar el feedback visual
+
     }
     // Actualiza la posición del cursor para seguir el mouse
     private void UpdateCursorPosition()
@@ -75,6 +80,7 @@ public class MouseController : MonoBehaviour
         transform.position = mouseWorldPosition;
     }
 
+
     // Lanza un Raycast desde la cámara hacia la posición del cursor en el mundo
     private void PerformRaycastForLeftClick()
     {
@@ -90,7 +96,7 @@ public class MouseController : MonoBehaviour
             }
             leftClickTool?.Interact(hit.collider.gameObject, is2DView);
             Debug.Log("Interacted with: " + hit.collider.name);
-            psScript.onParticlesMouse();
+           // psScript.onParticlesMouse();
         }
     }
     private void PerformRaycastForRightClick()
@@ -106,7 +112,60 @@ public class MouseController : MonoBehaviour
         }
     }
 
+    // Raycast para detectar si el mouse está sobre un objeto con IFeedback y mostrar el feedback visual
+    private void PerformRaycastForFeedback()
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
 
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, interactableLayer))
+        {
+            GameObject hitObject = hit.collider.gameObject;
+
+            // Verifica si el objeto tiene componentes que implementan IFeedback
+            IFeedback[] feedbackComponents = hitObject.GetComponentsInChildren<IFeedback>();
+
+            // Si hay algún IFeedback y es un objeto diferente al último interactuado
+            if (feedbackComponents.Length > 0)
+            {
+                // Si hay un objeto anterior al que ya no estamos apuntando, ocultar su feedback
+                if (lastInteractedObject != null)
+                {
+                    HideFeedbackFromObject(lastInteractedObject);
+                }
+
+                // Muestra el feedback del nuevo objeto
+                ShowFeedbackFromObject(hitObject, feedbackComponents);
+                lastInteractedObject = hitObject;
+            }
+        }
+        else
+        {
+            // Si no golpea nada y había un objeto previo con feedback visible, ocultarlo
+            if (lastInteractedObject != null)
+            {
+                HideFeedbackFromObject(lastInteractedObject);
+                lastInteractedObject = null;
+            }
+        }
+    }
+    private void ShowFeedbackFromObject(GameObject obj, IFeedback[] feedbackComponents)
+    {
+        foreach (IFeedback feedback in feedbackComponents)
+        {
+            feedback.ShowFeedback();
+        }
+    }
+
+    private void HideFeedbackFromObject(GameObject obj)
+    {
+        IFeedback[] feedbackComponents = obj.GetComponentsInChildren<IFeedback>();
+
+        foreach (IFeedback feedback in feedbackComponents)
+        {
+            feedback.HideFeedback();
+        }
+    }
 
     public void SwitchView()
     {
@@ -117,6 +176,11 @@ public class MouseController : MonoBehaviour
     {
         currentToolType = toolType;
         mouseState.SetCurrentToolType(toolType);
+        if (lastInteractedObject != null)
+        {
+            HideFeedbackFromObject(lastInteractedObject);
+            lastInteractedObject = null;
+        }
 
         switch (toolType)
         {

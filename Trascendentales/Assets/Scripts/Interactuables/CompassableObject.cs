@@ -3,13 +3,13 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(InteractuableObject))]
-public class CompassableObject : MonoBehaviour, ICompassable
+public class CompassableObject : MonoBehaviour, ICompassable, IFeedback
 {
     [SerializeField]private float maxRadius;
+    [SerializeField]private Material m_feedbackCompass, m_feedbackEraser;
 
     public event Action OnEraserInteract;
     public event Action OnEraserDrop;
-    public event Action OnCompassInteract;
 
     public float GetMaxRadius() => maxRadius;
 
@@ -23,14 +23,32 @@ public class CompassableObject : MonoBehaviour, ICompassable
         OnEraserDrop?.Invoke();
     }
 
-    public void InteractWithCompass(bool isOn2D)
-    {
-        OnCompassInteract?.Invoke();
-    }
 
     public void SetMaxRadius(float maxRadius)
     {
         this.maxRadius = maxRadius;
+    }
+
+    public void ShowFeedback()
+    {
+        if (MouseState.Instance.CurrentToolActive() == ToolTypes.Compass &&
+            !MouseState.Instance.IsRightClickPress())
+            FeedbackManager.Instance.ApplyFeedback(gameObject, m_feedbackCompass);
+        else if(MouseState.Instance.CurrentToolActive() == ToolTypes.Eraser &&
+            !MouseState.Instance.IsLeftClickPress() &&
+            !MouseState.Instance.IsRightClickPress())
+            FeedbackManager.Instance.ApplyFeedback(gameObject, m_feedbackEraser);
+
+
+    }
+
+    public void HideFeedback()
+    {
+        if(MouseState.Instance.CurrentToolActive() == ToolTypes.Compass &&
+            MouseState.Instance.IsLeftClickPress())
+            return;
+        Debug.Log("Sali");
+        FeedbackManager.Instance.ClearFeedback(gameObject);
     }
 }
 

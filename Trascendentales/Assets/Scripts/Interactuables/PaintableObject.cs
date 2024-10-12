@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 [RequireComponent (typeof(InteractuableObject))]
-public class PaintableObject : MonoBehaviour, IPaintable
+public class PaintableObject : MonoBehaviour, IPaintable, IFeedback
 {
     
     [SerializeField] private InteractionsByPerspectiveTypes interactionForBrush, interactionForEraser;
+    [SerializeField] private Material m_feedbackBrush, m_feedbackEraser;
     private bool wasInteracted = false;
 
 
@@ -52,6 +53,26 @@ public class PaintableObject : MonoBehaviour, IPaintable
             default:
                 return false;
         }
+    }
+
+    public void ShowFeedback()
+    {
+        if(MouseState.Instance.CurrentToolActive() == ToolTypes.Brush &&
+            !MouseState.Instance.IsLeftClickPress() &&
+            !MouseState.Instance.IsRightClickPress() &&
+             !wasInteracted)
+            FeedbackManager.Instance.ApplyFeedback(gameObject, m_feedbackBrush);
+        else if (MouseState.Instance.CurrentToolActive() == ToolTypes.Eraser &&
+            !MouseState.Instance.IsLeftClickPress() &&
+            !MouseState.Instance.IsRightClickPress() &&
+            wasInteracted)
+            FeedbackManager.Instance.ApplyFeedback(gameObject, m_feedbackEraser);
+
+    }
+
+    public void HideFeedback()
+    {
+        FeedbackManager.Instance.ClearFeedback(gameObject); // Limpiar el feedback al salir del objeto
     }
 }
 public enum InteractionsByPerspectiveTypes

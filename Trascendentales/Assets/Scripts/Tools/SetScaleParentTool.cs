@@ -80,6 +80,7 @@ public class SetScaleParentTool : Tools
                 component.isKinematic = true;
             }
             // Agrega el ScaleConstraint
+            interactable.SetIsAtachedToRuler();
             AddScaleConstraint(secondObject);
         }
         else
@@ -137,7 +138,6 @@ public class SetScaleParentTool : Tools
                 scalable.OnEraserInteract -= DropInteractable;
                 scalable = null;
             }
-            interactable = null;
         }
         mouseState.DropRightClick();
         base.DropInteractable();
@@ -153,6 +153,8 @@ public class SetScaleParentTool : Tools
             return;
         // Guardar la escala actual del objeto antes de eliminar el constraint
         // Desactivar el constraint y limpiar la fuente
+        interactable.SetUnatachedToRuler();
+        interactable = null;
         constraint.enabled = false;
         constraint.RemoveSource(0);
         Destroy(constraint);

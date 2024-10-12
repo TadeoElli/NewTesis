@@ -95,12 +95,16 @@ public class PlayerController : MonoBehaviour, IDamagable
             OnPerspectiveSwitch?.Invoke();
             _myMove.CheckPerspective();
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneController.Instance.ChangeScene(Scenes.TestScene);
+            TogglePause();
         }
 
-      
+
+    }
+    public void TogglePause()
+    {
+        GameManager.Instance.TogglePause();
     }
     private void LateUpdate()
     {

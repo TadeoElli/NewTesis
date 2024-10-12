@@ -34,4 +34,32 @@ public static class SaveSystem
             return null;
         }
     }
+    // Borrar datos del jugador
+    public static void DeleteSaveData()
+    {
+        string path = Application.persistentDataPath + "/player.data";
+        if (ExistData())
+        {
+            File.Delete(path); // Borra el archivo de guardado
+            Debug.Log("Save data deleted.");
+        }
+        else
+        {
+            Debug.Log("No save data to delete.");
+        }
+    }
+
+    public static bool ExistData()
+    {
+        string path = Application.persistentDataPath + "/player.data";
+        if (File.Exists(path))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 }

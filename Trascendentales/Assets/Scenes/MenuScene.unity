@@ -3103,6 +3103,7 @@ GameObject:
   - component: {fileID: 1120311597}
   - component: {fileID: 1120311596}
   - component: {fileID: 1120311600}
+  - component: {fileID: 1120311601}
   - component: {fileID: 1120311599}
   - component: {fileID: 1120311598}
   m_Layer: 5
@@ -3326,6 +3327,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1120311601}
+        m_TargetAssemblyTypeName: NewGameButton, Assembly-CSharp
+        m_MethodName: StartNewGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 63444794}
         m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
         m_MethodName: SetScene
@@ -3338,6 +3351,19 @@ MonoBehaviour:
           m_StringArgument: TestScene
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1120311601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120311594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72e174a20b362464c82d7100a050e0d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadButton: {fileID: 1419566093}
 --- !u!1 &1157289139
 GameObject:
   m_ObjectHideFlags: 0
@@ -4498,11 +4524,23 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1419566089}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 63444794}
+        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
+        m_MethodName: SetScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: TestScene
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1579249060
 GameObject:
   m_ObjectHideFlags: 0

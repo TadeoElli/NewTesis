@@ -39,6 +39,14 @@ public interface IRotable
     public void InteractWithEraser(bool isOn2D);
     public event Action OnEraserInteract;
 }
+public interface IRotableClamp
+{
+    public bool IsClamped();
+    public float GetMinRotationY();
+    public float GetMaxRotationY();
+    public float GetMinRotationZ();
+    public float GetMaxRotationZ();
+}
 public interface IPaintable
 {
     public void InteractWithBrush(bool isOn2D);

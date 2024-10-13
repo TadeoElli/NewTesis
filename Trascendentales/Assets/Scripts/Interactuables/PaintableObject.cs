@@ -5,6 +5,7 @@ public class PaintableObject : MonoBehaviour, IPaintable, IFeedback
     
     [SerializeField] private InteractionsByPerspectiveTypes interactionForBrush, interactionForEraser;
     [SerializeField] private Material m_feedbackBrush, m_feedbackEraser;
+    [SerializeField] protected Renderer objRenderer;
     private bool wasInteracted = false;
 
 
@@ -61,18 +62,18 @@ public class PaintableObject : MonoBehaviour, IPaintable, IFeedback
             !MouseState.Instance.IsLeftClickPress() &&
             !MouseState.Instance.IsRightClickPress() &&
              !wasInteracted)
-            FeedbackManager.Instance.ApplyFeedback(gameObject, m_feedbackBrush);
+            FeedbackManager.Instance.ApplyFeedback(objRenderer, m_feedbackBrush);
         else if (MouseState.Instance.CurrentToolActive() == ToolTypes.Eraser &&
             !MouseState.Instance.IsLeftClickPress() &&
             !MouseState.Instance.IsRightClickPress() &&
             wasInteracted)
-            FeedbackManager.Instance.ApplyFeedback(gameObject, m_feedbackEraser);
+            FeedbackManager.Instance.ApplyFeedback(objRenderer, m_feedbackEraser);
 
     }
 
     public virtual void HideFeedback()
     {
-        FeedbackManager.Instance.ClearFeedback(gameObject); // Limpiar el feedback al salir del objeto
+        FeedbackManager.Instance.ClearFeedback(objRenderer); // Limpiar el feedback al salir del objeto
     }
 }
 public enum InteractionsByPerspectiveTypes

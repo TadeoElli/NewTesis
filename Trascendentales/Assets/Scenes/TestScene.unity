@@ -1252,6 +1252,7 @@ MonoBehaviour:
   canAttachOthers: 1
   canScale: 1
   m_feedback: {fileID: 2100000, guid: f50960eaaf4ab9d44a19ae50858cea6f, type: 2}
+  objRenderer: {fileID: 0}
 --- !u!114 &100281257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1270,6 +1271,7 @@ MonoBehaviour:
   isAtachedToCompass: 0
   isAtachedToRuler: 0
   isAtachedToSquad: 0
+  rend: {fileID: 0}
   m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!114 &100281258
 MonoBehaviour:
@@ -2258,6 +2260,7 @@ MonoBehaviour:
   isAtachedToCompass: 0
   isAtachedToRuler: 0
   isAtachedToSquad: 0
+  rend: {fileID: 0}
   m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!54 &190772546
 Rigidbody:
@@ -2727,7 +2730,6 @@ GameObject:
   - component: {fileID: 221365767}
   - component: {fileID: 221365766}
   - component: {fileID: 221365765}
-  - component: {fileID: 221365764}
   - component: {fileID: 221365769}
   m_Layer: 6
   m_Name: Floor (12)
@@ -2751,25 +2753,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1480243955}
   m_LocalEulerAnglesHint: {x: 0, y: 91.053, z: 0}
---- !u!114 &221365764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221365762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f64c7de03efc38640b653ac3eb9dedb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isAtacheableForCompass: 0
-  isAtacheableForRuler: 0
-  isAtacheableForSquad: 1
-  isAtachedToCompass: 0
-  isAtachedToRuler: 0
-  isAtachedToSquad: 0
-  m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!54 &221365765
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2839,7 +2822,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3206,6 +3188,167 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1111874686}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &275803140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 275803141}
+  - component: {fileID: 275803147}
+  - component: {fileID: 275803146}
+  - component: {fileID: 275803145}
+  - component: {fileID: 275803144}
+  - component: {fileID: 275803143}
+  - component: {fileID: 275803142}
+  m_Layer: 6
+  m_Name: Valve
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &275803141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275803140}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 151.73376, y: 3.6121492, z: 8.359995}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 796069948}
+  m_Father: {fileID: 395545937}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &275803142
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275803140}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5, y: 1.5, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &275803143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275803140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 2143578189}
+--- !u!114 &275803144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275803140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79143a0e63bb4fc488b8f5f564d1aa9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRotateInY: 0
+  canRotateInZ: 1
+  maxRadius: 15
+  canAttachOthers: 0
+  gimballRef: {fileID: 0}
+  m_feedback: {fileID: 2100000, guid: 1d969f5824cfffb4885450f3489efdfa, type: 2}
+  objRenderer: {fileID: 796069951}
+--- !u!54 &275803145
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275803140}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 14
+  m_CollisionDetection: 0
+--- !u!114 &275803146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275803140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f64c7de03efc38640b653ac3eb9dedb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAtacheableForCompass: 0
+  isAtacheableForRuler: 0
+  isAtacheableForSquad: 0
+  isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  rend: {fileID: 796069951}
+  m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
+--- !u!114 &275803147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275803140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 004cd1bf4c8a84d4aac318a46d8830d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platform: {fileID: 1318388452}
+  maxRotation: -180
+  minRot: 0
+  closedScale: {x: 1, y: 1, z: 4}
+  openScale: {x: 12, y: 1, z: 4}
+  isClamped: 1
+  rotable: {fileID: 275803144}
+  minRotationY: -45
+  maxRotationY: 45
+  minRotationZ: 0
+  maxRotationZ: 170
 --- !u!1 &285968221
 GameObject:
   m_ObjectHideFlags: 0
@@ -3330,6 +3473,7 @@ MonoBehaviour:
   canAttachOthers: 1
   canScale: 1
   m_feedback: {fileID: 2100000, guid: f50960eaaf4ab9d44a19ae50858cea6f, type: 2}
+  objRenderer: {fileID: 291996773}
 --- !u!114 &291996770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3348,6 +3492,7 @@ MonoBehaviour:
   isAtachedToCompass: 0
   isAtachedToRuler: 0
   isAtachedToSquad: 0
+  rend: {fileID: 291996773}
   m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!54 &291996771
 Rigidbody:
@@ -4325,8 +4470,11 @@ Transform:
   - {fileID: 718628994}
   - {fileID: 1318388452}
   - {fileID: 1372576292}
+  - {fileID: 1054537392}
+  - {fileID: 1155577103}
+  - {fileID: 2008791593}
   - {fileID: 1701042975}
-  - {fileID: 796069948}
+  - {fileID: 275803141}
   - {fileID: 2058367600}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4822,6 +4970,7 @@ MonoBehaviour:
   canAttachOthers: 1
   canScale: 1
   m_feedback: {fileID: 2100000, guid: f50960eaaf4ab9d44a19ae50858cea6f, type: 2}
+  objRenderer: {fileID: 0}
 --- !u!114 &412175189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4840,6 +4989,7 @@ MonoBehaviour:
   isAtachedToCompass: 0
   isAtachedToRuler: 0
   isAtachedToSquad: 0
+  rend: {fileID: 0}
   m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!114 &412175190
 MonoBehaviour:
@@ -6667,7 +6817,10 @@ MonoBehaviour:
 
     Press R for restart level
 
-    Press Space for jump'
+    Press Space for jump
+
+    Press Tab
+    to Switch Perspective'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7274,7 +7427,6 @@ GameObject:
   - component: {fileID: 718629000}
   - component: {fileID: 718628999}
   - component: {fileID: 718628998}
-  - component: {fileID: 718629001}
   - component: {fileID: 718629002}
   m_Layer: 6
   m_Name: Cylinder (1)
@@ -7417,6 +7569,7 @@ MonoBehaviour:
   canAttachOthers: 0
   gimballRef: {fileID: 0}
   m_feedback: {fileID: 2100000, guid: 1d969f5824cfffb4885450f3489efdfa, type: 2}
+  objRenderer: {fileID: 718628992}
 --- !u!114 &718628999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7432,6 +7585,7 @@ MonoBehaviour:
   maxRadius: 10
   m_feedbackCompass: {fileID: 2100000, guid: 8f0b2c758ebb89141ac2761a6ddc1831, type: 2}
   m_feedbackEraser: {fileID: 2100000, guid: 6fa6db23edac8e444a3cc9213e05f7b6, type: 2}
+  objRenderer: {fileID: 718628992}
 --- !u!114 &718629000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7450,25 +7604,8 @@ MonoBehaviour:
   isAtachedToCompass: 0
   isAtachedToRuler: 0
   isAtachedToSquad: 0
+  rend: {fileID: 718628992}
   m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
---- !u!114 &718629001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 718628989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c05f6b7e186c5e94898dd59ab8b3dd27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minScale: {x: 1, y: 1, z: 1}
-  maxScale: {x: 3, y: 3, z: 3}
-  maxRadius: 0
-  canAttachOthers: 0
-  canScale: 1
-  m_feedback: {fileID: 2100000, guid: f50960eaaf4ab9d44a19ae50858cea6f, type: 2}
 --- !u!114 &718629002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8209,14 +8346,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 796069948}
-  - component: {fileID: 796069955}
-  - component: {fileID: 796069954}
-  - component: {fileID: 796069953}
-  - component: {fileID: 796069952}
   - component: {fileID: 796069951}
   - component: {fileID: 796069950}
-  - component: {fileID: 796069949}
-  - component: {fileID: 796069956}
   m_Layer: 6
   m_Name: Valve (1)
   m_TagString: Untagged
@@ -8233,33 +8364,12 @@ Transform:
   m_GameObject: {fileID: 796069947}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 151.73376, y: 3.6121492, z: 8.359995}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 24, y: 24, z: 24}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 395545937}
+  m_Father: {fileID: 275803141}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 90}
---- !u!65 &796069949
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 796069947}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.07, y: 0.008660255, z: 0.07}
-  m_Center: {x: 0, y: -2.3283064e-10, z: 0}
 --- !u!33 &796069950
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8311,100 +8421,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &796069952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 796069947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79143a0e63bb4fc488b8f5f564d1aa9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canRotateInY: 0
-  canRotateInZ: 1
-  maxRadius: 15
-  canAttachOthers: 0
-  gimballRef: {fileID: 0}
-  m_feedback: {fileID: 2100000, guid: 1d969f5824cfffb4885450f3489efdfa, type: 2}
---- !u!114 &796069953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 796069947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f64c7de03efc38640b653ac3eb9dedb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isAtacheableForCompass: 0
-  isAtacheableForRuler: 0
-  isAtacheableForSquad: 0
-  isAtachedToCompass: 0
-  isAtachedToRuler: 0
-  isAtachedToSquad: 0
-  m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
---- !u!54 &796069954
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 796069947}
-  serializedVersion: 4
-  m_Mass: 100
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 62
-  m_CollisionDetection: 0
---- !u!114 &796069955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 796069947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 004cd1bf4c8a84d4aac318a46d8830d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  platform: {fileID: 1318388452}
-  maxRotation: -180
-  minRot: 0
-  closedScale: {x: 1, y: 1, z: 4}
-  openScale: {x: 12, y: 1, z: 4}
---- !u!114 &796069956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 796069947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 2143578189}
 --- !u!1 &812662773
 GameObject:
   m_ObjectHideFlags: 0
@@ -9411,6 +9427,7 @@ MonoBehaviour:
   canAttachOthers: 1
   canScale: 1
   m_feedback: {fileID: 2100000, guid: f50960eaaf4ab9d44a19ae50858cea6f, type: 2}
+  objRenderer: {fileID: 0}
 --- !u!114 &939830877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9429,6 +9446,7 @@ MonoBehaviour:
   isAtachedToCompass: 0
   isAtachedToRuler: 0
   isAtachedToSquad: 0
+  rend: {fileID: 0}
   m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!114 &939830878
 MonoBehaviour:
@@ -10507,7 +10525,7 @@ Transform:
   m_LocalScale: {x: 1.5288, y: 1, z: 4.6855354}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1480243955}
+  m_Father: {fileID: 395545937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1054537393
 BoxCollider:
@@ -10599,6 +10617,7 @@ MonoBehaviour:
   canAttachOthers: 1
   gimballRef: {fileID: 0}
   m_feedback: {fileID: 2100000, guid: 1d969f5824cfffb4885450f3489efdfa, type: 2}
+  objRenderer: {fileID: 1054537394}
 --- !u!114 &1054537397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10617,6 +10636,7 @@ MonoBehaviour:
   isAtachedToCompass: 0
   isAtachedToRuler: 0
   isAtachedToSquad: 0
+  rend: {fileID: 1054537394}
   m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!54 &1054537398
 Rigidbody:
@@ -10918,7 +10938,7 @@ Transform:
   m_LocalScale: {x: 1.5288, y: 1, z: 4.6855354}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1480243955}
+  m_Father: {fileID: 395545937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1155577105
 MonoBehaviour:
@@ -10938,6 +10958,7 @@ MonoBehaviour:
   isAtachedToCompass: 0
   isAtachedToRuler: 0
   isAtachedToSquad: 0
+  rend: {fileID: 1155577108}
   m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!54 &1155577106
 Rigidbody:
@@ -11411,6 +11432,7 @@ MonoBehaviour:
   canAttachOthers: 1
   canScale: 1
   m_feedback: {fileID: 2100000, guid: f50960eaaf4ab9d44a19ae50858cea6f, type: 2}
+  objRenderer: {fileID: 0}
 --- !u!114 &1262593363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11429,6 +11451,7 @@ MonoBehaviour:
   isAtachedToCompass: 0
   isAtachedToRuler: 0
   isAtachedToSquad: 0
+  rend: {fileID: 0}
   m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!114 &1262593364
 MonoBehaviour:
@@ -11718,6 +11741,7 @@ MonoBehaviour:
   isAtachedToCompass: 0
   isAtachedToRuler: 0
   isAtachedToSquad: 0
+  rend: {fileID: 1318388450}
   m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!65 &1318388449
 BoxCollider:
@@ -11849,6 +11873,7 @@ MonoBehaviour:
   interactionForEraser: 0
   m_feedbackBrush: {fileID: 2100000, guid: 61ede7259f80f324ab1973dc7f4b7baa, type: 2}
   m_feedbackEraser: {fileID: 2100000, guid: 6fa6db23edac8e444a3cc9213e05f7b6, type: 2}
+  objRenderer: {fileID: 1318388450}
   col: {fileID: 1318388449}
   solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
   transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
@@ -12277,6 +12302,7 @@ MonoBehaviour:
   interactionForEraser: 0
   m_feedbackBrush: {fileID: 2100000, guid: 61ede7259f80f324ab1973dc7f4b7baa, type: 2}
   m_feedbackEraser: {fileID: 2100000, guid: 6fa6db23edac8e444a3cc9213e05f7b6, type: 2}
+  objRenderer: {fileID: 1372576290}
   col: {fileID: 1372576289}
   solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
   transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
@@ -12329,6 +12355,7 @@ MonoBehaviour:
   isAtachedToCompass: 0
   isAtachedToRuler: 0
   isAtachedToSquad: 0
+  rend: {fileID: 1372576290}
   m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!65 &1372576289
 BoxCollider:
@@ -13286,10 +13313,7 @@ Transform:
   m_Children:
   - {fileID: 1300188203}
   - {fileID: 425181935}
-  - {fileID: 1054537392}
-  - {fileID: 1155577103}
   - {fileID: 221365763}
-  - {fileID: 2008791593}
   - {fileID: 190772541}
   - {fileID: 1831116809}
   - {fileID: 605062175}
@@ -15185,6 +15209,7 @@ MonoBehaviour:
   canAttachOthers: 1
   canScale: 1
   m_feedback: {fileID: 2100000, guid: f50960eaaf4ab9d44a19ae50858cea6f, type: 2}
+  objRenderer: {fileID: 0}
 --- !u!114 &1594067789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15203,6 +15228,7 @@ MonoBehaviour:
   isAtachedToCompass: 0
   isAtachedToRuler: 0
   isAtachedToSquad: 0
+  rend: {fileID: 0}
   m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!114 &1594067790
 MonoBehaviour:
@@ -16214,6 +16240,12 @@ MonoBehaviour:
   minRot: 0
   closedScale: {x: 1, y: 1, z: 4}
   openScale: {x: 12, y: 1, z: 4}
+  isClamped: 1
+  rotable: {fileID: 1701042977}
+  minRotationY: 0
+  maxRotationY: 170
+  minRotationZ: -100
+  maxRotationZ: 0
 --- !u!114 &1701042977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16232,6 +16264,7 @@ MonoBehaviour:
   canAttachOthers: 0
   gimballRef: {fileID: 0}
   m_feedback: {fileID: 2100000, guid: 1d969f5824cfffb4885450f3489efdfa, type: 2}
+  objRenderer: {fileID: 1701042982}
 --- !u!114 &1701042978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16250,6 +16283,7 @@ MonoBehaviour:
   isAtachedToCompass: 0
   isAtachedToRuler: 0
   isAtachedToSquad: 0
+  rend: {fileID: 1701042982}
   m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!54 &1701042979
 Rigidbody:
@@ -18725,7 +18759,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 690465443}
-  m_Father: {fileID: 1480243955}
+  m_Father: {fileID: 395545937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2008791594
 MonoBehaviour:
@@ -18743,6 +18777,7 @@ MonoBehaviour:
   interactionForEraser: 0
   m_feedbackBrush: {fileID: 2100000, guid: 61ede7259f80f324ab1973dc7f4b7baa, type: 2}
   m_feedbackEraser: {fileID: 2100000, guid: 6fa6db23edac8e444a3cc9213e05f7b6, type: 2}
+  objRenderer: {fileID: 2008791597}
   oldPosition: {x: 75.99, y: -1.13, z: 35.1}
   newPosition: {x: 75.99, y: -1.13, z: 8.11}
 --- !u!114 &2008791595
@@ -18763,6 +18798,7 @@ MonoBehaviour:
   isAtachedToCompass: 0
   isAtachedToRuler: 0
   isAtachedToSquad: 0
+  rend: {fileID: 2008791597}
   m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!65 &2008791596
 BoxCollider:
@@ -19334,9 +19370,9 @@ ParentConstraint:
   m_TranslationAtRest: {x: 144.90472, y: 1.7774074, z: 8.359995}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: -1.8347418, y: 0, z: 6.8290405}
+  - {x: -6.8290405, y: -1.8347418, z: 0}
   m_RotationOffsets:
-  - {x: 90, y: 0, z: -90}
+  - {x: 0, y: 0, z: 0}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -19346,7 +19382,7 @@ ParentConstraint:
   m_Active: 1
   m_IsLocked: 1
   m_Sources:
-  - sourceTransform: {fileID: 796069948}
+  - sourceTransform: {fileID: 275803141}
     weight: 1
 --- !u!1 &2077937466
 GameObject:

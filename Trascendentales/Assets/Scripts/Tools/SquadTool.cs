@@ -9,6 +9,7 @@ public class SquadTool : Tools
     private Transform objectiveTr;
     [SerializeField] private Transform gimball, oldParent;
     [SerializeField] private IRotable rotable;
+    [SerializeField] private IRotableClamp clamp;
     [SerializeField] private GameObject gimballGizmo2D, gimballGizmoPerspective;
     [Header("Parameters")]
     [SerializeField] private float rotationSpeed = 1f;  // Sensibilidad de rotación
@@ -57,6 +58,11 @@ public class SquadTool : Tools
         objectiveRB = objective.GetComponent<Rigidbody>();
         objectiveRB.isKinematic = true;
         gimball.position = objectiveTr.position;
+        if(objective.TryGetComponent<IRotableClamp>(out IRotableClamp component1))
+        {
+            gimball.rotation = objectiveTr.rotation;
+            clamp = component1;
+        }
         oldParent = objectiveTr.parent;
         objectiveTr.SetParent(gimball);
         lastMousePosition = Input.mousePosition;  // Guarda la posición actual del mouse al iniciar la interacción
@@ -107,16 +113,43 @@ public class SquadTool : Tools
 
         if (isOn2D)
         {
-            // En 2D, rota alrededor del eje Z
-            if(canRotateInZ)
-                gimball.Rotate(0, 0, -rotationAmount); // El eje Z es para rotación en 2D
+            if (canRotateInZ)
+            {
+                if (clamp != null && clamp.IsClamped())
+                {
+                    float newZRotation = gimball.localEulerAngles.z - rotationAmount; // Obtener la rotación actual en Z
+                    newZRotation = ClampRotationAngle(newZRotation, clamp.GetMinRotationZ(), clamp.GetMaxRotationZ());
+                    gimball.localEulerAngles = new Vector3(gimball.localEulerAngles.x, gimball.localEulerAngles.y, newZRotation);
+                }
+                else
+                {
+                    gimball.Rotate(0, 0, -rotationAmount); // El eje Z es para rotación en 2D
+                }
+            }
         }
         else
         {
-            
-            if(canRotateInY)// En 2.5D, rota alrededor del eje Y
-                gimball.Rotate(0, -rotationAmount, 0); // El eje Y es para rotación en 3D
+            // En 2.5D, rota alrededor del eje Y
+            if (canRotateInY)
+            {
+                if (clamp != null && clamp.IsClamped())
+                {
+                    float newYRotation = gimball.localEulerAngles.y - rotationAmount; // Obtener la rotación actual en Y
+                    newYRotation = ClampRotationAngle(newYRotation, clamp.GetMinRotationY(), clamp.GetMaxRotationY());
+                    gimball.localEulerAngles = new Vector3(gimball.localEulerAngles.x, newYRotation, gimball.localEulerAngles.z);
+                }
+                else
+                {
+                    gimball.Rotate(0, -rotationAmount, 0); // El eje Y es para rotación en 3D
+                }
+            }
         }
+    }
+    // Función auxiliar para clamping de ángulos de rotación entre un rango
+    private float ClampRotationAngle(float angle, float min, float max)
+    {
+        if (angle > 180f) angle -= 360f; // Convertir el ángulo a un rango [-180, 180]
+        return Mathf.Clamp(angle, min, max);
     }
 
 }

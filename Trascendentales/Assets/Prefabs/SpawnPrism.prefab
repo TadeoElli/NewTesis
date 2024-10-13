@@ -133,6 +133,9 @@ MonoBehaviour:
   isAtacheableForRuler: 1
   isAtacheableForSquad: 1
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  rend: {fileID: 5649012913557171223, guid: adb9e9186ccfb7041a9a19353eda4746, type: 3}
   m_feedbackParent: {fileID: 0}
 --- !u!114 &4514795433426689790
 MonoBehaviour:
@@ -152,6 +155,8 @@ MonoBehaviour:
   canAttachOthers: 0
   gimballRef: {fileID: 0}
   m_feedback: {fileID: 2100000, guid: 1d969f5824cfffb4885450f3489efdfa, type: 2}
+  objRenderer: {fileID: 5649012913557171223, guid: adb9e9186ccfb7041a9a19353eda4746,
+    type: 3}
 --- !u!114 &2898222206795698952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,6 +175,8 @@ MonoBehaviour:
   canAttachOthers: 0
   canScale: 1
   m_feedback: {fileID: 2100000, guid: f50960eaaf4ab9d44a19ae50858cea6f, type: 2}
+  objRenderer: {fileID: 5649012913557171223, guid: adb9e9186ccfb7041a9a19353eda4746,
+    type: 3}
 --- !u!114 &-4521822089687581848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +193,8 @@ MonoBehaviour:
   interactionForEraser: 0
   m_feedbackBrush: {fileID: 2100000, guid: 61ede7259f80f324ab1973dc7f4b7baa, type: 2}
   m_feedbackEraser: {fileID: 2100000, guid: 6fa6db23edac8e444a3cc9213e05f7b6, type: 2}
+  objRenderer: {fileID: 5649012913557171223, guid: adb9e9186ccfb7041a9a19353eda4746,
+    type: 3}
 --- !u!135 &8943616005531247208
 SphereCollider:
   m_ObjectHideFlags: 0

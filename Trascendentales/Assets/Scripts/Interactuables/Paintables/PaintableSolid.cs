@@ -28,6 +28,6 @@ public class PaintableSolid : PaintableObject
     }
     public override void HideFeedback()
     {
-        FeedbackManager.Instance.ApplyFeedback(gameObject, m_feedbackTransparent);
+        FeedbackManager.Instance.ApplyFeedback(base.objRenderer, m_feedbackTransparent);
     }
 }

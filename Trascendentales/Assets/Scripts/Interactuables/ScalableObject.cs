@@ -12,7 +12,7 @@ public class ScalableObject : MonoBehaviour, IEscalable, IFeedback
     [SerializeField] private bool canAttachOthers;
     [SerializeField] public bool canScale = true;
     [SerializeField] private Material m_feedback;
-    private Renderer objRenderer;
+    [SerializeField] private Renderer objRenderer;
 
     public event Action OnEraserInteract;
 
@@ -28,24 +28,12 @@ public class ScalableObject : MonoBehaviour, IEscalable, IFeedback
         this.maxScale = maxScale;
     }
 
-    private void Start()
-    {
-        objRenderer = GetComponent<Renderer>();
-    }
+
     public void InteractWithEraser(bool isOn2D)
     {
         OnEraserInteract?.Invoke();
     }
-    private void OnMouseOver()
-    {
-        
 
-    }
-
-    private void OnMouseExit()
-    {
-        FeedbackManager.Instance.ClearFeedback(gameObject); // Limpiar el feedback al salir del objeto
-    }
 
     public void ShowFeedback()
     {
@@ -55,13 +43,13 @@ public class ScalableObject : MonoBehaviour, IEscalable, IFeedback
             canScale )
         {
             // Aplicar feedback si la herramienta activa es la regla y no hay clicks activos
-            FeedbackManager.Instance.ApplyFeedback(gameObject, m_feedback);
+            FeedbackManager.Instance.ApplyFeedback(objRenderer, m_feedback);
         }
 
     }
 
     public void HideFeedback()
     {
-        FeedbackManager.Instance.ClearFeedback(gameObject); // Limpiar el feedback al salir del objeto
+        FeedbackManager.Instance.ClearFeedback(objRenderer); // Limpiar el feedback al salir del objeto
     }
 }

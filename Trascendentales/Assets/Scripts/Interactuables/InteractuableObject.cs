@@ -8,6 +8,7 @@ public class InteractuableObject : MonoBehaviour, IInteractable, IFeedback
     [SerializeField] private bool isAtachedToCompass = false;
     [SerializeField] private bool isAtachedToRuler = false;
     [SerializeField] private bool isAtachedToSquad = false;
+    [SerializeField] private Renderer rend;
     private GameObject compassParent = null;
     public bool IsAtachableForCompass() => isAtacheableForCompass;
     public bool IsAtachableForRuler() => isAtacheableForRuler;
@@ -35,17 +36,17 @@ public class InteractuableObject : MonoBehaviour, IInteractable, IFeedback
     {
         isAtachedToCompass = false;
         compassParent = null;
-        FeedbackManager.Instance.ClearFeedback(gameObject); // Limpiar el feedback al salir del objeto
+        FeedbackManager.Instance.ClearFeedback(rend); // Limpiar el feedback al salir del objeto
     }
     public void SetUnatachedToRuler()
     {
         isAtachedToRuler = false;
-        FeedbackManager.Instance.ClearFeedback(gameObject); // Limpiar el feedback al salir del objeto
+        FeedbackManager.Instance.ClearFeedback(rend); // Limpiar el feedback al salir del objeto
     }
     public void SetUnatachedToSquad()
     {
         isAtachedToSquad = false;
-        FeedbackManager.Instance.ClearFeedback(gameObject); // Limpiar el feedback al salir del objeto
+        FeedbackManager.Instance.ClearFeedback(rend); // Limpiar el feedback al salir del objeto
     }
     public GameObject GetCompassParent()
     {
@@ -54,32 +55,11 @@ public class InteractuableObject : MonoBehaviour, IInteractable, IFeedback
     private void Update()
     {
         if(isAtachedToCompass || isAtachedToRuler || isAtachedToSquad)
-            FeedbackManager.Instance.ApplyFeedback(gameObject, m_feedbackParent);
+            FeedbackManager.Instance.ApplyFeedback(rend, m_feedbackParent);
     }
     public void SetIsAtachableForRuler(bool isAtachable)
     {
         isAtacheableForRuler = isAtachable;
-    }
-    private void OnMouseEnter()
-    {
-
-        var x = GetComponent<Renderer>().materials[1];
-        if (x != null)
-        {
-            //print("entre");
-
-            //x.SetFloat("_on_off", 1);
-        }
-
-    }
-
-    private void OnMouseExit()
-    {
-        var x = GetComponent<Renderer>().materials[1];
-        if (x != null)
-        {
-            //x.SetFloat("_on_off", 0);
-        }
     }
 
     public void ShowFeedback()
@@ -90,15 +70,15 @@ public class InteractuableObject : MonoBehaviour, IInteractable, IFeedback
                 break;
             case ToolTypes.Ruler:
                 if (!MouseState.Instance.IsLeftClickPress() && MouseState.Instance.IsRightClickPress() && isAtacheableForRuler)
-                    FeedbackManager.Instance.ApplyFeedback(gameObject, m_feedbackParent);
+                    FeedbackManager.Instance.ApplyFeedback(rend, m_feedbackParent);
                 break;
             case ToolTypes.Squad:
                 if (!MouseState.Instance.IsLeftClickPress() && MouseState.Instance.IsRightClickPress() && isAtacheableForSquad)
-                    FeedbackManager.Instance.ApplyFeedback(gameObject, m_feedbackParent);
+                    FeedbackManager.Instance.ApplyFeedback(rend, m_feedbackParent);
                 break;
             case ToolTypes.Compass:
                 if (MouseState.Instance.IsLeftClickPress() && !MouseState.Instance.IsRightClickPress() && isAtacheableForCompass)
-                    FeedbackManager.Instance.ApplyFeedback(gameObject, m_feedbackParent);
+                    FeedbackManager.Instance.ApplyFeedback(rend, m_feedbackParent);
                 break;
             case ToolTypes.Eraser:
                 break;

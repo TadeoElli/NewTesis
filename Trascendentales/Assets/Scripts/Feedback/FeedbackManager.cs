@@ -69,26 +69,24 @@ public class FeedbackManager : MonoBehaviour
     }
 
     // Aplicar feedback según el tipo de interacción
-    public void ApplyFeedback(GameObject obj, Material feedbackMaterial)
+    public void ApplyFeedback(Renderer rend, Material feedbackMaterial)
     {
-        var renderer = obj.GetComponent<Renderer>();
-        if (renderer != null)
+        if (rend != null)
         {
-            var materials = renderer.materials;
+            var materials = rend.materials;
             materials[1] = feedbackMaterial; // Aplicar material en el índice correcto
-            renderer.materials = materials;
+            rend.materials = materials;
         }
     }
 
     // Limpiar el feedback (quitar material)
-    public void ClearFeedback(GameObject obj)
+    public void ClearFeedback(Renderer rend)
     {
-        var renderer = obj.GetComponent<Renderer>();
-        if (renderer != null)
+        if (rend != null)
         {
-            var materials = renderer.materials;
+            var materials = rend.materials;
             materials[1] = null; // Eliminar el material de feedback
-            renderer.materials = materials;
+            rend.materials = materials;
         }
     }
 

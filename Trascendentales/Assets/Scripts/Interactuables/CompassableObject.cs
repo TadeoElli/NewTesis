@@ -7,7 +7,7 @@ public class CompassableObject : MonoBehaviour, ICompassable, IFeedback
 {
     [SerializeField]private float maxRadius;
     [SerializeField]private Material m_feedbackCompass, m_feedbackEraser;
-
+    [SerializeField] private Renderer objRenderer;
     public event Action OnEraserInteract;
     public event Action OnEraserDrop;
 
@@ -33,11 +33,11 @@ public class CompassableObject : MonoBehaviour, ICompassable, IFeedback
     {
         if (MouseState.Instance.CurrentToolActive() == ToolTypes.Compass &&
             !MouseState.Instance.IsRightClickPress())
-            FeedbackManager.Instance.ApplyFeedback(gameObject, m_feedbackCompass);
+            FeedbackManager.Instance.ApplyFeedback(objRenderer, m_feedbackCompass);
         else if(MouseState.Instance.CurrentToolActive() == ToolTypes.Eraser &&
             !MouseState.Instance.IsLeftClickPress() &&
             !MouseState.Instance.IsRightClickPress())
-            FeedbackManager.Instance.ApplyFeedback(gameObject, m_feedbackEraser);
+            FeedbackManager.Instance.ApplyFeedback(objRenderer, m_feedbackEraser);
 
 
     }
@@ -48,7 +48,7 @@ public class CompassableObject : MonoBehaviour, ICompassable, IFeedback
             MouseState.Instance.IsLeftClickPress())
             return;
         Debug.Log("Sali");
-        FeedbackManager.Instance.ClearFeedback(gameObject);
+        FeedbackManager.Instance.ClearFeedback(objRenderer);
     }
 }
 

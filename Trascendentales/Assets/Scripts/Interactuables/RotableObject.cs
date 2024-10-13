@@ -9,10 +9,12 @@ public class RotableObject : MonoBehaviour, IRotable, IFeedback
     [SerializeField] private bool canRotateInZ;
     [SerializeField] private float maxRadius;
     [SerializeField] private bool canAttachOthers;
-    [SerializeField] private Transform gimballRef;
+    [SerializeField] public Transform gimballRef;
     public event Action OnEraserInteract;
     [SerializeField] private Material m_feedback;
-    private Renderer objRenderer;
+    [SerializeField] private Renderer objRenderer;
+
+
 
     public bool CanRotateInY() => canRotateInY;
     public bool CanRotateInZ() => canRotateInZ;
@@ -34,17 +36,7 @@ public class RotableObject : MonoBehaviour, IRotable, IFeedback
         this.canRotateInY = canRotateInY;
         this.canRotateInZ = canRotateInZ;
     }
-    private void Start()
-    {
-        objRenderer = GetComponent<Renderer>();
-    }
-    private void OnMouseOver()
-    {
-    }
 
-    private void OnMouseExit()
-    {
-    }
 
     public void ShowFeedback()
     {
@@ -54,7 +46,7 @@ public class RotableObject : MonoBehaviour, IRotable, IFeedback
             )
         {
             // Aplicar feedback si la herramienta activa es la regla y no hay clicks activos
-            FeedbackManager.Instance.ApplyFeedback(gameObject, m_feedback);
+            FeedbackManager.Instance.ApplyFeedback(objRenderer, m_feedback);
         }
 
 
@@ -62,6 +54,6 @@ public class RotableObject : MonoBehaviour, IRotable, IFeedback
 
     public void HideFeedback()
     {
-        FeedbackManager.Instance.ClearFeedback(gameObject); // Limpiar el feedback al salir del objeto
+        FeedbackManager.Instance.ClearFeedback(objRenderer); // Limpiar el feedback al salir del objeto
     }
 }

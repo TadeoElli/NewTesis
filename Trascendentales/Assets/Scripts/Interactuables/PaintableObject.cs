@@ -55,7 +55,7 @@ public class PaintableObject : MonoBehaviour, IPaintable, IFeedback
         }
     }
 
-    public void ShowFeedback()
+    public virtual void ShowFeedback()
     {
         if(MouseState.Instance.CurrentToolActive() == ToolTypes.Brush &&
             !MouseState.Instance.IsLeftClickPress() &&
@@ -70,7 +70,7 @@ public class PaintableObject : MonoBehaviour, IPaintable, IFeedback
 
     }
 
-    public void HideFeedback()
+    public virtual void HideFeedback()
     {
         FeedbackManager.Instance.ClearFeedback(gameObject); // Limpiar el feedback al salir del objeto
     }

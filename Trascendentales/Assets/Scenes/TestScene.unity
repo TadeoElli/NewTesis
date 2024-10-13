@@ -11656,7 +11656,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11747,6 +11747,8 @@ MonoBehaviour:
   col: {fileID: 1318388449}
   solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
   transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
+  m_feedbackTransparent: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d,
+    type: 2}
   render: {fileID: 1318388450}
   startSolid: 0
 --- !u!114 &1318388455
@@ -12173,6 +12175,8 @@ MonoBehaviour:
   col: {fileID: 1372576289}
   solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
   transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
+  m_feedbackTransparent: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d,
+    type: 2}
   render: {fileID: 1372576290}
   startSolid: 1
 --- !u!54 &1372576287
@@ -12263,7 +12267,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -38,6 +38,7 @@ public class SetRotationParentTool : Tools
         isDragging = true;
         playerController.OnRightClickDrop += DropInteractable; // Limpiamos la interacción al soltar clic derecho
         base.Interact(interactable, isPerspective2D);
+        FeedbackManager.Instance.StartMouseLine(objective);
     }
 
 
@@ -45,6 +46,8 @@ public class SetRotationParentTool : Tools
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
+
+        FeedbackManager.Instance.StopMouseLine();
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, interactableLayer))
         {
@@ -67,6 +70,7 @@ public class SetRotationParentTool : Tools
             interactable.SetIsAtachedToSquad();
             // Agrega el ScaleConstraint
             AddRotationConstraint(secondObject);
+            FeedbackManager.Instance.ActivateLineRenderer(firstObject, secondObject);
         }
         else
             isDragging = false;
@@ -124,6 +128,7 @@ public class SetRotationParentTool : Tools
         if (constraint == null)
             return;
         // Desactivar el constraint y limpiar la fuente
+        FeedbackManager.Instance.DeactivateLineRenderer();
         interactable.SetUnatachedToSquad();
         interactable = null;
         constraint.enabled = false;

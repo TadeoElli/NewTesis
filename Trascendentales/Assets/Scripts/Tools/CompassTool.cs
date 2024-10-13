@@ -51,14 +51,15 @@ public class CompassTool : Tools
         isDragging = true;
         wasClicked = true;
         initialMousePosition = Input.mousePosition;
+        FeedbackManager.Instance.StartMouseLine(objective);
     }
 
     void Update()
     {
         if (!isDragging || !wasClicked) return;
-
         // Mientras se mantenga el clic, dibujar la circunferencia y ajustar el radio
         Vector3 currentMousePosition = Input.mousePosition;
+        //FeedbackManager.Instance.ActivateLineRenderer(firstObject, currentMousePosition);
         float distance = Vector3.Distance(initialMousePosition, currentMousePosition);
         currentRadius = Mathf.Min(distance * 0.01f, maxRadius); // Ajusta el radio y lo clampa al máximo
         compassGizmo.transform.localScale = new Vector3(currentRadius /1.5f, currentRadius /1.5f, 0.1f );
@@ -84,6 +85,7 @@ public class CompassTool : Tools
         // Hacer un raycast para ver si el jugador suelta el clic sobre otro objeto interactuable
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
+        FeedbackManager.Instance.StopMouseLine();
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, interactableLayer))
         {
@@ -120,6 +122,7 @@ public class CompassTool : Tools
             parentConstraint.constraintActive = true;
 
             parentConstraint.locked = true; // Mantener el offset original de la relación
+            FeedbackManager.Instance.ActivateLineRenderer(firstObject, secondObject);
 
             
         }
@@ -165,6 +168,7 @@ public class CompassTool : Tools
     private void ResetDragging()
     {
         isDragging = false;
+        FeedbackManager.Instance.DeactivateLineRenderer();
         playerController.OnPerspectiveSwitch -= ResetDragging;
         playerController.OnPerspectiveSwitch -= DropInteractable;
     }
@@ -181,6 +185,7 @@ public class CompassTool : Tools
         if (parentConstraint == null)
             return;
         // Desactivar el constraint y limpiar la fuente
+        FeedbackManager.Instance.DeactivateLineRenderer();
         parentConstraint.constraintActive = false;
         parentConstraint.RemoveSource(0);
         parentConstraint.enabled = false;

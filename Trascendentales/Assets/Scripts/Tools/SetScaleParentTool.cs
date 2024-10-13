@@ -37,6 +37,8 @@ public class SetScaleParentTool : Tools
         isDragging = true;
         playerController.OnRightClickDrop += DropInteractable; // Limpiamos la interacción al soltar clic derecho
         base.Interact(interactable, isPerspective2D);
+        FeedbackManager.Instance.StartMouseLine(objective);
+
     }
 
     private void Update()
@@ -52,6 +54,8 @@ public class SetScaleParentTool : Tools
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
+
+        FeedbackManager.Instance.StopMouseLine();
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, interactableLayer))
         {
@@ -111,6 +115,7 @@ public class SetScaleParentTool : Tools
         );
         Vector3 scaleOffset = Vector3.Scale(initialTargetScale, inverseFirstScale);
         constraint.scaleOffset = scaleOffset;
+        FeedbackManager.Instance.ActivateLineRenderer(firstObject, secondObject);
 
 
         // Aplica la escala actual
@@ -153,6 +158,7 @@ public class SetScaleParentTool : Tools
             return;
         // Guardar la escala actual del objeto antes de eliminar el constraint
         // Desactivar el constraint y limpiar la fuente
+        FeedbackManager.Instance.DeactivateLineRenderer();
         interactable.SetUnatachedToRuler();
         interactable = null;
         constraint.enabled = false;

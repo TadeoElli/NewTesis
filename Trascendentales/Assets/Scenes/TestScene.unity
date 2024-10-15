@@ -3468,7 +3468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minScale: {x: 1, y: 1, z: 1}
-  maxScale: {x: 2.5, y: 2.5, z: 2.5}
+  maxScale: {x: 4, y: 4, z: 4}
   maxRadius: 10
   canAttachOthers: 1
   canScale: 1
@@ -7285,6 +7285,11 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 2143578189}
+    - target: {fileID: 618527690003489019, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1256337824775038724, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
         type: 3}
       propertyPath: m_Range
@@ -7380,6 +7385,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6795313407306357663, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6795313407306357663, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7120580327111021115, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
         type: 3}
       propertyPath: m_IsActive
@@ -7390,6 +7405,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 3.0018
       objectReference: {fileID: 0}
+    - target: {fileID: 8914468042689068048, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
+        type: 3}
+      propertyPath: _controller
+      value: 
+      objectReference: {fileID: 1982907610}
+    - target: {fileID: 8914468042689068048, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
+        type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 193
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -7397,7 +7422,15 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1939609091}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3374092342300908800, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1982907610}
+    - targetCorrespondingSourceObject: {fileID: 3374092342300908800, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1982907611}
   m_SourcePrefab: {fileID: 100100000, guid: c05b0e0b10c6f1f4aa3df30b535daf94, type: 3}
 --- !u!114 &705624225 stripped
 MonoBehaviour:
@@ -7405,7 +7438,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 705624224}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1982907609}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19b04dd67aa4d7641b97b54697535117, type: 3}
@@ -18497,6 +18530,55 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1982907609 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3374092342300908800, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
+    type: 3}
+  m_PrefabInstance: {fileID: 705624224}
+  m_PrefabAsset: {fileID: 0}
+--- !u!143 &1982907610
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982907609}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1982907611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982907609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4569094971a97942811ca8f84c8f3e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 6
+  jumpPower: 5
+  gravity: 10
+  coyoteTime: 0.2
+  isIn2D: 0
 --- !u!1 &1988927595
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,18 +13,14 @@ public class PlayerController : MonoBehaviour, IDamagable
     public event Action OnRightClickPress;
     public event Action OnRightClickDrop;
 
-    public Rigidbody _rb;
 
     private Vector3 spawnPosition;
     Player_Move _myMove;
-    [SerializeField] float speed;
 
-    LayerMask layerMask;
     private void Awake()
     {
-        _myMove = new Player_Move(_rb, this, speed);
-        layerMask = LayerMask.GetMask("Ground");
         LoadPlayer();
+        _myMove = GetComponent<Player_Move>();
     }
     public void SavePlayer()
     {
@@ -93,7 +89,7 @@ public class PlayerController : MonoBehaviour, IDamagable
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             OnPerspectiveSwitch?.Invoke();
-            _myMove.CheckPerspective();
+            _myMove.SwitchPerspective();
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -101,48 +97,13 @@ public class PlayerController : MonoBehaviour, IDamagable
         }
 
 
+
     }
     public void TogglePause()
     {
         GameManager.Instance.TogglePause();
     }
-    private void LateUpdate()
-    {
-        MoveCheck();
 
-        JumpCheck();
-    }
-
-    private void MoveCheck()
-    {
-        var x = Input.GetAxis("Horizontal");
-        var y = Input.GetAxis("Vertical");
-
-        if (x != 0 || y != 0)
-        {
-            _myMove.move?.Invoke(x, y);
-        }
-        else _rb.velocity = new Vector3(0, _rb.velocity.y, 0);
-
-        if (Input.GetKeyDown(KeyCode.Space))
-            _myMove.Jump();
-    }
-
-    [SerializeField] float timePass;
-
-    void JumpCheck()
-    {
-        timePass += Time.deltaTime;
-        if (timePass >= 1.5f)
-        {
-            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit info, 2))
-            {
-                timePass = 0;
-                _myMove.canJump = true;
-            }
-        }
-
-    }
 
     public void Takedmg(int dmg)
     {

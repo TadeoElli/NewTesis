@@ -6,14 +6,17 @@ public class DrawObjectTool : Tools
 {
 
     [SerializeField] private GameObject cubePrefab, spherePrefab, rectanglePrefab; // Prefab del cubo a spawnear
-    private GameObject selectedPrefab, spawnedObject;
+    [SerializeField] private GameObject cubeFeedback, sphereFeedback, rectangleFeedback; // Prefab del cubo a spawnear
+    private GameObject selectedPrefab,selectedFeedback, spawnedObject;
 
     private bool isDrawing = false;
+    private bool isShowing = false;
 
 
     public override void Awake()
     {
         base.Awake();
+        DeactivateAllFeedback(); // Desactivamos todos los feedbacks al inicio
     }
 
 
@@ -30,36 +33,48 @@ public class DrawObjectTool : Tools
     }
     private void SelectShape()
     {
+        if(MouseState.Instance.CurrentToolActive() != ToolTypes.Brush)
+        {
+            DeactivateAllFeedback();
+            return;
+        }
         // Determinar la forma que se debe spawnear según las teclas de modificación
         if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
         {
             selectedPrefab = cubePrefab;
+            ActivateFeedback(cubeFeedback);
         }
         else if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
             selectedPrefab = spherePrefab;
+            ActivateFeedback(sphereFeedback);
         }
         else if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt))
         {
             selectedPrefab = rectanglePrefab;
+            ActivateFeedback(rectangleFeedback);
         }
         else
         {
             // Si no hay teclas de modificación, no spawneamos nada
+            DeactivateAllFeedback();
             selectedPrefab = null;
-            return;
         }
     }
     private void ResetDrawing()
     {
         isDrawing = false;
+        DeactivateAllFeedback();
     }
 
     void Update()
     {
         SelectShape();
-        // Mientras se mantiene presionado, sigue ajustando el gizmo
-        //UpdateDrawing();
+        // Si hay un feedback activo y estamos en modo de dibujo, actualizamos la posición
+        if (selectedFeedback != null)
+        {
+            UpdateFeedbackPosition();
+        }
     }
 
     public override void DropInteractable()
@@ -73,6 +88,7 @@ public class DrawObjectTool : Tools
         playerController.OnPerspectiveSwitch -= DropInteractable;
         playerController.OnToolSwitchCheck -= ResetDrawing;
         playerController.OnToolSwitchCheck -= DropInteractable;
+
     }
     private void FinishDrawing()
     {
@@ -112,6 +128,36 @@ public class DrawObjectTool : Tools
                 return newPosition;
             }
         }
+    }
+    private void UpdateFeedbackPosition()
+    {
+        // Actualizar la posición del feedback activo
+        if (selectedFeedback != null)
+        {
+            Vector3 mousePosition = GetMouseWorldPosition();
+            selectedFeedback.transform.position = mousePosition;
+            selectedFeedback.SetActive(true);
+        }
+    }
+
+    private void ActivateFeedback(GameObject feedback)
+    {
+        // Desactivar el feedback anterior
+        if (selectedFeedback != feedback)
+        {
+            DeactivateAllFeedback();
+            selectedFeedback = feedback;
+        }
+        selectedFeedback.SetActive(true);
+    }
+
+    private void DeactivateAllFeedback()
+    {
+        // Desactivar todos los objetos de feedback
+        cubeFeedback.SetActive(false);
+        sphereFeedback.SetActive(false);
+        rectangleFeedback.SetActive(false);
+        selectedFeedback = null;
     }
 
 }

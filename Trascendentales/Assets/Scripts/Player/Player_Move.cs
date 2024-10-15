@@ -17,7 +17,9 @@ public class Player_Move : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     private bool canJump = false;
     private CharacterController characterController;
-    private Vector3 resetVector = new Vector3(1, 1, 0);
+
+    private float originalZPosition; // Para guardar la posición Z original
+    private bool originalZSaved = false; // Para asegurar que solo se guarda una vez
 
     // Start is called before the first frame update
     void Start()
@@ -57,10 +59,14 @@ public class Player_Move : MonoBehaviour
         moveDirection = move * speed;
         // Reaplicar el movimiento en Y para caída o salto
         moveDirection.y = movementDirectionY;
-        ;
-        if(isIn2D)
-            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-
+        moveDirection.z = isIn2D ? 0f : move.z * speed;
+        // Si estamos en modo 2D, fijamos la posición Z en 0
+        if (isIn2D)
+        {
+            Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, 0f);
+            Vector3 delta = newPosition - transform.position;
+            characterController.Move(delta); // Move to set z=0
+        }
         // Aplicar movimiento en el CharacterController
         characterController.Move(moveDirection * Time.deltaTime);
     }
@@ -109,6 +115,21 @@ public class Player_Move : MonoBehaviour
     public void SwitchPerspective()
     {
         isIn2D = !isIn2D;
+
+        if (isIn2D)
+        {
+            originalZPosition = transform.position.z;
+            // Al cambiar a 2D, bloquear la posición Z en 0
+            Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, 0f);
+            Vector3 delta = newPosition - transform.position;
+            characterController.Move(delta);
+        }
+        else
+        {
+            // Al cambiar a 2.5D, restaurar la posición Z original
+            Vector3 originalPosition = new Vector3(transform.position.x, transform.position.y, originalZPosition);
+            characterController.Move(originalPosition - transform.position);
+        }
     }
     // Detectar colisiones y ajustar posición si colisiona en la parte superior de un objeto
     private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -117,7 +138,10 @@ public class Player_Move : MonoBehaviour
         if (hit.normal.y < -0.5f) // Si la normal de contacto indica que fue desde arriba
         {
             // Ajustar la posición del jugador en la dirección Y
-            transform.position = new Vector3(transform.position.x, hit.point.y + characterController.height / 2, transform.position.z);
+            float newY = hit.point.y + characterController.height / 2;
+            Vector3 newPosition = new Vector3(transform.position.x, newY, transform.position.z);
+            Vector3 delta = newPosition - transform.position;
+            characterController.Move(delta);
             canJump = true; // Permitir el salto nuevamente
         }
     }

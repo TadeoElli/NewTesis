@@ -8,19 +8,28 @@ public class ChangePositionByPerspective : MonoBehaviour
     float oldPositionZ;
     [SerializeField] CameraController cam;
     private ParentConstraint parentConstraint;
+    private bool isOriginalPositionSaved = false;
 
     private void OnEnable()
     {
         cam.OnCameraSwitch += ChangePerspective;
     }
+    private void SaveOriginalPositionZ()
+    {
+        if (!isOriginalPositionSaved)
+        {
+            oldPositionZ = transform.position.z; // Guarda la posición Z original la primera vez
+            isOriginalPositionSaved = true;
+        }
+    }
     public void SetNewPosition()
     {
-        if(TryGetComponent<ParentConstraint>(out ParentConstraint pConstraint))
+        SaveOriginalPositionZ(); // Solo guarda la posición original si no lo ha hecho ya
+        if (TryGetComponent<ParentConstraint>(out ParentConstraint pConstraint))
         {
             pConstraint.constraintActive = false;
             pConstraint.locked = false;
         }
-        oldPositionZ = transform.position.z;
         transform.position = new Vector3(transform.position.x,transform.position.y,0f);
         if (pConstraint != null)
         {
@@ -35,12 +44,14 @@ public class ChangePositionByPerspective : MonoBehaviour
     }
     public void ReturnToOldPosition()
     {
-        transform.position = new Vector3(transform.position.x,transform.position.y, oldPositionZ);
-        if(TryGetComponent<ParentConstraint>(out ParentConstraint constraint))
-        {
-            constraint.constraintActive = true;
-        }
+        // Restaura la posición Z original al cambiar a 2.5D
+        transform.position = new Vector3(transform.position.x, transform.position.y, oldPositionZ);
 
+        // Reactiva el constraint si existe
+        if (parentConstraint != null)
+        {
+            parentConstraint.constraintActive = true;
+        }
     }
     public void ChangePerspective(bool isOn2D)
     {

@@ -2280,7 +2280,7 @@ MonoBehaviour:
   isAtachedToCompass: 0
   isAtachedToRuler: 0
   isAtachedToSquad: 0
-  rend: {fileID: 0}
+  rend: {fileID: 190772543}
   m_feedbackParent: {fileID: 2100000, guid: 0287435174deb22448c9a536ba821388, type: 2}
 --- !u!54 &190772546
 Rigidbody:
@@ -3539,7 +3539,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &291996772
 BoxCollider:
@@ -7323,7 +7323,7 @@ PrefabInstance:
     - target: {fileID: 618527690003489019, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1256337824775038724, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
         type: 3}
@@ -7422,13 +7422,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6795313407306357663, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
         type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6795313407306357663, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
+        type: 3}
       propertyPath: m_Interpolate
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6795313407306357663, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
         type: 3}
       propertyPath: m_CollisionDetection
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7120580327111021115, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
         type: 3}

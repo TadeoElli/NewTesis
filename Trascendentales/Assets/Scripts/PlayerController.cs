@@ -88,8 +88,8 @@ public class PlayerController : MonoBehaviour, IDamagable
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            OnPerspectiveSwitch?.Invoke();
             _myMove.SwitchPerspective();
+            OnPerspectiveSwitch?.Invoke();
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {

@@ -11,7 +11,7 @@ public class ScalableObject : MonoBehaviour, IEscalable, IFeedback
     [SerializeField] private float maxRadius;
     [SerializeField] private bool canAttachOthers;
     [SerializeField] public bool canScale = true;
-    [SerializeField] private Material m_feedback;
+    [SerializeField] private Color m_feedback;
     [SerializeField] private Renderer objRenderer;
 
     public event Action OnEraserInteract;

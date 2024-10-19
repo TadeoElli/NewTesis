@@ -3,7 +3,8 @@
 public class PaintableSolid : PaintableObject
 {
     [SerializeField] private Collider col;
-    [SerializeField] private Material solidMat, transparentMat, m_feedbackTransparent;
+    [SerializeField] private Material solidMat, transparentMat;
+    [SerializeField] private Color feedbackColor;
     [SerializeField] private Renderer render;
     [SerializeField] private bool startSolid;
 
@@ -28,6 +29,6 @@ public class PaintableSolid : PaintableObject
     }
     public override void HideFeedback()
     {
-        FeedbackManager.Instance.ApplyFeedback(base.objRenderer, m_feedbackTransparent);
+        FeedbackManager.Instance.ApplyFeedback(base.objRenderer, feedbackColor);
     }
 }

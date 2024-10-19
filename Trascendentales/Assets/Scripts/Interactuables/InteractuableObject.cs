@@ -17,7 +17,7 @@ public class InteractuableObject : MonoBehaviour, IInteractable, IFeedback
     public bool IsAtachedToRuler() => isAtachedToRuler;
     public bool IsAtachedToSquad() => isAtachedToSquad;
 
-    [SerializeField]private Material  m_feedbackParent;
+    [SerializeField]private Color  m_feedbackParent;
 
     public void SetIsAtachedToCompass(GameObject gameObject)
     {

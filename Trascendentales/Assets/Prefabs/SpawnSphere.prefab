@@ -60,7 +60,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 947884d19a2b55c4f86a34081ee6c220, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -135,8 +135,8 @@ MonoBehaviour:
   isAtachedToCompass: 0
   isAtachedToRuler: 0
   isAtachedToSquad: 0
-  rend: {fileID: 5649012913557171223, guid: adb9e9186ccfb7041a9a19353eda4746, type: 3}
-  m_feedbackParent: {fileID: 0}
+  rend: {fileID: 6649980286205041670}
+  m_feedbackParent: {r: 0.32941177, g: 0.6431373, b: 1, a: 0}
 --- !u!114 &4514795433426689790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,9 +154,8 @@ MonoBehaviour:
   maxRadius: 0
   canAttachOthers: 0
   gimballRef: {fileID: 0}
-  m_feedback: {fileID: 2100000, guid: 1d969f5824cfffb4885450f3489efdfa, type: 2}
-  objRenderer: {fileID: 5649012913557171223, guid: adb9e9186ccfb7041a9a19353eda4746,
-    type: 3}
+  m_feedback: {r: 1, g: 0.5254902, b: 0, a: 0}
+  objRenderer: {fileID: 6649980286205041670}
 --- !u!114 &2898222206795698952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,9 +173,8 @@ MonoBehaviour:
   maxRadius: 0
   canAttachOthers: 0
   canScale: 1
-  m_feedback: {fileID: 2100000, guid: f50960eaaf4ab9d44a19ae50858cea6f, type: 2}
-  objRenderer: {fileID: 5649012913557171223, guid: adb9e9186ccfb7041a9a19353eda4746,
-    type: 3}
+  m_feedback: {r: 1, g: 1, b: 0, a: 0}
+  objRenderer: {fileID: 6649980286205041670}
 --- !u!114 &-4521822089687581848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,10 +189,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionForBrush: 0
   interactionForEraser: 0
-  m_feedbackBrush: {fileID: 2100000, guid: 61ede7259f80f324ab1973dc7f4b7baa, type: 2}
-  m_feedbackEraser: {fileID: 2100000, guid: 6fa6db23edac8e444a3cc9213e05f7b6, type: 2}
-  objRenderer: {fileID: 5649012913557171223, guid: adb9e9186ccfb7041a9a19353eda4746,
-    type: 3}
+  m_feedbackBrush: {r: 0.2784314, g: 0.18431373, b: 0.08627451, a: 0}
+  m_feedbackEraser: {r: 0.8980393, g: 0.5019608, b: 0.4784314, a: 0}
+  objRenderer: {fileID: 6649980286205041670}
 --- !u!135 &8943616005531247208
 SphereCollider:
   m_ObjectHideFlags: 0

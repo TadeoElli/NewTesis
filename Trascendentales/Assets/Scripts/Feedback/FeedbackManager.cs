@@ -69,24 +69,28 @@ public class FeedbackManager : MonoBehaviour
     }
 
     // Aplicar feedback según el tipo de interacción
-    public void ApplyFeedback(Renderer rend, Material feedbackMaterial)
+    public void ApplyFeedback(Renderer rend, Color feedbackColor)
     {
-        if (rend != null)
+        if (rend != null && rend.materials.Length > 1) // Asegurarse de que hay más de un material
         {
-            var materials = rend.materials;
-            materials[1] = feedbackMaterial; // Aplicar material en el índice correcto
-            rend.materials = materials;
+            MaterialPropertyBlock block = new MaterialPropertyBlock();
+            rend.GetPropertyBlock(block, 1); // Obtiene el MaterialPropertyBlock para el segundo material (índice 1)
+
+            block.SetColor("_LineColor", feedbackColor); // Cambia el color del segundo material
+            rend.SetPropertyBlock(block, 1);         // Aplica los cambios al segundo material
         }
     }
 
     // Limpiar el feedback (quitar material)
     public void ClearFeedback(Renderer rend)
     {
-        if (rend != null)
+        if (rend != null && rend.materials.Length > 1) // Asegurarse de que hay más de un material
         {
-            var materials = rend.materials;
-            materials[1] = null; // Eliminar el material de feedback
-            rend.materials = materials;
+            MaterialPropertyBlock block = new MaterialPropertyBlock();
+            rend.GetPropertyBlock(block, 1); // Obtiene el MaterialPropertyBlock para el segundo material (índice 1)
+
+            block.SetColor("_LineColor", new Color(0, 0, 0, 0)); // Color transparente para el segundo material
+            rend.SetPropertyBlock(block, 1);                 // Aplica los cambios al segundo material
         }
     }
 

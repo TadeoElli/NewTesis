@@ -75,6 +75,7 @@ public class SquadTool : Tools
         objectiveTr.SetParent(oldParent);
         oldParent = null;
         objectiveTr = null;
+        clamp = null;
         ResetGimball();
         mouseState.DropLeftClick();
         base.DropInteractable();

@@ -6,7 +6,7 @@ using UnityEngine;
 public class CompassableObject : MonoBehaviour, ICompassable, IFeedback
 {
     [SerializeField]private float maxRadius;
-    [SerializeField]private Material m_feedbackCompass, m_feedbackEraser;
+    [SerializeField]private Color m_feedbackCompass, m_feedbackEraser;
     [SerializeField] private Renderer objRenderer;
     public event Action OnEraserInteract;
     public event Action OnEraserDrop;

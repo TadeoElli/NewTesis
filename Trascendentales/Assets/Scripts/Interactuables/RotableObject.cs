@@ -11,7 +11,7 @@ public class RotableObject : MonoBehaviour, IRotable, IFeedback
     [SerializeField] private bool canAttachOthers;
     [SerializeField] public Transform gimballRef;
     public event Action OnEraserInteract;
-    [SerializeField] private Material m_feedback;
+    [SerializeField] private Color m_feedback;
     [SerializeField] private Renderer objRenderer;
 
 

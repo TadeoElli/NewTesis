@@ -4,7 +4,7 @@ public class PaintableObject : MonoBehaviour, IPaintable, IFeedback
 {
     
     [SerializeField] private InteractionsByPerspectiveTypes interactionForBrush, interactionForEraser;
-    [SerializeField] private Material m_feedbackBrush, m_feedbackEraser;
+    [SerializeField] private Color m_feedbackBrush, m_feedbackEraser;
     [SerializeField] protected Renderer objRenderer;
     private bool wasInteracted = false;
 

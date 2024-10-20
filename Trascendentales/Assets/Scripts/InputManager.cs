@@ -6,9 +6,13 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     PlayerControls playerControls;
+    PlayerLocomotion playerLocomotion;
     Vector2 movementInput;
     public float verticalInput;
     public float horizontalInput;
+    public bool jump_input;
+
+    //Events
     public event Action<ToolTypes> OnToolSwitch;
     public event Action OnToolSwitchCheck;
     public event Action OnPerspectiveSwitch;
@@ -19,6 +23,10 @@ public class InputManager : MonoBehaviour
     public event Action OnChangeCameraToLeft;
     public event Action OnChangeCameraToRight;
 
+    private void Awake()
+    {
+        playerLocomotion = GetComponent<PlayerLocomotion>();
+    }
     private void OnEnable()
     {
         if (playerControls == null)
@@ -31,6 +39,7 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerCamera.TurnCameraToLeft.performed += _ => SwitchCameraToLeft();
             playerControls.PlayerCamera.TurnCameraToRight.performed += _ => SwitchCameraToRight();
             playerControls.PlayerCamera.SwitchCamera.performed += _ => SwitchCamera();
+            playerControls.PlayerActions.Jump.performed += _ => jump_input = true;
         }
         playerControls.Enable();
     }
@@ -43,11 +52,20 @@ public class InputManager : MonoBehaviour
     public void HandleAllInputs()
     {
         HandleMovementInput();
+        HandleJumpingInput();
     }
     private void HandleMovementInput()
     {
         verticalInput = movementInput.y;
         horizontalInput = movementInput.x;
+    }
+    private void HandleJumpingInput()
+    {
+        if(jump_input)
+        {
+            jump_input = false;
+            playerLocomotion.BufferJump();
+        }
     }
     private void SwitchCameraToLeft()
     {

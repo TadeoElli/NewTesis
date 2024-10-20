@@ -15,6 +15,8 @@ public class PlayerLocomotion : MonoBehaviour
     public float rotationSpeed = 15;
     [Header("Movement Flags")]
     public bool isGrounded = false;
+    public bool isJumping = false;
+    public bool isNearEdge = false;  // Flag para detectar si el jugador está cerca de un borde
 
     [Header("Falling")]
     public float inAirTimer;
@@ -24,6 +26,24 @@ public class PlayerLocomotion : MonoBehaviour
     public float maxDistance = 1f;
     public LayerMask groundLayer;
 
+    [Header("Jump Speeds")]
+    public float jumpHeight = 3;
+    public float gravityIntensity = -15;
+
+    // Coyote Jump
+    [Header("Coyote Jump Settings")]
+    public float coyoteTime = 0.2f;  // Time window after leaving the ground to still jump
+    private float coyoteTimer;        // Timer to track coyote jump
+
+    // Jump Buffering
+    [Header("Jump Buffer Settings")]
+    public float jumpBufferTime = 0.2f; // Time to buffer a jump input
+    private float jumpBufferTimer;      // Timer to track buffered jumps
+
+    [Header("Edge Detection Settings")]
+    public float edgeRayLength = 1f;  // Longitud del raycast para detectar bordes
+    public Transform[] edgeRaycastOrigins;  // Puntos de origen de los raycasts laterales
+    public float edgeCorrectionSpeed = 5f; // Velocidad para ajustar la posición del jugador
 
     private void Awake()
     {
@@ -39,18 +59,26 @@ public class PlayerLocomotion : MonoBehaviour
         moveDirection.y = 0;
         moveDirection = moveDirection * movementSpeed;
 
-        Vector3 movementVelocity = moveDirection;
-        playerRigidbody.velocity = movementVelocity;
+        Vector3 currentVelocity = playerRigidbody.velocity;
+        currentVelocity.x = moveDirection.x;
+        currentVelocity.z = moveDirection.z;
+
+        playerRigidbody.velocity = currentVelocity; // Mantén la velocidad vertical (Y) intacta
     }
 
     private void HandleRotation()
     {
+        if(isJumping)
+            return;
         Vector3 targetDirection = Vector3.zero;
 
         targetDirection = cameraObject.forward * inputManager.verticalInput;
         targetDirection = targetDirection + cameraObject.right * inputManager.horizontalInput ;
         targetDirection.Normalize();
         targetDirection.y = 0;
+
+        if (targetDirection == Vector3.zero)
+            targetDirection = transform.forward;
 
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
         Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
@@ -63,26 +91,73 @@ public class PlayerLocomotion : MonoBehaviour
         RaycastHit hit;
         Vector3 rayCastOrigin = transform.position;
         rayCastOrigin.y = rayCastOrigin.y + rayCastHeightOffset;
-        if (!isGrounded)
-        {
-            inAirTimer = inAirTimer + Time.deltaTime * 3;
-            playerRigidbody.AddForce(transform.forward * leapingVelocity);
-            playerRigidbody.AddForce(-Vector3.up * fallingVelocity * inAirTimer);
-        }
-        if (Physics.SphereCast(rayCastOrigin, 0.1f,-Vector3.up, out hit, maxDistance, groundLayer))
-        {
-            if (!isGrounded)
-            {
-                //animatorManager.PlayTargetAnimation
-            }
+        bool isGroundDetected = Physics.SphereCast(rayCastOrigin, 0.1f, -Vector3.up, out hit, maxDistance, groundLayer);
 
-            inAirTimer = 0;
-            isGrounded = true;
+        // Si no hay suelo debajo, verificar bordes
+        if (!isGroundDetected)
+        {
+            isNearEdge = DetectEdge();  // Verificar si está cerca de un borde
+
+            if (!isNearEdge)
+            {
+                // Si no hay suelo ni bordes, el jugador está cayendo
+                inAirTimer = inAirTimer + Time.deltaTime;
+                playerRigidbody.AddForce(transform.forward * leapingVelocity);
+                playerRigidbody.AddForce(-Vector3.up * fallingVelocity * inAirTimer);
+            }
         }
         else
-        { 
+        {
+            isGrounded = true;
+            isNearEdge = false;  // Si está en el suelo, no está en un borde
+            coyoteTimer = coyoteTime;  // Resetear el temporizador de coyote jump
+            inAirTimer = 0;
+            isJumping = false;
+        }
+
+        if (!isGroundDetected && !isNearEdge)
+        {
             isGrounded = false;
         }
+    }
+    public void HandleJumping()
+    {
+        // Verificar Coyote Jump
+        if (coyoteTimer > 0 && !isJumping)
+        {
+            isJumping = true;
+            float jumpingVelocity = Mathf.Sqrt(-2f * gravityIntensity * jumpHeight);
+            Vector3 playerVelocity = playerRigidbody.velocity;
+            playerVelocity.y = jumpingVelocity;
+            playerRigidbody.velocity = playerVelocity;
+
+            // Reiniciar coyote jump solo después de saltar
+            coyoteTimer = 0;
+        }
+    }
+    // Actualiza el temporizador de coyote jump y jump buffering
+    private void Update()
+    {
+        if (!isGrounded)
+        {
+            coyoteTimer -= Time.deltaTime; // Cuenta regresiva de coyote jump
+        }
+        jumpBufferTimer -= Time.deltaTime; // Cuenta regresiva de jump buffering
+    }
+
+    private void HandleJumpBuffering()
+    {
+        // Jump buffering: si se presiona el salto y el temporizador de buffer no ha expirado
+        if (jumpBufferTimer > 0)
+        {
+            HandleJumping();
+            jumpBufferTimer = 0;
+        }
+    }
+    // Llamado desde InputManager cuando se presiona el botón de salto
+    public void BufferJump()
+    {
+        jumpBufferTimer = jumpBufferTime;
     }
 
     public void HandleAllMovement()
@@ -90,7 +165,49 @@ public class PlayerLocomotion : MonoBehaviour
         HandleFallingAndLanding();
 
         HandleMovement();
+        HandleJumpBuffering();  // Verifica si hay un salto en buffer
         //HandleRotation();
+    }
+    private bool DetectEdge()
+    {
+        // Realizar raycasts desde cada punto
+        for (int i = 0; i < edgeRaycastOrigins.Length; i++)
+        {
+            Vector3 origin = edgeRaycastOrigins[i].position;
+            if (Physics.Raycast(origin, -Vector3.up, edgeRayLength, groundLayer))
+            {
+                // Si detectamos un borde, corregir la posición
+                CorrectPosition(i);
+                return true;  // Está cerca de un borde
+            }
+        }
+        return false;
+    }
+
+    private void CorrectPosition(int edgeIndex)
+    {
+        // Determinar hacia dónde mover al jugador según el borde detectado
+        Vector3 correctionDirection = Vector3.zero;
+
+        switch (edgeIndex)
+        {
+            case 0: // Borde derecho
+                correctionDirection = Vector3.right;
+                break;
+            case 1: // Borde izquierdo
+                correctionDirection = Vector3.left;
+                break;
+            case 2: // Borde frontal
+                correctionDirection = Vector3.forward;
+                break;
+            case 3: // Borde trasero
+                correctionDirection = Vector3.back;
+                break;
+        }
+
+        // Mover al jugador en la dirección del borde con una interpolación suave
+        Vector3 targetPosition = transform.position + correctionDirection * 0.5f;
+        transform.position = Vector3.Lerp(transform.position, targetPosition, edgeCorrectionSpeed * Time.deltaTime);
     }
 
 }

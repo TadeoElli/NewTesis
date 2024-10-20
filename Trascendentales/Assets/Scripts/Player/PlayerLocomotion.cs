@@ -10,8 +10,20 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] Transform cameraObject;
     Rigidbody playerRigidbody;
 
+    [Header("MovementSpeed Speed")]
     public float movementSpeed = 7;
     public float rotationSpeed = 15;
+    [Header("Movement Flags")]
+    public bool isGrounded = false;
+
+    [Header("Falling")]
+    public float inAirTimer;
+    public float leapingVelocity;
+    public float fallingVelocity;
+    public float rayCastHeightOffset = 0.5f;
+    public float maxDistance = 1f;
+    public LayerMask groundLayer;
+
 
     private void Awake()
     {
@@ -46,9 +58,39 @@ public class PlayerLocomotion : MonoBehaviour
         transform.rotation = playerRotation;
     }
 
+    private void HandleFallingAndLanding()
+    {
+        RaycastHit hit;
+        Vector3 rayCastOrigin = transform.position;
+        rayCastOrigin.y = rayCastOrigin.y + rayCastHeightOffset;
+        if (!isGrounded)
+        {
+            inAirTimer = inAirTimer + Time.deltaTime * 3;
+            playerRigidbody.AddForce(transform.forward * leapingVelocity);
+            playerRigidbody.AddForce(-Vector3.up * fallingVelocity * inAirTimer);
+        }
+        if (Physics.SphereCast(rayCastOrigin, 0.1f,-Vector3.up, out hit, maxDistance, groundLayer))
+        {
+            if (!isGrounded)
+            {
+                //animatorManager.PlayTargetAnimation
+            }
+
+            inAirTimer = 0;
+            isGrounded = true;
+        }
+        else
+        { 
+            isGrounded = false;
+        }
+    }
+
     public void HandleAllMovement()
     {
+        HandleFallingAndLanding();
+
         HandleMovement();
         //HandleRotation();
     }
+
 }

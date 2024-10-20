@@ -6,10 +6,14 @@ using UnityEngine.Animations;
 public class ChangePositionByPerspective : MonoBehaviour
 {
     float oldPositionZ;
-    [SerializeField] CameraController cam;
+    [SerializeField] CameraManager cam;
     private ParentConstraint parentConstraint;
     private bool isOriginalPositionSaved = false;
 
+    private void Awake()
+    {
+        cam = FindObjectOfType<CameraManager>();
+    }
     private void OnEnable()
     {
         cam.OnCameraSwitch += ChangePerspective;

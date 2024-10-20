@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour, IDamagable
     public event Action OnLeftClickDrop;
     public event Action OnRightClickPress;
     public event Action OnRightClickDrop;
+    public event Action OnChangeCameraToLeft;
+    public event Action OnChangeCameraToRight;
 
 
     private Vector3 spawnPosition;
@@ -95,7 +97,14 @@ public class PlayerController : MonoBehaviour, IDamagable
         {
             TogglePause();
         }
-
+        if (!Input.GetKeyDown(KeyCode.E))
+        {
+            OnChangeCameraToRight?.Invoke();
+        }
+        if (!Input.GetKeyDown(KeyCode.Q))
+        {
+            OnChangeCameraToLeft?.Invoke();
+        }
 
 
     }

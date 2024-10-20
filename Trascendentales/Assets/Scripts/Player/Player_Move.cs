@@ -1,35 +1,36 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Rigidbody))]
 public class Player_Move : MonoBehaviour
 {
-    public float speed = 6f;
-    public float jumpPower = 5f;
-    public float gravity = 10f;
-    public float coyoteTime = 0.2f; // Tiempo de coyote jump
+    [SerializeField]private float speed = 6f;
+    [SerializeField] private float jumpPower = 5f;
+    [SerializeField] private float gravity = 10f;
+    [SerializeField] private float coyoteTime = 0.2f; // Tiempo de coyote jump
 
-    public bool isIn2D = true;  // Controla si estamos en 2D o 2.5D
+    private bool isIn2D = false;  // Controla si estamos en 2D o 2.5D
 
     private float jumpBufferTime = 0.2f; // Tiempo de buffer para el salto
     private float jumpBufferCounter;
     private float coyoteTimer;
     private Vector3 moveDirection = Vector3.zero;
     private bool canJump = false;
-    private CharacterController characterController;
+    private Rigidbody rb;
 
     private float originalZPosition; // Para guardar la posición Z original
-    private bool originalZSaved = false; // Para asegurar que solo se guarda una vez
+
+    [SerializeField] private float stoppingDrag = 20f; // Drag para frenar rápidamente
 
     // Start is called before the first frame update
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
-
+        rb = GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeRotation; // Evitar que el Rigidbody rote
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         HandleMovement();
         HandleJumping();
@@ -44,9 +45,7 @@ public class Player_Move : MonoBehaviour
         float curSpeedX = speed * Input.GetAxis("Horizontal");
         float curSpeedZ = isIn2D ? 0 : speed * Input.GetAxis("Vertical");
 
-        float movementDirectionY = moveDirection.y;
-
-        // Movimiento en X y Z (solo en 2.5D), sin Y que se maneja en salto
+        // Movimiento en X y Z (solo en 2.5D)
         Vector3 move = (right * curSpeedX) + (forward * curSpeedZ);
 
         // Normalizamos el vector de movimiento para evitar que se mueva más rápido en diagonal
@@ -55,26 +54,28 @@ public class Player_Move : MonoBehaviour
             move.Normalize();
         }
 
-        // Multiplicamos por la velocidad
-        moveDirection = move * speed;
-        // Reaplicar el movimiento en Y para caída o salto
-        moveDirection.y = movementDirectionY;
-        moveDirection.z = isIn2D ? 0f : move.z * speed;
+        // Si no hay input, aplicar desaceleración rápida
+        if (Mathf.Abs(curSpeedX) < 0.01f && Mathf.Abs(curSpeedZ) < 0.01f)
+        {
+            rb.velocity = new Vector3(Mathf.Lerp(rb.velocity.x, 0, stoppingDrag * Time.deltaTime), rb.velocity.y, Mathf.Lerp(rb.velocity.z, 0, stoppingDrag * Time.deltaTime));
+        }
+        else
+        {
+            // Aplicar movimiento
+            rb.velocity = new Vector3(move.x * speed, rb.velocity.y, move.z * speed);
+        }
+
         // Si estamos en modo 2D, fijamos la posición Z en 0
         if (isIn2D)
         {
-            Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, 0f);
-            Vector3 delta = newPosition - transform.position;
-            characterController.Move(delta); // Move to set z=0
+            rb.position = new Vector3(rb.position.x, rb.position.y, 0f);
         }
-        // Aplicar movimiento en el CharacterController
-        characterController.Move(moveDirection * Time.deltaTime);
     }
 
     void HandleJumping()
     {
         // Comprobar si el personaje está tocando el suelo
-        if (characterController.isGrounded)
+        if (IsGrounded())
         {
             // Reinicia el temporizador de coyote jump
             canJump = true;
@@ -95,20 +96,29 @@ public class Player_Move : MonoBehaviour
         {
             jumpBufferCounter = jumpBufferTime; // Activar el contador de buffer al presionar el salto
         }
-        if(jumpBufferCounter > 0)
+
+        if (jumpBufferCounter > 0)
         {
             jumpBufferCounter -= Time.deltaTime; // Decrementar el contador de salto buffer
             if (canJump)
             {
-                moveDirection.y = jumpPower;
+                rb.velocity = new Vector3(rb.velocity.x, jumpPower, rb.velocity.z);
                 canJump = false;
             }
         }
-        if (!characterController.isGrounded)
+
+        // Si no está en el suelo, aplicar gravedad extra manualmente
+        if (!IsGrounded())
         {
-            // Aplica gravedad mientras no está en el suelo
-            moveDirection.y -= gravity * Time.deltaTime;
+            rb.velocity += Vector3.down * gravity * Time.deltaTime;
         }
+    }
+
+    // Método para comprobar si el personaje está en el suelo
+    bool IsGrounded()
+    {
+        Ray ray = new Ray(transform.position, Vector3.down);
+        return Physics.Raycast(ray, 1.1f); // Verifica una pequeña distancia para detectar si está en el suelo
     }
 
     // Cambiar entre perspectiva 2D y 2.5D
@@ -118,31 +128,13 @@ public class Player_Move : MonoBehaviour
 
         if (isIn2D)
         {
-            originalZPosition = transform.position.z;
-            // Al cambiar a 2D, bloquear la posición Z en 0
-            Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, 0f);
-            Vector3 delta = newPosition - transform.position;
-            characterController.Move(delta);
+            originalZPosition = rb.position.z;
+            rb.position = new Vector3(rb.position.x, rb.position.y, 0f);
         }
         else
         {
-            // Al cambiar a 2.5D, restaurar la posición Z original
-            Vector3 originalPosition = new Vector3(transform.position.x, transform.position.y, originalZPosition);
-            characterController.Move(originalPosition - transform.position);
-        }
-    }
-    // Detectar colisiones y ajustar posición si colisiona en la parte superior de un objeto
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        // Comprobar si la colisión fue en la parte superior del objeto
-        if (hit.normal.y < -0.5f) // Si la normal de contacto indica que fue desde arriba
-        {
-            // Ajustar la posición del jugador en la dirección Y
-            float newY = hit.point.y + characterController.height / 2;
-            Vector3 newPosition = new Vector3(transform.position.x, newY, transform.position.z);
-            Vector3 delta = newPosition - transform.position;
-            characterController.Move(delta);
-            canJump = true; // Permitir el salto nuevamente
+            rb.position = new Vector3(rb.position.x, rb.position.y, originalZPosition);
         }
     }
 }
+

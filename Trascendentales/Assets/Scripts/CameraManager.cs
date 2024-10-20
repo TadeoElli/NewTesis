@@ -24,9 +24,8 @@ public class CameraManager : MonoBehaviour
     private void Awake()
     {
         inputManager = FindObjectOfType<InputManager>();
-        inputManager.OnChangeCameraToRight += RotateToRight;
-        inputManager.OnChangeCameraToLeft += RotateToLeft;
         inputManager.OnPerspectiveSwitch += TogglePerspective;
+        inputManager.OnChangeCameraAngle += ChangeCameraAngle;
         targetTransform = FindObjectOfType<PlayerManager>().transform;
         cameraPivot.transform.position = camera_3D_positions[index].transform.position;
         cameraPivot.transform.rotation = camera_3D_positions[index].transform.rotation;
@@ -51,17 +50,11 @@ public class CameraManager : MonoBehaviour
         transform.position = targetPosition;
         
     }
-    private void RotateToRight()
+    private void ChangeCameraAngle()
     {
         index++;
-        if (index > 3)
+        if(index > 1)
             index = 0;
-    }
-    private void RotateToLeft()
-    {
-        index--;
-        if (index < 0)
-            index = 3;
     }
     private void TogglePerspective()
     {

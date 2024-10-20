@@ -51,20 +51,57 @@ public class PlayerLocomotion : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody>();
     }
 
+    private float originalZPosition; // Para almacenar la posición Z original del jugador en 3D
+
     private void HandleMovement()
     {
-        moveDirection = cameraObject.forward * inputManager.verticalInput;
-        moveDirection = moveDirection + cameraObject.right * inputManager.horizontalInput;
-        moveDirection.Normalize();
-        moveDirection.y = 0;
-        moveDirection = moveDirection * movementSpeed;
+        // Si está en modo 2D, solo permitir movimiento en el eje X
+        if (inputManager.isOn2D)
+        {
+            Vector3 currentVelocity = playerRigidbody.velocity;
 
-        Vector3 currentVelocity = playerRigidbody.velocity;
-        currentVelocity.x = moveDirection.x;
-        currentVelocity.z = moveDirection.z;
+            // Solo permitir movimiento en el eje X
+            currentVelocity.x = inputManager.horizontalInput * movementSpeed;
+            currentVelocity.z = 0; // Mantener siempre el Z en 0 en modo 2D
 
-        playerRigidbody.velocity = currentVelocity; // Mantén la velocidad vertical (Y) intacta
+            // Fijar la posición del jugador en el eje Z a 0
+            playerRigidbody.position = new Vector3(playerRigidbody.position.x, playerRigidbody.position.y, 0);
+
+            playerRigidbody.velocity = currentVelocity;
+        }
+        else
+        {
+            // Movimiento normal en 3D
+            moveDirection = cameraObject.forward * inputManager.verticalInput;
+            moveDirection = moveDirection + cameraObject.right * inputManager.horizontalInput;
+            moveDirection.Normalize();
+            moveDirection.y = 0;
+            moveDirection = moveDirection * movementSpeed;
+
+            Vector3 currentVelocity = playerRigidbody.velocity;
+            currentVelocity.x = moveDirection.x;
+            currentVelocity.z = moveDirection.z;
+
+            playerRigidbody.velocity = currentVelocity; // Mantén la velocidad vertical (Y) intacta
+        }
     }
+
+    public void SwitchTo2D()
+    {
+        // Guardar la posición Z original antes de cambiar a 2D
+        originalZPosition = playerRigidbody.position.z;
+
+    }
+
+    public void SwitchTo3D()
+    {
+        // Restaurar la posición Z original cuando volvemos a 3D
+        Vector3 currentPosition = playerRigidbody.position;
+        playerRigidbody.position = new Vector3(currentPosition.x, currentPosition.y, originalZPosition);
+
+    }
+
+
 
     private void HandleRotation()
     {

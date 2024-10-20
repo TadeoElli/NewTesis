@@ -100,16 +100,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""id"": ""15cde203-989a-4cac-a039-f5b5320c4903"",
             ""actions"": [
                 {
-                    ""name"": ""TurnCameraToLeft"",
-                    ""type"": ""Button"",
-                    ""id"": ""8fca515e-f1b9-481a-b3d3-cfe5208145a3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""TurnCameraToRight"",
+                    ""name"": ""SwitchCameraAngle"",
                     ""type"": ""Button"",
                     ""id"": ""7c82e6e3-6bc5-4c8c-a0b1-427412ea4d3a"",
                     ""expectedControlType"": ""Button"",
@@ -130,23 +121,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""8cf67881-ba52-4492-acea-e10c3e1bee40"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TurnCameraToLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""f80d290e-d243-4d63-b95f-1f9fabdc8f14"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TurnCameraToRight"",
+                    ""action"": ""SwitchCameraAngle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -199,8 +179,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerMovement_Movement = m_PlayerMovement.FindAction("Movement", throwIfNotFound: true);
         // PlayerCamera
         m_PlayerCamera = asset.FindActionMap("PlayerCamera", throwIfNotFound: true);
-        m_PlayerCamera_TurnCameraToLeft = m_PlayerCamera.FindAction("TurnCameraToLeft", throwIfNotFound: true);
-        m_PlayerCamera_TurnCameraToRight = m_PlayerCamera.FindAction("TurnCameraToRight", throwIfNotFound: true);
+        m_PlayerCamera_SwitchCameraAngle = m_PlayerCamera.FindAction("SwitchCameraAngle", throwIfNotFound: true);
         m_PlayerCamera_SwitchCamera = m_PlayerCamera.FindAction("SwitchCamera", throwIfNotFound: true);
         // PlayerActions
         m_PlayerActions = asset.FindActionMap("PlayerActions", throwIfNotFound: true);
@@ -312,15 +291,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     // PlayerCamera
     private readonly InputActionMap m_PlayerCamera;
     private List<IPlayerCameraActions> m_PlayerCameraActionsCallbackInterfaces = new List<IPlayerCameraActions>();
-    private readonly InputAction m_PlayerCamera_TurnCameraToLeft;
-    private readonly InputAction m_PlayerCamera_TurnCameraToRight;
+    private readonly InputAction m_PlayerCamera_SwitchCameraAngle;
     private readonly InputAction m_PlayerCamera_SwitchCamera;
     public struct PlayerCameraActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerCameraActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @TurnCameraToLeft => m_Wrapper.m_PlayerCamera_TurnCameraToLeft;
-        public InputAction @TurnCameraToRight => m_Wrapper.m_PlayerCamera_TurnCameraToRight;
+        public InputAction @SwitchCameraAngle => m_Wrapper.m_PlayerCamera_SwitchCameraAngle;
         public InputAction @SwitchCamera => m_Wrapper.m_PlayerCamera_SwitchCamera;
         public InputActionMap Get() { return m_Wrapper.m_PlayerCamera; }
         public void Enable() { Get().Enable(); }
@@ -331,12 +308,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerCameraActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerCameraActionsCallbackInterfaces.Add(instance);
-            @TurnCameraToLeft.started += instance.OnTurnCameraToLeft;
-            @TurnCameraToLeft.performed += instance.OnTurnCameraToLeft;
-            @TurnCameraToLeft.canceled += instance.OnTurnCameraToLeft;
-            @TurnCameraToRight.started += instance.OnTurnCameraToRight;
-            @TurnCameraToRight.performed += instance.OnTurnCameraToRight;
-            @TurnCameraToRight.canceled += instance.OnTurnCameraToRight;
+            @SwitchCameraAngle.started += instance.OnSwitchCameraAngle;
+            @SwitchCameraAngle.performed += instance.OnSwitchCameraAngle;
+            @SwitchCameraAngle.canceled += instance.OnSwitchCameraAngle;
             @SwitchCamera.started += instance.OnSwitchCamera;
             @SwitchCamera.performed += instance.OnSwitchCamera;
             @SwitchCamera.canceled += instance.OnSwitchCamera;
@@ -344,12 +318,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IPlayerCameraActions instance)
         {
-            @TurnCameraToLeft.started -= instance.OnTurnCameraToLeft;
-            @TurnCameraToLeft.performed -= instance.OnTurnCameraToLeft;
-            @TurnCameraToLeft.canceled -= instance.OnTurnCameraToLeft;
-            @TurnCameraToRight.started -= instance.OnTurnCameraToRight;
-            @TurnCameraToRight.performed -= instance.OnTurnCameraToRight;
-            @TurnCameraToRight.canceled -= instance.OnTurnCameraToRight;
+            @SwitchCameraAngle.started -= instance.OnSwitchCameraAngle;
+            @SwitchCameraAngle.performed -= instance.OnSwitchCameraAngle;
+            @SwitchCameraAngle.canceled -= instance.OnSwitchCameraAngle;
             @SwitchCamera.started -= instance.OnSwitchCamera;
             @SwitchCamera.performed -= instance.OnSwitchCamera;
             @SwitchCamera.canceled -= instance.OnSwitchCamera;
@@ -422,8 +393,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     }
     public interface IPlayerCameraActions
     {
-        void OnTurnCameraToLeft(InputAction.CallbackContext context);
-        void OnTurnCameraToRight(InputAction.CallbackContext context);
+        void OnSwitchCameraAngle(InputAction.CallbackContext context);
         void OnSwitchCamera(InputAction.CallbackContext context);
     }
     public interface IPlayerActionsActions

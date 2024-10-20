@@ -11,7 +11,7 @@ public class InputManager : MonoBehaviour
     public float verticalInput;
     public float horizontalInput;
     public bool jump_input;
-
+    public bool isOn2D = false;
     //Events
     public event Action<ToolTypes> OnToolSwitch;
     public event Action OnToolSwitchCheck;
@@ -20,8 +20,7 @@ public class InputManager : MonoBehaviour
     public event Action OnLeftClickDrop;
     public event Action OnRightClickPress;
     public event Action OnRightClickDrop;
-    public event Action OnChangeCameraToLeft;
-    public event Action OnChangeCameraToRight;
+    public event Action OnChangeCameraAngle;
 
     private void Awake()
     {
@@ -36,8 +35,7 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
 
             // Vincular las acciones de las teclas Q y E
-            playerControls.PlayerCamera.TurnCameraToLeft.performed += _ => SwitchCameraToLeft();
-            playerControls.PlayerCamera.TurnCameraToRight.performed += _ => SwitchCameraToRight();
+            playerControls.PlayerCamera.SwitchCameraAngle.performed += _ => SwitchCameraAngle();
             playerControls.PlayerCamera.SwitchCamera.performed += _ => SwitchCamera();
             playerControls.PlayerActions.Jump.performed += _ => jump_input = true;
         }
@@ -67,16 +65,17 @@ public class InputManager : MonoBehaviour
             playerLocomotion.BufferJump();
         }
     }
-    private void SwitchCameraToLeft()
+    private void SwitchCameraAngle()
     {
-        OnChangeCameraToLeft?.Invoke();
-    }
-    private void SwitchCameraToRight()
-    {
-        OnChangeCameraToRight?.Invoke();
+        OnChangeCameraAngle?.Invoke();
     }
     private void SwitchCamera()
     {
+        isOn2D = !isOn2D;
+        if(isOn2D)
+            playerLocomotion.SwitchTo2D();
+        else
+            playerLocomotion.SwitchTo3D();
         OnPerspectiveSwitch?.Invoke();
     }
 }

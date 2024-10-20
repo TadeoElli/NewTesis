@@ -78,16 +78,7 @@
             "id": "15cde203-989a-4cac-a039-f5b5320c4903",
             "actions": [
                 {
-                    "name": "TurnCameraToLeft",
-                    "type": "Button",
-                    "id": "8fca515e-f1b9-481a-b3d3-cfe5208145a3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "TurnCameraToRight",
+                    "name": "SwitchCameraAngle",
                     "type": "Button",
                     "id": "7c82e6e3-6bc5-4c8c-a0b1-427412ea4d3a",
                     "expectedControlType": "Button",
@@ -108,23 +99,12 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "8cf67881-ba52-4492-acea-e10c3e1bee40",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "TurnCameraToLeft",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "f80d290e-d243-4d63-b95f-1f9fabdc8f14",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TurnCameraToRight",
+                    "action": "SwitchCameraAngle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

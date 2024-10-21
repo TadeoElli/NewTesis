@@ -146,6 +146,7 @@ public class PlayerLocomotion : MonoBehaviour
         }
         else
         {
+            playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, 0, playerRigidbody.velocity.z);
             isGrounded = true;
             isNearEdge = false;  // Si está en el suelo, no está en un borde
             coyoteTimer = coyoteTime;  // Resetear el temporizador de coyote jump

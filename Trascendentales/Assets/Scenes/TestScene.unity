@@ -2629,8 +2629,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 1565962512}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
         m_MethodName: TogglePause
         m_Mode: 1
         m_Arguments:
@@ -4573,8 +4573,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 1565962512}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
         m_MethodName: TogglePause
         m_Mode: 1
         m_Arguments:
@@ -16384,6 +16384,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 705624224}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1565962512 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1774123092189984009, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
+    type: 3}
+  m_PrefabInstance: {fileID: 705624224}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520006751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2917fd32a1606e47a8e3bf5ee81a3f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1565962516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21577,8 +21589,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 1565962512}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
         m_MethodName: TogglePause
         m_Mode: 1
         m_Arguments:

@@ -2342,6 +2342,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInFront: 1
+  isInBack: 1
 --- !u!1 &194939733
 GameObject:
   m_ObjectHideFlags: 0
@@ -2692,6 +2694,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInFront: 1
+  isInBack: 1
 --- !u!114 &198192153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2877,6 +2881,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInFront: 0
+  isInBack: 0
 --- !u!1 &212989487
 GameObject:
   m_ObjectHideFlags: 0
@@ -3196,6 +3202,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInFront: 1
+  isInBack: 1
 --- !u!1 &256948638
 GameObject:
   m_ObjectHideFlags: 0
@@ -3591,6 +3599,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInFront: 1
+  isInBack: 1
 --- !u!114 &275803144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3952,6 +3962,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInFront: 1
+  isInBack: 1
 --- !u!1 &298775761
 GameObject:
   m_ObjectHideFlags: 0
@@ -4813,7 +4825,7 @@ Transform:
   m_GameObject: {fileID: 389841938}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.87, z: -0.68}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5.7685, y: 1, z: 4.1878}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5814,6 +5826,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInFront: 1
+  isInBack: 1
 --- !u!1 &440647343
 GameObject:
   m_ObjectHideFlags: 0
@@ -6250,7 +6264,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464409879}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 8.27}
+  m_LocalPosition: {x: 0, y: 0, z: -0.09}
   m_LocalScale: {x: 1.3699999, y: 1.37, z: 1.37}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6436,6 +6450,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInFront: 1
+  isInBack: 1
 --- !u!1 &510158506
 GameObject:
   m_ObjectHideFlags: 0
@@ -6554,6 +6570,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInFront: 1
+  isInBack: 1
 --- !u!114 &512194984 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9073911576350447687, guid: a020c8bd42b67ca459ae45cd617d6ac1,
@@ -8397,6 +8415,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInFront: 1
+  isInBack: 1
 --- !u!1 &721736069
 GameObject:
   m_ObjectHideFlags: 0
@@ -11803,6 +11823,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInFront: 1
+  isInBack: 1
 --- !u!1 &1057098710
 GameObject:
   m_ObjectHideFlags: 0
@@ -12202,6 +12224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInFront: 1
+  isInBack: 1
 --- !u!1 &1171088411
 GameObject:
   m_ObjectHideFlags: 0
@@ -12293,6 +12317,7 @@ MonoBehaviour:
   - {fileID: 1301646395}
   cameraPivot: {fileID: 536795401}
   orthographicSize: 7
+  isFrontView: 1
   cameraFollowSpeed: 0.2
 --- !u!1 &1190623540
 GameObject:
@@ -13044,6 +13069,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInFront: 1
+  isInBack: 1
 --- !u!4 &1301646395 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4769087694849371238, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
@@ -13242,6 +13269,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInFront: 1
+  isInBack: 1
 --- !u!1 &1353776064
 GameObject:
   m_ObjectHideFlags: 0
@@ -13804,6 +13833,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInFront: 1
+  isInBack: 1
 --- !u!1 &1377600399
 GameObject:
   m_ObjectHideFlags: 0
@@ -16963,6 +16994,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInFront: 1
+  isInBack: 1
 --- !u!1 &1625035441
 GameObject:
   m_ObjectHideFlags: 0
@@ -20551,7 +20584,7 @@ GameObject:
   - component: {fileID: 2008791596}
   - component: {fileID: 2008791595}
   - component: {fileID: 2008791594}
-  - component: {fileID: 2008791599}
+  - component: {fileID: 2008791600}
   m_Layer: 6
   m_Name: Bridge (3)
   m_TagString: Untagged
@@ -20686,7 +20719,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2008791592}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &2008791599
+--- !u!114 &2008791600
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20698,6 +20731,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInFront: 1
+  isInBack: 0
 --- !u!1 &2013649201
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 
-public class ChangePositionByPerspective : MonoBehaviour
+public class ChangePositionByPerspective : MonoBehaviour, IObjectAffectableByPerspective
 {
-    float oldPositionZ;
-    CameraManager cam;
-    private ParentConstraint parentConstraint;
+    private float originalPositionZ;
     private bool isOriginalPositionSaved = false;
+    private CameraManager cam;
+
+    [SerializeField] private bool isInFront;  // Si el objeto puede ser visto desde la vista frontal
+    [SerializeField] private bool isInBack;   // Si el objeto puede ser visto desde la vista trasera
+
 
     private void Awake()
     {
@@ -16,57 +19,57 @@ public class ChangePositionByPerspective : MonoBehaviour
     }
     private void OnEnable()
     {
-        cam.OnCameraSwitch += ChangePerspective;
+        // Registra el objeto en el CameraManager
+        cam.RegisterObject(this);
+        SaveOriginalPositionZ();
+    }
+
+    private void OnDisable()
+    {
+        // Desregistra el objeto en el CameraManager
+        cam.UnregisterObject(this);
     }
     private void SaveOriginalPositionZ()
     {
         if (!isOriginalPositionSaved)
         {
-            oldPositionZ = transform.position.z; // Guarda la posición Z original la primera vez
+            originalPositionZ = transform.position.z; // Guarda la posición Z original la primera vez
             isOriginalPositionSaved = true;
         }
     }
-    public void SetNewPosition()
+    public void OnPerspectiveChanged(bool is2D, bool isFrontView)
     {
-        SaveOriginalPositionZ(); // Solo guarda la posición original si no lo ha hecho ya
-        if (TryGetComponent<ParentConstraint>(out ParentConstraint pConstraint))
+        // Verifica si el objeto debe ser visible o no y ajusta la posición en Z
+        if (is2D)
         {
-            pConstraint.constraintActive = false;
-            pConstraint.locked = false;
+            if ((isFrontView && isInFront) || (!isFrontView && isInBack) || (isInFront && isInBack))
+            {
+                SetNewPosition();
+            }
+            else
+            {
+                ReturnToOriginalPosition();
+            }
         }
-        transform.position = new Vector3(transform.position.x,transform.position.y,0f);
-        if (pConstraint != null)
-        {
-            Vector3 positionOffset = transform.InverseTransformPoint(pConstraint.GetSource(0).sourceTransform.position);
-            Vector3 rotationOffset = new Vector3(90,0,-90);
-            pConstraint.SetTranslationOffset(0, positionOffset);
-            pConstraint.SetRotationOffset(0, rotationOffset);
-            pConstraint.constraintActive = true;
-            pConstraint.locked = true;
-        }
-
-    }
-    public void ReturnToOldPosition()
-    {
-        // Restaura la posición Z original al cambiar a 2.5D
-        transform.position = new Vector3(transform.position.x, transform.position.y, oldPositionZ);
-
-        // Reactiva el constraint si existe
-        if (parentConstraint != null)
-        {
-            parentConstraint.constraintActive = true;
-        }
-    }
-    public void ChangePerspective(bool isOn2D)
-    {
-        if(isOn2D)
-            SetNewPosition();
         else
-            ReturnToOldPosition();
+        {
+            // Restaura la posición original si no está en 2D
+            ReturnToOriginalPosition();
+        }
+    }
+    private void SetNewPosition()
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
 
-    private void OnDisable()
+    private void ReturnToOriginalPosition()
     {
-        cam.OnCameraSwitch -= ChangePerspective;
+        transform.position = new Vector3(transform.position.x, transform.position.y, originalPositionZ);
     }
+
+}
+
+public interface IObjectAffectableByPerspective
+{
+    void OnPerspectiveChanged(bool is2D, bool isFrontView);
 }

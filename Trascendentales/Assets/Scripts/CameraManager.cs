@@ -16,10 +16,12 @@ public class CameraManager : MonoBehaviour
     private bool is2D = false;
     [SerializeField] private float orthographicSize = 7f; // Tamaño de la cámara ortográfica en modo 2D
     private int index = 0;
-    public event Action<bool> OnCameraSwitch;
-
+    public bool isFrontView = true;
 
     public float cameraFollowSpeed = 0.2f;
+
+    // Lista de objetos que pueden verse afectados por el cambio de perspectiva
+    private List<IObjectAffectableByPerspective> affectableObjects = new List<IObjectAffectableByPerspective>();
 
     private void Awake()
     {
@@ -55,6 +57,9 @@ public class CameraManager : MonoBehaviour
         index++;
         if(index > 1)
             index = 0;
+        isFrontView = !isFrontView;
+        // Notifica a los objetos sobre el cambio de ángulo de cámara
+        NotifyObjectsOfPerspectiveChange();
     }
     private void TogglePerspective()
     {
@@ -70,6 +75,29 @@ public class CameraManager : MonoBehaviour
             mainCamera.orthographicSize = orthographicSize;
         }
         is2D = !is2D;
-        OnCameraSwitch?.Invoke(is2D);
+        NotifyObjectsOfPerspectiveChange();
+    }
+    public void RegisterObject(IObjectAffectableByPerspective obj)
+    {
+        if (!affectableObjects.Contains(obj))
+        {
+            affectableObjects.Add(obj);
+        }
+    }
+
+    public void UnregisterObject(IObjectAffectableByPerspective obj)
+    {
+        if (affectableObjects.Contains(obj))
+        {
+            affectableObjects.Remove(obj);
+        }
+    }
+
+    private void NotifyObjectsOfPerspectiveChange()
+    {
+        foreach (var obj in affectableObjects)
+        {
+            obj.OnPerspectiveChanged(is2D, isFrontView);
+        }
     }
 }

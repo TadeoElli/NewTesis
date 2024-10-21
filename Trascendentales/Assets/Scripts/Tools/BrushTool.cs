@@ -26,9 +26,9 @@ public class BrushTool : Tools
         if(!currentInteractable.CanInteractWithBrush(isOn2D))
             return;
         mouseState.SetLeftclickPress();
-        playerController.OnPerspectiveSwitch += DropInteractable;
-        playerController.OnLeftClickDrop += DropInteractable;
-        playerController.OnToolSwitchCheck += DropInteractable;
+        inputManager.OnPerspectiveSwitch += DropInteractable;
+        inputManager.OnLeftClickDrop += DropInteractable;
+        inputManager.OnToolSwitchCheck += DropInteractable;
         chargeCursor.SetActive(true);
         image.fillAmount = 0f; // Reiniciar el fillAmount a 0
         holdTime = 0f;
@@ -65,9 +65,9 @@ public class BrushTool : Tools
     {
         base.DropInteractable();
         mouseState.DropLeftClick();
-        playerController.OnPerspectiveSwitch -= DropInteractable;
-        playerController.OnToolSwitchCheck -= DropInteractable;
-        playerController.OnLeftClickDrop -= DropInteractable;
+        inputManager.OnPerspectiveSwitch -= DropInteractable;
+        inputManager.OnToolSwitchCheck -= DropInteractable;
+        inputManager.OnLeftClickDrop -= DropInteractable;
         chargeCursor.SetActive(false);
         image.fillAmount = 0f;
         if (currentInteractable != null)

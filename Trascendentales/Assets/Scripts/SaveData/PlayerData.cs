@@ -7,7 +7,7 @@ public class PlayerData
 {
     public float[] lastPosition;
 
-    public PlayerData (PlayerController player)
+    public PlayerData (PlayerManager player)
     {
         lastPosition = new float[3];
         lastPosition[0] = player.transform.position.x;

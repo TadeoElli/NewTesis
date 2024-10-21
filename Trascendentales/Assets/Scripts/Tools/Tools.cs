@@ -5,7 +5,7 @@ using UnityEngine;
 public class Tools : MonoBehaviour
 {
     protected GameObject objective;
-    protected PlayerController playerController;
+    protected InputManager inputManager;
     protected MouseState mouseState;
     [SerializeField] protected bool isOn2D;
     [SerializeField] protected Camera mainCamera;
@@ -13,7 +13,7 @@ public class Tools : MonoBehaviour
 
     public virtual void Awake()
     {
-        playerController = FindObjectOfType<PlayerController>();
+        inputManager = FindObjectOfType<InputManager>();
         mouseState = GetComponentInParent<MouseState>();
     }
     public virtual void DropInteractable()

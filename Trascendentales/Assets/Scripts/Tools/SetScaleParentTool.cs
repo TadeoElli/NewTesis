@@ -35,7 +35,7 @@ public class SetScaleParentTool : Tools
         firstObject = interactable;
         maxRadius = scalable.GetMaxRadius();
         isDragging = true;
-        playerController.OnRightClickDrop += DropInteractable; // Limpiamos la interacción al soltar clic derecho
+        inputManager.OnRightClickDrop += DropInteractable; // Limpiamos la interacción al soltar clic derecho
         base.Interact(interactable, isPerspective2D);
         FeedbackManager.Instance.StartMouseLine(objective);
 
@@ -146,7 +146,7 @@ public class SetScaleParentTool : Tools
         }
         mouseState.DropRightClick();
         base.DropInteractable();
-        playerController.OnRightClickDrop -= DropInteractable;
+        inputManager.OnRightClickDrop -= DropInteractable;
     }
     private void ResetDragging()
     {

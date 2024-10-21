@@ -155,6 +155,78 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Tool1"",
+                    ""type"": ""Button"",
+                    ""id"": ""4e563221-3587-42e1-aa5b-23bde2338760"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Tool2"",
+                    ""type"": ""Button"",
+                    ""id"": ""6a4f0287-982b-44b2-af03-ee4d7c2ef312"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Tool3"",
+                    ""type"": ""Button"",
+                    ""id"": ""c677f466-e421-4e2f-8001-9f55bfc8abc7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Tool4"",
+                    ""type"": ""Button"",
+                    ""id"": ""281a08b0-bca6-4a72-a97c-2e3f8e9427ee"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Tool5"",
+                    ""type"": ""Button"",
+                    ""id"": ""3ded6811-05f7-4d1e-b468-7c9b92cb111b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""988bc3d6-4e79-4bb7-9d27-1e481122567e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""53ae44ab-1acf-40d0-b68b-7c7d639825fb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""8d817963-b3bd-4c0f-b226-70def4f69a36"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -166,6 +238,94 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6232c109-3d90-4c23-a7d4-e71fc950164c"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tool1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ad5cfa7-b367-4f5b-895c-d575880680f0"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tool2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1bebb379-5dbc-46fe-a240-bf9d42a72af0"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tool3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb399dfe-0fe5-49d8-a808-fc265e9b3400"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tool4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bc97c62e-09ab-4af3-8b72-0582a8ebb638"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tool5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""10e5fc0f-c402-4863-a6ca-88f1b45400cf"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70987817-3167-43fe-8d1f-b812aca5031a"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a9e21e5-c659-4932-bc56-16404a3eaf6f"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -184,6 +344,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // PlayerActions
         m_PlayerActions = asset.FindActionMap("PlayerActions", throwIfNotFound: true);
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerActions_Tool1 = m_PlayerActions.FindAction("Tool1", throwIfNotFound: true);
+        m_PlayerActions_Tool2 = m_PlayerActions.FindAction("Tool2", throwIfNotFound: true);
+        m_PlayerActions_Tool3 = m_PlayerActions.FindAction("Tool3", throwIfNotFound: true);
+        m_PlayerActions_Tool4 = m_PlayerActions.FindAction("Tool4", throwIfNotFound: true);
+        m_PlayerActions_Tool5 = m_PlayerActions.FindAction("Tool5", throwIfNotFound: true);
+        m_PlayerActions_Escape = m_PlayerActions.FindAction("Escape", throwIfNotFound: true);
+        m_PlayerActions_LeftClick = m_PlayerActions.FindAction("LeftClick", throwIfNotFound: true);
+        m_PlayerActions_RightClick = m_PlayerActions.FindAction("RightClick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -346,11 +514,27 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerActions;
     private List<IPlayerActionsActions> m_PlayerActionsActionsCallbackInterfaces = new List<IPlayerActionsActions>();
     private readonly InputAction m_PlayerActions_Jump;
+    private readonly InputAction m_PlayerActions_Tool1;
+    private readonly InputAction m_PlayerActions_Tool2;
+    private readonly InputAction m_PlayerActions_Tool3;
+    private readonly InputAction m_PlayerActions_Tool4;
+    private readonly InputAction m_PlayerActions_Tool5;
+    private readonly InputAction m_PlayerActions_Escape;
+    private readonly InputAction m_PlayerActions_LeftClick;
+    private readonly InputAction m_PlayerActions_RightClick;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerActionsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_PlayerActions_Jump;
+        public InputAction @Tool1 => m_Wrapper.m_PlayerActions_Tool1;
+        public InputAction @Tool2 => m_Wrapper.m_PlayerActions_Tool2;
+        public InputAction @Tool3 => m_Wrapper.m_PlayerActions_Tool3;
+        public InputAction @Tool4 => m_Wrapper.m_PlayerActions_Tool4;
+        public InputAction @Tool5 => m_Wrapper.m_PlayerActions_Tool5;
+        public InputAction @Escape => m_Wrapper.m_PlayerActions_Escape;
+        public InputAction @LeftClick => m_Wrapper.m_PlayerActions_LeftClick;
+        public InputAction @RightClick => m_Wrapper.m_PlayerActions_RightClick;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -363,6 +547,30 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Tool1.started += instance.OnTool1;
+            @Tool1.performed += instance.OnTool1;
+            @Tool1.canceled += instance.OnTool1;
+            @Tool2.started += instance.OnTool2;
+            @Tool2.performed += instance.OnTool2;
+            @Tool2.canceled += instance.OnTool2;
+            @Tool3.started += instance.OnTool3;
+            @Tool3.performed += instance.OnTool3;
+            @Tool3.canceled += instance.OnTool3;
+            @Tool4.started += instance.OnTool4;
+            @Tool4.performed += instance.OnTool4;
+            @Tool4.canceled += instance.OnTool4;
+            @Tool5.started += instance.OnTool5;
+            @Tool5.performed += instance.OnTool5;
+            @Tool5.canceled += instance.OnTool5;
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
+            @LeftClick.started += instance.OnLeftClick;
+            @LeftClick.performed += instance.OnLeftClick;
+            @LeftClick.canceled += instance.OnLeftClick;
+            @RightClick.started += instance.OnRightClick;
+            @RightClick.performed += instance.OnRightClick;
+            @RightClick.canceled += instance.OnRightClick;
         }
 
         private void UnregisterCallbacks(IPlayerActionsActions instance)
@@ -370,6 +578,30 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Tool1.started -= instance.OnTool1;
+            @Tool1.performed -= instance.OnTool1;
+            @Tool1.canceled -= instance.OnTool1;
+            @Tool2.started -= instance.OnTool2;
+            @Tool2.performed -= instance.OnTool2;
+            @Tool2.canceled -= instance.OnTool2;
+            @Tool3.started -= instance.OnTool3;
+            @Tool3.performed -= instance.OnTool3;
+            @Tool3.canceled -= instance.OnTool3;
+            @Tool4.started -= instance.OnTool4;
+            @Tool4.performed -= instance.OnTool4;
+            @Tool4.canceled -= instance.OnTool4;
+            @Tool5.started -= instance.OnTool5;
+            @Tool5.performed -= instance.OnTool5;
+            @Tool5.canceled -= instance.OnTool5;
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
+            @LeftClick.started -= instance.OnLeftClick;
+            @LeftClick.performed -= instance.OnLeftClick;
+            @LeftClick.canceled -= instance.OnLeftClick;
+            @RightClick.started -= instance.OnRightClick;
+            @RightClick.performed -= instance.OnRightClick;
+            @RightClick.canceled -= instance.OnRightClick;
         }
 
         public void RemoveCallbacks(IPlayerActionsActions instance)
@@ -399,5 +631,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IPlayerActionsActions
     {
         void OnJump(InputAction.CallbackContext context);
+        void OnTool1(InputAction.CallbackContext context);
+        void OnTool2(InputAction.CallbackContext context);
+        void OnTool3(InputAction.CallbackContext context);
+        void OnTool4(InputAction.CallbackContext context);
+        void OnTool5(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
+        void OnLeftClick(InputAction.CallbackContext context);
+        void OnRightClick(InputAction.CallbackContext context);
     }
 }

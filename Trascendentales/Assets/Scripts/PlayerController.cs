@@ -17,29 +17,13 @@ public class PlayerController : MonoBehaviour, IDamagable
 
 
     private Vector3 spawnPosition;
-    Player_Move _myMove;
+    //Player_Move _myMove;
 
     private void Awake()
     {
-        LoadPlayer();
-        _myMove = GetComponent<Player_Move>();
+      //  _myMove = GetComponent<Player_Move>();
     }
-    public void SavePlayer()
-    {
-        SaveSystem.SavePlayer(this);
-    }
-
-    public void LoadPlayer()
-    {
-        PlayerData data = SaveSystem.LoadPlayer();
-        if(data == null )
-            return;
-        Vector3 position;
-        position.x = data.lastPosition[0];
-        position.y = data.lastPosition[1];
-        position.z = data.lastPosition[2];
-        transform.position = position;  
-    }
+   
 
     private void Update()
     {
@@ -90,7 +74,7 @@ public class PlayerController : MonoBehaviour, IDamagable
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            _myMove.SwitchPerspective();
+          //  _myMove.SwitchPerspective();
             OnPerspectiveSwitch?.Invoke();
         }
         if (Input.GetKeyDown(KeyCode.Escape))

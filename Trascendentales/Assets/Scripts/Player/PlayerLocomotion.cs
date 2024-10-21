@@ -13,6 +13,7 @@ public class PlayerLocomotion : MonoBehaviour
     [Header("MovementSpeed Speed")]
     public float movementSpeed = 7;
     public float rotationSpeed = 15;
+    private float originalZPosition; // Para almacenar la posición Z original del jugador en 3D
     [Header("Movement Flags")]
     public bool isGrounded = false;
     public bool isJumping = false;
@@ -40,19 +41,18 @@ public class PlayerLocomotion : MonoBehaviour
     public float jumpBufferTime = 0.2f; // Time to buffer a jump input
     private float jumpBufferTimer;      // Timer to track buffered jumps
 
-    [Header("Edge Detection Settings")]
+    /*[Header("Edge Detection Settings")]
     public float edgeRayLength = 1f;  // Longitud del raycast para detectar bordes
     public Transform[] edgeRaycastOrigins;  // Puntos de origen de los raycasts laterales
     public float edgeCorrectionSpeed = 5f; // Velocidad para ajustar la posición del jugador
-
+    */
     private void Awake()
     {
         inputManager = GetComponent<InputManager>();
         playerRigidbody = GetComponent<Rigidbody>();
     }
 
-    private float originalZPosition; // Para almacenar la posición Z original del jugador en 3D
-
+    #region Movement
     private void HandleMovement()
     {
         // Si está en modo 2D, solo permitir movimiento en el eje X
@@ -100,9 +100,9 @@ public class PlayerLocomotion : MonoBehaviour
         playerRigidbody.position = new Vector3(currentPosition.x, currentPosition.y, originalZPosition);
 
     }
+    #endregion
 
-
-
+    #region Rotation
     private void HandleRotation()
     {
         if(isJumping)
@@ -122,7 +122,8 @@ public class PlayerLocomotion : MonoBehaviour
 
         transform.rotation = playerRotation;
     }
-
+    #endregion
+    #region Falling and Jumping
     private void HandleFallingAndLanding()
     {
         RaycastHit hit;
@@ -133,15 +134,15 @@ public class PlayerLocomotion : MonoBehaviour
         // Si no hay suelo debajo, verificar bordes
         if (!isGroundDetected)
         {
-            isNearEdge = DetectEdge();  // Verificar si está cerca de un borde
+            //isNearEdge = DetectEdge();  // Verificar si está cerca de un borde
 
-            if (!isNearEdge)
-            {
+            //if (!isNearEdge)
+            //{
                 // Si no hay suelo ni bordes, el jugador está cayendo
                 inAirTimer = inAirTimer + Time.deltaTime;
                 playerRigidbody.AddForce(transform.forward * leapingVelocity);
                 playerRigidbody.AddForce(-Vector3.up * fallingVelocity * inAirTimer);
-            }
+            //}
         }
         else
         {
@@ -172,6 +173,7 @@ public class PlayerLocomotion : MonoBehaviour
             coyoteTimer = 0;
         }
     }
+    #endregion
     // Actualiza el temporizador de coyote jump y jump buffering
     private void Update()
     {
@@ -181,6 +183,8 @@ public class PlayerLocomotion : MonoBehaviour
         }
         jumpBufferTimer -= Time.deltaTime; // Cuenta regresiva de jump buffering
     }
+
+    #region JumpBuffering
 
     private void HandleJumpBuffering()
     {
@@ -197,6 +201,8 @@ public class PlayerLocomotion : MonoBehaviour
         jumpBufferTimer = jumpBufferTime;
     }
 
+    #endregion
+
     public void HandleAllMovement()
     {
         HandleFallingAndLanding();
@@ -205,8 +211,12 @@ public class PlayerLocomotion : MonoBehaviour
         HandleJumpBuffering();  // Verifica si hay un salto en buffer
         //HandleRotation();
     }
+    /*
+    #region EdgeDetector
     private bool DetectEdge()
     {
+        // Si ya estamos en el suelo, no detectamos bordes
+        if (isGrounded) return false;
         // Realizar raycasts desde cada punto
         for (int i = 0; i < edgeRaycastOrigins.Length; i++)
         {
@@ -245,6 +255,13 @@ public class PlayerLocomotion : MonoBehaviour
         // Mover al jugador en la dirección del borde con una interpolación suave
         Vector3 targetPosition = transform.position + correctionDirection * 0.5f;
         transform.position = Vector3.Lerp(transform.position, targetPosition, edgeCorrectionSpeed * Time.deltaTime);
+        // Verificar nuevamente si el jugador está sobre el suelo después de la corrección
+        if (!Physics.Raycast(transform.position, -Vector3.up, rayCastHeightOffset + 0.1f, groundLayer))
+        {
+            // Si después de la corrección no está en el suelo, desactiva edge detection
+            isNearEdge = false;
+        }
     }
-
+    #endregion
+    */
 }

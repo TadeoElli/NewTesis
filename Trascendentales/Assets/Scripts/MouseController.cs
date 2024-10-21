@@ -7,7 +7,7 @@ public class MouseController : MonoBehaviour
 {
     // Start is called before the first frame update
     [Header("Components")]
-    [SerializeField] private PlayerController playerController;
+    [SerializeField] private InputManager inputManager;
     [SerializeField] private MouseState mouseState;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Camera mainCamera;
@@ -43,13 +43,13 @@ public class MouseController : MonoBehaviour
     private bool is2DView = false;   // Indica si estamos en la vista 2D o 2.5D
     void Awake()
     {
-        playerController = FindObjectOfType<PlayerController>();
+        inputManager = FindObjectOfType<InputManager>();
         mouseState = GetComponent<MouseState>();
         //psScript = GetComponent<PS_Script>();
-        playerController.OnToolSwitch += SetTool; // Unifica el evento de cambio de herramienta
-        playerController.OnPerspectiveSwitch += SwitchView;
-        playerController.OnLeftClickPress += PerformRaycastForLeftClick;
-        playerController.OnRightClickPress += PerformRaycastForRightClick;
+        inputManager.OnToolSwitch += SetTool; // Unifica el evento de cambio de herramienta
+        inputManager.OnPerspectiveSwitch += SwitchView;
+        inputManager.OnLeftClickPress += PerformRaycastForLeftClick;
+        inputManager.OnRightClickPress += PerformRaycastForRightClick;
     }
 
     private void Start()

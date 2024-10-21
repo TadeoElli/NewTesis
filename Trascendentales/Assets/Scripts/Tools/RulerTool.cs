@@ -27,9 +27,9 @@ public class RulerTool : Tools
         if (!component.CanScale())
             return;
         mouseState.SetLeftclickPress();
-        playerController.OnLeftClickDrop += DropInteractable;
-        playerController.OnToolSwitchCheck += DropInteractable;
-        playerController.OnPerspectiveSwitch += DropInteractable;
+        inputManager.OnLeftClickDrop += DropInteractable;
+        inputManager.OnToolSwitchCheck += DropInteractable;
+        inputManager.OnPerspectiveSwitch += DropInteractable;
         minScale = component.GetMinScale();
         maxScale = component.GetMaxScale();
         base.Interact(interactable, isPerspective2D); // Llama a la lógica común de interactuar
@@ -103,9 +103,9 @@ public class RulerTool : Tools
         objectiveTr = null;
         ResetGimball();
         base.DropInteractable();
-        playerController.OnLeftClickDrop -= DropInteractable;
-        playerController.OnToolSwitchCheck -= DropInteractable;
-        playerController.OnPerspectiveSwitch -= DropInteractable;
+        inputManager.OnLeftClickDrop -= DropInteractable;
+        inputManager.OnToolSwitchCheck -= DropInteractable;
+        inputManager.OnPerspectiveSwitch -= DropInteractable;
     }
     private void ResetGimball()
     {

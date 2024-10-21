@@ -24,11 +24,11 @@ public class DrawObjectTool : Tools
     {
         base.Interact(objective, isPerspective2D);
         mouseState.SetRightclickPress();
-        playerController.OnRightClickDrop += DropInteractable; // Al soltar el clic derecho, limpiamos la interacción
-        playerController.OnPerspectiveSwitch += ResetDrawing;
-        playerController.OnPerspectiveSwitch += DropInteractable;
-        playerController.OnToolSwitchCheck += ResetDrawing;
-        playerController.OnToolSwitchCheck += DropInteractable;
+        inputManager.OnRightClickDrop += DropInteractable; // Al soltar el clic derecho, limpiamos la interacción
+        inputManager.OnPerspectiveSwitch += ResetDrawing;
+        inputManager.OnPerspectiveSwitch += DropInteractable;
+        inputManager.OnToolSwitchCheck += ResetDrawing;
+        inputManager.OnToolSwitchCheck += DropInteractable;
         isDrawing = true;
     }
     private void SelectShape()
@@ -83,11 +83,11 @@ public class DrawObjectTool : Tools
         if(isDrawing)
             FinishDrawing();
         mouseState.DropRightClick();
-        playerController.OnRightClickDrop -= DropInteractable; // Al soltar el clic derecho, limpiamos la interacción
-        playerController.OnPerspectiveSwitch -= ResetDrawing;
-        playerController.OnPerspectiveSwitch -= DropInteractable;
-        playerController.OnToolSwitchCheck -= ResetDrawing;
-        playerController.OnToolSwitchCheck -= DropInteractable;
+        inputManager.OnRightClickDrop -= DropInteractable; // Al soltar el clic derecho, limpiamos la interacción
+        inputManager.OnPerspectiveSwitch -= ResetDrawing;
+        inputManager.OnPerspectiveSwitch -= DropInteractable;
+        inputManager.OnToolSwitchCheck -= ResetDrawing;
+        inputManager.OnToolSwitchCheck -= DropInteractable;
 
     }
     private void FinishDrawing()
@@ -111,7 +111,7 @@ public class DrawObjectTool : Tools
         {
             // Si estamos en 2D, utilizamos el plano X-Y
             Vector3 newPosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0F));
-            newPosition.z = playerController.transform.position.z;
+            newPosition.z = inputManager.transform.position.z;
             return newPosition;
         }
         else
@@ -124,7 +124,7 @@ public class DrawObjectTool : Tools
             else
             {
                 Vector3 newPosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0F));
-                newPosition.z = playerController.transform.position.z;
+                newPosition.z = inputManager.transform.position.z;
                 return newPosition;
             }
         }

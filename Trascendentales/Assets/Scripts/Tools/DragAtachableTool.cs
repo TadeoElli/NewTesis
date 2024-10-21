@@ -28,9 +28,9 @@ public class DragAtachableTool : Tools {
         base.Interact(objective, isPerspective2D);
         mouseState.SetRightclickPress();
         constraint = objective.GetComponent<ParentConstraint>();
-        playerController.OnRightClickDrop += DropInteractable; // Al soltar el clic derecho, limpiamos la interacción
-        playerController.OnPerspectiveSwitch += DropInteractable;
-        playerController.OnToolSwitchCheck += DropInteractable;
+        inputManager.OnRightClickDrop += DropInteractable; // Al soltar el clic derecho, limpiamos la interacción
+        inputManager.OnPerspectiveSwitch += DropInteractable;
+        inputManager.OnToolSwitchCheck += DropInteractable;
         isDragging = true;
         initialMousePosition = Input.mousePosition;
         initialDistanceMouseToParent = Vector3.Distance(GetMouseWorldPosition(), parent.transform.position);
@@ -115,8 +115,8 @@ public class DragAtachableTool : Tools {
 
         // Limpiar las suscripciones a los eventos
         mouseState.DropRightClick();
-        playerController.OnRightClickDrop -= DropInteractable;
-        playerController.OnPerspectiveSwitch -= DropInteractable;
-        playerController.OnToolSwitchCheck -= DropInteractable;
+        inputManager.OnRightClickDrop -= DropInteractable;
+        inputManager.OnPerspectiveSwitch -= DropInteractable;
+        inputManager.OnToolSwitchCheck -= DropInteractable;
     }
 }

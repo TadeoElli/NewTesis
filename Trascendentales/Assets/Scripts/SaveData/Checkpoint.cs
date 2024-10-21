@@ -8,7 +8,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.GetComponent<PlayerController>().SavePlayer();
+            other.GetComponent<PlayerManager>().SavePlayer();
         }
     }
 }

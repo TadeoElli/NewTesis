@@ -29,9 +29,9 @@ public class SquadTool : Tools
         mouseState.SetLeftclickPress();
         rotable.SetGimballRef(gimball);
         objectiveTr = interactable.GetComponent<Transform>();
-        playerController.OnPerspectiveSwitch += DropInteractable;
-        playerController.OnLeftClickDrop += DropInteractable;
-        playerController.OnToolSwitchCheck += DropInteractable;
+        inputManager.OnPerspectiveSwitch += DropInteractable;
+        inputManager.OnLeftClickDrop += DropInteractable;
+        inputManager.OnToolSwitchCheck += DropInteractable;
         base.Interact(interactable, isPerspective2D); // Llama a la lógica común de interactuar
         canRotateInY = rotable.CanRotateInY();
         canRotateInZ = rotable.CanRotateInZ();
@@ -80,9 +80,9 @@ public class SquadTool : Tools
         mouseState.DropLeftClick();
         base.DropInteractable();
         rotable.SetGimballRef(null);
-        playerController.OnPerspectiveSwitch -= DropInteractable;
-        playerController.OnLeftClickDrop -= DropInteractable;
-        playerController.OnToolSwitchCheck -= DropInteractable;
+        inputManager.OnPerspectiveSwitch -= DropInteractable;
+        inputManager.OnLeftClickDrop -= DropInteractable;
+        inputManager.OnToolSwitchCheck -= DropInteractable;
     }
 
     private void ResetGimball()

@@ -21,7 +21,6 @@ public class ChangePositionByPerspective : MonoBehaviour, IObjectAffectableByPer
     {
         // Registra el objeto en el CameraManager
         cam.RegisterObject(this);
-        SaveOriginalPositionZ();
     }
 
     private void OnDisable()
@@ -40,6 +39,7 @@ public class ChangePositionByPerspective : MonoBehaviour, IObjectAffectableByPer
     public void OnPerspectiveChanged(bool is2D, bool isFrontView)
     {
         // Verifica si el objeto debe ser visible o no y ajusta la posición en Z
+        SaveOriginalPositionZ();
         if (is2D)
         {
             if ((isFrontView && isInFront) || (!isFrontView && isInBack) || (isInFront && isInBack))

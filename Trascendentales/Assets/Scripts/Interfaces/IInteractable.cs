@@ -4,6 +4,7 @@ using UnityEngine;
 public interface IInteractable
 {
     public bool IsAtachableForCompass();
+    public bool IsRotatingTowardsTheCompass();
     public bool IsAtachableForRuler();
     public bool IsAtachableForSquad();
     public bool IsAtachedToCompass();

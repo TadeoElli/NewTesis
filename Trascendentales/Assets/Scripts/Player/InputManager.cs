@@ -127,22 +127,22 @@ public class InputManager : MonoBehaviour
     #region MouseClick
     private void LeftClickPressed()
     {
-        Debug.Log("Left Click Pressed");
+        //Debug.Log("Left Click Pressed");
         OnLeftClickPress?.Invoke();
     }
     private void LeftClickReleased()
     {
-        Debug.Log("Left Click Released");
+        //Debug.Log("Left Click Released");
         OnLeftClickDrop?.Invoke();
     }
     private void RightClickPressed()
     {
-        Debug.Log("Right Click Pressed");
+        //Debug.Log("Right Click Pressed");
         OnRightClickPress?.Invoke();
     }
     private void RightClickReleased()
     {
-        Debug.Log("Right Click Released");
+        //Debug.Log("Right Click Released");
         OnRightClickDrop?.Invoke();
     }
     #endregion

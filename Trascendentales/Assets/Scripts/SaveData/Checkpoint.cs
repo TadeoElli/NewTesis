@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
+    private bool hasActivated = false;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player") && !hasActivated)
         {
             other.GetComponent<PlayerManager>().SavePlayer();
+            hasActivated = true;
+            Debug.Log("Checkpoint Reached and Activated");
         }
     }
 }

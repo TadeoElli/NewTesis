@@ -54,7 +54,7 @@ public class CompassTool : Tools
         FeedbackManager.Instance.StartMouseLine(objective);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (!isDragging || !wasClicked) return;
         // Mientras se mantenga el clic, dibujar la circunferencia y ajustar el radio
@@ -119,6 +119,8 @@ public class CompassTool : Tools
             parentConstraint.AddSource(source);
             parentConstraint.SetTranslationOffset(0, secondObject.transform.position - firstObject.transform.position);
             parentConstraint.SetRotationOffset(0, secondObject.transform.rotation.eulerAngles - firstObject.transform.rotation.eulerAngles);
+            if (!component.IsRotatingTowardsTheCompass())
+                parentConstraint.rotationAxis = Axis.None;
             parentConstraint.constraintActive = true;
 
             parentConstraint.locked = true; // Mantener el offset original de la relación

@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
         // Opcional: Aquí puedes añadir lógica para mostrar un menú de pausa
         // o detener otros sistemas específicos del juego
-        Debug.Log("Juego pausado");
+        //Debug.Log("Juego pausado");
     }
 
     // Función para continuar el juego
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         OnResumeGame.Invoke();
 
         // Opcional: Aquí puedes ocultar el menú de pausa
-        Debug.Log("Juego reanudado");
+        //Debug.Log("Juego reanudado");
     }
     public void ResetEvents()
     {

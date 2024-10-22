@@ -121,7 +121,7 @@ public class RulerTool : Tools
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // Lógica específica de la regla: Escalar el objeto
         if (objective == null)

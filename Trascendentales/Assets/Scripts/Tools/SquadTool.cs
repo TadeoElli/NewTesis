@@ -97,7 +97,7 @@ public class SquadTool : Tools
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (objective != null)
         {

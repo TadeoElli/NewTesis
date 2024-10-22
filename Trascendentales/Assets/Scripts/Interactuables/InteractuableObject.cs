@@ -3,6 +3,7 @@
 public class InteractuableObject : MonoBehaviour, IInteractable, IFeedback
 {
     [SerializeField] protected bool isAtacheableForCompass;
+    [SerializeField] protected bool isRotatingTowardsTheCompass;
     [SerializeField] protected bool isAtacheableForRuler;
     [SerializeField] protected bool isAtacheableForSquad;
     [SerializeField] private bool isAtachedToCompass = false;
@@ -11,6 +12,7 @@ public class InteractuableObject : MonoBehaviour, IInteractable, IFeedback
     [SerializeField] private Renderer rend;
     private GameObject compassParent = null;
     public bool IsAtachableForCompass() => isAtacheableForCompass;
+    public bool IsRotatingTowardsTheCompass() => isRotatingTowardsTheCompass;
     public bool IsAtachableForRuler() => isAtacheableForRuler;
     public bool IsAtachableForSquad() => isAtacheableForSquad;
     public bool IsAtachedToCompass() => isAtachedToCompass;

@@ -41,7 +41,7 @@ public class SetScaleParentTool : Tools
 
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if(interactable != null && !interactable.IsAtachableForRuler())
         {

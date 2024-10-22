@@ -40,7 +40,7 @@ public class DragAtachableTool : Tools {
         constraint.constraintActive = false;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if(!isDragging) return;
         AdjustDistance();
@@ -55,7 +55,7 @@ public class DragAtachableTool : Tools {
 
         // Calcular la nueva distancia basándonos en el desplazamiento del mouse en el eje Y (o cualquier otro control)
         float mouseDeltaY = Input.GetAxis("Mouse Y"); // Cambia esto si usas otro input
-        float distanceDelta = mouseDeltaY * 0.1f; // Escalar para controlar la sensibilidad del desplazamiento
+        float distanceDelta = mouseDeltaY; // Escalar para controlar la sensibilidad del desplazamiento
 
         // Calcular la nueva distancia final
         float newDistanceToParent = Mathf.Clamp(currentDistanceToParent + distanceDelta, 2.5f, maxRadius); // Limitar la distancia entre 0.5 y el radio máximo
@@ -103,10 +103,17 @@ public class DragAtachableTool : Tools {
         source.sourceTransform = parent.transform;
         source.weight = 1.0f;
         constraint.SetSource(0,source);
-        Vector3 positionOffset = parent.transform.InverseTransformPoint(objective.transform.position);
+        // Calcular el positionOffset utilizando la posición relativa, tomando en cuenta la rotación del padre
+        Vector3 globalPosition = objective.transform.position;
+        Vector3 parentGlobalPosition = parent.transform.position;
+        Vector3 positionOffset = Quaternion.Inverse(parent.transform.rotation) * (globalPosition - parentGlobalPosition);
+
+        // Corregir el rotationOffset para evitar que el objeto rote junto con el padre
         Quaternion rotationOffset = Quaternion.Inverse(parent.transform.rotation) * objective.transform.rotation;
+
+        // Aplicar los offsets
         constraint.SetTranslationOffset(0, positionOffset);
-        constraint.SetRotationOffset(0, rotationOffset.eulerAngles);
+        constraint.SetRotationOffset(0, Vector3.zero);  // Setear el rotationOffset en Vector3.zero para que no rote con el padre
 
         constraint.constraintActive = true;
 

@@ -19,6 +19,7 @@ public class CameraManager : MonoBehaviour
     public bool isFrontView = true;
 
     public float cameraFollowSpeed = 0.2f;
+    public event Action OnCameraSwitch;
 
     // Lista de objetos que pueden verse afectados por el cambio de perspectiva
     private List<IObjectAffectableByPerspective> affectableObjects = new List<IObjectAffectableByPerspective>();
@@ -75,6 +76,7 @@ public class CameraManager : MonoBehaviour
             mainCamera.orthographicSize = orthographicSize;
         }
         is2D = !is2D;
+        OnCameraSwitch?.Invoke();
         NotifyObjectsOfPerspectiveChange();
     }
     public void RegisterObject(IObjectAffectableByPerspective obj)

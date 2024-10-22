@@ -6,6 +6,7 @@ public class Tools : MonoBehaviour
 {
     protected GameObject objective;
     protected InputManager inputManager;
+    protected CameraManager cameraManager;
     protected MouseState mouseState;
     [SerializeField] protected bool isOn2D;
     [SerializeField] protected Camera mainCamera;
@@ -14,6 +15,7 @@ public class Tools : MonoBehaviour
     public virtual void Awake()
     {
         inputManager = FindObjectOfType<InputManager>();
+        cameraManager = FindObjectOfType<CameraManager>();
         mouseState = GetComponentInParent<MouseState>();
     }
     public virtual void DropInteractable()

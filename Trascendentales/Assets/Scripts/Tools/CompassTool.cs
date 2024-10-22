@@ -26,8 +26,8 @@ public class CompassTool : Tools
     public override void Interact(GameObject interactable, bool isPerspective2D)
     {
         inputManager.OnLeftClickDrop += DropInteractable;
-        inputManager.OnPerspectiveSwitch += ResetDragging;
-        inputManager.OnPerspectiveSwitch += DropInteractable;
+        cameraManager.OnCameraSwitch += ResetDragging;
+        cameraManager.OnCameraSwitch += DropInteractable;
         if(!interactable.TryGetComponent<ICompassable>(out ICompassable component))
             return;
         mouseState.SetLeftclickPress();
@@ -171,8 +171,8 @@ public class CompassTool : Tools
     {
         isDragging = false;
         FeedbackManager.Instance.DeactivateLineRenderer();
-        inputManager.OnPerspectiveSwitch -= ResetDragging;
-        inputManager.OnPerspectiveSwitch -= DropInteractable;
+        cameraManager.OnCameraSwitch -= ResetDragging;
+        cameraManager.OnCameraSwitch -= DropInteractable;
     }
     private void ResetGimball()
     {

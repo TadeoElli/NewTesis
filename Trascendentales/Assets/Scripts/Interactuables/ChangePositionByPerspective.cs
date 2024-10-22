@@ -59,12 +59,38 @@ public class ChangePositionByPerspective : MonoBehaviour, IObjectAffectableByPer
     }
     private void SetNewPosition()
     {
+        /*if(TryGetComponent<ParentConstraint>(out ParentConstraint pConstraint))
+        {
+            RemoveConstraints(pConstraint);
+        }*/
         transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
-    }
+        /*if(pConstraint != null)
+            AddConstraint(pConstraint);
+    */}
 
     private void ReturnToOriginalPosition()
     {
+        /*if (TryGetComponent<ParentConstraint>(out ParentConstraint pConstraint))
+        {
+            RemoveConstraints(pConstraint);
+        }*/
         transform.position = new Vector3(transform.position.x, transform.position.y, originalPositionZ);
+        /*if (pConstraint != null)
+            AddConstraint(pConstraint);
+    */}
+    private void RemoveConstraints(ParentConstraint pConstraint)
+    {
+        pConstraint.constraintActive = false;
+        pConstraint.locked = false;
+    }
+    private void AddConstraint(ParentConstraint pConstraint)
+    {
+        Vector3 positionOffset = transform.InverseTransformPoint(pConstraint.GetSource(0).sourceTransform.position);
+        Vector3 rotationOffset = new Vector3(90, 0, -90);
+        pConstraint.SetTranslationOffset(0, positionOffset);
+        pConstraint.SetRotationOffset(0, rotationOffset);
+        pConstraint.constraintActive = true;
+        pConstraint.locked = true;
     }
 
 }

@@ -92,7 +92,9 @@ public class InputManager : MonoBehaviour
             playerLocomotion.SwitchTo2D();
         else
             playerLocomotion.SwitchTo3D();
+        Debug.Log("Perspectiveswitch");
         OnPerspectiveSwitch?.Invoke();
+
     }
 
     #endregion

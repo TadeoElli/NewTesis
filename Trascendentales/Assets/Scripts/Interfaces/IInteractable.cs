@@ -32,11 +32,13 @@ public interface IEscalable
 }
 public interface IRotable
 {
+    public bool CanRotate();
     public bool CanRotateInY();
     public bool CanRotateInZ();
     public bool CanAttachOthers();
     public float GetMaxRadius();
     public void SetGimballRef(Transform newRef);
+    public void SetCanRotate(bool canRotate);
     public void InteractWithEraser(bool isOn2D);
     public event Action OnEraserInteract;
 }

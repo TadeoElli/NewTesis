@@ -132,7 +132,16 @@ public class PlayerLocomotion : MonoBehaviour
         bool isGroundDetected = Physics.SphereCast(rayCastOrigin, 0.1f, -Vector3.up, out hit, maxDistance, groundLayer);
 
         // Si no hay suelo debajo, verificar bordes
-        if (!isGroundDetected)
+        if (isGroundDetected && !hit.collider.isTrigger)
+        {
+            playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, 0, playerRigidbody.velocity.z);
+            isGrounded = true;
+            isNearEdge = false;  // Si está en el suelo, no está en un borde
+            coyoteTimer = coyoteTime;  // Resetear el temporizador de coyote jump
+            inAirTimer = 0;
+            isJumping = false;
+        }
+        else
         {
             //isNearEdge = DetectEdge();  // Verificar si está cerca de un borde
 
@@ -143,15 +152,6 @@ public class PlayerLocomotion : MonoBehaviour
                 playerRigidbody.AddForce(transform.forward * leapingVelocity);
                 playerRigidbody.AddForce(-Vector3.up * fallingVelocity * inAirTimer);
             //}
-        }
-        else
-        {
-            playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, 0, playerRigidbody.velocity.z);
-            isGrounded = true;
-            isNearEdge = false;  // Si está en el suelo, no está en un borde
-            coyoteTimer = coyoteTime;  // Resetear el temporizador de coyote jump
-            inAirTimer = 0;
-            isJumping = false;
         }
 
         if (!isGroundDetected && !isNearEdge)

@@ -8,7 +8,6 @@ public class ValveController : MonoBehaviour,IRotableClamp
     public float minRot = 0;
     public Vector3 closedScale = new Vector3(1, 1, 1); // Escala de la plataforma cuando la válvula está cerrada
     public Vector3 openScale = new Vector3(3, 1, 1); // Escala de la plataforma cuando la válvula está completamente abierta
-
     private float currentRotation = 0f; // El ángulo de rotación actual de la válvula
     private float rotationDifference;
     [SerializeField] private bool isClamped;
@@ -33,7 +32,7 @@ public class ValveController : MonoBehaviour,IRotableClamp
         currentRotation = transform.localEulerAngles.y;
         rb = GetComponent<Rigidbody>();
     }
-    void Update()
+    void FixedUpdate()
     {
         RotateValve();
     }
@@ -61,8 +60,8 @@ public class ValveController : MonoBehaviour,IRotableClamp
         //Reseteamos el valor previo (si, los nombres estan al reves)
         currentRotation = previousRotation;
 
+
         float clampedRot = Mathf.Clamp(previousRotation, minRot, maxRotation);
-        //print(clampedRot);
 
   
 
@@ -73,6 +72,17 @@ public class ValveController : MonoBehaviour,IRotableClamp
 
         // Modificamos la escala de la plataforma basándonos en el progreso
         platform.localScale = Vector3.Lerp(closedScale, openScale, progress);
+        // Si la escala de la plataforma está cerca de openScale, eliminamos el componente RotableObject
+        float scaleThreshold = 0.1f; // Umbral para definir qué tan cerca está de openScale
+        if (Vector3.Distance(platform.localScale, openScale) < scaleThreshold)
+        {
+            // Eliminamos el componente RotableObject cuando la escala está lo suficientemente cerca de openScale
+            if (rotable != null)
+            {
+                rotable.SetCanRotate(false);
+                rotable = null;
+            }
+        }
     }
 
 }

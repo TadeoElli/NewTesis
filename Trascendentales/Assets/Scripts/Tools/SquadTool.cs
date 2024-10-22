@@ -26,6 +26,8 @@ public class SquadTool : Tools
         if(!interactable.TryGetComponent<IRotable>(out IRotable component))
             return;
         rotable = component;
+        if(!rotable.CanRotate())
+            return;
         mouseState.SetLeftclickPress();
         rotable.SetGimballRef(gimball);
         objectiveTr = interactable.GetComponent<Transform>();
@@ -101,6 +103,11 @@ public class SquadTool : Tools
     {
         if (objective != null)
         {
+            if (!rotable.CanRotate())
+            {
+                DropInteractable();
+                return;
+            }
             RotateObject();
         }
     }

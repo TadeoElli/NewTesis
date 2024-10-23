@@ -15,6 +15,16 @@ public class DialogueSysterm : MonoBehaviour
 
     public float txtSpeed;
 
+  
+
+    private void Update()
+    {
+    if (Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                CheckDialogue();
+            }
+        
+    }
     public void CheckDialogue()
     {
         if (_text.text == _dialogue[index])
@@ -33,6 +43,7 @@ public class DialogueSysterm : MonoBehaviour
         _text.text = string.Empty;
         index = 0;
         StartCoroutine(WriteLine());
+
     }
 
     IEnumerator WriteLine()
@@ -40,7 +51,7 @@ public class DialogueSysterm : MonoBehaviour
         foreach (char dialogue in _dialogue[index].ToCharArray())
         {
             _text.text += dialogue;
-
+            AudioManagerOptional.instance.Play("Dialogue");
             yield return new WaitForSeconds(txtSpeed);
         }
     }

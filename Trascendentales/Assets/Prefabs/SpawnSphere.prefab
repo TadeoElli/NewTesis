@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAtacheableForCompass: 1
+  isRotatingTowardsTheCompass: 0
   isAtacheableForRuler: 1
   isAtacheableForSquad: 1
   isAtachedToCompass: 0
@@ -152,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canRotateInY: 1
   canRotateInZ: 1
+  canRotate: 1
   maxRadius: 0
   canAttachOthers: 0
   gimballRef: {fileID: 0}
@@ -226,3 +228,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInFront: 1
+  isInBack: 1

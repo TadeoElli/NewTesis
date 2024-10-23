@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     private void Awake()
     {
-        LoadPlayer();
+       // LoadPlayer();
         _myMove = GetComponent<Player_Move>();
     }
     public void SavePlayer()

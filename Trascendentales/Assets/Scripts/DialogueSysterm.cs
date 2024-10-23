@@ -15,25 +15,15 @@ public class DialogueSysterm : MonoBehaviour
 
     public float txtSpeed;
 
-    bool onText = true;
+  
 
     private void Update()
     {
-        if (onText)
-        { 
-            if (Input.GetKeyUp(KeyCode.Mouse0))
-            {
-                Start_Dialogues();
-                onText = false;
-            }
-        }
-        else
-        {
-            if (Input.GetKeyUp(KeyCode.Mouse0))
+    if (Input.GetKeyUp(KeyCode.Mouse0))
             {
                 CheckDialogue();
             }
-        }
+        
     }
     public void CheckDialogue()
     {
@@ -53,6 +43,7 @@ public class DialogueSysterm : MonoBehaviour
         _text.text = string.Empty;
         index = 0;
         StartCoroutine(WriteLine());
+
     }
 
     IEnumerator WriteLine()

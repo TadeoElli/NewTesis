@@ -51,6 +51,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   gimball: {fileID: 0}
+  oldParent: {fileID: 0}
   gimballGizmo2D: {fileID: 0}
   gimballGizmoPerspective: {fileID: 0}
   rotationSpeed: 1
@@ -123,11 +124,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
-  mouseState: {fileID: 0}
+  mouseState: {fileID: 9073911576350447687}
   spriteRenderer: {fileID: 8948166519887790638}
   mainCamera: {fileID: 0}
   cursorTransform: {fileID: 2656691352042560701}
-  outline: {fileID: 0}
   interactableLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -176,7 +176,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3986295417255705529
 RectTransform:
   m_ObjectHideFlags: 0
@@ -311,6 +311,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   gimball: {fileID: 0}
+  oldParent: {fileID: 0}
   gimballGizmo2D: {fileID: 0}
   gimballGizmoPerspective: {fileID: 0}
   mouseSensitiviy: 0.005
@@ -408,6 +409,9 @@ MonoBehaviour:
     type: 3}
   rectanglePrefab: {fileID: 3064545021292272062, guid: 44dfe98971d97024cb1f530f7de88c50,
     type: 3}
+  cubeFeedback: {fileID: 0}
+  sphereFeedback: {fileID: 0}
+  rectangleFeedback: {fileID: 0}
 --- !u!1 &3235152842718352788
 GameObject:
   m_ObjectHideFlags: 0

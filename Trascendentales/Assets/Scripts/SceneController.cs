@@ -43,4 +43,5 @@ public enum Scenes
 {
     MainMenu = 0,
     TestScene = 1,
+    TutorialEscene = 2,
 }

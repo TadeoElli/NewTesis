@@ -40,7 +40,7 @@ public class DragAtachableTool : Tools {
         constraint.constraintActive = false;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if(!isDragging) return;
         AdjustDistance();

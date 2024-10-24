@@ -80,7 +80,7 @@ public class ValveController : MonoBehaviour,IRotableClamp
             if (rotable != null)
             {
                 rotable.SetCanRotate(false);
-                rotable = null;
+                Destroy(rotable);
             }
         }
     }

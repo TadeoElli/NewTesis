@@ -14,6 +14,11 @@ public class DialogueSysterm : MonoBehaviour
     public int index;
 
     public float txtSpeed;
+    private void Awake()
+    {
+        InputManager input = FindObjectOfType<InputManager>();
+        input.OnLeftClickPress += CheckDialogue;
+    }
 
     public void CheckDialogue()
     {
@@ -40,7 +45,7 @@ public class DialogueSysterm : MonoBehaviour
         foreach (char dialogue in _dialogue[index].ToCharArray())
         {
             _text.text += dialogue;
-
+            AudioManagerOptional.instance.Play("Dialogue");
             yield return new WaitForSeconds(txtSpeed);
         }
     }

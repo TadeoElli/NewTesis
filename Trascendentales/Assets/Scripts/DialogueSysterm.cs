@@ -10,6 +10,7 @@ public class DialogueSysterm : MonoBehaviour
     [SerializeField] string[] _dialogue;
 
     [SerializeField] TextMeshProUGUI _text;
+    [SerializeField] AudioClip writeClip;
 
     public int index;
 
@@ -45,7 +46,7 @@ public class DialogueSysterm : MonoBehaviour
         foreach (char dialogue in _dialogue[index].ToCharArray())
         {
             _text.text += dialogue;
-            AudioManagerOptional.instance.Play("Dialogue");
+            AudioManager.Instance.PlaySoundEffect(writeClip);
             yield return new WaitForSeconds(txtSpeed);
         }
     }

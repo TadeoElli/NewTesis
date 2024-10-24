@@ -2639,6 +2639,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6afd012f3fdd8b14f8623e72435435cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myTutorialO: {fileID: 629420723}
+  Enter: 1
 --- !u!1 &179655199
 GameObject:
   m_ObjectHideFlags: 0
@@ -8043,6 +8045,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6afd012f3fdd8b14f8623e72435435cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myTutorialO: {fileID: 1963350899}
+  Enter: 1
 --- !u!65 &608634027
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11643,6 +11647,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6afd012f3fdd8b14f8623e72435435cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myTutorialO: {fileID: 1541976314}
+  Enter: 1
 --- !u!65 &861603940
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14241,6 +14247,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 173663f1233f34d4c81118a3dd231bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sounds:
+  - name: Dialogue
+    clip: {fileID: 8300000, guid: c81c643f4e909b24e93d608e135a37bf, type: 3}
+    volume: 0.3
+    pitch: 1
+    source: {fileID: 0}
 --- !u!1 &1060330927
 GameObject:
   m_ObjectHideFlags: 0
@@ -17400,111 +17412,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1333535452}
   m_CullTransparentMesh: 1
---- !u!1 &1334747452
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1334747453}
-  - component: {fileID: 1334747456}
-  - component: {fileID: 1334747455}
-  - component: {fileID: 1334747454}
-  m_Layer: 7
-  m_Name: Flooe (7)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1334747453
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1334747452}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.34, y: 1.21, z: 4.41}
-  m_LocalScale: {x: 5.323702, y: 6.624148, z: 16.895601}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1610540387}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1334747454
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1334747452}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1334747455
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1334747452}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1334747456
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1334747452}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1339818675
 GameObject:
   m_ObjectHideFlags: 0
@@ -17941,7 +17848,7 @@ PrefabInstance:
     - target: {fileID: 6496342794344882879, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.6
+      value: 112.5
       objectReference: {fileID: 0}
     - target: {fileID: 6496342794344882879, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
         type: 3}
@@ -18591,6 +18498,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1427703330}
+  - component: {fileID: 1427703331}
   m_Layer: 0
   m_Name: CanvasTutorial
   m_TagString: Untagged
@@ -18620,6 +18528,19 @@ Transform:
   - {fileID: 772321694}
   m_Father: {fileID: 1361951711}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1427703331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427703329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 648b17bb8c7bf184299079be6af6d9d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartCanvas: {fileID: 843612220}
 --- !u!1 &1467909408
 GameObject:
   m_ObjectHideFlags: 0
@@ -20365,7 +20286,6 @@ Transform:
   - {fileID: 689872277}
   - {fileID: 634350111}
   - {fileID: 2080846925}
-  - {fileID: 1334747453}
   - {fileID: 229792576}
   - {fileID: 365571276}
   - {fileID: 1799318374}
@@ -20869,7 +20789,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 3e28e8ac21cd6a449ba0cba2cb4d4401, type: 3}
+  m_Texture: {fileID: 2800000, guid: d0bf1459207577845adce52bd1988e28, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -21294,6 +21214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6afd012f3fdd8b14f8623e72435435cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myTutorialO: {fileID: 772321693}
+  Enter: 1
 --- !u!65 &1649161630
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21584,6 +21506,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6afd012f3fdd8b14f8623e72435435cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myTutorialO: {fileID: 616414733}
+  Enter: 1
 --- !u!65 &1673529491
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21782,6 +21706,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6afd012f3fdd8b14f8623e72435435cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myTutorialO: {fileID: 1993707501}
+  Enter: 1
 --- !u!65 &1711173850
 BoxCollider:
   m_ObjectHideFlags: 0

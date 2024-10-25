@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ActivateDialogues : MonoBehaviour
 {
-    [SerializeField] GameObject myTutorialO;
+    [SerializeField] GameObject myTutorialO, tutorialHud;
     bool Enter = true;
     private void OnTriggerEnter(Collider other)
     {
@@ -13,6 +13,7 @@ public class ActivateDialogues : MonoBehaviour
             if (Enter)
             {
                 myTutorialO.SetActive(true);
+                tutorialHud.SetActive(true);
 
                 myTutorialO.GetComponent<DialogueSysterm>().Start_Dialogues();
                 Enter = false;

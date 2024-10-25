@@ -11,6 +11,7 @@ public class DialogueSysterm : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI _text;
     [SerializeField] AudioClip writeClip;
+    [SerializeField] GameObject tutorialHud;
 
     public int index;
 
@@ -61,7 +62,8 @@ public class DialogueSysterm : MonoBehaviour
         }
         else 
         {
-        gameObject.SetActive(false);
+            tutorialHud.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }

@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class OnlyOneUse : MonoBehaviour
 {
-    [SerializeField] GameObject StartCanvas;
+    [SerializeField] GameObject StartCanvas, tutorialHud;
     void Start()
     {
         StartCanvas.SetActive(true);
+        tutorialHud.SetActive(true);
 
         StartCanvas.GetComponent<DialogueSysterm>().Start_Dialogues();
     }

@@ -35,7 +35,7 @@ public class DialogueSystem : MonoBehaviour
         tutorialHud.SetActive(false); // Mantener oculto al inicio
     }
     private void Start()
-    {
+    { 
         StartDialogue(firstDialogue);
     }
 
@@ -56,6 +56,7 @@ public class DialogueSystem : MonoBehaviour
     // Iniciar diálogo con el texto específico
     public void StartDialogue(string[] dialogue)
     {
+        StopAllCoroutines();
         currentDialogue = dialogue;
         _text.text = string.Empty;
         index = 0;

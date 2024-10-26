@@ -66,21 +66,4 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Platform"))
-        {
-            transform.SetParent(collision.transform);
-            currentPlatform = collision.transform;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Platform"))
-        {
-            transform.SetParent(null);
-            currentPlatform = null;
-        }
-    }
 }

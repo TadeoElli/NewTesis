@@ -208,6 +208,7 @@ public class MouseController : MonoBehaviour
             case ToolTypes.Eraser:
                 spriteRenderer.sprite = eraserSprite;
                 leftClickTool = eraseTool;
+                rightClickTool = null;
                 break;
             default:
                 break;

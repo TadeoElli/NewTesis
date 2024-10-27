@@ -38,12 +38,6 @@ public class DrawObjectTool : Tools
     }
     private void SelectShape()
     {
-        if (MouseState.Instance.CurrentToolActive() != ToolTypes.Brush)
-        {
-            DeactivateAllFeedback();
-            return;
-        }
-
         ActivateFeedback(GetFeedbackForPrefab(selectedPrefab));
     }
 
@@ -82,6 +76,11 @@ public class DrawObjectTool : Tools
 
     void Update()
     {
+        if (MouseState.Instance.CurrentToolActive() != ToolTypes.Brush)
+        {
+            DeactivateAllFeedback();
+            return;
+        }
         if (isDrawing)
         {
             rightClickHoldTime += Time.deltaTime;

@@ -227,6 +227,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenToolWheel"",
+                    ""type"": ""Button"",
+                    ""id"": ""c69e7f41-af27-4d02-a236-3f283900a8ed"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -328,6 +337,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""RightClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5b0179c6-a5d5-48b5-93d2-530e9edb2f1f"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenToolWheel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -352,6 +372,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerActions_Escape = m_PlayerActions.FindAction("Escape", throwIfNotFound: true);
         m_PlayerActions_LeftClick = m_PlayerActions.FindAction("LeftClick", throwIfNotFound: true);
         m_PlayerActions_RightClick = m_PlayerActions.FindAction("RightClick", throwIfNotFound: true);
+        m_PlayerActions_OpenToolWheel = m_PlayerActions.FindAction("OpenToolWheel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -522,6 +543,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_Escape;
     private readonly InputAction m_PlayerActions_LeftClick;
     private readonly InputAction m_PlayerActions_RightClick;
+    private readonly InputAction m_PlayerActions_OpenToolWheel;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -535,6 +557,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Escape => m_Wrapper.m_PlayerActions_Escape;
         public InputAction @LeftClick => m_Wrapper.m_PlayerActions_LeftClick;
         public InputAction @RightClick => m_Wrapper.m_PlayerActions_RightClick;
+        public InputAction @OpenToolWheel => m_Wrapper.m_PlayerActions_OpenToolWheel;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -571,6 +594,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RightClick.started += instance.OnRightClick;
             @RightClick.performed += instance.OnRightClick;
             @RightClick.canceled += instance.OnRightClick;
+            @OpenToolWheel.started += instance.OnOpenToolWheel;
+            @OpenToolWheel.performed += instance.OnOpenToolWheel;
+            @OpenToolWheel.canceled += instance.OnOpenToolWheel;
         }
 
         private void UnregisterCallbacks(IPlayerActionsActions instance)
@@ -602,6 +628,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RightClick.started -= instance.OnRightClick;
             @RightClick.performed -= instance.OnRightClick;
             @RightClick.canceled -= instance.OnRightClick;
+            @OpenToolWheel.started -= instance.OnOpenToolWheel;
+            @OpenToolWheel.performed -= instance.OnOpenToolWheel;
+            @OpenToolWheel.canceled -= instance.OnOpenToolWheel;
         }
 
         public void RemoveCallbacks(IPlayerActionsActions instance)
@@ -639,5 +668,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnEscape(InputAction.CallbackContext context);
         void OnLeftClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
+        void OnOpenToolWheel(InputAction.CallbackContext context);
     }
 }

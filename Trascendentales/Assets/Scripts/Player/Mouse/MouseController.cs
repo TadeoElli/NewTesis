@@ -31,6 +31,7 @@ public class MouseController : MonoBehaviour
     [SerializeField] private Tools setRotationParentTool;
     [SerializeField] private Tools dragAtachableObjectsTool;
 
+    [SerializeField] Animator anim;
     private Tools leftClickTool, rightClickTool; // Herramienta activa
     private ToolTypes currentToolType;
 
@@ -212,6 +213,33 @@ public class MouseController : MonoBehaviour
                 break;
         }
     }
+    public void ShowToolWheel()
+    {
+        anim.SetBool("OpenToolWheel", true);
+    }
+    public void HideToolWheel()
+    {
+        anim.SetBool("OpenToolWheel", false);
+    }
+    public void SelectBrush()
+    {
+        SetTool(ToolTypes.Brush);
+    }
+    public void SelectRuler()
+    {
+        SetTool(ToolTypes.Ruler);
+    }
+    public void SelectSquad()
+    {
+        SetTool(ToolTypes.Squad);
+    }
+    public void SelectCompass()
+    {
+        SetTool(ToolTypes.Compass);
+    }
+    public void SelectEraser()
+    {
+        SetTool(ToolTypes.Eraser);
+    }
 
-   
 }

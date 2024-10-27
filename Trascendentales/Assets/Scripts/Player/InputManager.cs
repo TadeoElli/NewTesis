@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
     public float horizontalInput;
     public bool jump_input;
     public bool isOn2D = false;
+    [SerializeField] private Animator toolWheelAnim, drawObjectWheelAnim;
     //Events
     public event Action<ToolTypes> OnToolSwitch;
     public event Action OnToolSwitchCheck;
@@ -34,7 +35,6 @@ public class InputManager : MonoBehaviour
 
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
 
-            // Vincular las acciones de las teclas Q y E
             playerControls.PlayerCamera.SwitchCameraAngle.performed += _ => SwitchCameraAngle();
             playerControls.PlayerCamera.SwitchCamera.performed += _ => SwitchCamera();
             playerControls.PlayerActions.Jump.performed += _ => jump_input = true;
@@ -43,6 +43,8 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.Tool3.performed += _ => SetSquadTool();
             playerControls.PlayerActions.Tool4.performed += _ => SetCompassTool();
             playerControls.PlayerActions.Tool5.performed += _ => SetEraserTool();
+            playerControls.PlayerActions.OpenToolWheel.performed += _ => ShowToolWheel();
+            playerControls.PlayerActions.OpenToolWheel.canceled += _ => HideToolWheel();
             playerControls.PlayerActions.LeftClick.performed += _ => LeftClickPressed();
             playerControls.PlayerActions.LeftClick.canceled += _ => LeftClickReleased();
             playerControls.PlayerActions.RightClick.performed += _ => RightClickPressed();
@@ -100,30 +102,48 @@ public class InputManager : MonoBehaviour
     #endregion
 
     #region Tools
-    private void SetBrushTool()
+    public void SetBrushTool()
     {
         OnToolSwitch?.Invoke(ToolTypes.Brush);
         OnToolSwitchCheck?.Invoke();
     }
-    private void SetRulerTool()
+    public void SetRulerTool()
     {
         OnToolSwitch?.Invoke(ToolTypes.Ruler);
         OnToolSwitchCheck?.Invoke();
     }
-    private void SetSquadTool()
+    public void SetSquadTool()
     {
         OnToolSwitch?.Invoke(ToolTypes.Squad);
         OnToolSwitchCheck?.Invoke();
     }
-    private void SetCompassTool()
+    public void SetCompassTool()
     {
         OnToolSwitch?.Invoke(ToolTypes.Compass);
         OnToolSwitchCheck?.Invoke();
     }
-    private void SetEraserTool()
+    public void SetEraserTool()
     {
         OnToolSwitch?.Invoke(ToolTypes.Eraser);
         OnToolSwitchCheck?.Invoke();
+    }
+    public void ShowToolWheel()
+    {
+        toolWheelAnim.SetBool("OpenToolWheel", true);
+        OnToolSwitchCheck?.Invoke();
+    }
+    public void HideToolWheel()
+    {
+        toolWheelAnim.SetBool("OpenToolWheel", false);
+    }
+    public void ShowDrawObjectWheel()
+    {
+        drawObjectWheelAnim.SetBool("OpenToolWheel", true);
+        OnToolSwitchCheck?.Invoke();
+    }
+    public void HideDrawObjectWheel()
+    {
+        drawObjectWheelAnim.SetBool("OpenToolWheel", false);
     }
     #endregion
     #region MouseClick

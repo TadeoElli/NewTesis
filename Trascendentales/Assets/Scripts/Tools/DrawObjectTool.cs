@@ -57,20 +57,24 @@ public class DrawObjectTool : Tools
     public void SelectCube()
     {
         selectedPrefab = cubePrefab;
+        inputManager.HideDrawObjectWheel();
+        ResetDrawing();
     }
     public void SelectSphere()
     {
         selectedPrefab = spherePrefab;
+        inputManager.HideDrawObjectWheel();
+        ResetDrawing();
     }
     public void SelectPlatform()
     {
         selectedPrefab = rectanglePrefab;
+        inputManager.HideDrawObjectWheel();
+        ResetDrawing();
     }
     private void ResetDrawing()
     {
         isDrawing = false;
-        if(isShowingSelectionWheel)
-            inputManager.HideDrawObjectWheel();
         isShowingSelectionWheel = false;
         rightClickHoldTime = 0f;
         DeactivateAllFeedback();
@@ -111,8 +115,8 @@ public class DrawObjectTool : Tools
                 FinishDrawing();
             }
             ResetDrawing();
+            inputManager.HideDrawObjectWheel();
         }
-
         mouseState.DropRightClick();
         inputManager.OnRightClickDrop -= DropInteractable; // Al soltar el clic derecho, limpiamos la interacción
         inputManager.OnPerspectiveSwitch -= ResetDrawing;

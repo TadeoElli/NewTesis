@@ -11,11 +11,15 @@ public class DrawObjectTool : Tools
 
     private bool isDrawing = false;
     private bool isShowing = false;
+    private bool isShowingSelectionWheel = false;
+    private float rightClickHoldTime = 0f;
+    private float holdThreshold = 0.5f; // Tiempo requerido para mostrar la rueda de selección
 
 
     public override void Awake()
     {
         base.Awake();
+        selectedPrefab = cubePrefab;
         DeactivateAllFeedback(); // Desactivamos todos los feedbacks al inicio
     }
 
@@ -30,58 +34,85 @@ public class DrawObjectTool : Tools
         inputManager.OnToolSwitchCheck += ResetDrawing;
         inputManager.OnToolSwitchCheck += DropInteractable;
         isDrawing = true;
+        rightClickHoldTime = 0f; // Reiniciar el temporizador al interactuar
     }
     private void SelectShape()
     {
-        if(MouseState.Instance.CurrentToolActive() != ToolTypes.Brush)
+        if (MouseState.Instance.CurrentToolActive() != ToolTypes.Brush)
         {
             DeactivateAllFeedback();
             return;
         }
-        // Determinar la forma que se debe spawnear según las teclas de modificación
-        if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
-        {
-            selectedPrefab = cubePrefab;
-            ActivateFeedback(cubeFeedback);
-        }
-        else if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-        {
-            selectedPrefab = spherePrefab;
-            ActivateFeedback(sphereFeedback);
-        }
-        else if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt))
-        {
-            selectedPrefab = rectanglePrefab;
-            ActivateFeedback(rectangleFeedback);
-        }
-        else
-        {
-            // Si no hay teclas de modificación, no spawneamos nada
-            DeactivateAllFeedback();
-            selectedPrefab = null;
-        }
+
+        ActivateFeedback(GetFeedbackForPrefab(selectedPrefab));
+    }
+
+    private GameObject GetFeedbackForPrefab(GameObject prefab)
+    {
+        if (prefab == cubePrefab) return cubeFeedback;
+        if (prefab == spherePrefab) return sphereFeedback;
+        if (prefab == rectanglePrefab) return rectangleFeedback;
+        return null;
+    }
+    public void SelectCube()
+    {
+        selectedPrefab = cubePrefab;
+    }
+    public void SelectSphere()
+    {
+        selectedPrefab = spherePrefab;
+    }
+    public void SelectPlatform()
+    {
+        selectedPrefab = rectanglePrefab;
     }
     private void ResetDrawing()
     {
         isDrawing = false;
+        if(isShowingSelectionWheel)
+            inputManager.HideDrawObjectWheel();
+        isShowingSelectionWheel = false;
+        rightClickHoldTime = 0f;
         DeactivateAllFeedback();
     }
 
     void Update()
     {
-        SelectShape();
-        // Si hay un feedback activo y estamos en modo de dibujo, actualizamos la posición
-        if (selectedFeedback != null)
+        if (isDrawing)
         {
-            UpdateFeedbackPosition();
+            rightClickHoldTime += Time.deltaTime;
+
+            // Muestra la rueda de selección si se mantiene presionado el clic derecho el tiempo suficiente
+            if (rightClickHoldTime >= holdThreshold && !isShowingSelectionWheel)
+            {
+                inputManager.ShowDrawObjectWheel();
+                isShowingSelectionWheel = true;
+            }
+            else
+            {
+                SelectShape();
+            }
+
+            if (selectedFeedback != null)
+            {
+                UpdateFeedbackPosition();
+            }
         }
     }
 
     public override void DropInteractable()
     {
         base.DropInteractable();
-        if(isDrawing)
-            FinishDrawing();
+        if (isDrawing)
+        {
+            // Si el clic derecho se suelta antes de alcanzar el umbral, spawneamos el objeto seleccionado
+            if (rightClickHoldTime < holdThreshold && selectedPrefab != null)
+            {
+                FinishDrawing();
+            }
+            ResetDrawing();
+        }
+
         mouseState.DropRightClick();
         inputManager.OnRightClickDrop -= DropInteractable; // Al soltar el clic derecho, limpiamos la interacción
         inputManager.OnPerspectiveSwitch -= ResetDrawing;

@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour
     public float horizontalInput;
     public bool jump_input;
     public bool isOn2D = false;
-    [SerializeField] private Animator toolWheelAnim;
+    [SerializeField] private Animator toolWheelAnim, drawObjectWheelAnim;
     //Events
     public event Action<ToolTypes> OnToolSwitch;
     public event Action OnToolSwitchCheck;
@@ -130,10 +130,20 @@ public class InputManager : MonoBehaviour
     public void ShowToolWheel()
     {
         toolWheelAnim.SetBool("OpenToolWheel", true);
+        OnToolSwitchCheck?.Invoke();
     }
     public void HideToolWheel()
     {
         toolWheelAnim.SetBool("OpenToolWheel", false);
+    }
+    public void ShowDrawObjectWheel()
+    {
+        drawObjectWheelAnim.SetBool("OpenToolWheel", true);
+        OnToolSwitchCheck?.Invoke();
+    }
+    public void HideDrawObjectWheel()
+    {
+        drawObjectWheelAnim.SetBool("OpenToolWheel", false);
     }
     #endregion
     #region MouseClick

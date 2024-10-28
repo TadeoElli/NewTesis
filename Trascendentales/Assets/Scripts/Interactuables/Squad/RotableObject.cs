@@ -12,7 +12,7 @@ public class RotableObject : MonoBehaviour, IRotable, IFeedback
     [SerializeField] private bool canAttachOthers;
     [SerializeField] public Transform gimballRef;
     public event Action OnEraserInteract;
-    [SerializeField] private Color m_feedback;
+    private Color m_feedback;
     [SerializeField] private Renderer objRenderer;
 
 
@@ -23,6 +23,11 @@ public class RotableObject : MonoBehaviour, IRotable, IFeedback
     public bool CanAttachOthers() => canAttachOthers;
     public float GetMaxRadius() => maxRadius;
 
+
+    private void Start()
+    {
+        m_feedback = ColorDictionary.GetColor("FeedbackSquad");
+    }
     public void SetCanRotate(bool state)
     {
         canRotate = state;

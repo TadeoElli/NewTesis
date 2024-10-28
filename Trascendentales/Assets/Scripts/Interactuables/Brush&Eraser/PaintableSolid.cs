@@ -4,7 +4,7 @@ public class PaintableSolid : PaintableObject
 {
     [SerializeField] private Collider col;
     [SerializeField] private Material solidMat, transparentMat;
-    [SerializeField] private Color feedbackColor;
+    private Color feedbackColor;
     [SerializeField] private Renderer render;
     [SerializeField] private bool startSolid;
 
@@ -14,6 +14,7 @@ public class PaintableSolid : PaintableObject
             InteractionWithBrush();
         else
             InteractionWithEraser();
+        feedbackColor = Color.black;
     }
     public override void InteractionWithBrush()
     {

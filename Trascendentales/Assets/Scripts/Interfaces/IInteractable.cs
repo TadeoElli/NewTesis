@@ -26,6 +26,8 @@ public interface IEscalable
     public Vector3 GetMaxScale();
     public bool CanAttachOthers();
     public bool CanScale();
+    public bool IsScaling();
+    public void SetIsScaling(bool state);
     public float GetMaxRadius();
     public void InteractWithEraser(bool isOn2D);
     public event Action OnEraserInteract;

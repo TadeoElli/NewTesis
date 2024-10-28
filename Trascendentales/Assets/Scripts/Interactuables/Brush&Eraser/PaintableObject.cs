@@ -4,10 +4,15 @@ public class PaintableObject : MonoBehaviour, IPaintable, IFeedback
 {
     
     [SerializeField] private InteractionsByPerspectiveTypes interactionForBrush, interactionForEraser;
-    [SerializeField] private Color m_feedbackBrush, m_feedbackEraser;
+    private Color m_feedbackBrush, m_feedbackEraser;
     [SerializeField] protected Renderer objRenderer;
     private bool wasInteracted = false;
 
+    private void Start()
+    {
+        m_feedbackBrush = ColorDictionary.GetColor("FeedbackBrush");
+        m_feedbackEraser = ColorDictionary.GetColor("FeedbackEraser");
+    }
 
     public void InteractWithBrush(bool isOn2D)
     {

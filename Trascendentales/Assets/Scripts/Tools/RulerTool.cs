@@ -26,12 +26,14 @@ public class RulerTool : Tools
             return;
         if (!component.CanScale())
             return;
+        scalable = component;
         mouseState.SetLeftclickPress();
         inputManager.OnLeftClickDrop += DropInteractable;
         inputManager.OnToolSwitchCheck += DropInteractable;
         inputManager.OnPerspectiveSwitch += DropInteractable;
-        minScale = component.GetMinScale();
-        maxScale = component.GetMaxScale();
+        scalable.SetIsScaling(true);
+        minScale = scalable.GetMinScale();
+        maxScale = scalable.GetMaxScale();
         base.Interact(interactable, isPerspective2D); // Llama a la lógica común de interactuar
         //Desactivo la colision
         if(objective.TryGetComponent<Rigidbody>(out Rigidbody objectiveRB))
@@ -97,6 +99,8 @@ public class RulerTool : Tools
         if(objective == null) return;
         if(objective.TryGetComponent<Rigidbody>(out Rigidbody objectiveRB))
             objectiveRB.isKinematic = false;
+        scalable.SetIsScaling(false);
+        scalable = null;
         mouseState.DropLeftClick();
         objectiveTr.SetParent(oldParent);
         oldParent = null;

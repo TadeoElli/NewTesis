@@ -11,7 +11,8 @@ public class ScalableObject : MonoBehaviour, IEscalable, IFeedback
     [SerializeField] private float maxRadius;
     [SerializeField] private bool canAttachOthers;
     [SerializeField] public bool canScale = true;
-    [SerializeField] private Color m_feedback;
+    [SerializeField] public bool isScaling = false;
+    private Color m_feedback;
     [SerializeField] private Renderer objRenderer;
 
     public event Action OnEraserInteract;
@@ -20,6 +21,7 @@ public class ScalableObject : MonoBehaviour, IEscalable, IFeedback
     public Vector3 GetMaxScale() => maxScale;
     public bool CanAttachOthers() => canAttachOthers;
     public bool CanScale() => canScale;
+    public bool IsScaling() => isScaling;
     public float GetMaxRadius() => maxRadius;
 
     public void SetScaleConstraints(Vector3 minScale, Vector3 maxScale)
@@ -27,8 +29,14 @@ public class ScalableObject : MonoBehaviour, IEscalable, IFeedback
         this.minScale = minScale;
         this.maxScale = maxScale;
     }
+    public void SetIsScaling(bool state) {
+        isScaling = state;
+    }
 
-
+    public virtual void Start()
+    {
+        m_feedback = ColorDictionary.GetColor("FeedbackScale");
+    }
     public void InteractWithEraser(bool isOn2D)
     {
         OnEraserInteract?.Invoke();

@@ -51,6 +51,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   gimball: {fileID: 0}
+  oldParent: {fileID: 0}
   gimballGizmo2D: {fileID: 0}
   gimballGizmoPerspective: {fileID: 0}
   rotationSpeed: 1
@@ -122,12 +123,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf8ea70f0f7f144eadf0332fe2e03dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
+  inputManager: {fileID: 0}
   mouseState: {fileID: 0}
   spriteRenderer: {fileID: 8948166519887790638}
   mainCamera: {fileID: 0}
   cursorTransform: {fileID: 2656691352042560701}
-  outline: {fileID: 0}
   interactableLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -311,6 +311,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   gimball: {fileID: 0}
+  oldParent: {fileID: 0}
   gimballGizmo2D: {fileID: 0}
   gimballGizmoPerspective: {fileID: 0}
   mouseSensitiviy: 0.005
@@ -408,6 +409,9 @@ MonoBehaviour:
     type: 3}
   rectanglePrefab: {fileID: 3064545021292272062, guid: 44dfe98971d97024cb1f530f7de88c50,
     type: 3}
+  cubeFeedback: {fileID: 0}
+  sphereFeedback: {fileID: 0}
+  rectangleFeedback: {fileID: 0}
 --- !u!1 &3235152842718352788
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,8 +524,8 @@ RectTransform:
   m_GameObject: {fileID: 4859796807575461488}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3986295417255705529}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

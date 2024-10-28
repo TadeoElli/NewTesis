@@ -1,8 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
-using UnityEngine;
 using UnityEngine.Animations;
+using System.Collections.Generic;
+using System.Reflection;
+using UnityEngine;
 
 public class CompassTool : Tools
 {
@@ -127,6 +127,7 @@ public class CompassTool : Tools
             FeedbackManager.Instance.ActivateLineRenderer(firstObject, secondObject);
 
             
+
         }
         else
         {
@@ -193,5 +194,6 @@ public class CompassTool : Tools
         parentConstraint.enabled = false;
         parentConstraint = null;
         Destroy(secondObject.GetComponent<ParentConstraint>());
+
     }
 }

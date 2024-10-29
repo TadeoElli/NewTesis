@@ -20,7 +20,7 @@ public class DrawObjectTool : Tools
     {
         base.Awake();
         selectedPrefab = cubePrefab;
-        DeactivateAllFeedback(); // Desactivamos todos los feedbacks al inicio
+        //DeactivateAllFeedback(); // Desactivamos todos los feedbacks al inicio
     }
 
 

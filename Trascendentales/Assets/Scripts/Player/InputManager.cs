@@ -7,12 +7,14 @@ public class InputManager : MonoBehaviour
 {
     PlayerControls playerControls;
     PlayerLocomotion playerLocomotion;
+    AnimatorManager animatorManager;
     Vector2 movementInput;
+    private float moveAmount;
     public float verticalInput;
     public float horizontalInput;
     public bool jump_input;
     public bool isOn2D = false;
-    [SerializeField] private Animator toolWheelAnim, drawObjectWheelAnim;
+    [SerializeField] private Animator toolWheelAnim, drawObjectWheelAnim, playerAnim;
     //Events
     public event Action<ToolTypes> OnToolSwitch;
     public event Action OnToolSwitchCheck;
@@ -26,6 +28,7 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         playerLocomotion = GetComponent<PlayerLocomotion>();
+        animatorManager = GetComponent<AnimatorManager>();
     }
     private void OnEnable()
     {
@@ -70,6 +73,8 @@ public class InputManager : MonoBehaviour
     {
         verticalInput = movementInput.y;
         horizontalInput = movementInput.x;
+        moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
+        animatorManager.UpdateAnimatorValues(0, moveAmount);
     }
     private void HandleJumpingInput()
     {

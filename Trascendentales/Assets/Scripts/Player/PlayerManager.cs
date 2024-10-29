@@ -6,10 +6,12 @@ public class PlayerManager : MonoBehaviour
 {
     InputManager inputManager;
     CameraManager cameraManager;
+    [SerializeField] Animator animator;
     PlayerLocomotion playerLocomotion;
     private Vector3 spawnPosition;
     private Vector3 originalPositionZ;
     private Transform currentPlatform;
+    public bool isInteracting;
     private void Awake()
     {
         inputManager = GetComponent<InputManager>();
@@ -63,7 +65,7 @@ public class PlayerManager : MonoBehaviour
     private void LateUpdate()
     {
         cameraManager.FollowTarget();
-
+        isInteracting = animator.GetBool("isInteracting");
     }
 
 }

@@ -189,6 +189,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Death",
+                    "type": "Button",
+                    "id": "43b01a15-f1d0-4da5-842d-0a00f9adf8ac",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "LeftClick",
                     "type": "Button",
                     "id": "53ae44ab-1acf-40d0-b68b-7c7d639825fb",
@@ -324,6 +333,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "OpenToolWheel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2509524f-8ca7-4161-9662-22f430e80944",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Death",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

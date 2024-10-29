@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     private Vector3 originalPositionZ;
     private Transform currentPlatform;
     public bool isInteracting;
+    private bool isAlive = true;
     private void Awake()
     {
         inputManager = GetComponent<InputManager>();
@@ -59,17 +60,30 @@ public class PlayerManager : MonoBehaviour
     #endregion
     private void Update()
     {
+        if (!isAlive)
+            return;
         inputManager.HandleAllInputs();
     }
     private void FixedUpdate()
     {
+        if (!isAlive)
+            return;
         playerLocomotion.HandleAllMovement();
     }
 
     private void LateUpdate()
     {
+        if (!isAlive)
+            return;
         cameraManager.FollowTarget();
         isInteracting = animator.GetBool("isInteracting");
+    }
+    public void Death()
+    {
+        isAlive = false;
+        animator.SetTrigger("isDeath");
+        animatorManager.PlayTargetAnimation("Death", true);
+        inputManager.Death();
     }
 
 }

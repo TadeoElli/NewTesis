@@ -207,10 +207,10 @@ public class PlayerLocomotion : MonoBehaviour
     public void HandleAllMovement()
     {
         HandleFallingAndLanding();
-        HandleMovement();
-        HandleRotation();
         if (playerManager.isInteracting)
             return;
+        HandleMovement();
+        HandleRotation();
         HandleJumpBuffering();  // Verifica si hay un salto en buffer
     }
     /*

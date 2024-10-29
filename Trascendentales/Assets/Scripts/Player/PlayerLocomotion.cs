@@ -108,8 +108,7 @@ public class PlayerLocomotion : MonoBehaviour
     #region Rotation
     private void HandleRotation()
     {
-        if(isJumping)
-            return;
+
         Vector3 targetDirection = Vector3.zero;
 
         targetDirection = cameraObject.forward * inputManager.verticalInput;
@@ -137,6 +136,8 @@ public class PlayerLocomotion : MonoBehaviour
         // Si  hay suelo debajo, verificar bordes
         if (isGroundDetected && !hit.collider.isTrigger)
         {
+            if(!isGrounded)
+                animatorManager.PlayTargetAnimation("Land", false);
             playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, 0, playerRigidbody.velocity.z);
             isGrounded = true;
             //isNearEdge = false;  // Si está en el suelo, no está en un borde
@@ -147,8 +148,7 @@ public class PlayerLocomotion : MonoBehaviour
         else
         {
             isGrounded = false;
-            if(!playerManager.isInteracting)
-                animatorManager.PlayTargetAnimation("Falling", true);
+            animatorManager.PlayTargetAnimation("Falling", false);
             //isNearEdge = DetectEdge();  // Verificar si está cerca de un borde
 
             //if (!isNearEdge)
@@ -165,7 +165,6 @@ public class PlayerLocomotion : MonoBehaviour
         // Verificar Coyote Jump
         if (coyoteTimer > 0 && !isJumping)
         {
-            isJumping = true;
             float jumpingVelocity = Mathf.Sqrt(-2f * gravityIntensity * jumpHeight);
             Vector3 playerVelocity = playerRigidbody.velocity;
             playerVelocity.y = jumpingVelocity;
@@ -208,10 +207,10 @@ public class PlayerLocomotion : MonoBehaviour
     public void HandleAllMovement()
     {
         HandleFallingAndLanding();
-        if (playerManager.isInteracting)
-            return;
         HandleMovement();
         HandleRotation();
+        if (playerManager.isInteracting)
+            return;
         HandleJumpBuffering();  // Verifica si hay un salto en buffer
     }
     /*

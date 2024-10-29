@@ -6,7 +6,8 @@ public class PlayerManager : MonoBehaviour
 {
     InputManager inputManager;
     CameraManager cameraManager;
-    [SerializeField] Animator animator;
+    AnimatorManager animatorManager;
+    Animator animator;
     PlayerLocomotion playerLocomotion;
     private Vector3 spawnPosition;
     private Vector3 originalPositionZ;
@@ -17,7 +18,10 @@ public class PlayerManager : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         cameraManager = FindObjectOfType<CameraManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
+        animatorManager = GetComponent<AnimatorManager>();
+        animator = animatorManager.animator;
     }
+    #region SavePosition
     private void Start()
     {
         LoadPlayer();
@@ -52,7 +56,7 @@ public class PlayerManager : MonoBehaviour
     {
         StartCoroutine(LoadPlayerCoroutine());
     }
-
+    #endregion
     private void Update()
     {
         inputManager.HandleAllInputs();

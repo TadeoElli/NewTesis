@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bossBalance : MonoBehaviour
+public class BossBalance : MonoBehaviour
 {
     [SerializeField] private List<BossPartLogic> bossParts;
     [SerializeField] private GameObject winMenu;

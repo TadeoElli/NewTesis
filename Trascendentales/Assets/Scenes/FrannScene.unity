@@ -1982,6 +1982,7 @@ MonoBehaviour:
   balance: {fileID: 2025041892}
   correctScale: {x: 4, y: 4, z: 4}
   scaleTolerance: 0.25
+  isInteractable: 1
 --- !u!65 &100281259
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7265,6 +7266,7 @@ MonoBehaviour:
   balance: {fileID: 2025041892}
   correctScale: {x: 4, y: 4, z: 4}
   scaleTolerance: 0.25
+  isInteractable: 1
 --- !u!65 &412175191
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14047,6 +14049,7 @@ MonoBehaviour:
   balance: {fileID: 2025041892}
   correctScale: {x: 7, y: 7, z: 7}
   scaleTolerance: 0.25
+  isInteractable: 1
 --- !u!1 &960867240
 GameObject:
   m_ObjectHideFlags: 0
@@ -16475,6 +16478,7 @@ MonoBehaviour:
   balance: {fileID: 2025041892}
   correctScale: {x: 5, y: 5, z: 5}
   scaleTolerance: 0.25
+  isInteractable: 1
 --- !u!65 &1262593365
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21341,6 +21345,7 @@ MonoBehaviour:
   balance: {fileID: 2025041892}
   correctScale: {x: 5, y: 5, z: 5}
   scaleTolerance: 0.25
+  isInteractable: 1
 --- !u!65 &1594067791
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24017,6 +24022,11 @@ PrefabInstance:
       propertyPath: drawObjectWheelAnim
       value: 
       objectReference: {fileID: 1054278781}
+    - target: {fileID: 4942565289048504640, guid: 9042738332b100449b0a10e2a89209ce,
+        type: 3}
+      propertyPath: deadMenu
+      value: 
+      objectReference: {fileID: 676731146}
     - target: {fileID: 6786063747659376352, guid: 9042738332b100449b0a10e2a89209ce,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -27231,6 +27241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2013649202}
+  - component: {fileID: 2013649203}
   m_Layer: 6
   m_Name: Boss
   m_TagString: Untagged
@@ -27259,6 +27270,25 @@ Transform:
   - {fileID: 2112254577}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2013649203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013649201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085277ff5e5fc00429d63295844f8c89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossParts:
+  - {fileID: 412175190}
+  - {fileID: 100281258}
+  - {fileID: 1262593364}
+  - {fileID: 1594067790}
+  - {fileID: 939830878}
+  winMenu: {fileID: 2036156983}
 --- !u!1 &2021594369
 GameObject:
   m_ObjectHideFlags: 0

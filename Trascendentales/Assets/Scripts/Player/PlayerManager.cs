@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     InputManager inputManager;
-    CameraManager cameraManager;
+    [HideInInspector] public CameraManager cameraManager;
     AnimatorManager animatorManager;
     Animator animator;
     PlayerLocomotion playerLocomotion;

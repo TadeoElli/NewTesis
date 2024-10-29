@@ -7,6 +7,7 @@ public class PlayerLocomotion : MonoBehaviour
     InputManager inputManager;
     PlayerManager playerManager;
     AnimatorManager animatorManager;
+    CameraManager cameraManager;
     Vector3 moveDirection;
     [SerializeField] Transform cameraObject;
     Rigidbody playerRigidbody;
@@ -54,6 +55,10 @@ public class PlayerLocomotion : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         playerRigidbody = GetComponent<Rigidbody>();
     }
+    private void Start()
+    {
+        cameraManager = playerManager.cameraManager;
+    }
 
     #region Movement
     private void HandleMovement()
@@ -66,7 +71,8 @@ public class PlayerLocomotion : MonoBehaviour
             // Solo permitir movimiento en el eje X
             currentVelocity.x = inputManager.horizontalInput * movementSpeed;
             currentVelocity.z = 0; // Mantener siempre el Z en 0 en modo 2D
-
+            if(!cameraManager.isFrontView)
+                currentVelocity.x = -currentVelocity.x;
             // Fijar la posición del jugador en el eje Z a 0
             playerRigidbody.position = new Vector3(playerRigidbody.position.x, playerRigidbody.position.y, 0);
 

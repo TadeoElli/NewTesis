@@ -7,8 +7,8 @@ public class MouseController : MonoBehaviour
 {
     // Start is called before the first frame update
     [Header("Components")]
-    [SerializeField] private InputManager inputManager;
-    [SerializeField] private MouseState mouseState;
+    InputManager inputManager;
+    MouseState mouseState;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Transform cursorTransform;  //transform del cursor

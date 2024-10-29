@@ -24,7 +24,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4368327708275118609
 Transform:
   m_ObjectHideFlags: 0
@@ -34,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 2480493298415744116}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 23.552967, y: -0.09272456, z: -2.0569048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -132,7 +132,6 @@ MonoBehaviour:
   isAtachedToRuler: 0
   isAtachedToSquad: 0
   rend: {fileID: 5649012913557171223}
-  m_feedbackParent: {r: 0.03137255, g: 0.5137255, b: 0.8431373, a: 0}
 --- !u!114 &9071847403314349119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +149,7 @@ MonoBehaviour:
   maxRadius: 0
   canAttachOthers: 0
   canScale: 1
-  m_feedback: {r: 1, g: 0.81568635, b: 0.29803923, a: 0}
+  isScaling: 0
   objRenderer: {fileID: 5649012913557171223}
 --- !u!54 &4646270654586461909
 Rigidbody:
@@ -197,7 +196,6 @@ MonoBehaviour:
   maxRadius: 0
   canAttachOthers: 0
   gimballRef: {fileID: 0}
-  m_feedback: {r: 0.8235295, g: 0.5686275, b: 0.2784314, a: 0}
   objRenderer: {fileID: 5649012913557171223}
 --- !u!114 &7622694557337297928
 MonoBehaviour:
@@ -213,8 +211,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionForBrush: 0
   interactionForEraser: 0
-  m_feedbackBrush: {r: 0.2784314, g: 0.18431373, b: 0.08627451, a: 0}
-  m_feedbackEraser: {r: 0.8431373, g: 0.4901961, b: 0.38431376, a: 0}
   objRenderer: {fileID: 5649012913557171223}
 --- !u!114 &-1403896007804393028
 MonoBehaviour:

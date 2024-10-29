@@ -211,15 +211,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Death"",
-                    ""type"": ""Button"",
-                    ""id"": ""43b01a15-f1d0-4da5-842d-0a00f9adf8ac"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""LeftClick"",
                     ""type"": ""Button"",
                     ""id"": ""53ae44ab-1acf-40d0-b68b-7c7d639825fb"",
@@ -357,17 +348,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""OpenToolWheel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2509524f-8ca7-4161-9662-22f430e80944"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Death"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -390,7 +370,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerActions_Tool4 = m_PlayerActions.FindAction("Tool4", throwIfNotFound: true);
         m_PlayerActions_Tool5 = m_PlayerActions.FindAction("Tool5", throwIfNotFound: true);
         m_PlayerActions_Escape = m_PlayerActions.FindAction("Escape", throwIfNotFound: true);
-        m_PlayerActions_Death = m_PlayerActions.FindAction("Death", throwIfNotFound: true);
         m_PlayerActions_LeftClick = m_PlayerActions.FindAction("LeftClick", throwIfNotFound: true);
         m_PlayerActions_RightClick = m_PlayerActions.FindAction("RightClick", throwIfNotFound: true);
         m_PlayerActions_OpenToolWheel = m_PlayerActions.FindAction("OpenToolWheel", throwIfNotFound: true);
@@ -562,7 +541,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_Tool4;
     private readonly InputAction m_PlayerActions_Tool5;
     private readonly InputAction m_PlayerActions_Escape;
-    private readonly InputAction m_PlayerActions_Death;
     private readonly InputAction m_PlayerActions_LeftClick;
     private readonly InputAction m_PlayerActions_RightClick;
     private readonly InputAction m_PlayerActions_OpenToolWheel;
@@ -577,7 +555,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Tool4 => m_Wrapper.m_PlayerActions_Tool4;
         public InputAction @Tool5 => m_Wrapper.m_PlayerActions_Tool5;
         public InputAction @Escape => m_Wrapper.m_PlayerActions_Escape;
-        public InputAction @Death => m_Wrapper.m_PlayerActions_Death;
         public InputAction @LeftClick => m_Wrapper.m_PlayerActions_LeftClick;
         public InputAction @RightClick => m_Wrapper.m_PlayerActions_RightClick;
         public InputAction @OpenToolWheel => m_Wrapper.m_PlayerActions_OpenToolWheel;
@@ -611,9 +588,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Escape.started += instance.OnEscape;
             @Escape.performed += instance.OnEscape;
             @Escape.canceled += instance.OnEscape;
-            @Death.started += instance.OnDeath;
-            @Death.performed += instance.OnDeath;
-            @Death.canceled += instance.OnDeath;
             @LeftClick.started += instance.OnLeftClick;
             @LeftClick.performed += instance.OnLeftClick;
             @LeftClick.canceled += instance.OnLeftClick;
@@ -648,9 +622,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Escape.started -= instance.OnEscape;
             @Escape.performed -= instance.OnEscape;
             @Escape.canceled -= instance.OnEscape;
-            @Death.started -= instance.OnDeath;
-            @Death.performed -= instance.OnDeath;
-            @Death.canceled -= instance.OnDeath;
             @LeftClick.started -= instance.OnLeftClick;
             @LeftClick.performed -= instance.OnLeftClick;
             @LeftClick.canceled -= instance.OnLeftClick;
@@ -695,7 +666,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnTool4(InputAction.CallbackContext context);
         void OnTool5(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
-        void OnDeath(InputAction.CallbackContext context);
         void OnLeftClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
         void OnOpenToolWheel(InputAction.CallbackContext context);

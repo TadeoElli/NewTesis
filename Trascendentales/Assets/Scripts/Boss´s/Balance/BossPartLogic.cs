@@ -9,7 +9,7 @@ public class BossPartLogic : MonoBehaviour
     [SerializeField] private Vector3 correctScale;
     public float scaleTolerance = 0.05f;  // Tolerancia para considerar la escala correcta
 
-    private bool isInteractable = true;
+    [HideInInspector]public bool isInteractable = true;
     ScalableObject scalable;
     InteractuableObject interactuable;
 

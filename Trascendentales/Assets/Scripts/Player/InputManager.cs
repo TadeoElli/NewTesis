@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    PlayerControls playerControls, playerControlsOnLive;
+    PlayerControls playerControls;
     PlayerLocomotion playerLocomotion;
     AnimatorManager animatorManager;
     Vector2 movementInput;
@@ -32,32 +32,29 @@ public class InputManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        if (playerControls == null && playerControlsOnLive == null)
+        if (playerControls == null)
         {
-            playerControlsOnLive = new PlayerControls();
             playerControls = new PlayerControls();
 
-            playerControlsOnLive.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
+            playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
 
-            playerControlsOnLive.PlayerCamera.SwitchCameraAngle.performed += _ => SwitchCameraAngle();
-            playerControlsOnLive.PlayerCamera.SwitchCamera.performed += _ => SwitchCamera();
-            playerControlsOnLive.PlayerActions.Jump.performed += _ => jump_input = true;
-            playerControlsOnLive.PlayerActions.Tool1.performed += _ => SetBrushTool();
-            playerControlsOnLive.PlayerActions.Tool2.performed += _ => SetRulerTool();
-            playerControlsOnLive.PlayerActions.Tool3.performed += _ => SetSquadTool();
-            playerControlsOnLive.PlayerActions.Tool4.performed += _ => SetCompassTool();
-            playerControlsOnLive.PlayerActions.Tool5.performed += _ => SetEraserTool();
-            playerControlsOnLive.PlayerActions.OpenToolWheel.performed += _ => ShowToolWheel();
-            playerControlsOnLive.PlayerActions.OpenToolWheel.canceled += _ => HideToolWheel();
-            playerControlsOnLive.PlayerActions.LeftClick.performed += _ => LeftClickPressed();
-            playerControlsOnLive.PlayerActions.LeftClick.canceled += _ => LeftClickReleased();
-            playerControlsOnLive.PlayerActions.RightClick.performed += _ => RightClickPressed();
-            playerControlsOnLive.PlayerActions.RightClick.canceled += _ => RightClickReleased();
+            playerControls.PlayerCamera.SwitchCameraAngle.performed += _ => SwitchCameraAngle();
+            playerControls.PlayerCamera.SwitchCamera.performed += _ => SwitchCamera();
+            playerControls.PlayerActions.Jump.performed += _ => jump_input = true;
+            playerControls.PlayerActions.Tool1.performed += _ => SetBrushTool();
+            playerControls.PlayerActions.Tool2.performed += _ => SetRulerTool();
+            playerControls.PlayerActions.Tool3.performed += _ => SetSquadTool();
+            playerControls.PlayerActions.Tool4.performed += _ => SetCompassTool();
+            playerControls.PlayerActions.Tool5.performed += _ => SetEraserTool();
+            playerControls.PlayerActions.OpenToolWheel.performed += _ => ShowToolWheel();
+            playerControls.PlayerActions.OpenToolWheel.canceled += _ => HideToolWheel();
+            playerControls.PlayerActions.LeftClick.performed += _ => LeftClickPressed();
+            playerControls.PlayerActions.LeftClick.canceled += _ => LeftClickReleased();
+            playerControls.PlayerActions.RightClick.performed += _ => RightClickPressed();
+            playerControls.PlayerActions.RightClick.canceled += _ => RightClickReleased();
             playerControls.PlayerActions.Escape.performed += _ => TogglePause();
-            playerControls.PlayerActions.Death.performed += _ => Death();
         }
         playerControls.Enable();
-        playerControlsOnLive.Enable();
     }
 
     private void OnDisable()
@@ -189,6 +186,7 @@ public class InputManager : MonoBehaviour
         movementInput = Vector2.zero;
         GetComponent<Rigidbody>().velocity = Vector2.zero;
         HandleMovementInput();
-        playerControlsOnLive.Disable();
+        playerControls.Disable();
+        playerControls = null;
     }
 }

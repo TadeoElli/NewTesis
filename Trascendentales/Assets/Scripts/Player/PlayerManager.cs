@@ -86,4 +86,5 @@ public class PlayerManager : MonoBehaviour
         inputManager.Death();
     }
 
+    
 }

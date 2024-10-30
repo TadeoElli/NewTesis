@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlatformAddParent : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -12,7 +12,7 @@ public class PlatformAddParent : MonoBehaviour
             collision.gameObject.transform.parent = transform;
         }
     }
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerStay(Collider collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -20,7 +20,7 @@ public class PlatformAddParent : MonoBehaviour
             collision.gameObject.transform.parent = transform;
         }
     }
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {

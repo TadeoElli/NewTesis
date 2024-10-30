@@ -20,6 +20,8 @@ public class SceneController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        Cursor.visible = true; //Desactivo el mouse
+
     }
     public void ChangeScene(Scenes scene)
     {

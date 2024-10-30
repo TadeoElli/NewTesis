@@ -5,19 +5,17 @@ public class ShaderController : MonoBehaviour
 {
     public Material material; 
     [SerializeField] private float duration = 2f;
-    public LayerMask playerLayerMask;
+
 
     private void Start()
     {
         material = GetComponent<Renderer>().material;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        Debug.Log("entre");
-        if ((playerLayerMask.value & (1 << other.gameObject.layer)) != 0)
+        if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("contacto");
             StartCoroutine(CambiarValorGradualmente(0f, 1f, duration));
         }
     }

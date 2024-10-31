@@ -14,6 +14,7 @@ public class PlayerManager : MonoBehaviour
     private Transform currentPlatform;
     public bool isInteracting;
     private bool isAlive = true;
+    [SerializeField] private bool isGrabbing;
     private void Awake()
     {
         inputManager = GetComponent<InputManager>();
@@ -68,6 +69,8 @@ public class PlayerManager : MonoBehaviour
     {
         if (!isAlive)
             return;
+        if (!isGrabbing)
+            return;
         playerLocomotion.HandleAllMovement();
     }
 
@@ -84,6 +87,12 @@ public class PlayerManager : MonoBehaviour
         animator.SetTrigger("isDeath");
         animatorManager.PlayTargetAnimation("Death", true);
         inputManager.Death();
+    }
+    public void GrabToTheFloor()
+    {
+        isGrabbing = !isGrabbing;
+        playerLocomotion.enabled = isGrabbing;
+        this.enabled = false;
     }
 
     

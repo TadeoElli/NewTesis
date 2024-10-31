@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
 {
     PlayerControls playerControls;
     PlayerLocomotion playerLocomotion;
+    PlayerManager playerManager;
     AnimatorManager animatorManager;
     Vector2 movementInput;
     private float moveAmount;
@@ -29,6 +30,7 @@ public class InputManager : MonoBehaviour
     {
         playerLocomotion = GetComponent<PlayerLocomotion>();
         animatorManager = GetComponent<AnimatorManager>();
+        playerManager = GetComponent<PlayerManager>();
     }
     private void OnEnable()
     {
@@ -53,6 +55,7 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.RightClick.performed += _ => RightClickPressed();
             playerControls.PlayerActions.RightClick.canceled += _ => RightClickReleased();
             playerControls.PlayerActions.Escape.performed += _ => TogglePause();
+            playerControls.PlayerActions.Crouch.performed += _ => playerManager.GrabToTheFloor();
         }
         playerControls.Enable();
     }
@@ -177,7 +180,7 @@ public class InputManager : MonoBehaviour
     #region Menu
     public void TogglePause()
     {
-        GameManager.Instance.TogglePause();
+        MenuManager.Instance.TogglePause();
     }
     #endregion
 

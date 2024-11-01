@@ -69,7 +69,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (!isAlive)
             return;
-        if (!isGrabbing)
+        if (isGrabbing)
             return;
         playerLocomotion.HandleAllMovement();
     }

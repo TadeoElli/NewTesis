@@ -51,30 +51,26 @@ public class DrawObjectTool : Tools
     public void SelectCube()
     {
         selectedPrefab = cubePrefab;
-        inputManager.HideDrawObjectWheel();
-        ResetDrawing();
+        //ResetDrawing();
     }
     public void SelectSphere()
     {
         selectedPrefab = spherePrefab;
-        inputManager.HideDrawObjectWheel();
-        ResetDrawing();
+        //ResetDrawing();
     }
     public void SelectPlatform()
     {
         selectedPrefab = rectanglePrefab;
-        inputManager.HideDrawObjectWheel();
-        ResetDrawing();
+        //ResetDrawing();
     }
     private void ResetDrawing()
     {
         isDrawing = false;
-        isShowingSelectionWheel = false;
         rightClickHoldTime = 0f;
         DeactivateAllFeedback();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (MouseState.Instance.CurrentToolActive() != ToolTypes.Brush)
         {
@@ -105,7 +101,7 @@ public class DrawObjectTool : Tools
 
     public override void DropInteractable()
     {
-        base.DropInteractable();
+        //base.DropInteractable();
         if (isDrawing)
         {
             // Si el clic derecho se suelta antes de alcanzar el umbral, spawneamos el objeto seleccionado
@@ -113,9 +109,14 @@ public class DrawObjectTool : Tools
             {
                 FinishDrawing();
             }
-            ResetDrawing();
-            inputManager.HideDrawObjectWheel();
         }
+        // Asegúrate de ocultar la rueda de selección aquí
+        if (isShowingSelectionWheel)
+        {
+            inputManager.HideDrawObjectWheel();
+            isShowingSelectionWheel = false;
+        }
+        ResetDrawing();
         mouseState.DropRightClick();
         inputManager.OnRightClickDrop -= DropInteractable; // Al soltar el clic derecho, limpiamos la interacción
         inputManager.OnPerspectiveSwitch -= ResetDrawing;

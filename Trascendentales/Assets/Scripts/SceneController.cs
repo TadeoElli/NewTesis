@@ -32,6 +32,7 @@ public class SceneController : MonoBehaviour
     }
     public void SetScene(string scene)
     {
+        Time.timeScale = 1; // Restaurar el tiempo
         string sceneName = scene.ToString(); // Convierte el valor del enum a una cadena (string).
 
         SceneManager.LoadScene(sceneName);

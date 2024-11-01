@@ -238,7 +238,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Crouch"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""96f16d0d-97a9-4e96-beaa-eee2e3835917"",
                     ""expectedControlType"": ""Button"",
@@ -361,11 +361,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""049e4300-94fc-4024-90c2-a43670c76071"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Crouch"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -393,7 +393,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerActions_LeftClick = m_PlayerActions.FindAction("LeftClick", throwIfNotFound: true);
         m_PlayerActions_RightClick = m_PlayerActions.FindAction("RightClick", throwIfNotFound: true);
         m_PlayerActions_OpenToolWheel = m_PlayerActions.FindAction("OpenToolWheel", throwIfNotFound: true);
-        m_PlayerActions_Crouch = m_PlayerActions.FindAction("Crouch", throwIfNotFound: true);
+        m_PlayerActions_Interact = m_PlayerActions.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -565,7 +565,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_LeftClick;
     private readonly InputAction m_PlayerActions_RightClick;
     private readonly InputAction m_PlayerActions_OpenToolWheel;
-    private readonly InputAction m_PlayerActions_Crouch;
+    private readonly InputAction m_PlayerActions_Interact;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -580,7 +580,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @LeftClick => m_Wrapper.m_PlayerActions_LeftClick;
         public InputAction @RightClick => m_Wrapper.m_PlayerActions_RightClick;
         public InputAction @OpenToolWheel => m_Wrapper.m_PlayerActions_OpenToolWheel;
-        public InputAction @Crouch => m_Wrapper.m_PlayerActions_Crouch;
+        public InputAction @Interact => m_Wrapper.m_PlayerActions_Interact;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -620,9 +620,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @OpenToolWheel.started += instance.OnOpenToolWheel;
             @OpenToolWheel.performed += instance.OnOpenToolWheel;
             @OpenToolWheel.canceled += instance.OnOpenToolWheel;
-            @Crouch.started += instance.OnCrouch;
-            @Crouch.performed += instance.OnCrouch;
-            @Crouch.canceled += instance.OnCrouch;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IPlayerActionsActions instance)
@@ -657,9 +657,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @OpenToolWheel.started -= instance.OnOpenToolWheel;
             @OpenToolWheel.performed -= instance.OnOpenToolWheel;
             @OpenToolWheel.canceled -= instance.OnOpenToolWheel;
-            @Crouch.started -= instance.OnCrouch;
-            @Crouch.performed -= instance.OnCrouch;
-            @Crouch.canceled -= instance.OnCrouch;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IPlayerActionsActions instance)
@@ -698,6 +698,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnLeftClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
         void OnOpenToolWheel(InputAction.CallbackContext context);
-        void OnCrouch(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

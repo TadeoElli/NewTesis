@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerLocomotion : MonoBehaviour
 {
@@ -42,6 +44,13 @@ public class PlayerLocomotion : MonoBehaviour
     [Header("Jump Buffer Settings")]
     public float jumpBufferTime = 0.2f; // Time to buffer a jump input
     private float jumpBufferTimer;      // Timer to track buffered jumps
+
+    [Header("Grab To Objects")]
+    [SerializeField] private Transform grabObject; // Objeto al que el jugador se agarra
+    [SerializeField] private float grabRadius = 1f;
+    [SerializeField] private LayerMask grabLayerMask; // Capa para los objetos que se pueden agarrar
+    private Vector3 grabOffset; // Offset para no quedar dentro del objeto
+    private bool isGrabbing = false; // Indica si el jugador está agarrado
 
     /*[Header("Edge Detection Settings")]
     public float edgeRayLength = 1f;  // Longitud del raycast para detectar bordes
@@ -210,8 +219,54 @@ public class PlayerLocomotion : MonoBehaviour
 
     #endregion
 
+    #region GrabToObject
+    public bool TryToGrab()
+    {
+        // Usar un OverlapSphere para detectar el objeto cercano
+        Collider hitCollider = Physics.OverlapSphere(transform.position, grabRadius, grabLayerMask).FirstOrDefault();
+
+        if (hitCollider != null)
+        {
+            // Tomar el objeto encontrado
+            grabObject = hitCollider.gameObject.transform;
+            // Calcular y almacenar el offset actual entre el jugador y el objeto
+            grabOffset = grabObject.position - transform.position;
+            // Desactivar la física del jugador
+            isGrabbing = true;
+            playerRigidbody.isKinematic = true;
+
+            return true; // Indicar que el agarre fue exitoso
+        }
+
+        return false; // Indicar que no se encontró un objeto para agarrar
+    }
+
+    public void TryToDrop()
+    {
+        if (grabObject != null)
+        {
+            grabObject = null;
+            isGrabbing = false;
+            playerRigidbody.isKinematic = false; // Reactiva la física
+        }
+    }
+    #endregion
     public void HandleAllMovement()
     {
+        if (isGrabbing && grabObject != null)
+        {
+            // Mueve al jugador a la posición del objeto con un offset
+            transform.position = grabObject.position - grabOffset;
+            // Rota al jugador para que apunte hacia el objeto
+            Vector3 directionToGrabObject = (grabObject.position - transform.position).normalized;
+            directionToGrabObject.y = 0; // Asegura que la rotación sea solo en el plano XZ
+            if (directionToGrabObject != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(directionToGrabObject);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
+            return;
+        }
         HandleFallingAndLanding();
         if (playerManager.isInteracting)
             return;

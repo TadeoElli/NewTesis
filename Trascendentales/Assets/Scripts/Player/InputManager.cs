@@ -16,6 +16,8 @@ public class InputManager : MonoBehaviour
     public float horizontalInput;
     public bool jump_input;
     public bool isOn2D = false;
+    private bool isGrabbing = false;
+    private GameObject platform;
     //Events
     public event Action<ToolTypes> OnToolSwitch;
     public event Action OnToolSwitchCheck;
@@ -59,7 +61,7 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.RightClick.performed += _ => RightClickPressed();
             playerControls.PlayerActions.RightClick.canceled += _ => RightClickReleased();
             playerControls.PlayerActions.Escape.performed += _ => TogglePause();
-            //playerControls.PlayerActions.Crouch.performed += _ => playerManager.GrabToTheFloor();
+            playerControls.PlayerActions.Interact.performed += _ => GrabInteraction();
         }
         playerControls.Enable();
     }
@@ -199,4 +201,19 @@ public class InputManager : MonoBehaviour
         playerControls.Disable();
         playerControls = null;
     }
+    public void GrabInteraction()
+    {
+        if (isGrabbing)
+        {
+            // Si está agarrado a algo, intenta soltarlo
+            playerLocomotion.TryToDrop();
+            isGrabbing = false;
+        }
+        else
+        {
+            // Si no está agarrado, intenta agarrar
+            isGrabbing = playerLocomotion.TryToGrab();
+        }
+    }
+
 }

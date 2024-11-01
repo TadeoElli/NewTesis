@@ -205,8 +205,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 4506808623600409923}
-          m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        - m_Target: {fileID: 3803644752612683550}
+          m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
           m_MethodName: HideToolWheel
           m_Mode: 1
           m_Arguments:
@@ -497,8 +497,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 4506808623600409923}
-          m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        - m_Target: {fileID: 3803644752612683550}
+          m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
           m_MethodName: HideToolWheel
           m_Mode: 1
           m_Arguments:
@@ -2166,8 +2166,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 4506808623600409923}
-          m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        - m_Target: {fileID: 3803644752612683550}
+          m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
           m_MethodName: HideToolWheel
           m_Mode: 1
           m_Arguments:
@@ -2225,6 +2225,8 @@ MonoBehaviour:
   pauseMenu: {fileID: 3552615527711739303}
   winMenu: {fileID: 4874141838471119692}
   loseMenu: {fileID: 6626581650483862712}
+  toolWheel: {fileID: 1059861368272099101}
+  drawObjectWheel: {fileID: 1227950926420943461}
 --- !u!1 &2478942803004479140
 GameObject:
   m_ObjectHideFlags: 0
@@ -2430,8 +2432,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 4506808623600409923}
-          m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        - m_Target: {fileID: 3803644752612683550}
+          m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
           m_MethodName: HideToolWheel
           m_Mode: 1
           m_Arguments:
@@ -2618,18 +2620,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3207079010660303873}
-  m_LocalRotation: {x: 0, y: 0, z: 0.86602545, w: 0.49999994}
+  m_LocalRotation: {x: -0, y: -0, z: 0.8660257, w: -0.4999996}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2103524589681588264}
   m_Father: {fileID: 714865574993497169}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 120}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 240}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -75, y: 50}
-  m_SizeDelta: {x: 113, y: 172}
+  m_SizeDelta: {x: 200, y: 113}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2135958386576689580
 CanvasRenderer:
@@ -2763,6 +2765,18 @@ MonoBehaviour:
             m_StringArgument: SelectorWheelOnMouseOver
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1140178400978678447}
+          m_TargetAssemblyTypeName: DrawObjectTool, Assembly-CSharp
+          m_MethodName: SelectSphere
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -2777,22 +2791,6 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: SelectorWheelOnMouseExit
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 9
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1140178400978678447}
-          m_TargetAssemblyTypeName: DrawObjectTool, Assembly-CSharp
-          m_MethodName: SelectSphere
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!1 &3242713072400222721
@@ -3074,16 +3072,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3930084008705097359}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071067}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.27423352, y: 0.873, z: 1}
+  m_LocalScale: {x: 0.37602898, y: 1.1970576, z: 1.3712}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1756301849142045901}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -9.4}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3255619615383019750
@@ -3324,16 +3322,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4223218280768790963}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.25881898, w: 0.96592593}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.57573, y: 0.57573, z: 0.57573}
+  m_LocalScale: {x: 0.6775191, y: 0.6775191, z: 0.6775191}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6109709453954674966}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 3.6, y: -6.6}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1467406561808025663
@@ -3402,18 +3400,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4370449326834166450}
-  m_LocalRotation: {x: 0, y: -0, z: 0.8660254, w: -0.5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2758009644717027727}
   m_Father: {fileID: 714865574993497169}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 240}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -75}
-  m_SizeDelta: {x: 113, y: 172}
+  m_SizeDelta: {x: 200, y: 113}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8606604560391305049
 CanvasRenderer:
@@ -3547,6 +3545,18 @@ MonoBehaviour:
             m_StringArgument: SelectorWheelOnMouseOver
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1140178400978678447}
+          m_TargetAssemblyTypeName: DrawObjectTool, Assembly-CSharp
+          m_MethodName: SelectPlatform
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -3561,22 +3571,6 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: SelectorWheelOnMouseExit
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 9
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1140178400978678447}
-          m_TargetAssemblyTypeName: DrawObjectTool, Assembly-CSharp
-          m_MethodName: SelectPlatform
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!1 &4499433856033037752
@@ -4302,8 +4296,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 4506808623600409923}
-          m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        - m_Target: {fileID: 3803644752612683550}
+          m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
           m_MethodName: HideToolWheel
           m_Mode: 1
           m_Arguments:
@@ -4490,18 +4484,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5071834269906832636}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.8660255, w: 0.49999982}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8125988724048004156}
   m_Father: {fileID: 714865574993497169}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 120}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 75, y: 50}
-  m_SizeDelta: {x: 113, y: 172}
+  m_SizeDelta: {x: 200, y: 113}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7192768570475691149
 CanvasRenderer:
@@ -4635,6 +4629,18 @@ MonoBehaviour:
             m_StringArgument: SelectorWheelOnMouseOver
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1140178400978678447}
+          m_TargetAssemblyTypeName: DrawObjectTool, Assembly-CSharp
+          m_MethodName: SelectCube
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -4649,22 +4655,6 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: SelectorWheelOnMouseExit
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 9
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1140178400978678447}
-          m_TargetAssemblyTypeName: DrawObjectTool, Assembly-CSharp
-          m_MethodName: SelectCube
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!1 &5097470373270718238
@@ -6181,14 +6171,14 @@ RectTransform:
   m_GameObject: {fileID: 8485432746485054597}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.73483, y: 0.73483, z: 0.73483}
+  m_LocalScale: {x: 0.88422096, y: 0.88422096, z: 0.88422096}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7338878392179977051}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 2.5, y: -7.2}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5755932721751798397
@@ -6932,6 +6922,11 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 6642611515304542456}
+    - target: {fileID: 4872339832566942274, guid: a020c8bd42b67ca459ae45cd617d6ac1,
+        type: 3}
+      propertyPath: holdTimeThreshold
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6165654701097406847, guid: a020c8bd42b67ca459ae45cd617d6ac1,
         type: 3}
       propertyPath: m_LocalPosition.x

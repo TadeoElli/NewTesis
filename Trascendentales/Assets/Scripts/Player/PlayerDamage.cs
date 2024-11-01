@@ -8,7 +8,6 @@ public class PlayerDamage : MonoBehaviour, IDamagable
 {
     private bool isLive = true;
     PlayerManager playerManager;
-    [SerializeField] GameObject deadMenu;
 
     private void Awake()
     {
@@ -27,7 +26,7 @@ public class PlayerDamage : MonoBehaviour, IDamagable
     private IEnumerator ShowDeadMenu()
     {
         yield return new WaitForSeconds(1.5f);
-        deadMenu.SetActive(true);
+        MenuManager.Instance.LoseLevel();
     }
 
     private void CallToDeath()

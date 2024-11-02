@@ -193,6 +193,11 @@ public class PlayerLocomotion : MonoBehaviour
     // Actualiza el temporizador de coyote jump y jump buffering
     private void Update()
     {
+        if (isGrabbing && grabObject != null)
+        {
+            // Mueve al jugador a la posición del objeto con un offset
+            transform.position = grabObject.position - grabOffset;
+        }
         if (!isGrounded)
         {
             coyoteTimer -= Time.deltaTime; // Cuenta regresiva de coyote jump
@@ -234,6 +239,8 @@ public class PlayerLocomotion : MonoBehaviour
             // Desactivar la física del jugador
             isGrabbing = true;
             playerRigidbody.isKinematic = true;
+            animatorManager.PlayTargetAnimation("Standing To Crouch", true);
+            animatorManager.animator.SetBool("isCrouch", true);
 
             return true; // Indicar que el agarre fue exitoso
         }
@@ -248,6 +255,7 @@ public class PlayerLocomotion : MonoBehaviour
             grabObject = null;
             isGrabbing = false;
             playerRigidbody.isKinematic = false; // Reactiva la física
+            animatorManager.animator.SetBool("isCrouch", false);
         }
     }
     #endregion
@@ -255,16 +263,6 @@ public class PlayerLocomotion : MonoBehaviour
     {
         if (isGrabbing && grabObject != null)
         {
-            // Mueve al jugador a la posición del objeto con un offset
-            transform.position = grabObject.position - grabOffset;
-            // Rota al jugador para que apunte hacia el objeto
-            Vector3 directionToGrabObject = (grabObject.position - transform.position).normalized;
-            directionToGrabObject.y = 0; // Asegura que la rotación sea solo en el plano XZ
-            if (directionToGrabObject != Vector3.zero)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(directionToGrabObject);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-            }
             return;
         }
         HandleFallingAndLanding();

@@ -61,7 +61,7 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.RightClick.performed += _ => RightClickPressed();
             playerControls.PlayerActions.RightClick.canceled += _ => RightClickReleased();
             playerControls.PlayerActions.Escape.performed += _ => TogglePause();
-            playerControls.PlayerActions.Interact.performed += _ => GrabInteraction();
+            playerControls.PlayerActions.Crouch.performed += _ => GrabInteraction();
         }
         playerControls.Enable();
     }

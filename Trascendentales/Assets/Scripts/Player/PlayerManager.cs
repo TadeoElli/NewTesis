@@ -75,7 +75,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (!isAlive)
             return;
-        cameraManager.FollowTarget();
+        //cameraManager.FollowTarget();
         isInteracting = animator.GetBool("isInteracting");
     }
     public void Death()

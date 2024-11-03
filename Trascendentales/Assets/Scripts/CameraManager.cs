@@ -2,23 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraManager : MonoBehaviour
 {
     InputManager inputManager;
 
-    [SerializeField]private Transform targetTransform;
-    [SerializeField]private Camera mainCamera;
-    private Vector3 cameraFollowVelocity = Vector3.zero;
-    [SerializeField] private List<Transform> camera_3D_positions;
-    [SerializeField] private List<Transform> camera_2D_positions;
-    [SerializeField] private Transform cameraPivot;
+    [SerializeField] private Transform targetTransform;
+    [SerializeField] private CinemachineVirtualCamera virtualCamera2DFront, virtualCamera2DBack;
+    [SerializeField] private CinemachineVirtualCamera virtualCamera3DFront, virtualCamera3DBack;
+    private CinemachineVirtualCamera currentVirtualCamera;
+    [SerializeField] private float transitionDuration = 1f; // Duración del slerp
     private bool is2D = false;
-    [SerializeField] private float orthographicSize = 7f; // Tamaño de la cámara ortográfica en modo 2D
-    private int index = 0;
-    public bool isFrontView = true;
 
-    public float cameraFollowSpeed = 0.2f;
+    private Coroutine currentTransition;
+
+    public bool isFrontView = true;
+    // Valores de offset para el eje Z
+    [SerializeField] private float frontViewOffsetZ = -14f;
+    [SerializeField] private float backViewOffsetZ = 14f;
     public event Action OnCameraSwitch;
 
     // Lista de objetos que pueden verse afectados por el cambio de perspectiva
@@ -30,55 +32,95 @@ public class CameraManager : MonoBehaviour
         inputManager.OnPerspectiveSwitch += TogglePerspective;
         inputManager.OnChangeCameraAngle += ChangeCameraAngle;
         targetTransform = FindObjectOfType<PlayerManager>().transform;
-        cameraPivot.transform.position = camera_3D_positions[index].transform.position;
-        cameraPivot.transform.rotation = camera_3D_positions[index].transform.rotation;
-
+        // Asegúrate de que solo una cámara esté activa al inicio
+        ResetVirtualCameras();
     }
-
-    public void FollowTarget()
+    private void ResetVirtualCameras()
     {
+        virtualCamera2DFront.gameObject.SetActive(false);
+        virtualCamera2DBack.gameObject.SetActive(false);
+        virtualCamera3DBack.gameObject.SetActive(false);
+        virtualCamera3DFront.gameObject.SetActive(false);
         if (is2D)
         {
-            cameraPivot.position = camera_2D_positions[index].position;
-            cameraPivot.rotation = camera_2D_positions[index].rotation;
+            if(isFrontView)
+            {
+                virtualCamera2DFront.gameObject.SetActive(true);
+                currentVirtualCamera = virtualCamera2DFront;
+            }
+            else
+            {
+                virtualCamera2DBack.gameObject.SetActive(true);
+                currentVirtualCamera = virtualCamera2DBack;
+            }
         }
         else
         {
-            cameraPivot.position = camera_3D_positions[index].position;
-            cameraPivot.rotation = camera_3D_positions[index].rotation;
+            if (isFrontView)
+            {
+                virtualCamera3DFront.gameObject.SetActive(true);
+                currentVirtualCamera = virtualCamera3DFront;
+            }
+            else
+            {
+                virtualCamera3DBack.gameObject.SetActive(true);
+                currentVirtualCamera = virtualCamera3DBack;
+            }
         }
-        Vector3 targetPosition = Vector3.SmoothDamp
-            (transform.position, targetTransform.position, ref cameraFollowVelocity, cameraFollowSpeed);
-
-        transform.position = targetPosition;
-        
     }
+
     private void ChangeCameraAngle()
     {
-        index++;
-        if(index > 1)
-            index = 0;
+        // Puedes agregar lógica aquí si deseas cambiar el ángulo de la cámara, pero 
+        // si solo estás cambiando entre 2D y 3D, podrías dejar esto vacío o simplificarlo
         isFrontView = !isFrontView;
-        // Notifica a los objetos sobre el cambio de ángulo de cámara
+        ResetVirtualCameras();
         NotifyObjectsOfPerspectiveChange();
     }
+
     private void TogglePerspective()
     {
-        if (is2D)
+        if (currentTransition != null)
         {
-            // Volver a 2.5D
-            mainCamera.orthographic = false;
+            StopCoroutine(currentTransition);
         }
-        else
-        {
-            // Cambiar a 2D
-            mainCamera.orthographic = true;
-            mainCamera.orthographicSize = orthographicSize;
-        }
+
         is2D = !is2D;
+        ResetVirtualCameras();
         OnCameraSwitch?.Invoke();
+
+        // Iniciar la transición suave
+        currentTransition = StartCoroutine(TransitionCamera());
+
         NotifyObjectsOfPerspectiveChange();
     }
+
+    private IEnumerator TransitionCamera()
+    {
+        // Obtener las posiciones y rotaciones actuales de las cámaras
+        Transform startTransform = currentVirtualCamera.transform;
+        Transform endTransform = is2D ? (isFrontView ? virtualCamera2DFront.transform : virtualCamera2DBack.transform ):(isFrontView ? virtualCamera3DFront.transform : virtualCamera3DBack.transform);
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < transitionDuration)
+        {
+            float t = elapsedTime / transitionDuration;
+            t = Mathf.SmoothStep(0f, 1f, t); // Usar SmoothStep para una transición suave
+
+            // Interpolación esférica para la rotación
+            transform.position = Vector3.Lerp(startTransform.position, endTransform.position, t);
+            transform.rotation = Quaternion.Slerp(startTransform.rotation, endTransform.rotation, t);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Asegurarse de que la cámara termine exactamente en la posición y rotación finales
+        transform.position = endTransform.position;
+        transform.rotation = endTransform.rotation;
+    }
+
     public void RegisterObject(IObjectAffectableByPerspective obj)
     {
         if (!affectableObjects.Contains(obj))

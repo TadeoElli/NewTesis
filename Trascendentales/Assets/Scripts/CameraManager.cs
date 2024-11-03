@@ -35,6 +35,10 @@ public class CameraManager : MonoBehaviour
         // Asegúrate de que solo una cámara esté activa al inicio
         ResetVirtualCameras();
     }
+    private void FixedUpdate()
+    {
+        currentVirtualCamera.transform.position = new Vector3(targetTransform.transform.position.x, targetTransform.transform.position.y, -14f);
+    }
     private void ResetVirtualCameras()
     {
         virtualCamera2DFront.gameObject.SetActive(false);

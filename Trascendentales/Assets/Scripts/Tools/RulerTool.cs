@@ -36,8 +36,8 @@ public class RulerTool : Tools
         maxScale = scalable.GetMaxScale();
         base.Interact(interactable, isPerspective2D); // Llama a la lógica común de interactuar
         //Desactivo la colision
-        if(objective.TryGetComponent<Rigidbody>(out Rigidbody objectiveRB))
-            objectiveRB.isKinematic = true;
+        //if(objective.TryGetComponent<Rigidbody>(out Rigidbody objectiveRB))
+          //  objectiveRB.isKinematic = true;
         //Seteo el Gimball
         objectiveTr = objective.GetComponent<Transform>();
         SetGimball();
@@ -97,8 +97,8 @@ public class RulerTool : Tools
     public override void DropInteractable()
     {
         if(objective == null) return;
-        if(objective.TryGetComponent<Rigidbody>(out Rigidbody objectiveRB))
-            objectiveRB.isKinematic = false;
+        //if(objective.TryGetComponent<Rigidbody>(out Rigidbody objectiveRB))
+          //  objectiveRB.isKinematic = false;
         scalable.SetIsScaling(false);
         scalable = null;
         mouseState.DropLeftClick();

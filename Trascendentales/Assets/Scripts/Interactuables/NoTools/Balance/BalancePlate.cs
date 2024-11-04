@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,15 +6,20 @@ public class BalancePlate : MonoBehaviour
 {
     public Balance balance; // Referencia al script principal de la balanza
     [SerializeField] float plateWeight;
-    private List<WeightedObject> objectsOnPlate = new List<WeightedObject>();
+    private List<Rigidbody> objectsOnPlate = new List<Rigidbody>();
 
+    private void Start()
+    {
+        // Iniciar la corrutina para verificar objetos cada segundo
+        StartCoroutine(CheckObjectsOnPlate());
+    }
     private void Update()
     {
         ChangeTotalWeight();
     }
     private void OnTriggerEnter(Collider other)
     {
-        WeightedObject weightedObject = other.GetComponent<WeightedObject>();
+        Rigidbody weightedObject = other.GetComponent<Rigidbody>();
         if (weightedObject != null)
         {
             objectsOnPlate.Add(weightedObject);
@@ -23,7 +29,7 @@ public class BalancePlate : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        WeightedObject weightedObject = other.GetComponent<WeightedObject>();
+        Rigidbody weightedObject = other.GetComponent<Rigidbody>();
         if (weightedObject != null)
         {
             objectsOnPlate.Remove(weightedObject);
@@ -34,10 +40,26 @@ public class BalancePlate : MonoBehaviour
     public void ChangeTotalWeight()
     {
         float totalWeight = 0f;
-        foreach (WeightedObject obj in objectsOnPlate)
+        foreach (Rigidbody obj in objectsOnPlate)
         {
-            totalWeight += obj.weight;
+            totalWeight += Mathf.Round(obj.mass);
         }
         balance.UpdatePlateWeight(this, totalWeight + plateWeight);
+    }
+    private IEnumerator CheckObjectsOnPlate()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+
+            // Recorrer la lista al revés para eliminar objetos de manera segura
+            for (int i = objectsOnPlate.Count - 1; i >= 0; i--)
+            {
+                if (objectsOnPlate[i] == null)
+                {
+                    objectsOnPlate.RemoveAt(i);
+                }
+            }
+        }
     }
 }

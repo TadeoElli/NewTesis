@@ -14,7 +14,9 @@ public class DrawObjectTool : Tools
     private bool isShowingSelectionWheel = false;
     private float rightClickHoldTime = 0f;
     private float holdThreshold = 0.5f; // Tiempo requerido para mostrar la rueda de selección
-
+    // Variables para el temporizador
+    [SerializeField] private float cooldown = 2f; // Tiempo de espera en segundos
+    private bool canInteract = true;
 
     public override void Awake()
     {
@@ -26,6 +28,8 @@ public class DrawObjectTool : Tools
 
     public override void Interact(GameObject objective, bool isPerspective2D)
     {
+        if (!canInteract) return; // Si el temporizador no ha terminado, no se puede interactuar
+
         base.Interact(objective, isPerspective2D);
         mouseState.SetRightclickPress();
         inputManager.OnRightClickDrop += DropInteractable; // Al soltar el clic derecho, limpiamos la interacción
@@ -35,6 +39,8 @@ public class DrawObjectTool : Tools
         inputManager.OnToolSwitchCheck += DropInteractable;
         isDrawing = true;
         rightClickHoldTime = 0f; // Reiniciar el temporizador al interactuar
+        StartCoroutine(CooldownTimer()); // Iniciar el temporizador
+
     }
     private void SelectShape()
     {
@@ -193,6 +199,12 @@ public class DrawObjectTool : Tools
         sphereFeedback.SetActive(false);
         rectangleFeedback.SetActive(false);
         selectedFeedback = null;
+    }
+    private IEnumerator CooldownTimer()
+    {
+        canInteract = false;
+        yield return new WaitForSeconds(cooldown);
+        canInteract = true;
     }
 
 }

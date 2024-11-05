@@ -1,98 +1,77 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class Balance_Atack_Method : MonoBehaviour
+public class Balance_Attack_Method : MonoBehaviour
 {
-    [SerializeField] Transform _target;
-    [SerializeField] Balance_Atack_Method _secondBalance;
+    [SerializeField] private Transform player; // Referencia al jugador
+    [SerializeField] private float hoverPositionY, floorPositionY; // Referencia al jugador
+    [SerializeField] private float hoverDuration = 3f; // Tiempo que sigue al jugador
+    [SerializeField] private float dropWaitTime = 2f; // Tiempo antes de caer
+    [SerializeField] private float resetWaitTime = 3f; // Tiempo antes de volver a subir
+    [SerializeField] private float fallSpeed = 5f; // Velocidad de caída
+    [SerializeField] private float riseSpeed = 5f; // Velocidad de subida
+    [SerializeField] private float speedMultiplier = 1f; // Velocidad de subida
 
-    [SerializeField] float _speedAt;
+    private bool isFollowing = false;
+    private bool isFalling = false;
+    private Vector3 targetPosition;
 
-    [SerializeField] float _fallSpeed;
-
-    [SerializeField] float _positionXMin;
-
-    public delegate void miMetodo();
-    private int _successCount = 0;
-
-    miMetodo _atack;
-
-    bool isFall = true;
-
-    bool _canAt = true;
-
-    private void Start()
+    void Start()
     {
-        _atack = ChangePosition;
-
+        StartCoroutine(HoverCycle());
     }
 
-    private void Update()
+    private IEnumerator HoverCycle()
     {
-        if(_target.position.x >= _positionXMin)
-            _atack();
-
-    }
-
-    void FallingRise()
-    {
-
-        if (isFall)
+        while (true)
         {
-            transform.position += Vector3.down * _fallSpeed * Time.deltaTime;
-            if (transform.position.y <= -0.5) isFall = false;
-        }
-        else
-        {
-            transform.position += Vector3.up * _fallSpeed / 2 * Time.deltaTime;
+            // Subir y seguir al jugador
+            isFollowing = true;
+            yield return new WaitForSeconds(hoverDuration * speedMultiplier);
 
-            if (transform.position.y >= 5)
+            // Detener el seguimiento y esperar antes de caer
+            isFollowing = false;
+            yield return new WaitForSeconds(dropWaitTime * speedMultiplier);
+
+            // Caer al suelo
+            isFalling = true;
+            while (isFalling)
             {
-                _atack = ChangePosition;
-                print("cambio pos");
-                _canAt = true;
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, floorPositionY, transform.position.z), fallSpeed * Time.deltaTime);
+                if (transform.position.y <= (floorPositionY + 0.1f))
+                {
+                    isFalling = false; // Deja de caer cuando toca el suelo
+                }
+                yield return null;
+            }
+
+            // Esperar antes de volver a subir
+            yield return new WaitForSeconds(resetWaitTime * speedMultiplier);
+
+            // Subir de nuevo
+            while (transform.position.y < hoverPositionY)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, hoverPositionY, transform.position.z), riseSpeed * Time.deltaTime);
+                yield return null;
             }
         }
     }
 
-    void ChangePosition()
+    void Update()
     {
-        if (!_canAt) return;
-        float x = Random.Range(-3f, 3f);
-        float z = Random.Range(-3f, 3f);
-
-        transform.position = new Vector3(_target.position.x + x, transform.position.y, _target.position.z + z);
-        StartCoroutine(TimerRoutine());
-        _canAt = false;
-        isFall = true;
-    }
-
-    IEnumerator TimerRoutine()
-    {
-        yield return new WaitForSeconds(_speedAt);
-        transform.position =new Vector3(transform.position.x, 5, transform.position.z);
-        _atack = FallingRise;
-    }
-    public void IncreaseSpeed()
-    {
-        _successCount++;
-        _speedAt = _speedAt - 0.3f;
-        _fallSpeed = _fallSpeed + 1f;
-        if(_successCount > 2)
+        if (isFollowing && player != null)
         {
-            if(_secondBalance !=null && !_secondBalance.gameObject.activeSelf)
-                _secondBalance.gameObject.SetActive(true);
-            _secondBalance.SetValues(_speedAt - 1f,_fallSpeed);
+            // Seguir la posición del jugador desde arriba
+            targetPosition = new Vector3(player.position.x, hoverPositionY, player.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, fallSpeed * Time.deltaTime);
         }
     }
-    public void SetValues(float speedAt,float fallSpeed)
+
+    // Funciones públicas para ajustar la velocidad
+    public void IncreaseSpeed()
     {
-        _speedAt = speedAt;
-        _fallSpeed = fallSpeed;
+        speedMultiplier  -= 0.3f;
     }
 
-
 }
+

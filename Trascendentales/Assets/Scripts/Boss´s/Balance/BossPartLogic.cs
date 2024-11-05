@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossPartLogic : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private Balance_Atack_Method balance;
+    //[SerializeField] private Balance_Atack_Method balance;
     [SerializeField] private Vector3 correctScale;
     public float scaleTolerance = 0.05f;  // Tolerancia para considerar la escala correcta
 
@@ -46,7 +46,7 @@ public class BossPartLogic : MonoBehaviour
         // Desactivar componentes que hacen que esta parte sea interactuable
         scalable.canScale = false;
         interactuable.SetIsAtachableForRuler(false);
-        balance.IncreaseSpeed();
+       // balance.IncreaseSpeed();
         //scalable.enabled = false;
         Debug.Log($"{gameObject.name} alcanzó la escala correcta y ya no es interactuable.");
     }

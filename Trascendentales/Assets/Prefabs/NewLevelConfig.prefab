@@ -7437,7 +7437,7 @@ PrefabInstance:
     - target: {fileID: 8055069782542264571, guid: 9042738332b100449b0a10e2a89209ce,
         type: 3}
       propertyPath: m_Mass
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7623,6 +7623,11 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 2510775611644852232}
+    - target: {fileID: 2290954574694791121, guid: a020c8bd42b67ca459ae45cd617d6ac1,
+        type: 3}
+      propertyPath: holdTimeThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2519444888325775714, guid: a020c8bd42b67ca459ae45cd617d6ac1,
         type: 3}
       propertyPath: anim
@@ -7676,7 +7681,7 @@ PrefabInstance:
     - target: {fileID: 4872339832566942274, guid: a020c8bd42b67ca459ae45cd617d6ac1,
         type: 3}
       propertyPath: holdTimeThreshold
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6165654701097406847, guid: a020c8bd42b67ca459ae45cd617d6ac1,
         type: 3}

@@ -82,4 +82,11 @@ public class Balance : MonoBehaviour
         else
             StartCoroutine(TriggerEvent());
     }
+
+    public void ResetBalance()
+    {
+        isBlocked = false;
+        hasBalancedOnce = false;
+        isBalanced = false;
+    }
 }

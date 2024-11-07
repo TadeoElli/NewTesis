@@ -11,7 +11,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (other.CompareTag("Player") && !hasActivated)
         {
-            other.GetComponent<PlayerManager>().SavePlayer();
+            SaveSystem.SavePlayerData(other.transform.position);
             hasActivated = true;
             savingFeedback.SetActive(true);
             StartCoroutine(HideFeedback());
@@ -25,3 +25,4 @@ public class Checkpoint : MonoBehaviour
         savingFeedback.SetActive(false);
     }
 }
+

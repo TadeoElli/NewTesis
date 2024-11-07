@@ -23,39 +23,20 @@ public class PlayerManager : MonoBehaviour
         animator = animatorManager.animator;
     }
     #region SavePosition
+    private IEnumerator LoadPlayerPosition()
+    {
+        yield return new WaitForEndOfFrame();  // Esperar a que la escena esté completamente inicializada
+        Vector3 savedPosition = SaveSystem.LoadPlayerData();
+
+        if (savedPosition != Vector3.zero)
+        {
+            transform.position = savedPosition;
+        }
+    }
+
     private void Start()
     {
-        LoadPlayer();
-    }
-    public void SavePlayer()
-    {
-        SaveSystem.SavePlayer(this);
-    }
-
-    public IEnumerator LoadPlayerCoroutine()
-    {
-        PlayerData data = SaveSystem.LoadPlayer();
-        if (data == null)
-        {
-            Debug.Log("No save data found, starting from default position");
-            yield break;
-        }
-
-        Debug.Log("Loading saved position");
-        Vector3 position;
-        position.x = data.lastPosition[0];
-        position.y = data.lastPosition[1];
-        position.z = data.lastPosition[2];
-
-        transform.position = position;
-        SaveSystem.DeleteSaveData();
-        SaveSystem.SavePlayer(this);
-        yield return null; // Asegurarse de esperar un frame para confirmar que los datos se aplicaron correctamente
-    }
-
-    public void LoadPlayer()
-    {
-        StartCoroutine(LoadPlayerCoroutine());
+        StartCoroutine(LoadPlayerPosition());
     }
     #endregion
     private void Update()

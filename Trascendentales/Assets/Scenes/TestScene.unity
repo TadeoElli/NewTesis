@@ -7559,6 +7559,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770037221}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &776808105 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3653359195175577735, guid: c5ab43aafa20f35449c5d42d03d57854,
+    type: 3}
+  m_PrefabInstance: {fileID: 1009709726}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c05b0df5f7eec428abd3b6cfd1764e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &796069947
 GameObject:
   m_ObjectHideFlags: 0
@@ -8835,6 +8847,18 @@ MonoBehaviour:
   correctScale: {x: 7, y: 7, z: 7}
   scaleTolerance: 0.25
   isInteractable: 1
+--- !u!114 &949615506 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2129346657136278297, guid: c5ab43aafa20f35449c5d42d03d57854,
+    type: 3}
+  m_PrefabInstance: {fileID: 1009709726}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6419d5186779dcb4d9cad03c69a0e26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &960867240
 GameObject:
   m_ObjectHideFlags: 0
@@ -9609,6 +9633,16 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2129346657136278297, guid: c5ab43aafa20f35449c5d42d03d57854,
+        type: 3}
+      propertyPath: setScaleParentTool
+      value: 
+      objectReference: {fileID: 776808105}
+    - target: {fileID: 2129346657136278297, guid: c5ab43aafa20f35449c5d42d03d57854,
+        type: 3}
+      propertyPath: setRotationParentTool
+      value: 
+      objectReference: {fileID: 1053584783}
     - target: {fileID: 2510775611644852232, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: orthographic
@@ -9654,6 +9688,16 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.008524492
       objectReference: {fileID: 0}
+    - target: {fileID: 3653359195175577735, guid: c5ab43aafa20f35449c5d42d03d57854,
+        type: 3}
+      propertyPath: compassTool
+      value: 
+      objectReference: {fileID: 949615506}
+    - target: {fileID: 3653359195175577735, guid: c5ab43aafa20f35449c5d42d03d57854,
+        type: 3}
+      propertyPath: setRotationParentTool
+      value: 
+      objectReference: {fileID: 1053584783}
     - target: {fileID: 3768542913238313606, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -9819,6 +9863,16 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8388738762509102311, guid: c5ab43aafa20f35449c5d42d03d57854,
+        type: 3}
+      propertyPath: compassTool
+      value: 
+      objectReference: {fileID: 949615506}
+    - target: {fileID: 8388738762509102311, guid: c5ab43aafa20f35449c5d42d03d57854,
+        type: 3}
+      propertyPath: setScaleParentTool
+      value: 
+      objectReference: {fileID: 776808105}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10015,6 +10069,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1051499624}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1053584783 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8388738762509102311, guid: c5ab43aafa20f35449c5d42d03d57854,
+    type: 3}
+  m_PrefabInstance: {fileID: 1009709726}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2325f78916eb0b84390babdaf333751f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1054537391
 GameObject:
   m_ObjectHideFlags: 0

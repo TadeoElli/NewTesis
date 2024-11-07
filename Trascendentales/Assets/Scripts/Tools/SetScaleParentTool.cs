@@ -4,6 +4,8 @@ using UnityEngine.Animations;
 public class SetScaleParentTool : Tools
 {
     private bool isDragging = false;
+    [SerializeField] private SetRotationParentTool setRotationParentTool;
+    [SerializeField] private CompassTool compassTool;
     private GameObject firstObject;
     private IEscalable scalable;
     private GameObject secondObject;
@@ -29,6 +31,8 @@ public class SetScaleParentTool : Tools
         {
             ResetConstraint();
         }
+        compassTool.ResetConstraint();
+        setRotationParentTool.ResetConstraint();
         mouseState.SetRightclickPress();
         scalable.OnEraserInteract += ResetDragging;
         scalable.OnEraserInteract += DropInteractable;
@@ -131,18 +135,6 @@ public class SetScaleParentTool : Tools
         if (!isDragging && secondObject != null)
         {
             ResetConstraint();
-            firstObject = null;
-            if (secondObject.TryGetComponent<Rigidbody>(out Rigidbody component))
-            {
-                component.isKinematic = false;
-            }
-            secondObject = null;
-            if(scalable != null)
-            {
-                scalable.OnEraserInteract -= ResetDragging;
-                scalable.OnEraserInteract -= DropInteractable;
-                scalable = null;
-            }
         }
         mouseState.DropRightClick();
         base.DropInteractable();
@@ -152,7 +144,7 @@ public class SetScaleParentTool : Tools
     {
         isDragging = false;
     }
-    private void ResetConstraint()
+    public void ResetConstraint()
     {
         if (constraint == null)
             return;
@@ -165,7 +157,18 @@ public class SetScaleParentTool : Tools
         constraint.RemoveSource(0);
         Destroy(constraint);
         constraint = null;
-        // Aplicar la escala guardada
+        firstObject = null;
+        if (secondObject.TryGetComponent<Rigidbody>(out Rigidbody component))
+        {
+            component.isKinematic = false;
+        }
+        secondObject = null;
+        if(scalable != null)
+        {
+            scalable.OnEraserInteract -= ResetDragging;
+            scalable.OnEraserInteract -= DropInteractable;
+            scalable = null;
+        }
     }
 }
 

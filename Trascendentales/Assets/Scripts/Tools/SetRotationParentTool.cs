@@ -4,6 +4,8 @@ using UnityEngine.Animations;
 public class SetRotationParentTool : Tools
 {
     private bool isDragging = false;
+    [SerializeField] private SetScaleParentTool setScaleParentTool;
+    [SerializeField] private CompassTool compassTool;
     private GameObject firstObject;
     private IRotable rotable;
     private GameObject secondObject;
@@ -30,6 +32,8 @@ public class SetRotationParentTool : Tools
         {
             ResetConstraint();
         }
+        setScaleParentTool.ResetConstraint();
+        compassTool.ResetConstraint();
         mouseState.SetRightclickPress();
         rotable.OnEraserInteract += ResetDragging;
         rotable.OnEraserInteract += DropInteractable;
@@ -105,15 +109,6 @@ public class SetRotationParentTool : Tools
         if (!isDragging && secondObject != null)
         {
             ResetConstraint();
-            firstObject = null;
-            secondObject.GetComponent<Rigidbody>().isKinematic = false;
-            secondObject = null;
-            if(rotable != null)
-            {
-                rotable.OnEraserInteract -= ResetDragging;
-                rotable.OnEraserInteract -= DropInteractable;
-                rotable = null;
-            }
         }
         mouseState.DropRightClick();
         base.DropInteractable();
@@ -123,7 +118,7 @@ public class SetRotationParentTool : Tools
     {
         isDragging = false;
     }
-    private void ResetConstraint()
+    public void ResetConstraint()
     {
         if (constraint == null)
             return;
@@ -135,6 +130,15 @@ public class SetRotationParentTool : Tools
         constraint.RemoveSource(0);
         Destroy(constraint);
         constraint = null;
+        firstObject = null;
+        secondObject.GetComponent<Rigidbody>().isKinematic = false;
+        secondObject = null;
+        if(rotable != null)
+        {
+            rotable.OnEraserInteract -= ResetDragging;
+            rotable.OnEraserInteract -= DropInteractable;
+            rotable = null;
+        }
 
     }
 }

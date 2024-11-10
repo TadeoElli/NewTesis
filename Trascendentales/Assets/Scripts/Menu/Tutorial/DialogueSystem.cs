@@ -70,6 +70,7 @@ public class DialogueSystem : MonoBehaviour
         foreach (char dialogueChar in currentDialogue[index].ToCharArray())
         {
             _text.text += dialogueChar;
+            Debug.Log("Adding character: " + dialogueChar);
             AudioManager.Instance.PlaySoundEffect(writeClip);
             yield return new WaitForSeconds(txtSpeed);
         }

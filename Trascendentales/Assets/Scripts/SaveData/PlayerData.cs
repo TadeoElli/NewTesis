@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
 public class PlayerData
 {
-    public float[] lastPosition;
+    public float positionX;
+    public float positionY;
+    public float positionZ;
 
-    public PlayerData (PlayerManager player)
+    public PlayerData(Vector3 position)
     {
-        lastPosition = new float[3];
-        lastPosition[0] = player.transform.position.x;
-        lastPosition[1] = player.transform.position.y;
-        lastPosition[2] = player.transform.position.z;
+        positionX = position.x;
+        positionY = position.y;
+        positionZ = position.z;
+    }
 
+    public Vector3 GetPosition()
+    {
+        return new Vector3(positionX, positionY, positionZ);
     }
 }

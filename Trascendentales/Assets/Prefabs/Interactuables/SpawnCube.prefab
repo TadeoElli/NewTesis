@@ -149,7 +149,7 @@ MonoBehaviour:
   minScale: {x: 1, y: 1, z: 1}
   maxScale: {x: 3, y: 3, z: 3}
   maxRadius: 0
-  canAttachOthers: 0
+  canAttachOthers: 1
   canScale: 1
   isScaling: 0
   objRenderer: {fileID: 5649012913557171223}
@@ -165,8 +165,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e113ef43c09c3084d8cdff7d1ee67ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 1
-  rb: {fileID: 0}
 --- !u!54 &4646270654586461909
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -254,5 +252,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e113ef43c09c3084d8cdff7d1ee67ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 1
-  rb: {fileID: 0}

@@ -20,6 +20,7 @@ public class InteractuableObject : MonoBehaviour, IInteractable, IFeedback
     public bool IsAtachedToSquad() => isAtachedToSquad;
 
     private Color  m_feedbackParent;
+    private bool isMouseOver = false;
 
 
     private void Start()
@@ -63,6 +64,9 @@ public class InteractuableObject : MonoBehaviour, IInteractable, IFeedback
     {
         if(isAtachedToCompass || isAtachedToRuler || isAtachedToSquad)
             FeedbackManager.Instance.ApplyFeedback(rend, m_feedbackParent);
+        else
+            if(!isMouseOver)
+                FeedbackManager.Instance.ClearFeedback(rend); // Limpiar el feedback al salir del objeto
     }
     public void SetIsAtachableForRuler(bool isAtachable)
     {
@@ -71,6 +75,7 @@ public class InteractuableObject : MonoBehaviour, IInteractable, IFeedback
 
     public void ShowFeedback()
     {
+        isMouseOver = true;
         switch (MouseState.Instance.CurrentToolActive())
         {
             case ToolTypes.Brush:
@@ -78,14 +83,20 @@ public class InteractuableObject : MonoBehaviour, IInteractable, IFeedback
             case ToolTypes.Ruler:
                 if (!MouseState.Instance.IsLeftClickPress() && MouseState.Instance.IsRightClickPress() && isAtacheableForRuler)
                     FeedbackManager.Instance.ApplyFeedback(rend, m_feedbackParent);
+                else
+                    FeedbackManager.Instance.ClearFeedback(rend); // Limpiar el feedback al salir del objeto
                 break;
             case ToolTypes.Squad:
                 if (!MouseState.Instance.IsLeftClickPress() && MouseState.Instance.IsRightClickPress() && isAtacheableForSquad)
                     FeedbackManager.Instance.ApplyFeedback(rend, m_feedbackParent);
+                else
+                    FeedbackManager.Instance.ClearFeedback(rend); // Limpiar el feedback al salir del objeto
                 break;
             case ToolTypes.Compass:
                 if (MouseState.Instance.IsLeftClickPress() && !MouseState.Instance.IsRightClickPress() && isAtacheableForCompass)
                     FeedbackManager.Instance.ApplyFeedback(rend, m_feedbackParent);
+                else
+                    FeedbackManager.Instance.ClearFeedback(rend); // Limpiar el feedback al salir del objeto
                 break;
             case ToolTypes.Eraser:
                 break;
@@ -96,6 +107,6 @@ public class InteractuableObject : MonoBehaviour, IInteractable, IFeedback
 
     public void HideFeedback()
     {
-        //FeedbackManager.Instance.ClearFeedback(gameObject); // Limpiar el feedback al salir del objeto
+        isMouseOver = false;
     }
 }

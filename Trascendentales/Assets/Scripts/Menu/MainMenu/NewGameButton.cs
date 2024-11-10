@@ -8,7 +8,7 @@ public class NewGameButton : MonoBehaviour
     [SerializeField] private Button loadButton;
     public void StartNewGame()
     {
-        SaveSystem.DeleteSaveData();
+        SaveSystem.DeletePlayerData();
     }
     private void Awake()
     {

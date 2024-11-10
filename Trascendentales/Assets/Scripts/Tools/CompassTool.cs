@@ -8,6 +8,8 @@ public class CompassTool : Tools
 {
     [SerializeField] private Transform gimball;
     [SerializeField] private GameObject compassGizmo;
+    [SerializeField] private SetScaleParentTool setScaleParentTool;
+    [SerializeField] private SetRotationParentTool setRotationParentTool;
     private float maxRadius; // Radio máximo permitido
     private ParentConstraint parentConstraint; // El constraint para la rotación
     private Vector3 initialMousePosition;
@@ -38,6 +40,8 @@ public class CompassTool : Tools
         {
             ResetConstraint();
         }
+        setScaleParentTool.ResetConstraint();
+        setRotationParentTool.ResetConstraint();
         ResetGimball();
         gimball.position = interactable.transform.position;
         gimball.SetParent(interactable.transform);
@@ -143,30 +147,17 @@ public class CompassTool : Tools
         if (!isDragging)
         {
             ResetConstraint();
-            if (firstObject != null)
-            {
-                firstObject = null;
-            }
-            if (secondObject != null)
-            {
-                secondObject.GetComponent<Rigidbody>().isKinematic = false;
-                if (secondObject.TryGetComponent<IInteractable>(out IInteractable component))
-                {
-                    component.SetUnatachedToCompass();
-                }
-                secondObject = null;
-            }
             if (compassable != null) { 
             compassable.OnEraserInteract -= ResetDragging;
             compassable.OnEraserInteract -= DropInteractable;
             compassable = null;
             }
             ResetGimball();
-            compassGizmo.SetActive(false);
         }
         base.DropInteractable();
         mouseState.DropLeftClick();
         inputManager.OnLeftClickDrop -= DropInteractable;
+        compassGizmo.SetActive(false);
     }
     private void ResetDragging()
     {
@@ -182,11 +173,13 @@ public class CompassTool : Tools
         gimball.rotation = Quaternion.identity;
         gimball.localScale = Vector3.one;
     }
-    private void ResetConstraint()
+    public void ResetConstraint()
     {
         currentRadius = 0f;
         if (parentConstraint == null)
             return;
+        
+        compassGizmo.SetActive(false);
         // Desactivar el constraint y limpiar la fuente
         FeedbackManager.Instance.DeactivateLineRenderer();
         parentConstraint.constraintActive = false;
@@ -194,6 +187,19 @@ public class CompassTool : Tools
         parentConstraint.enabled = false;
         parentConstraint = null;
         Destroy(secondObject.GetComponent<ParentConstraint>());
+        if (firstObject != null)
+        {
+            firstObject = null;
+        }
+        if (secondObject != null)
+        {
+            secondObject.GetComponent<Rigidbody>().isKinematic = false;
+            if (secondObject.TryGetComponent<IInteractable>(out IInteractable component))
+            {
+                component.SetUnatachedToCompass();
+            }
+            secondObject = null;
+        }
 
     }
 }

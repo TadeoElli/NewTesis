@@ -42,7 +42,8 @@ public class BalancePlate : MonoBehaviour
         float totalWeight = 0f;
         foreach (Rigidbody obj in objectsOnPlate)
         {
-            totalWeight += Mathf.Round(obj.mass);
+            if(obj != null)
+                totalWeight += Mathf.Round(obj.mass);
         }
         balance.UpdatePlateWeight(this, totalWeight + plateWeight);
     }
@@ -50,7 +51,7 @@ public class BalancePlate : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
 
             // Recorrer la lista al revés para eliminar objetos de manera segura
             for (int i = objectsOnPlate.Count - 1; i >= 0; i--)

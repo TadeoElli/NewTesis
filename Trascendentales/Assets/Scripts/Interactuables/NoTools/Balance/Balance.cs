@@ -8,7 +8,8 @@ public class Balance : MonoBehaviour
     [SerializeField] private Transform rightPlate; // Transform del platillo derecho
     [SerializeField] private BalancePlate leftPlateTrigger; // Referencia al script del platillo izquierdo
     [SerializeField] private BalancePlate rightPlateTrigger; // Referencia al script del platillo derecho
-    private float movementRange = 2f; // Rango máximo de movimiento vertical
+    [SerializeField] float movementRange = 2f; // Rango máximo de movimiento vertical
+    [SerializeField] float offsetY = 2f; // Rango máximo de movimiento vertical
     private float balanceSpeed = 2f; // Velocidad de balanceo
     private float leftWeight, rightWeight, weightDifference, leftPlateTargetY, rightPlateTargetY;
     private bool isBalanced = false;
@@ -33,11 +34,11 @@ public class Balance : MonoBehaviour
 
         // Interpola suavemente las posiciones de los platillos
         Vector3 leftPlatePosition = leftPlate.localPosition;
-        leftPlatePosition.y = Mathf.Lerp(leftPlate.localPosition.y, leftPlateTargetY, Time.deltaTime * balanceSpeed);
+        leftPlatePosition.y = Mathf.Lerp(leftPlate.localPosition.y, leftPlateTargetY + offsetY, Time.deltaTime * balanceSpeed);
         leftPlate.localPosition = leftPlatePosition;
 
         Vector3 rightPlatePosition = rightPlate.localPosition;
-        rightPlatePosition.y = Mathf.Lerp(rightPlate.localPosition.y, rightPlateTargetY, Time.deltaTime * balanceSpeed);
+        rightPlatePosition.y = Mathf.Lerp(rightPlate.localPosition.y, rightPlateTargetY + offsetY , Time.deltaTime * balanceSpeed);
         rightPlate.localPosition = rightPlatePosition;
     }
 
@@ -80,5 +81,12 @@ public class Balance : MonoBehaviour
         }
         else
             StartCoroutine(TriggerEvent());
+    }
+
+    public void ResetBalance()
+    {
+        isBlocked = false;
+        hasBalancedOnce = false;
+        isBalanced = false;
     }
 }

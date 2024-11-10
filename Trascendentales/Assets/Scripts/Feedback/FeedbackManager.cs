@@ -48,6 +48,7 @@ public class FeedbackManager : MonoBehaviour
     // Activar LineRenderer entre el clic inicial y el mouse
     public void StartMouseLine(GameObject gameObject)
     {
+        DeactivateLineRenderer();
         initialMousePosition = GetMouseWorldPosition();
         lineRenderer.SetPosition(0, gameObject.transform.position);
         lineRenderer.SetPosition(1, initialMousePosition);
@@ -99,6 +100,7 @@ public class FeedbackManager : MonoBehaviour
     // Activar LineRenderer entre dos GameObjects
     public void ActivateLineRenderer(GameObject parent, GameObject child)
     {
+        DeactivateLineRenderer();
         parentObject = parent;
         childObject = child;
         isConnectingObjects = true;

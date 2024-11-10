@@ -391,6 +391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionForBrush: 0
   interactionForEraser: 0
+  objRenderer: {fileID: 0}
   otherParts:
   - {fileID: 412175186}
   - {fileID: 1262593360}
@@ -414,6 +415,8 @@ MonoBehaviour:
   maxRadius: 15
   canAttachOthers: 1
   canScale: 0
+  isScaling: 0
+  objRenderer: {fileID: 0}
 --- !u!114 &100281257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,9 +430,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAtacheableForCompass: 0
+  isRotatingTowardsTheCompass: 0
   isAtacheableForRuler: 1
   isAtacheableForSquad: 0
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  rend: {fileID: 0}
 --- !u!114 &100281258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,6 +451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   correctScale: {x: 4, y: 4, z: 4}
   scaleTolerance: 0.25
+  isInteractable: 1
 --- !u!65 &100281259
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -793,6 +801,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionForBrush: 0
   interactionForEraser: 0
+  objRenderer: {fileID: 0}
   otherParts:
   - {fileID: 100281254}
   - {fileID: 1262593360}
@@ -816,6 +825,8 @@ MonoBehaviour:
   maxRadius: 15
   canAttachOthers: 1
   canScale: 0
+  isScaling: 0
+  objRenderer: {fileID: 0}
 --- !u!114 &412175189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -829,9 +840,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAtacheableForCompass: 0
+  isRotatingTowardsTheCompass: 0
   isAtacheableForRuler: 1
   isAtacheableForSquad: 0
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  rend: {fileID: 0}
 --- !u!114 &412175190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -846,6 +861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   correctScale: {x: 4, y: 4, z: 4}
   scaleTolerance: 0.25
+  isInteractable: 1
 --- !u!65 &412175191
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1974,6 +1990,8 @@ MonoBehaviour:
   maxRadius: 15
   canAttachOthers: 1
   canScale: 0
+  isScaling: 0
+  objRenderer: {fileID: 0}
 --- !u!114 &939830876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1988,6 +2006,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionForBrush: 0
   interactionForEraser: 0
+  objRenderer: {fileID: 0}
   otherParts:
   - {fileID: 412175186}
   - {fileID: 100281254}
@@ -2007,9 +2026,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAtacheableForCompass: 0
+  isRotatingTowardsTheCompass: 0
   isAtacheableForRuler: 0
   isAtacheableForSquad: 0
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  rend: {fileID: 0}
 --- !u!114 &939830878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2024,6 +2047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   correctScale: {x: 7, y: 7, z: 7}
   scaleTolerance: 0.25
+  isInteractable: 1
 --- !u!1 &1009623452
 GameObject:
   m_ObjectHideFlags: 0
@@ -2120,12 +2144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b04dd67aa4d7641b97b54697535117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1072242715 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6496342794344882879, guid: c05b0e0b10c6f1f4aa3df30b535daf94,
-    type: 3}
-  m_PrefabInstance: {fileID: 493736487}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1079614885
 GameObject:
   m_ObjectHideFlags: 0
@@ -2473,6 +2491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionForBrush: 0
   interactionForEraser: 0
+  objRenderer: {fileID: 0}
   otherParts:
   - {fileID: 412175186}
   - {fileID: 100281254}
@@ -2496,6 +2515,8 @@ MonoBehaviour:
   maxRadius: 15
   canAttachOthers: 1
   canScale: 0
+  isScaling: 0
+  objRenderer: {fileID: 0}
 --- !u!114 &1262593363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2509,9 +2530,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAtacheableForCompass: 0
+  isRotatingTowardsTheCompass: 0
   isAtacheableForRuler: 1
   isAtacheableForSquad: 0
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  rend: {fileID: 0}
 --- !u!114 &1262593364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2526,6 +2551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   correctScale: {x: 5, y: 5, z: 5}
   scaleTolerance: 0.25
+  isInteractable: 1
 --- !u!65 &1262593365
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3221,6 +3247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionForBrush: 0
   interactionForEraser: 0
+  objRenderer: {fileID: 0}
   otherParts:
   - {fileID: 412175186}
   - {fileID: 100281254}
@@ -3244,6 +3271,8 @@ MonoBehaviour:
   maxRadius: 15
   canAttachOthers: 1
   canScale: 0
+  isScaling: 0
+  objRenderer: {fileID: 0}
 --- !u!114 &1594067789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3257,9 +3286,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAtacheableForCompass: 0
+  isRotatingTowardsTheCompass: 0
   isAtacheableForRuler: 1
   isAtacheableForSquad: 0
   isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  rend: {fileID: 0}
 --- !u!114 &1594067790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3274,6 +3307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   correctScale: {x: 5, y: 5, z: 5}
   scaleTolerance: 0.25
+  isInteractable: 1
 --- !u!65 &1594067791
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3599,9 +3633,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7e52f1b3965e1468a702437b3d91e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 1072242715}
-  _speedAt: 2
-  _fallSpeed: 2
+  player: {fileID: 0}
+  hoverPositionY: 0
+  floorPositionY: 0
+  hoverDuration: 3
+  dropWaitTime: 2
+  resetWaitTime: 3
+  fallSpeed: 5
+  riseSpeed: 5
+  speedMultiplier: 1
 --- !u!4 &2025041893
 Transform:
   m_ObjectHideFlags: 0

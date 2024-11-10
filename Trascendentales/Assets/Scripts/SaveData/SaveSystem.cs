@@ -1,72 +1,52 @@
-using UnityEngine;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
 public static class SaveSystem
 {
-    public static void SavePlayer(PlayerManager player)
+    private static string path = Application.persistentDataPath + "/playerData.json";
+
+    // Guardar datos en JSON
+    public static void SavePlayerData(Vector3 position)
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/player.data";
-
-        // Añade una comprobación de seguridad antes de sobrescribir
-        if (ExistData())
-        {
-            Debug.Log("Overwriting save data...");
-        }
-
-        FileStream stream = new FileStream(path, FileMode.Create);
-
-        PlayerData data = new PlayerData(player);
-        formatter.Serialize(stream, data);
-        stream.Close();
+        PlayerData data = new PlayerData(position);
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(path, json);
+        Debug.Log("Posición guardada en: " + path);
     }
 
-
-    public static PlayerData LoadPlayer()
+    // Cargar datos desde JSON
+    public static Vector3 LoadPlayerData()
     {
-        string path = Application.persistentDataPath + "/player.data";
         if (File.Exists(path))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
-
-            PlayerData data = formatter.Deserialize(stream) as PlayerData;
-            stream.Close();
-            return data;
+            string json = File.ReadAllText(path);
+            PlayerData data = JsonUtility.FromJson<PlayerData>(json);
+            return data.GetPosition();
         }
         else
         {
-            Debug.LogError("Save data file not found in " + path);
-            return null;
+            Debug.LogWarning("Archivo de guardado no encontrado. Usando posición inicial.");
+            return Vector3.zero; // Posición inicial o posición predeterminada
         }
     }
+
     // Borrar datos del jugador
-    public static void DeleteSaveData()
+    public static void DeletePlayerData()
     {
-        string path = Application.persistentDataPath + "/player.data";
-        if (ExistData())
+        if (File.Exists(path))
         {
-            File.Delete(path); // Borra el archivo de guardado
-            Debug.Log("Save data deleted.");
+            File.Delete(path);
+            Debug.Log("Datos de guardado borrados.");
         }
         else
         {
-            Debug.Log("No save data to delete.");
+            Debug.LogWarning("No se encontraron datos para borrar.");
         }
     }
 
     public static bool ExistData()
     {
-        string path = Application.persistentDataPath + "/player.data";
-        if (File.Exists(path))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return File.Exists(path);
     }
-
 }
+

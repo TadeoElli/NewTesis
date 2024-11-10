@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class ShaderController : MonoBehaviour
+public class DisolveMaterial : MonoBehaviour
 {
     public Material material; 
     [SerializeField] private float duration = 2f;
@@ -12,12 +12,10 @@ public class ShaderController : MonoBehaviour
         material = GetComponent<Renderer>().material;
     }
 
-    private void OnCollisionEnter(Collision other)
+    public void StartDisolve()
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            StartCoroutine(CambiarValorGradualmente(0f, 1f, duration));
-        }
+        Debug.Log("trigger ");
+        StartCoroutine(CambiarValorGradualmente(0f,2f, duration));
     }
 
     private IEnumerator CambiarValorGradualmente(float inicio, float fin, float tiempo)

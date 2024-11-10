@@ -24,6 +24,7 @@ public class DragAtachableTool : Tools {
         parent = interactable.GetCompassParent();
         if(!parent.TryGetComponent<ICompassable>(out ICompassable compassable))
             return;
+        Debug.Log("Entro");
         maxRadius = compassable.GetMaxRadius();
         base.Interact(objective, isPerspective2D);
         mouseState.SetRightclickPress();

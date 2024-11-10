@@ -228,7 +228,7 @@ public class PlayerLocomotion : MonoBehaviour
     public bool TryToGrab()
     {
         // Usar un OverlapSphere para detectar el objeto cercano
-        Collider hitCollider = Physics.OverlapSphere(transform.position, grabRadius, grabLayerMask).FirstOrDefault();
+        Collider hitCollider = Physics.OverlapSphere(transform.position, grabRadius, grabLayerMask).FirstOrDefault(c => c.CompareTag("Platform"));
 
         if (hitCollider != null)
         {

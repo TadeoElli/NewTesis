@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 2124994994747297646}
   m_Layer: 6
   m_Name: SpawnSphere
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,6 +156,7 @@ MonoBehaviour:
   canRotate: 1
   maxRadius: 0
   canAttachOthers: 0
+  needToBeKinematic: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 6649980286205041670}
 --- !u!114 &2898222206795698952
@@ -239,5 +240,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e113ef43c09c3084d8cdff7d1ee67ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 1
-  rb: {fileID: 0}

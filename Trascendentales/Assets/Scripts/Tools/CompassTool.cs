@@ -107,7 +107,7 @@ public class CompassTool : Tools
             component.SetIsAtachedToCompass(objective);
 
             secondObject = hit.collider.gameObject;
-            secondObject.GetComponent<Rigidbody>().isKinematic = true;
+            //secondObject.GetComponent<Rigidbody>().isKinematic = true;
 
             // Configurar el constraint para que el segundo objeto siga la rotación del gimball
             if (parentConstraint != null)
@@ -193,7 +193,7 @@ public class CompassTool : Tools
         }
         if (secondObject != null)
         {
-            secondObject.GetComponent<Rigidbody>().isKinematic = false;
+            //secondObject.GetComponent<Rigidbody>().isKinematic = false;
             if (secondObject.TryGetComponent<IInteractable>(out IInteractable component))
             {
                 component.SetUnatachedToCompass();

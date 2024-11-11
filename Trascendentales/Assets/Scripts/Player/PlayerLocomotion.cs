@@ -115,7 +115,7 @@ public class PlayerLocomotion : MonoBehaviour
     {
         // Restaurar la posición Z original cuando volvemos a 3D
         Vector3 currentPosition = playerRigidbody.position;
-        playerRigidbody.position = new Vector3(currentPosition.x, currentPosition.y, originalZPosition);
+        playerRigidbody.position = new Vector3(currentPosition.x, currentPosition.y, 0f);
 
     }
     #endregion

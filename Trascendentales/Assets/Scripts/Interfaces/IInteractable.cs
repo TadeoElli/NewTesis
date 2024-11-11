@@ -35,6 +35,7 @@ public interface IEscalable
 public interface IRotable
 {
     public bool CanRotate();
+    public bool NeedToBeKinematic();
     public bool CanRotateInY();
     public bool CanRotateInZ();
     public bool CanAttachOthers();

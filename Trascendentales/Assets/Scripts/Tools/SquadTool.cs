@@ -58,7 +58,8 @@ public class SquadTool : Tools
             }
         }
         objectiveRB = objective.GetComponent<Rigidbody>();
-        objectiveRB.isKinematic = true;
+        if(!rotable.NeedToBeKinematic())
+            objectiveRB.isKinematic = true;
         gimball.position = objectiveTr.position;
         if(objective.TryGetComponent<IRotableClamp>(out IRotableClamp component1))
         {
@@ -72,7 +73,8 @@ public class SquadTool : Tools
     public override void DropInteractable()
     {
         if(objective == null) return;
-        objectiveRB.isKinematic = false;
+        if(!rotable.NeedToBeKinematic())
+            objectiveRB.isKinematic = false;
         objectiveRB = null;
         objectiveTr.SetParent(oldParent);
         oldParent = null;

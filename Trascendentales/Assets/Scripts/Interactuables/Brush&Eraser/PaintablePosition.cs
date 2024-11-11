@@ -11,7 +11,7 @@ public class PaintablePosition : PaintableObject
         transform.position = newPosition;
         if (TryGetComponent<ChangePositionByPerspective>(out ChangePositionByPerspective component))
         {
-            //component.SetNewPosition();
+            component.SaveNewPositionByBrush();
         }
     }
     public override void InteractionWithEraser()
@@ -20,7 +20,7 @@ public class PaintablePosition : PaintableObject
         transform.position = oldPosition;
         if (TryGetComponent<ChangePositionByPerspective>(out ChangePositionByPerspective component))
         {
-           // component.SetNewPosition();
+           component.SaveNewPositionByBrush();
         }
     }
 }

@@ -36,7 +36,12 @@ public class SceneController : MonoBehaviour
         string sceneName = scene.ToString(); // Convierte el valor del enum a una cadena (string).
 
         SceneManager.LoadScene(sceneName);
-
+    }
+    public void ResetScene()
+    {
+        // Recargar la escena actual
+        Time.timeScale = 1; // Restaurar el tiempo
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 }

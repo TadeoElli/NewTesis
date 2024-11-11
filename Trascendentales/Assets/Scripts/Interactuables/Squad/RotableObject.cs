@@ -10,6 +10,7 @@ public class RotableObject : MonoBehaviour, IRotable, IFeedback
     [SerializeField] private bool canRotate = true;
     [SerializeField] private float maxRadius;
     [SerializeField] private bool canAttachOthers;
+    [SerializeField] private bool needToBeKinematic = false;
     [SerializeField] public Transform gimballRef;
     public event Action OnEraserInteract;
     private Color m_feedback;
@@ -18,6 +19,7 @@ public class RotableObject : MonoBehaviour, IRotable, IFeedback
 
 
     public bool CanRotate() => canRotate;
+    public bool NeedToBeKinematic() => needToBeKinematic;
     public bool CanRotateInY() => canRotateInY;
     public bool CanRotateInZ() => canRotateInZ;
     public bool CanAttachOthers() => canAttachOthers;

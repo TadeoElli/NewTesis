@@ -36,6 +36,12 @@ public class ChangePositionByPerspective : MonoBehaviour, IObjectAffectableByPer
             isOriginalPositionSaved = true;
         }
     }
+    public void SaveNewPositionByBrush()
+    {
+        originalPositionZ = transform.position.z;
+        if(cam.is2D)
+            transform.position = new Vector3(transform.position.x,transform.position.y,0f);
+    }
     public void OnPerspectiveChanged(bool is2D, bool isFrontView)
     {
         // Verifica si el objeto debe ser visible o no y ajusta la posición en Z

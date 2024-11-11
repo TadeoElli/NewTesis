@@ -13,7 +13,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera virtualCamera3DFront, virtualCamera3DBack;
     private CinemachineVirtualCamera currentVirtualCamera;
     [SerializeField] private float transitionDuration = 1f; // Duración del slerp
-    private bool is2D = false;
+    public bool is2D = false;
 
     private Coroutine currentTransition;
 

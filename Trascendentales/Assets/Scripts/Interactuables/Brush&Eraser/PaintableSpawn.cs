@@ -21,6 +21,7 @@ public class PaintableSpawn : PaintableObject
         }
         else
         {
+            spawnedObject.SetActive(true);
             spObjectRb.velocity = Vector3.zero;
             spObjectRb.angularVelocity = Vector3.zero;
             spawnedObject.transform.position = transform.position;

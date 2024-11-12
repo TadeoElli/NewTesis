@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 9097153500563284886}
   - component: {fileID: -6156559369848119717}
   - component: {fileID: 2312479690385528703}
-  - component: {fileID: -7015600708228403969}
   m_Layer: 6
   m_Name: SpawnPlatform
   m_TagString: Untagged
@@ -158,6 +157,7 @@ MonoBehaviour:
   canRotate: 1
   maxRadius: 15
   canAttachOthers: 0
+  needToBeKinematic: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 4133567735572385632}
 --- !u!114 &7333091602985305767
@@ -242,17 +242,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInFront: 0
   isInBack: 0
---- !u!114 &-7015600708228403969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3064545021292272062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e113ef43c09c3084d8cdff7d1ee67ad2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weight: 1
-  rb: {fileID: 0}

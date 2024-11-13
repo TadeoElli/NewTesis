@@ -12,6 +12,7 @@ public class RotableObject : MonoBehaviour, IRotable, IFeedback
     [SerializeField] private bool canAttachOthers;
     [SerializeField] private bool needToBeKinematic = false;
     [SerializeField] public Transform gimballRef;
+    private Quaternion originalRotation;
     public event Action OnEraserInteract;
     private Color m_feedback;
     [SerializeField] private Renderer objRenderer;
@@ -29,6 +30,8 @@ public class RotableObject : MonoBehaviour, IRotable, IFeedback
     private void Start()
     {
         m_feedback = ColorDictionary.GetColor("FeedbackSquad");
+        originalRotation = transform.rotation;
+        OnEraserInteract += ResetRotation;
     }
     public void SetCanRotate(bool state)
     {
@@ -64,6 +67,11 @@ public class RotableObject : MonoBehaviour, IRotable, IFeedback
         }
 
 
+    }
+
+    private void ResetRotation()
+    {
+        transform.rotation = originalRotation;
     }
 
     public void HideFeedback()

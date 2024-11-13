@@ -120,9 +120,10 @@ public class SquadTool : Tools
         lastMousePosition = currentMousePosition; // Actualiza la última posición del mouse
 
         float rotationAmount = mouseDelta.x * rotationSpeed; // Calcula la cantidad de rotación basada en el movimiento del mouse
-
         if (isOn2D)
         {
+            if (!cameraManager.isFrontView)
+                rotationAmount = rotationAmount * -1;
             if (canRotateInZ)
             {
                 if (clamp != null && clamp.IsClamped())

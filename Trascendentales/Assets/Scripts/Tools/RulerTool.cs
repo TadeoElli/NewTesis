@@ -51,10 +51,10 @@ public class RulerTool : Tools
     private void SetGimball()
     {
         gimball.position = objectiveTr.position;
-        oldParent = objectiveTr.parent;
-        objectiveTr.SetParent(gimball);
+        gimball.localRotation = objectiveTr.localRotation;
+        gimball.localScale = objectiveTr.lossyScale;
         // Obtener el tamaño real del objeto usando su renderer
-        Renderer objRenderer = objectiveTr.GetComponent<Renderer>();
+        /*Renderer objRenderer = objectiveTr.GetComponent<Renderer>();
         if (objRenderer != null)
         {
             Vector3 objectSize = objRenderer.bounds.size;
@@ -62,9 +62,10 @@ public class RulerTool : Tools
 
             // Ajustar la escala del gimball para que no dependa de la escala actual del objeto
             gimball.localScale = new Vector3(largestDimension, largestDimension, largestDimension);
-        }
+        }*/
+        oldParent = objectiveTr.parent;
+        objectiveTr.SetParent(gimball);
 
-        gimball.localRotation = objectiveTr.localRotation;
 
         if (isOn2D)
         {

@@ -14,7 +14,8 @@ public class CameraManager : MonoBehaviour
     private CinemachineVirtualCamera currentVirtualCamera;
     [SerializeField] private float transitionDuration = 1f; // Duración del slerp
     public bool is2D = false;
-
+    private Camera cam;
+    private bool hasToCheck = false;
     private Coroutine currentTransition;
 
     public bool isFrontView = true;
@@ -32,6 +33,7 @@ public class CameraManager : MonoBehaviour
         inputManager.OnPerspectiveSwitch += TogglePerspective;
         inputManager.OnChangeCameraAngle += ChangeCameraAngle;
         targetTransform = FindObjectOfType<PlayerManager>().transform;
+        cam = GetComponent<Camera>();
         // Asegúrate de que solo una cámara esté activa al inicio
         ResetVirtualCameras();
     }
@@ -90,15 +92,30 @@ public class CameraManager : MonoBehaviour
         }
 
         is2D = !is2D;
+        hasToCheck = true;
         ResetVirtualCameras();
         OnCameraSwitch?.Invoke();
 
         // Iniciar la transición suave
         currentTransition = StartCoroutine(TransitionCamera());
-
-        NotifyObjectsOfPerspectiveChange();
+        StartCoroutine(CheckForCameraChange());
     }
-
+    private IEnumerator CheckForCameraChange()
+    {
+        while (hasToCheck)
+        {
+            // Revisa la condición para el cambio de perspectiva
+            if ((is2D && cam.orthographic) || (!is2D && !cam.orthographic))
+            {
+                NotifyObjectsOfPerspectiveChange();
+                hasToCheck = false;  // Termina la verificación
+            }
+            else
+            {
+                yield return new WaitForFixedUpdate(); // Espera al siguiente frame fijo
+            }
+        }
+    }
     private IEnumerator TransitionCamera()
     {
         // Obtener las posiciones y rotaciones actuales de las cámaras

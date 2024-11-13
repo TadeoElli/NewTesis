@@ -13,6 +13,7 @@ public class ScalableObject : MonoBehaviour, IEscalable, IFeedback
     [SerializeField] public bool canScale = true;
     [SerializeField] public bool isScaling = false;
     private Color m_feedback;
+    private Vector3 originalScale;
     [SerializeField] private Renderer objRenderer;
 
     public event Action OnEraserInteract;
@@ -36,6 +37,8 @@ public class ScalableObject : MonoBehaviour, IEscalable, IFeedback
     public virtual void Start()
     {
         m_feedback = ColorDictionary.GetColor("FeedbackScale");
+        originalScale = transform.localScale;
+        OnEraserInteract += ResetScale;
     }
     public void InteractWithEraser(bool isOn2D)
     {
@@ -55,7 +58,10 @@ public class ScalableObject : MonoBehaviour, IEscalable, IFeedback
         }
 
     }
-
+    private void ResetScale()
+    {
+        transform.localScale = originalScale;
+    }
     public void HideFeedback()
     {
         FeedbackManager.Instance.ClearFeedback(objRenderer); // Limpiar el feedback al salir del objeto

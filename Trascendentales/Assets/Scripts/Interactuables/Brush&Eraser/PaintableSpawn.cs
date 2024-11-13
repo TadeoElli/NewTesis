@@ -16,6 +16,8 @@ public class PaintableSpawn : PaintableObject
         {
             spawnedObject = Instantiate(prefab);
             spawnedObject.transform.position = transform.position;
+            spawnedObject.transform.rotation = transform.rotation;
+            spawnedObject.transform.localScale = transform.localScale;
             spObjectRb = spawnedObject.GetComponent<Rigidbody>();
             spawnedObject.SetActive(true);
         }
@@ -26,6 +28,7 @@ public class PaintableSpawn : PaintableObject
             spObjectRb.angularVelocity = Vector3.zero;
             spawnedObject.transform.position = transform.position;
             spawnedObject.transform.rotation = transform.rotation;
+            spawnedObject.transform.localScale = transform.localScale;
         }
 
     }

@@ -14,12 +14,11 @@ GameObject:
   - component: {fileID: 127869173051522954}
   - component: {fileID: 4174353788029812825}
   - component: {fileID: 9071847403314349119}
-  - component: {fileID: 8300251920650685117}
   - component: {fileID: 4646270654586461909}
   - component: {fileID: 5201249034803495606}
   - component: {fileID: 7622694557337297928}
   - component: {fileID: -1403896007804393028}
-  - component: {fileID: -1596504642421775135}
+  - component: {fileID: 5951695141727294003}
   m_Layer: 6
   m_Name: SpawnCube
   m_TagString: Untagged
@@ -153,18 +152,6 @@ MonoBehaviour:
   canScale: 1
   isScaling: 0
   objRenderer: {fileID: 5649012913557171223}
---- !u!114 &8300251920650685117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2480493298415744116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e113ef43c09c3084d8cdff7d1ee67ad2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &4646270654586461909
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -209,6 +196,7 @@ MonoBehaviour:
   canRotate: 1
   maxRadius: 0
   canAttachOthers: 0
+  needToBeKinematic: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 5649012913557171223}
 --- !u!114 &7622694557337297928
@@ -240,7 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInFront: 1
   isInBack: 1
---- !u!114 &-1596504642421775135
+--- !u!114 &5951695141727294003
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

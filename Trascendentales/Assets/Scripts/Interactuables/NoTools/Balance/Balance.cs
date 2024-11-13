@@ -16,6 +16,7 @@ public class Balance : MonoBehaviour
 
     [Header("Modificable")]
     [SerializeField] private bool hasBalancedEvent = false;
+    [SerializeField] private bool hasToBlock = true;
 
 
     // UnityEvent que se dispara cuando la balanza se balancea por primera vez
@@ -45,7 +46,7 @@ public class Balance : MonoBehaviour
 
     public void UpdatePlateWeight(BalancePlate plate, float newWeight)
     {
-        if(hasBalancedOnce) 
+        if(isBlocked) 
             return;
         // Esta función se llama cuando el peso de uno de los platillos cambia
         BalancePlate currentPlate;
@@ -77,7 +78,8 @@ public class Balance : MonoBehaviour
         {
             hasBalancedOnce = true; // Marcar que el evento ya se disparó
             OnFirstBalance?.Invoke(); // Invocar el evento
-            isBlocked = true;
+            if(hasToBlock)
+                isBlocked = true;
         }
         else
             StartCoroutine(TriggerEvent());

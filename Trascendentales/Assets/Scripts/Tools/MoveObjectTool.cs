@@ -6,9 +6,11 @@ using UnityEngine.Animations;
 public class MoveObjectTool : Tools
 {
     private bool isDragging = false;
+    private Rigidbody objectiveRb;
     //private GameObject parent;
     private float maxRadius;
     private float initialDistanceMouseToParent;
+    private IMovable movable;
     private Vector3 selectedAxis; // Nuevo: Almacena el eje seleccionado
     private bool isShowingAxisSelectionWheel = false; // Nuevo: para el temporizador de la rueda de selección
     private bool isHoldingClick = false; 
@@ -30,10 +32,11 @@ public class MoveObjectTool : Tools
         isHoldingClick = true;
         inputManager.OnRightClickDrop += DropInteractable; // Al soltar el clic derecho, limpiamos la interacción
 
-        if (!objective.TryGetComponent<IInteractable>(out IInteractable interactable) || !objective.TryGetComponent<IMovable>(out IMovable movable))
+        if (!objective.TryGetComponent<IInteractable>(out IInteractable interactable) || !objective.TryGetComponent<IMovable>(out IMovable component))
             return;
         if (!interactable.IsAtachableForCompass() || interactable.IsAtachedToCompass()|| interactable.IsAtachedToRuler() || interactable.IsAtachedToSquad())
             return;
+        movable = component;
         isHoldingClick = false;
         maxRadius = movable.GetMaxRadius();
         originalPosition = movable.GetOriginalPosition();
@@ -43,7 +46,10 @@ public class MoveObjectTool : Tools
 
         inputManager.OnPerspectiveSwitch += DropInteractable;
         inputManager.OnToolSwitchCheck += DropInteractable;
-
+        objectiveRb = objective.GetComponent<Rigidbody>();
+        objectiveRb.useGravity = false;
+        objectiveRb.velocity = Vector3.zero;
+        objectiveRb.angularVelocity = Vector3.zero;
         isDragging = true;
         rightClickHoldTime = 0f; // Reiniciar el temporizador al interactuar
         initialMousePosition = Input.mousePosition;
@@ -63,10 +69,12 @@ public class MoveObjectTool : Tools
             }
         }
         if (!isDragging) return;
-        if (!isShowingAxisSelectionWheel)
+        if (movable.GetIsMovable())
         {
             AdjustDistance(); // Solo ajustar cuando no esté mostrando la rueda de selección
         }
+        else
+            DropInteractable();
     }
 
 
@@ -141,6 +149,10 @@ public class MoveObjectTool : Tools
         {
             inputManager.OnPerspectiveSwitch -= DropInteractable;
             inputManager.OnToolSwitchCheck -= DropInteractable;
+            if(movable.GetNeedGravity())
+                objectiveRb.useGravity = true;
+            movable = null;
+            objectiveRb = null;
         }
         isHoldingClick = false;
     }

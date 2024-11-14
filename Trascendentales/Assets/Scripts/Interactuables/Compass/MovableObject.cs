@@ -2,16 +2,22 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(InteractuableObject))]
+[RequireComponent(typeof(Rigidbody))]
 public class MovableObject : MonoBehaviour, IMovable,IFeedback
 {
     [SerializeField] private float maxRadius;
     private Vector3 originalPosition;
     private Color m_feedbackCompass, m_feedbackEraser;
+    [SerializeField] private bool needGravity = false;
     [SerializeField] private Renderer objRenderer;
+    [SerializeField] private GameObject originParticle;
+    private bool isMovable = true;
 
     public event Action OnEraserInteract;
 
     public float GetMaxRadius() => maxRadius;
+    public bool GetNeedGravity() => needGravity;
+    public bool GetIsMovable() => isMovable;
 
     private void Start()
     {
@@ -19,6 +25,7 @@ public class MovableObject : MonoBehaviour, IMovable,IFeedback
         m_feedbackEraser = ColorDictionary.GetColor("FeedbackEraser");
         originalPosition = transform.position;
         OnEraserInteract += ResetPosition;
+        Instantiate(originParticle, transform.position, Quaternion.identity);
     }
     public Vector3 GetOriginalPosition() => originalPosition;
 
@@ -51,5 +58,15 @@ public class MovableObject : MonoBehaviour, IMovable,IFeedback
         FeedbackManager.Instance.ClearFeedback(objRenderer);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+            isMovable = false;
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+            isMovable = true;
+    }
 
 }

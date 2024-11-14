@@ -162,6 +162,14 @@ public class InputManager : MonoBehaviour
     {
         menuManager.HideDrawObjectWheel();
     }
+    public void ShowDragObjectWheel()
+    {
+        menuManager.ShowDragObjectWheel();
+    }
+    public void HideDragObjectWheel()
+    {
+        menuManager.HideDragObjectWheel();
+    }
     #endregion
     #region MouseClick
     private void LeftClickPressed()

@@ -9,6 +9,7 @@ public class EraserTool : Tools
     private ICompassable currentCompassable;
     private IEscalable currentEscalable;
     private IRotable currentRotable;
+    private IMovable currentMovable;
     
     [SerializeField] private GameObject chargeCursor;
     [SerializeField] private Image image;
@@ -41,7 +42,11 @@ public class EraserTool : Tools
         {
             currentRotable = rotable;
         }
-        if (currentPaintable ==  null && currentCompassable == null && currentEscalable == null && currentRotable == null)
+        if (objective.TryGetComponent<IMovable>(out IMovable movable))
+        {
+            currentMovable = movable;
+        }
+        if (currentPaintable ==  null && currentCompassable == null && currentEscalable == null && currentRotable == null && currentMovable == null)
             return;
         mouseState.SetLeftclickPress();
         inputManager.OnPerspectiveSwitch += DropInteractable;
@@ -79,6 +84,7 @@ public class EraserTool : Tools
                 currentPaintable?.InteractWithEraser(isOn2D);
                 currentEscalable?.InteractWithEraser(isOn2D);
                 currentRotable?.InteractWithEraser(isOn2D);
+                currentMovable?.InteractWithEraser(isOn2D);
                 isHolding = false; // Detener el hold una vez que se activa
             }
         }
@@ -109,6 +115,10 @@ public class EraserTool : Tools
         if (currentRotable != null)
         {
             currentRotable = null;
+        }
+        if (currentMovable != null)
+        {
+            currentMovable = null;
         }
         isHolding = false;
     }

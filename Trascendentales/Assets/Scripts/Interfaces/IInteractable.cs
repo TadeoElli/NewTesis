@@ -68,3 +68,11 @@ public interface ICompassable
     public event Action OnEraserInteract;
 
 }
+public interface IMovable
+{
+    public float GetMaxRadius();
+    public Vector3 GetOriginalPosition();
+    public event Action OnEraserInteract;
+    public void InteractWithEraser(bool isOn2D);
+
+}

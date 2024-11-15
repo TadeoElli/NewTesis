@@ -76,7 +76,7 @@ public class MovableObject : MonoBehaviour, IMovable,IFeedback
         FeedbackManager.Instance.ClearFeedback(objRenderer);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Player"))
             isMovable = false;
@@ -85,6 +85,6 @@ public class MovableObject : MonoBehaviour, IMovable,IFeedback
     {
         if (collision.gameObject.CompareTag("Player"))
             isMovable = true;
-    }
+    }*/
 
 }

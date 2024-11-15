@@ -59,6 +59,8 @@ public class MoveObjectTool : Tools
 
     private void FixedUpdate()
     {
+        if (cameraManager.is2D && selectedAxis == Vector3.forward)
+            SelectXAxis();
         if (isHoldingClick)
         {
             rightClickHoldTime += Time.deltaTime;
@@ -166,6 +168,9 @@ public class MoveObjectTool : Tools
     }
     public void SelectZAxis()
     {
-        selectedAxis = new Vector3(0, 0, 1);
+        if (cameraManager.is2D)
+            selectedAxis = new Vector3(1, 0, 0);
+        else
+            selectedAxis = new Vector3(0, 0, 1);
     }
 }

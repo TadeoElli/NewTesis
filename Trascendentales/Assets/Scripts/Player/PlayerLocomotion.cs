@@ -200,8 +200,11 @@ public class PlayerLocomotion : MonoBehaviour, IObjectAffectableByPerspective
     {
         if (isGrabbing && grabObject != null)
         {
+            if (Vector3.Distance(grabObject.position - grabOffset, transform.position) > 1f)
+                TryToDrop();
+            else
+                transform.position = grabObject.position - grabOffset;
             // Mueve al jugador a la posición del objeto con un offset
-            transform.position = grabObject.position - grabOffset;
         }
         if (!isGrounded)
         {

@@ -64,6 +64,8 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.Tool5.performed += _ => SetEraserTool();
             playerControls.PlayerActions.OpenToolWheel.performed += _ => ShowToolWheel();
             playerControls.PlayerActions.OpenToolWheel.canceled += _ => HideToolWheel();
+            playerControls.PlayerActions.OpenAlternativeWheel.performed += _ => ShowAlternativeWheel();
+            playerControls.PlayerActions.OpenAlternativeWheel.canceled += _ => HideAlternativeWheel();
             playerControls.PlayerActions.LeftClick.performed += _ => LeftClickPressed();
             playerControls.PlayerActions.LeftClick.canceled += _ => LeftClickReleased();
             playerControls.PlayerActions.RightClick.performed += _ => RightClickPressed();
@@ -170,21 +172,30 @@ public class InputManager : MonoBehaviour
     {
         menuManager.HideToolWheel();
     }
-    public void ShowDrawObjectWheel()
+    public void ShowAlternativeWheel()
     {
-        menuManager.ShowDrawObjectWheel();
+        switch (MouseState.Instance.CurrentToolActive())
+        {
+            case ToolTypes.Brush:
+                menuManager.ShowDrawObjectWheel();
+                break;
+            case ToolTypes.Ruler:
+                break;
+            case ToolTypes.Squad:
+                break;
+            case ToolTypes.Compass:
+                menuManager.ShowDragObjectWheel();
+                break;
+            case ToolTypes.Eraser:
+                menuManager.ShowEraserWheel();
+                break;
+            default:
+                break;
+        }
     }
-    public void HideDrawObjectWheel()
+    public void HideAlternativeWheel()
     {
-        menuManager.HideDrawObjectWheel();
-    }
-    public void ShowDragObjectWheel()
-    {
-        menuManager.ShowDragObjectWheel();
-    }
-    public void HideDragObjectWheel()
-    {
-        menuManager.HideDragObjectWheel();
+        menuManager.HideAlternativeWheel();
     }
     #endregion
     #region MouseClick
@@ -254,5 +265,5 @@ public class InputManager : MonoBehaviour
         yield return new WaitForSeconds(cameraSwitchCooldown);
         canSwitchCamera = true;
     }
-    #endregion
+        #endregion
 }

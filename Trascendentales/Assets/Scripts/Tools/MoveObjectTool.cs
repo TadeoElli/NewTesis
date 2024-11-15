@@ -7,20 +7,18 @@ public class MoveObjectTool : Tools
 {
     private bool isDragging = false;
     private Rigidbody objectiveRb;
-    //private GameObject parent;
     private float maxRadius;
     private float initialDistanceMouseToParent;
     private IMovable movable;
     private Vector3 selectedAxis; // Nuevo: Almacena el eje seleccionado
-    private bool isShowingAxisSelectionWheel = false; // Nuevo: para el temporizador de la rueda de selección
+    private Vector3 originalPosition;
+    private Vector3 currentOriginalPosition;
+    private Vector3 currentOffset;
     private bool isHoldingClick = false; 
     private float rightClickHoldTime = 0f;
     private float holdThreshold = 1f; // Tiempo requerido para mostrar la rueda de selección de ejes
     [SerializeField] private LayerMask raycastLayer;
-    private Vector3 initialMousePosition;
-    private Vector3 initialObjectPosition;
-    private Vector3 originalPosition;
-    //private bool hitDetected = false;
+
     public override void Awake()
     {
         base.Awake();
@@ -29,7 +27,6 @@ public class MoveObjectTool : Tools
     public override void Interact(GameObject objective, bool isPerspective2D)
     {
         mouseState.SetRightclickPress();
-        isHoldingClick = true;
         inputManager.OnRightClickDrop += DropInteractable; // Al soltar el clic derecho, limpiamos la interacción
 
         if (!objective.TryGetComponent<IInteractable>(out IInteractable interactable) || !objective.TryGetComponent<IMovable>(out IMovable component))
@@ -38,10 +35,10 @@ public class MoveObjectTool : Tools
             return;
         movable = component;
         movable.ShowOriginFeedback();
-        isHoldingClick = false;
         maxRadius = movable.GetMaxRadius();
         originalPosition = movable.GetOriginalPosition();
-        initialObjectPosition = objective.transform.position;
+        currentOriginalPosition = objective.transform.position;
+        currentOffset = Vector3.zero;
 
         base.Interact(objective, isPerspective2D);
 
@@ -53,7 +50,6 @@ public class MoveObjectTool : Tools
         objectiveRb.angularVelocity = Vector3.zero;
         isDragging = true;
         rightClickHoldTime = 0f; // Reiniciar el temporizador al interactuar
-        initialMousePosition = Input.mousePosition;
         
     }
 
@@ -61,15 +57,6 @@ public class MoveObjectTool : Tools
     {
         if (cameraManager.is2D && selectedAxis == Vector3.forward)
             SelectXAxis();
-        if (isHoldingClick)
-        {
-            rightClickHoldTime += Time.deltaTime;
-            if (rightClickHoldTime >= holdThreshold && !isShowingAxisSelectionWheel)
-            {
-                inputManager.ShowDragObjectWheel(); // Mostrar la rueda de selección de ejes
-                isShowingAxisSelectionWheel = true;
-            }
-        }
         if (!isDragging) return;
         if (movable.GetIsMovable())
         {
@@ -83,7 +70,7 @@ public class MoveObjectTool : Tools
     private void AdjustDistance()
     {
         // Calcular el desplazamiento actual y la distancia desde el origen en el eje seleccionado
-        Vector3 currentOffset = objective.transform.position - originalPosition;
+        Vector3 currentOffset = objective.transform.position - currentOriginalPosition;
         float currentDistanceToOrigin = Vector3.Dot(currentOffset, selectedAxis);
 
         // Obtener el desplazamiento del mouse en el eje seleccionado (positivo o negativo)
@@ -103,7 +90,14 @@ public class MoveObjectTool : Tools
 
         // Calcular la nueva distancia objetivo y clamping entre los límites
         float newDistanceToOrigin = Mathf.Clamp(currentDistanceToOrigin + mouseDelta, -maxRadius, maxRadius);
-        Vector3 desiredPosition = originalPosition + selectedAxis * newDistanceToOrigin;
+        Vector3 desiredPosition = currentOriginalPosition + selectedAxis * newDistanceToOrigin;
+
+        // Clamping para asegurar que no exceda el radio máximo
+        if (Vector3.Distance(originalPosition, desiredPosition) > maxRadius)
+        {
+            desiredPosition = originalPosition + (desiredPosition - originalPosition).normalized * maxRadius;
+        }
+
 
         // Determinar la dirección del Raycast basándose en si el desplazamiento es positivo o negativo
         Vector3 raycastDirection = (desiredPosition - originalPosition).normalized;
@@ -113,13 +107,14 @@ public class MoveObjectTool : Tools
         int originalLayer = objective.layer;
         objective.layer = LayerMask.NameToLayer("Ignore Raycast");
 
-        bool hitDetected = Physics.Raycast(originalPosition, raycastDirection, out RaycastHit hit, raycastDistance);
+        bool hitDetected = Physics.Raycast(originalPosition, raycastDirection, out RaycastHit hit, raycastDistance, raycastLayer);
 
         // Restaurar la capa original del objeto
         objective.layer = originalLayer;
 
         if (hitDetected)
         {
+            Debug.Log(hit.collider.gameObject);
             // Calcular un offset en dirección hacia la posición original
             float offsetDistance = 1.5f; // Puedes ajustar este valor para definir la distancia del offset
             Vector3 offsetDirection = (originalPosition - hit.point).normalized;
@@ -140,23 +135,14 @@ public class MoveObjectTool : Tools
     {
         isDragging = false;
         mouseState.DropRightClick();
-        rightClickHoldTime = 0;
-        if (isShowingAxisSelectionWheel)
-        {
-            inputManager.HideDragObjectWheel();
-            isShowingAxisSelectionWheel = false;
-        }
+        if(movable.GetNeedGravity())
+            objectiveRb.useGravity = true;
+        movable = null;
+        objectiveRb = null;
         inputManager.OnRightClickDrop -= DropInteractable;
-        if (!isHoldingClick)
-        {
-            inputManager.OnPerspectiveSwitch -= DropInteractable;
-            inputManager.OnToolSwitchCheck -= DropInteractable;
-            if(movable.GetNeedGravity())
-                objectiveRb.useGravity = true;
-            movable = null;
-            objectiveRb = null;
-        }
-        isHoldingClick = false;
+        inputManager.OnPerspectiveSwitch -= DropInteractable;
+        inputManager.OnToolSwitchCheck -= DropInteractable;
+
     }
     public void SelectXAxis()
     {

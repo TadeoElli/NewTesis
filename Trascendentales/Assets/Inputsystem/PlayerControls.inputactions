@@ -100,7 +100,7 @@
                 {
                     "name": "",
                     "id": "f80d290e-d243-4d63-b95f-1f9fabdc8f14",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -210,6 +210,15 @@
                     "name": "OpenToolWheel",
                     "type": "Button",
                     "id": "c69e7f41-af27-4d02-a236-3f283900a8ed",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenAlternativeWheel",
+                    "type": "Button",
+                    "id": "d29bcb54-24ee-4463-a597-ce9424720cd3",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -344,6 +353,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5c3199a1-0bd1-4c73-89af-3de7fc47d243",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenAlternativeWheel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

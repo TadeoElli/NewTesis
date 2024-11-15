@@ -5,7 +5,8 @@ using UnityEngine;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu, winMenu, loseMenu;
-    [SerializeField] private Animator toolWheel, drawObjectWheel, dragObjectWheel;
+    [SerializeField] private Animator toolWheel, drawObjectWheel, dragObjectWheel, eraserWheel;
+    private Animator currentAlternativeWheel;
     private bool isGamePaused = false;
     private bool isCompleted = false;
 
@@ -78,18 +79,23 @@ public class MenuManager : MonoBehaviour
     public void ShowDrawObjectWheel()
     {
         drawObjectWheel.SetBool("OpenToolWheel", true);
-    }
-    public void HideDrawObjectWheel()
-    {
-        drawObjectWheel.SetBool("OpenToolWheel", false);
+        currentAlternativeWheel = drawObjectWheel;
     }
     public void ShowDragObjectWheel()
     {
         dragObjectWheel.SetBool("OpenToolWheel", true);
+        currentAlternativeWheel = dragObjectWheel;
     }
-    public void HideDragObjectWheel()
+    public void ShowEraserWheel()
     {
-        dragObjectWheel.SetBool("OpenToolWheel", false);
+        eraserWheel.SetBool("OpenToolWheel", true);
+        currentAlternativeWheel = eraserWheel;
+    }
+    public void HideAlternativeWheel()
+    {
+        if(!currentAlternativeWheel) return;
+        currentAlternativeWheel.SetBool("OpenToolWheel", false);
+        currentAlternativeWheel = null;
     }
     #endregion
 }

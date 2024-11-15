@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerDamage : MonoBehaviour, IDamagable
 {
     private bool isLive = true;
+    [SerializeField] private int lives = 3;
     PlayerManager playerManager;
 
     private void Awake()
@@ -15,13 +16,16 @@ public class PlayerDamage : MonoBehaviour, IDamagable
     }
     public void Takedmg(int dmg)
     {
-        //StartCoroutine(dmgVisual());
-        if(isLive)
+        lives--;
+        if(lives <= 0 && isLive)
         {
             CallToDeath();
             StartCoroutine(ShowDeadMenu());
             isLive = false;
+            return;
         }
+        StartCoroutine(dmgVisual());
+
     }
     private IEnumerator ShowDeadMenu()
     {
@@ -34,12 +38,12 @@ public class PlayerDamage : MonoBehaviour, IDamagable
         playerManager.Death();
     }
 
-    /*IEnumerator dmgVisual()
+    IEnumerator dmgVisual()
     {
         this.GetComponent<Renderer>().material.color = Color.red;
         yield return new WaitForSeconds(0.25f);
         this.GetComponent<Renderer>().material.color = Color.yellow;
 
         yield return null;
-    }*/
+    }
 }

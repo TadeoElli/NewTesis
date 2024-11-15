@@ -14,9 +14,6 @@ public class MoveObjectTool : Tools
     private Vector3 originalPosition;
     private Vector3 currentOriginalPosition;
     private Vector3 currentOffset;
-    private bool isHoldingClick = false; 
-    private float rightClickHoldTime = 0f;
-    private float holdThreshold = 1f; // Tiempo requerido para mostrar la rueda de selección de ejes
     [SerializeField] private LayerMask raycastLayer;
 
     public override void Awake()
@@ -49,7 +46,6 @@ public class MoveObjectTool : Tools
         objectiveRb.velocity = Vector3.zero;
         objectiveRb.angularVelocity = Vector3.zero;
         isDragging = true;
-        rightClickHoldTime = 0f; // Reiniciar el temporizador al interactuar
         
     }
 

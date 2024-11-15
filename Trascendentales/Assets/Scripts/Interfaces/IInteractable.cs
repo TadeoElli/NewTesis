@@ -73,6 +73,7 @@ public interface IMovable
     public float GetMaxRadius();
     public bool GetNeedGravity();
     public bool GetIsMovable();
+    public void ShowOriginFeedback();
     public Vector3 GetOriginalPosition();
     public event Action OnEraserInteract;
     public void InteractWithEraser(bool isOn2D);

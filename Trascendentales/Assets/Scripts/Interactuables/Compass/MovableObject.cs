@@ -11,6 +11,8 @@ public class MovableObject : MonoBehaviour, IMovable,IFeedback
     [SerializeField] private bool needGravity = false;
     [SerializeField] private Renderer objRenderer;
     [SerializeField] private GameObject originParticle;
+    private GameObject particleFeedback;
+    private LineRenderer lineRenderer;
     private bool isMovable = true;
 
     public event Action OnEraserInteract;
@@ -25,13 +27,29 @@ public class MovableObject : MonoBehaviour, IMovable,IFeedback
         m_feedbackEraser = ColorDictionary.GetColor("FeedbackEraser");
         originalPosition = transform.position;
         OnEraserInteract += ResetPosition;
-        Instantiate(originParticle, transform.position, Quaternion.identity);
+        OnEraserInteract += HideOriginFeedback;
+        particleFeedback = Instantiate(originParticle, transform.position, Quaternion.identity);
+        particleFeedback.SetActive(false);
+        lineRenderer = particleFeedback.GetComponent<LineRenderer>();
+        lineRenderer.SetPosition(0, particleFeedback.transform.position);
     }
     public Vector3 GetOriginalPosition() => originalPosition;
 
+    private void Update()
+    {
+        lineRenderer.SetPosition(1, transform.position);
+    }
     public void InteractWithEraser(bool isOn2D)
     {
         OnEraserInteract?.Invoke();
+    }
+    public void ShowOriginFeedback()
+    {
+        particleFeedback.SetActive(true);
+    }
+    public void HideOriginFeedback()
+    {
+        particleFeedback.SetActive(false);
     }
     public void ShowFeedback()
     {

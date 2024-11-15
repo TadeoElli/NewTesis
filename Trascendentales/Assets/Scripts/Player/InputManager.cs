@@ -5,6 +5,14 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    // Tiempo de cooldown en segundos para cambios de cámara y ángulo
+    [SerializeField] private float cameraSwitchCooldown = 1f;
+    [SerializeField] private float angleSwitchCooldown = 1f;
+
+    // Estados para los cooldowns
+    private bool canSwitchCamera = true;
+    private bool canSwitchAngle = true;
+
     PlayerControls playerControls;
     PlayerLocomotion playerLocomotion;
     PlayerManager playerManager;
@@ -12,10 +20,10 @@ public class InputManager : MonoBehaviour
     MenuManager menuManager;
     Vector2 movementInput;
     private float moveAmount;
-    public float verticalInput;
-    public float horizontalInput;
-    public bool jump_input;
-    public bool isOn2D = false;
+    [HideInInspector] public float verticalInput;
+    [HideInInspector] public float horizontalInput;
+    [HideInInspector] public bool jump_input;
+    [HideInInspector] public bool isOn2D = false;
     private bool isGrabbing = false;
     private GameObject platform;
     //Events
@@ -99,18 +107,26 @@ public class InputManager : MonoBehaviour
 
     private void SwitchCameraAngle()
     {
-        OnChangeCameraAngle?.Invoke();
+        if (canSwitchAngle)
+        {
+            OnChangeCameraAngle?.Invoke();
+            StartCoroutine(CameraAngleCooldown());
+        }
     }
     private void SwitchCamera()
     {
-        isOn2D = !isOn2D;
-        if(isOn2D)
-            playerLocomotion.SwitchTo2D();
-        else
-            playerLocomotion.SwitchTo3D();
-        Debug.Log("Perspectiveswitch");
-        OnPerspectiveSwitch?.Invoke();
+        if (canSwitchCamera)
+        {
+            isOn2D = !isOn2D;
+            if (isOn2D)
+                playerLocomotion.SwitchTo2D();
+            else
+                playerLocomotion.SwitchTo3D();
 
+            Debug.Log("Perspective switch");
+            OnPerspectiveSwitch?.Invoke();
+            StartCoroutine(CameraSwitchCooldown());
+        }
     }
 
     #endregion
@@ -224,4 +240,19 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    #region Cooldown Coroutines
+    private IEnumerator CameraAngleCooldown()
+    {
+        canSwitchAngle = false;
+        yield return new WaitForSeconds(angleSwitchCooldown);
+        canSwitchAngle = true;
+    }
+
+    private IEnumerator CameraSwitchCooldown()
+    {
+        canSwitchCamera = false;
+        yield return new WaitForSeconds(cameraSwitchCooldown);
+        canSwitchCamera = true;
+    }
+    #endregion
 }

@@ -2,12 +2,15 @@
 [RequireComponent (typeof(InteractuableObject))]
 public class PaintableObject : MonoBehaviour, IPaintable, IFeedback
 {
-    
+    CameraManager cameraManager;
     [SerializeField] private InteractionsByPerspectiveTypes interactionForBrush, interactionForEraser;
     private Color m_feedbackBrush, m_feedbackEraser;
     [SerializeField] protected Renderer objRenderer;
     private bool wasInteracted = false;
-
+    private void Awake()
+    {
+        cameraManager = FindObjectOfType<CameraManager>();
+    }
     private void Start()
     {
         m_feedbackBrush = ColorDictionary.GetColor("FeedbackBrush");
@@ -18,7 +21,7 @@ public class PaintableObject : MonoBehaviour, IPaintable, IFeedback
     {
         if(wasInteracted)
             return;
-        InteractionWithBrush();
+        InteractionWithBrush(); 
     }
     public void InteractWithEraser(bool isOn2D)
     {
@@ -66,12 +69,12 @@ public class PaintableObject : MonoBehaviour, IPaintable, IFeedback
         if(MouseState.Instance.CurrentToolActive() == ToolTypes.Brush &&
             !MouseState.Instance.IsLeftClickPress() &&
             !MouseState.Instance.IsRightClickPress() &&
-             !wasInteracted)
+             !wasInteracted && CheckInteractions(interactionForBrush, cameraManager.is2D))
             FeedbackManager.Instance.ApplyFeedback(objRenderer, m_feedbackBrush);
         else if (MouseState.Instance.CurrentToolActive() == ToolTypes.Eraser &&
             !MouseState.Instance.IsLeftClickPress() &&
             !MouseState.Instance.IsRightClickPress() &&
-            wasInteracted)
+            wasInteracted && CheckInteractions(interactionForEraser, cameraManager.is2D))
             FeedbackManager.Instance.ApplyFeedback(objRenderer, m_feedbackEraser);
 
     }

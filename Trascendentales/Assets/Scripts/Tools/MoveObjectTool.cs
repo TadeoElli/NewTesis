@@ -37,6 +37,7 @@ public class MoveObjectTool : Tools
         if (!interactable.IsAtachableForCompass() || interactable.IsAtachedToCompass()|| interactable.IsAtachedToRuler() || interactable.IsAtachedToSquad())
             return;
         movable = component;
+        movable.ShowOriginFeedback();
         isHoldingClick = false;
         maxRadius = movable.GetMaxRadius();
         originalPosition = movable.GetOriginalPosition();
@@ -54,7 +55,6 @@ public class MoveObjectTool : Tools
         rightClickHoldTime = 0f; // Reiniciar el temporizador al interactuar
         initialMousePosition = Input.mousePosition;
         
-        //initialDistanceMouseToParent = Vector3.Distance(GetMouseWorldPosition(), movable.GetOriginalPosition());
     }
 
     private void FixedUpdate()

@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerLocomotion : MonoBehaviour
+public class PlayerLocomotion : MonoBehaviour, IObjectAffectableByPerspective
 {
     InputManager inputManager;
     PlayerManager playerManager;
@@ -22,6 +22,7 @@ public class PlayerLocomotion : MonoBehaviour
     public bool isGrounded = false;
     public bool isJumping = false;
     public bool isNearEdge = false;  // Flag para detectar si el jugador está cerca de un borde
+    private bool isOn2D = false; 
 
     [Header("Falling")]
     public float inAirTimer;
@@ -67,13 +68,14 @@ public class PlayerLocomotion : MonoBehaviour
     private void Start()
     {
         cameraManager = playerManager.cameraManager;
+        cameraManager.RegisterObject(this);
     }
 
     #region Movement
     private void HandleMovement()
     {
         // Si está en modo 2D, solo permitir movimiento en el eje X
-        if (inputManager.isOn2D)
+        if (isOn2D)
         {
             Vector3 currentVelocity = playerRigidbody.velocity;
 
@@ -103,7 +105,10 @@ public class PlayerLocomotion : MonoBehaviour
             playerRigidbody.velocity = currentVelocity; // Mantén la velocidad vertical (Y) intacta
         }
     }
-
+    private void ChangeIsOn2D()
+    {
+        isOn2D = !isOn2D;
+    }
     public void SwitchTo2D()
     {
         // Guardar la posición Z original antes de cambiar a 2D
@@ -272,57 +277,66 @@ public class PlayerLocomotion : MonoBehaviour
         HandleRotation();
         HandleJumpBuffering();  // Verifica si hay un salto en buffer
     }
+
+    public void OnPerspectiveChanged(bool is2D, bool isFrontView)
+    {
+        isOn2D = is2D;
+    }
+    private void OnDisable()
+    {
+        cameraManager.UnregisterObject(this);
+    }
     /*
-    #region EdgeDetector
-    private bool DetectEdge()
-    {
-        // Si ya estamos en el suelo, no detectamos bordes
-        if (isGrounded) return false;
-        // Realizar raycasts desde cada punto
-        for (int i = 0; i < edgeRaycastOrigins.Length; i++)
-        {
-            Vector3 origin = edgeRaycastOrigins[i].position;
-            if (Physics.Raycast(origin, -Vector3.up, edgeRayLength, groundLayer))
-            {
-                // Si detectamos un borde, corregir la posición
-                CorrectPosition(i);
-                return true;  // Está cerca de un borde
-            }
-        }
-        return false;
-    }
+#region EdgeDetector
+private bool DetectEdge()
+{
+   // Si ya estamos en el suelo, no detectamos bordes
+   if (isGrounded) return false;
+   // Realizar raycasts desde cada punto
+   for (int i = 0; i < edgeRaycastOrigins.Length; i++)
+   {
+       Vector3 origin = edgeRaycastOrigins[i].position;
+       if (Physics.Raycast(origin, -Vector3.up, edgeRayLength, groundLayer))
+       {
+           // Si detectamos un borde, corregir la posición
+           CorrectPosition(i);
+           return true;  // Está cerca de un borde
+       }
+   }
+   return false;
+}
 
-    private void CorrectPosition(int edgeIndex)
-    {
-        // Determinar hacia dónde mover al jugador según el borde detectado
-        Vector3 correctionDirection = Vector3.zero;
+private void CorrectPosition(int edgeIndex)
+{
+   // Determinar hacia dónde mover al jugador según el borde detectado
+   Vector3 correctionDirection = Vector3.zero;
 
-        switch (edgeIndex)
-        {
-            case 0: // Borde derecho
-                correctionDirection = Vector3.right;
-                break;
-            case 1: // Borde izquierdo
-                correctionDirection = Vector3.left;
-                break;
-            case 2: // Borde frontal
-                correctionDirection = Vector3.forward;
-                break;
-            case 3: // Borde trasero
-                correctionDirection = Vector3.back;
-                break;
-        }
+   switch (edgeIndex)
+   {
+       case 0: // Borde derecho
+           correctionDirection = Vector3.right;
+           break;
+       case 1: // Borde izquierdo
+           correctionDirection = Vector3.left;
+           break;
+       case 2: // Borde frontal
+           correctionDirection = Vector3.forward;
+           break;
+       case 3: // Borde trasero
+           correctionDirection = Vector3.back;
+           break;
+   }
 
-        // Mover al jugador en la dirección del borde con una interpolación suave
-        Vector3 targetPosition = transform.position + correctionDirection * 0.5f;
-        transform.position = Vector3.Lerp(transform.position, targetPosition, edgeCorrectionSpeed * Time.deltaTime);
-        // Verificar nuevamente si el jugador está sobre el suelo después de la corrección
-        if (!Physics.Raycast(transform.position, -Vector3.up, rayCastHeightOffset + 0.1f, groundLayer))
-        {
-            // Si después de la corrección no está en el suelo, desactiva edge detection
-            isNearEdge = false;
-        }
-    }
-    #endregion
-    */
+   // Mover al jugador en la dirección del borde con una interpolación suave
+   Vector3 targetPosition = transform.position + correctionDirection * 0.5f;
+   transform.position = Vector3.Lerp(transform.position, targetPosition, edgeCorrectionSpeed * Time.deltaTime);
+   // Verificar nuevamente si el jugador está sobre el suelo después de la corrección
+   if (!Physics.Raycast(transform.position, -Vector3.up, rayCastHeightOffset + 0.1f, groundLayer))
+   {
+       // Si después de la corrección no está en el suelo, desactiva edge detection
+       isNearEdge = false;
+   }
+}
+#endregion
+*/
 }

@@ -385,6 +385,7 @@ MonoBehaviour:
   canRotate: 1
   maxRadius: 20
   canAttachOthers: 0
+  needToBeKinematic: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 45780140}
 --- !u!114 &45780135
@@ -1689,6 +1690,7 @@ MonoBehaviour:
   canRotate: 1
   maxRadius: 15
   canAttachOthers: 0
+  needToBeKinematic: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 267879095}
 --- !u!114 &267879097
@@ -3185,6 +3187,7 @@ MonoBehaviour:
   canRotate: 1
   maxRadius: 20
   canAttachOthers: 0
+  needToBeKinematic: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 506431952}
 --- !u!114 &506431947
@@ -3431,6 +3434,7 @@ MonoBehaviour:
   canRotate: 1
   maxRadius: 20
   canAttachOthers: 0
+  needToBeKinematic: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 510571604}
 --- !u!114 &510571599
@@ -4700,6 +4704,7 @@ MonoBehaviour:
   canRotate: 1
   maxRadius: 20
   canAttachOthers: 0
+  needToBeKinematic: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 686952935}
 --- !u!114 &686952931
@@ -5500,6 +5505,7 @@ MonoBehaviour:
   canRotate: 1
   maxRadius: 20
   canAttachOthers: 0
+  needToBeKinematic: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 733639698}
 --- !u!114 &733639693
@@ -6924,10 +6930,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2510775611644852232, guid: c5ab43aafa20f35449c5d42d03d57854,
+        type: 3}
+      propertyPath: orthographic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2510775611644852232, guid: c5ab43aafa20f35449c5d42d03d57854,
+        type: 3}
+      propertyPath: orthographic size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3137706336384100565, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_Name
       value: NewLevelConfig
+      objectReference: {fileID: 0}
+    - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
@@ -6937,22 +6958,22 @@ PrefabInstance:
     - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8380618
+      value: 0.98532784
       objectReference: {fileID: 0}
     - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.040281005
+      value: 0.17067231
       objectReference: {fileID: 0}
     - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.54345894
+      value: -0.000000016953926
       objectReference: {fileID: 0}
     - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.026121065
+      value: 0.0000000029366534
       objectReference: {fileID: 0}
     - target: {fileID: 6323744800106687020, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
@@ -7007,17 +7028,27 @@ PrefabInstance:
     - target: {fileID: 6378466528603176896, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8380618
+      value: 0.98532784
       objectReference: {fileID: 0}
     - target: {fileID: 6378466528603176896, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.54345894
+      value: -0.000000016953926
       objectReference: {fileID: 0}
     - target: {fileID: 6378466528603176896, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.026121065
+      value: 0.0000000029366534
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192060455597761534, guid: c5ab43aafa20f35449c5d42d03d57854,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.000000016953926
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192060455597761534, guid: c5ab43aafa20f35449c5d42d03d57854,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.0000000029366534
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7165,6 +7196,7 @@ MonoBehaviour:
   canRotate: 1
   maxRadius: 0
   canAttachOthers: 0
+  needToBeKinematic: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 1092602778}
 --- !u!114 &1092602781
@@ -8036,6 +8068,7 @@ MonoBehaviour:
   canRotate: 1
   maxRadius: 20
   canAttachOthers: 0
+  needToBeKinematic: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 1200099264}
 --- !u!114 &1200099259
@@ -10048,6 +10081,7 @@ MonoBehaviour:
   canRotate: 1
   maxRadius: 0
   canAttachOthers: 0
+  needToBeKinematic: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 1540896432}
 --- !u!114 &1540896428
@@ -10377,6 +10411,7 @@ MonoBehaviour:
   canRotate: 1
   maxRadius: 20
   canAttachOthers: 1
+  needToBeKinematic: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 1575703259}
 --- !u!114 &1575703256
@@ -10923,6 +10958,7 @@ MonoBehaviour:
   canRotate: 1
   maxRadius: 20
   canAttachOthers: 0
+  needToBeKinematic: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 1626984284}
 --- !u!114 &1626984279
@@ -11559,6 +11595,7 @@ MonoBehaviour:
   canRotate: 1
   maxRadius: 20
   canAttachOthers: 0
+  needToBeKinematic: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 1673873578}
 --- !u!1 &1673999394
@@ -12991,9 +13028,9 @@ GameObject:
   - component: {fileID: 1848644623}
   - component: {fileID: 1848644622}
   - component: {fileID: 1848644621}
+  - component: {fileID: 1848644624}
   - component: {fileID: 1848644620}
   - component: {fileID: 1848644619}
-  - component: {fileID: 1848644618}
   - component: {fileID: 1848644617}
   m_Layer: 6
   m_Name: Cube (7)
@@ -13032,26 +13069,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInFront: 1
   isInBack: 1
---- !u!114 &1848644618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1848644615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82a93fcbfab81bd4fa873df6fcc1169b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionForBrush: 0
-  interactionForEraser: 0
-  objRenderer: {fileID: 1848644622}
-  col: {fileID: 1848644621}
-  solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
-  render: {fileID: 1848644622}
-  startSolid: 1
 --- !u!54 &1848644619
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13171,6 +13188,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848644615}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1848644624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848644615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c0a80a83f7e287418bd23302b53ca36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionForBrush: 0
+  interactionForEraser: 0
+  objRenderer: {fileID: 1848644622}
+  col: {fileID: 1848644621}
+  solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
+  transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
+  render: {fileID: 1848644622}
+  startSolid: 1
+  resetDelay: 2
+  state: 0
 --- !u!1 &1849840918
 GameObject:
   m_ObjectHideFlags: 0
@@ -13368,6 +13407,7 @@ MonoBehaviour:
   canRotate: 1
   maxRadius: 20
   canAttachOthers: 0
+  needToBeKinematic: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 1865939357}
 --- !u!114 &1865939352
@@ -14111,6 +14151,7 @@ MonoBehaviour:
   canRotate: 1
   maxRadius: 0
   canAttachOthers: 0
+  needToBeKinematic: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 1957824789}
 --- !u!114 &1957824792
@@ -15219,6 +15260,7 @@ MonoBehaviour:
   canRotate: 1
   maxRadius: 15
   canAttachOthers: 0
+  needToBeKinematic: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 0}
 --- !u!54 &2097130299

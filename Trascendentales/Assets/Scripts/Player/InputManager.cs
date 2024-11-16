@@ -76,7 +76,11 @@ public class InputManager : MonoBehaviour
         playerControls.Enable();
     }
 
-
+    public void OnDisable()
+    {
+        if(playerControls != null)
+            playerControls.Disable();
+    }
 
     public void HandleAllInputs()
     {

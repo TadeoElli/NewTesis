@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
+
 
 public class PaintableSolid : PaintableObject
 {
     [SerializeField] private Collider col;
-    [SerializeField] private Material solidMat, transparentMat;
     private Color feedbackColor;
-    [SerializeField] private Renderer render;
     [SerializeField] private bool startSolid;
-
-    private void Awake()
+    public UnityEvent OnInteractionWitBrush, OnInteractionWithEraser;
+    public override void Awake()
     {
+        base.Awake();
         if (startSolid)
             InteractionWithBrush();
         else
@@ -20,13 +21,13 @@ public class PaintableSolid : PaintableObject
     {
         base.InteractionWithBrush();
         col.isTrigger = false;
-        render.material = solidMat;
+        OnInteractionWitBrush?.Invoke();
     }
     public override void InteractionWithEraser()
     {
         base.InteractionWithEraser();
         col.isTrigger = true;
-        render.material = transparentMat;
+        OnInteractionWithEraser?.Invoke();
     }
     public override void HideFeedback()
     {

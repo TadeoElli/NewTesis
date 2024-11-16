@@ -7,7 +7,7 @@ public class PaintableObject : MonoBehaviour, IPaintable, IFeedback
     private Color m_feedbackBrush, m_feedbackEraser;
     [SerializeField] protected Renderer objRenderer;
     private bool wasInteracted = false;
-    private void Awake()
+    public virtual void Awake()
     {
         cameraManager = FindObjectOfType<CameraManager>();
     }
@@ -47,7 +47,7 @@ public class PaintableObject : MonoBehaviour, IPaintable, IFeedback
     {
         return CheckInteractions(interactionForEraser, isOn2D);
     }
-    private bool CheckInteractions(InteractionsByPerspectiveTypes type, bool isOn2D)
+    public bool CheckInteractions(InteractionsByPerspectiveTypes type, bool isOn2D)
     {
         switch (type)
         {
@@ -71,11 +71,12 @@ public class PaintableObject : MonoBehaviour, IPaintable, IFeedback
             !MouseState.Instance.IsRightClickPress() &&
              !wasInteracted && CheckInteractions(interactionForBrush, cameraManager.is2D))
             FeedbackManager.Instance.ApplyFeedback(objRenderer, m_feedbackBrush);
-        else if (MouseState.Instance.CurrentToolActive() == ToolTypes.Eraser &&
-            !MouseState.Instance.IsLeftClickPress() &&
-            !MouseState.Instance.IsRightClickPress() &&
-            wasInteracted && CheckInteractions(interactionForEraser, cameraManager.is2D))
-            FeedbackManager.Instance.ApplyFeedback(objRenderer, m_feedbackEraser);
+        else if (MouseState.Instance.CurrentToolActive() == ToolTypes.Eraser )
+            if(!MouseState.Instance.IsLeftClickPress())
+                if(!MouseState.Instance.IsRightClickPress())
+                    if(wasInteracted)
+                        if(CheckInteractions(interactionForEraser, cameraManager.is2D))
+                            FeedbackManager.Instance.ApplyFeedback(objRenderer, m_feedbackEraser);
 
     }
 

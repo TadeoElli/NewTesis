@@ -141,5 +141,9 @@ public class SetRotationParentTool : Tools
         }
 
     }
+    public override void SetCurrentAlternativeTool()
+    {
+        MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.SquadLink);
+    }
 }
 

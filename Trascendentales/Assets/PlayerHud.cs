@@ -7,6 +7,7 @@ using static EraserWithSelectionTool;
 
 public class PlayerHud : MonoBehaviour
 {
+    private InputManager inputManager;
     [SerializeField] private GameObject[] livesIcon;
     [SerializeField] private Image toolIcon, alternativeToolIcon;
     [Header("ToolsIcon")]
@@ -27,10 +28,17 @@ public class PlayerHud : MonoBehaviour
     private void Awake()
     {
         lives = livesIcon.Count();
+        inputManager = FindObjectOfType<InputManager>();
+        inputManager.OnToolSwitchCheck += UpdateToolIcon;
+    }
+    private void Start()
+    {
+        UpdateToolIcon();
     }
     public void ReduceLive()
     {
-        livesIcon[lives].SetActive(false);
+        livesIcon[lives -1].SetActive(false);
+        lives--;
     }
     public void UpdateToolIcon()
     {

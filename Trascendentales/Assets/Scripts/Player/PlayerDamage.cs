@@ -19,7 +19,8 @@ public class PlayerDamage : MonoBehaviour, IDamagable
     public void Takedmg(int dmg)
     {
         lives--;
-        if(lives <= 0 && isLive)
+        OnTakeDamage?.Invoke();
+        if (lives <= 0 && isLive)
         {
             CallToDeath();
             StartCoroutine(ShowDeadMenu());

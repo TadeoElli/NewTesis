@@ -17,8 +17,11 @@ public class DrawObjectTool : Tools
     public override void Awake()
     {
         base.Awake();
-        SelectCube();
         //DeactivateAllFeedback(); // Desactivamos todos los feedbacks al inicio
+    }
+    private void Start()
+    {
+        SelectCube();
     }
 
 

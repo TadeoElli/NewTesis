@@ -170,5 +170,9 @@ public class SetScaleParentTool : Tools
             scalable = null;
         }
     }
+    public override void SetCurrentAlternativeTool()
+    {
+        MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.RulerLink);
+    }
 }
 

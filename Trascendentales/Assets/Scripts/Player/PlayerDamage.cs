@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerDamage : MonoBehaviour, IDamagable
@@ -9,6 +10,7 @@ public class PlayerDamage : MonoBehaviour, IDamagable
     private bool isLive = true;
     [SerializeField] private int lives = 3;
     PlayerManager playerManager;
+    public UnityEvent OnTakeDamage;
 
     private void Awake()
     {

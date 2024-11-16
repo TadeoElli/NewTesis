@@ -19,7 +19,7 @@ public class MoveObjectTool : Tools
     public override void Awake()
     {
         base.Awake();
-        SelectXAxis();
+        selectedAxis = new Vector3(1, 0, 0);
     }
     public override void Interact(GameObject objective, bool isPerspective2D)
     {
@@ -143,16 +143,33 @@ public class MoveObjectTool : Tools
     public void SelectXAxis()
     {
         selectedAxis = new Vector3(1,0,0);
+        MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.CompassXAxis);
     }
     public void SelectYAxis()
     {
         selectedAxis = new Vector3(0, 1, 0);
+        MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.CompassYAxis);
     }
     public void SelectZAxis()
     {
         if (cameraManager.is2D)
+        {
             selectedAxis = new Vector3(1, 0, 0);
+            MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.CompassXAxis);
+        }
         else
+        {
             selectedAxis = new Vector3(0, 0, 1);
+            MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.CompassZAxis);
+        }
+    }
+    public override void SetCurrentAlternativeTool()
+    {
+        if (selectedAxis == Vector3.right)
+            MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.CompassXAxis);
+        else if (selectedAxis == Vector3.up)
+            MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.CompassYAxis);
+        else if (selectedAxis == Vector3.forward)
+            MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.CompassZAxis);
     }
 }

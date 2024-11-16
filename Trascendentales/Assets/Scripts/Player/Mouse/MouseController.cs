@@ -214,6 +214,7 @@ public class MouseController : MonoBehaviour
             default:
                 break;
         }
+        rightClickTool.SetCurrentAlternativeTool();
     }
     public void ShowToolWheel()
     {

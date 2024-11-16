@@ -17,7 +17,7 @@ public class DrawObjectTool : Tools
     public override void Awake()
     {
         base.Awake();
-        selectedPrefab = cubePrefab;
+        SelectCube();
         //DeactivateAllFeedback(); // Desactivamos todos los feedbacks al inicio
     }
 
@@ -52,16 +52,19 @@ public class DrawObjectTool : Tools
     public void SelectCube()
     {
         selectedPrefab = cubePrefab;
+        MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.BrushBox);
         //ResetDrawing();
     }
     public void SelectSphere()
     {
         selectedPrefab = spherePrefab;
+        MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.BrushSphere);
         //ResetDrawing();
     }
     public void SelectPlatform()
     {
         selectedPrefab = rectanglePrefab;
+        MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.BrushRectangle);
         //ResetDrawing();
     }
     private void ResetDrawing()
@@ -182,6 +185,15 @@ public class DrawObjectTool : Tools
         canInteract = false;
         yield return new WaitForSeconds(cooldown);
         canInteract = true;
+    }
+    public override void SetCurrentAlternativeTool()
+    {
+        if(selectedPrefab == cubePrefab)
+            MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.BrushBox);
+        else if(selectedPrefab == spherePrefab)
+            MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.BrushSphere);
+        else if(selectedPrefab == rectanglePrefab)
+            MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.BrushRectangle);
     }
 
 }

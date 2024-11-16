@@ -43,4 +43,6 @@ public class Tools : MonoBehaviour
 
         return false;
     }
+    public virtual void SetCurrentAlternativeTool() { }
+
 }

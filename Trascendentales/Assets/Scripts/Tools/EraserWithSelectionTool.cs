@@ -24,10 +24,7 @@ public class EraserWithSelectionTool : Tools
     public override void Awake()
     {
         base.Awake();
-    }
-    private void Start()
-    {
-        SetEraserModePosition();
+        eraserMode = EraserMode.Position;
     }
 
     public override void Interact(GameObject objective, bool isPerspective2D)
@@ -119,14 +116,17 @@ public class EraserWithSelectionTool : Tools
     public void SetEraserModePosition()
     {
         eraserMode = EraserMode.Position;
+        MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.EraserPosition);
     }
     public void SetEraserModeRotation()
     {
         eraserMode = EraserMode.Rotation;
+        MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.EraserRotation);
     }
     public void SetEraserModeScale()
     {
         eraserMode = EraserMode.Scale;
+        MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.EraserScale);
     }
     public override void DropInteractable()
     {
@@ -160,5 +160,22 @@ public class EraserWithSelectionTool : Tools
             currentMovable = null;
         }
         isHolding = false;
+    }
+    public override void SetCurrentAlternativeTool()
+    {
+        switch (eraserMode)
+        {
+            case EraserMode.Position:
+                MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.EraserPosition);
+                break;
+            case EraserMode.Rotation:
+                MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.EraserRotation);
+                break;
+            case EraserMode.Scale:
+                MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.EraserScale);
+                break;
+            default:
+                break;
+        }
     }
 }

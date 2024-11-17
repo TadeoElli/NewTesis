@@ -2646,12 +2646,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   restartPosition: {x: 47.17, y: 2.9, z: 0}
   triggerDialogue:
-  - No pasa nada, vuelve a intentarlo
-  - Con el pincel equipado presiona "Click Derecho" para crear un cubo y llegar hasta
-    la plataforma
-  - Luego equipate la regla y presionar "Click Derecho" en uno de los objetos y enlazalo
-    al otro
-  - Asi podras escalarlos para llegar al otro lado
+  - 'No pasa nada, vuelve a intentarlo.  '
+  - 'Con el pincel equipado, presiona "Click Derecho" para crear un cubo y llegar
+    hasta la plataforma.  '
+  - "Luego, equ\xEDpate la regla y presiona \"Click Derecho\" en uno de los objetos
+    para enlazarlo al otro.  "
+  - "As\xED podr\xE1s escalarlos para llegar al otro lado.  "
+  triggerDialogueEnglish:
+  - "It\u2019s okay, try again.  "
+  - 'With the brush equipped, press "Right Click" to create a cube and reach the
+    platform.  '
+  - 'Then, equip the ruler and press "Right Click" on one of the objects to link
+    it to the other.  '
+  - 'That way, you can scale them to reach the other side.       '
 --- !u!65 &333607833
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3918,10 +3925,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   restartPosition: {x: 82.63, y: 2.9, z: 0}
   triggerDialogue:
-  - Mmm, bien, te dare un consejo
-  - Usa el transportador para girar la valvula
-  - Luego con el transportador equipado, haz "Click Derecho" sobre el cilindro y
-    suelta sobre la plataforma para luego rotarla
+  - "Mmm, bien, te dar\xE9 un consejo.  "
+  - 'Primero escala la primera plataforma, luego utiliza el pilar del fondo para
+    enlazar las plataformas y evitar que roten.  '
+  - 'Para eso, presiona "Click Derecho" con el transportador equipado en el pilar
+    y suelta sobre una de las plataformas.  '
+  triggerDialogueEnglish:
+  - "Hmm, alright, I\u2019ll give you a tip.  "
+  - 'First, scale the first platform, then use the pillar in the background to link
+    the platforms and prevent them from rotating.  '
+  - 'To do that, press "Right Click" with the protractor equipped on the pillar and
+    release on one of the platforms.       '
 --- !u!65 &534853182
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4345,8 +4359,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerDialogue:
-  - Ya estas listo, presiona "Escape" cuando gustes para volver al menu principal
-  triggerDialogueEnglish: []
+  - "Ya est\xE1s listo, presiona \"Escape\" cuando gustes para volver al men\xFA
+    principal.  "
+  triggerDialogueEnglish:
+  - "You\u2019re ready now. Press \"Escape\" whenever you\u2019re ready to return
+    to the main menu.       "
 --- !u!65 &594688392
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4984,10 +5001,10 @@ GameObject:
   - component: {fileID: 689872280}
   - component: {fileID: 689872279}
   - component: {fileID: 689872278}
-  - component: {fileID: 689872284}
+  - component: {fileID: 689872285}
   m_Layer: 6
   m_Name: Floor (7)
-  m_TagString: Platform
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5004,7 +5021,8 @@ Transform:
   m_LocalPosition: {x: 132.93999, y: -0.32999974, z: -1.15}
   m_LocalScale: {x: 3.055896, y: 0.46778244, z: 2.037361}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1360232822}
   m_Father: {fileID: 1610540387}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &689872278
@@ -5075,7 +5093,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 689872276}
-  m_Material: {fileID: 13400000, guid: 4bd0f68b992359043894e967aef0ff0f, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5140,7 +5158,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 689872276}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &689872284
+--- !u!114 &689872285
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5149,9 +5167,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 689872276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d0bf011b7b56754481735c0569d1382, type: 3}
+  m_Script: {fileID: 11500000, guid: 78a0fb736edc05147bb34ed983f6e4b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxRadius: 5
+  needGravity: 0
+  objRenderer: {fileID: 689872282}
+  originParticle: {fileID: 7235251305826239643, guid: 0304948c45a3e3049a9d502fcbd4d427,
+    type: 3}
 --- !u!1 &697980871
 GameObject:
   m_ObjectHideFlags: 0
@@ -6356,10 +6379,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerDialogue:
-  - Asombroso, superaste mis expectativas
-  - Ahora es momento de "Cambiar la forma de ver" las cosas
-  - Intenta apretar "Tab" para pasar a un plano de 2 dimensiones
-  triggerDialogueEnglish: []
+  - 'No olvides que puedes usar la goma para desenlazar objetos y devolverlos a su
+    estado original.  '
+  - "Adem\xE1s, si presionas la \"E\" con la goma, podr\xE1s elegir qu\xE9 modificaci\xF3n
+    reiniciar y luego solo debes presionar \"Click Derecho\" en el objeto.  "
+  - 'Ahora es momento de "cambiar la forma de ver" las cosas.  '
+  - 'Intenta apretar "Tab" para pasar a un plano de 2 dimensiones.  '
+  triggerDialogueEnglish:
+  - "Don\u2019t forget that you can use the eraser to unlink objects and restore
+    them to their original state.  "
+  - 'Additionally, if you press "E" with the eraser equipped, you can select which
+    modification to reset, and then simply right-click on the object.       '
+  - "Now it\u2019s time to \u201Cchange the way you see\u201D things.  "
+  - 'Try pressing "Tab" to switch to a 2D plane.       '
 --- !u!65 &861603940
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7095,7 +7127,6 @@ Transform:
   - {fileID: 506431943}
   - {fileID: 733639689}
   - {fileID: 1626984275}
-  - {fileID: 1540896425}
   - {fileID: 966830322}
   - {fileID: 1575703252}
   - {fileID: 2143638661}
@@ -7111,6 +7142,7 @@ Transform:
   - {fileID: 267879092}
   - {fileID: 2097130295}
   - {fileID: 2042978337}
+  - {fileID: 1815144283}
   m_Father: {fileID: 1607392721}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1014779624
@@ -7159,12 +7191,12 @@ PrefabInstance:
     - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000016953926
+      value: -0.000000016953926
       objectReference: {fileID: 0}
     - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000029366534
+      value: 0.0000000029366534
       objectReference: {fileID: 0}
     - target: {fileID: 6323744800106687020, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
@@ -7224,12 +7256,12 @@ PrefabInstance:
     - target: {fileID: 6378466528603176896, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000016953926
+      value: -0.000000016953926
       objectReference: {fileID: 0}
     - target: {fileID: 6378466528603176896, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000029366534
+      value: 0.0000000029366534
       objectReference: {fileID: 0}
     - target: {fileID: 6736285431859821979, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
@@ -8201,9 +8233,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   restartPosition: {x: 27.66, y: 1.76, z: 0}
   triggerDialogue:
-  - No pasa nada, vuelve a intentarlo
-  - Prueba usando la goma (Espacio "5") para borrar la pared y el Pincel (espacio
-    "1") para aparecer plataformas)
+  - 'No pasa nada, vuelve a intentarlo.  '
+  - 'Prueba usando la goma (espacio "5") para borrar la pared y el pincel (espacio
+    "1") para hacer aparecer plataformas.  '
+  triggerDialogueEnglish:
+  - "It\u2019s okay, try again.  "
+  - 'Try using the eraser (slot "5") to erase the wall and the brush (slot "1") to
+    make platforms appear.       '
 --- !u!1 &1200099254
 GameObject:
   m_ObjectHideFlags: 0
@@ -8553,13 +8589,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerDialogue:
-  - "Ya estas listo, creo que no tengo nada mas que ense\xF1arte"
-  - Ah cierto, quedo una cosa, asi como puedes utilizar la perspectiva a tu favor
-    eso no siempre sera suficiente
-  - Si en algun momento crees que estas atascado, presiona "E" para "ver desde otro
-    punto de vista"
-  - Puede que haya partes escondidas que no estas viendo
-  triggerDialogueEnglish: []
+  - "Ya est\xE1s listo, creo que no tengo nada m\xE1s que ense\xF1arte.  "
+  - "Ah, cierto, qued\xF3 una cosa. As\xED como puedes utilizar la perspectiva a
+    tu favor, eso no siempre ser\xE1 suficiente.  "
+  - "Si en alg\xFAn momento crees que est\xE1s atascado, presiona \"R\" para \"ver
+    desde otro punto de vista\".  "
+  - "Puede que haya partes escondidas que no est\xE1s viendo.  "
+  triggerDialogueEnglish:
+  - "You\u2019re ready; I don\u2019t think there\u2019s anything else left to teach
+    you.  "
+  - "Oh, right, there\u2019s one last thing. Just as you can use perspective to your
+    advantage, it won\u2019t always be enough.  "
+  - 'If you ever feel stuck, press "R" to "see things from another point of view."  '
+  - "There might be hidden parts you\u2019re not seeing.  "
 --- !u!65 &1228602836
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9304,6 +9346,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1290907761}
   m_CullTransparentMesh: 1
+--- !u!1 &1360232821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1360232822}
+  - component: {fileID: 1360232823}
+  m_Layer: 2
+  m_Name: TriggerBox
+  m_TagString: Platform
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1360232822
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360232821}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 689872277}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1360232823
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360232821}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1361951710
 GameObject:
   m_ObjectHideFlags: 0
@@ -10259,8 +10354,6 @@ GameObject:
   - component: {fileID: 1540896429}
   - component: {fileID: 1540896428}
   - component: {fileID: 1540896427}
-  - component: {fileID: 1540896426}
-  - component: {fileID: 1540896434}
   m_Layer: 6
   m_Name: Cylinder (1)
   m_TagString: Untagged
@@ -10277,26 +10370,12 @@ Transform:
   m_GameObject: {fileID: 1540896424}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 140.54, y: 0.05, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: -0.011729899, y: 1.7563974, z: 0}
+  m_LocalScale: {x: 0.25, y: 1.2, z: 0.35}
+  m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1008379127}
+  m_Father: {fileID: 1815144283}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1540896426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540896424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f6e6eb27e4a23a4fb668ad26c648449, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isInFront: 1
-  isInBack: 1
 --- !u!114 &1540896427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10453,25 +10532,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1540896424}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1540896434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540896424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c05f6b7e186c5e94898dd59ab8b3dd27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minScale: {x: 1, y: 1, z: 1}
-  maxScale: {x: 2, y: 2, z: 2}
-  maxRadius: 0
-  canAttachOthers: 0
-  canScale: 1
-  isScaling: 0
-  objRenderer: {fileID: 1540896432}
 --- !u!1 &1541347849
 GameObject:
   m_ObjectHideFlags: 0
@@ -10976,7 +11036,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1815144283}
   - {fileID: 854717569}
   - {fileID: 689872277}
   - {fileID: 634350111}
@@ -11508,18 +11567,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerDialogue:
-  - Increible! vas muy bien, es tiempo de aprender la ultima herramienta, de seguro
-    lo aprendes rapido
-  - El transportador te permitira enlazar objetos pero a diferencia de las otras
-    herramientas que hace que compartan modificaciones
-  - el transportador lo que hara es juntar 2 objetos de forma que el segundo se vuelva
-    "hijo" del primero
-  - Prueba enlazar el cilindro con la plataforma usando el transportador, presiona
-    "Q" o "4" para seleccionarlo y luego presiona "Click Izquierdo" sobre el cilindro
-  - Luego suelta el click sobre la plataforma y luego interactua con el "padre"
-  - Ademas, si mantienes presionado "Click Derecho" sobre el hijo mientras esta enlazado,
-    lo podras arrastrar hacia el "padre"
-  triggerDialogueEnglish: []
+  - "\xA1Incre\xEDble! Vas muy bien, ahora vamos a ver una herramienta bastante interesante.
+    Seguro la aprendes r\xE1pido.  "
+  - 'El transportador tiene dos funciones: enlazar objetos con el "Click Izquierdo"
+    o mover objetos con el "Click Derecho".  '
+  - 'Si queremos enlazar objetos, debemos presionar sobre un objeto para volverlo
+    el "padre" y luego soltar sobre otro para convertirlo en el "hijo".  '
+  - "De esta forma, el hijo recibir\xE1 todas las modificaciones que se le hagan
+    al padre.  "
+  - "Por el contrario, si queremos mover un objeto, debemos usar el \"Click Derecho\"
+    y arrastrarlo para moverlo, pero no podr\xE1 alejarse mucho de su posici\xF3n
+    original.  "
+  - "Adem\xE1s, puedes elegir el eje en el cual mover el objeto presionando \"E\".  "
+  triggerDialogueEnglish:
+  - "Incredible! You're doing great. Now let\u2019s look at a very interesting tool.
+    I\u2019m sure you\u2019ll learn it quickly.  "
+  - 'The compass has two functions: linking objects with the "Left Click" or moving
+    objects with the "Right Click."  '
+  - 'If we want to link objects, we need to press on an object to make it the "parent"
+    and then release on another to make it the "child."  '
+  - 'This way, the child will inherit all modifications made to the parent.  '
+  - "On the other hand, if we want to move an object, we must use the \"Right Click\"
+    and drag it to move, but it won\u2019t be able to stray far from its original
+    position.  "
+  - 'Additionally, you can choose the axis along which to move the object by pressing
+    "E."       '
 --- !u!65 &1673529491
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12089,7 +12161,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   restartPosition: {x: 155.76, y: 3.91, z: 0}
   triggerDialogue:
-  - Tranquilo, a veces la perspectiva puede ayudarnos
+  - "Quiz\xE1s un \"cambio de perspectiva\" ayude.  "
+  triggerDialogueEnglish:
+  - 'Maybe a "change of perspective" will help.       '
 --- !u!65 &1692944277
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13162,7 +13236,11 @@ GameObject:
   - component: {fileID: 1815144286}
   - component: {fileID: 1815144285}
   - component: {fileID: 1815144284}
-  m_Layer: 0
+  - component: {fileID: 1815144291}
+  - component: {fileID: 1815144290}
+  - component: {fileID: 1815144289}
+  - component: {fileID: 1815144288}
+  m_Layer: 6
   m_Name: Floor (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13179,10 +13257,12 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 140.59999, y: -1.3499998, z: 0}
-  m_LocalScale: {x: 5.1149254, y: 0.797086, z: 3.4474}
+  m_LocalScale: {x: 5, y: 1, z: 3.5}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1610540387}
+  m_Children:
+  - {fileID: 1924293626}
+  - {fileID: 1540896425}
+  m_Father: {fileID: 1008379127}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1815144284
 MonoBehaviour:
@@ -13269,6 +13349,89 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1815144282}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1815144288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815144282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78a0fb736edc05147bb34ed983f6e4b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRadius: 2.5
+  needGravity: 0
+  objRenderer: {fileID: 1815144286}
+  originParticle: {fileID: 7235251305826239643, guid: 0304948c45a3e3049a9d502fcbd4d427,
+    type: 3}
+--- !u!54 &1815144289
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815144282}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &1815144290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815144282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c05f6b7e186c5e94898dd59ab8b3dd27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minScale: {x: 1, y: 1, z: 1}
+  maxScale: {x: 2, y: 2, z: 2}
+  maxRadius: 0
+  canAttachOthers: 0
+  canScale: 1
+  isScaling: 0
+  objRenderer: {fileID: 1540896432}
+--- !u!114 &1815144291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815144282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f64c7de03efc38640b653ac3eb9dedb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAtacheableForCompass: 0
+  isRotatingTowardsTheCompass: 0
+  isAtacheableForRuler: 0
+  isAtacheableForSquad: 0
+  isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  rend: {fileID: 1815144286}
 --- !u!1 &1848644615
 GameObject:
   m_ObjectHideFlags: 0
@@ -14043,11 +14206,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   restartPosition: {x: 123.44, y: 3.48, z: 0}
   triggerDialogue:
-  - Tranquilo, vuelve a intentarlo
-  - Con el transportador ("4") clickea el objeto "padre" y arrastra el mouse para
-    soltarlo sobre el objeto que quieres que se vuelva "hijo"
-  - Rota el "padre" para rotar tambien al hijo y asi llegar al otro lado
-  - Puedes usar el "Click Derecho" para acercarte y alejarte del "padre"
+  - "Mmm, bien, te dar\xE9 un consejo.  "
+  - 'Primero escala la primera plataforma, luego utiliza el pilar del fondo para
+    enlazar las plataformas y evitar que roten.  '
+  - 'Para eso, presiona "Click Derecho" con el transportador equipado en el pilar
+    y suelta sobre una de las plataformas.  '
+  triggerDialogueEnglish:
+  - "Hmm, alright, I\u2019ll give you a tip.  "
+  - 'First, scale the first platform, then use the pillar in the background to link
+    the platforms and prevent them from rotating.  '
+  - 'To do that, press "Right Click" with the protractor equipped on the pillar and
+    release on one of the platforms.       '
 --- !u!65 &1895907560
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14296,6 +14465,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1923917583}
   m_CullTransparentMesh: 1
+--- !u!1 &1924293625
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1924293626}
+  - component: {fileID: 1924293627}
+  m_Layer: 2
+  m_Name: TriggerBox
+  m_TagString: Platform
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1924293626
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924293625}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1815144283}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1924293627
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924293625}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1957824785
 GameObject:
   m_ObjectHideFlags: 0
@@ -15128,16 +15350,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerDialogue:
-  - Jajaja, perfecto, por cierto, olvide mencionarte algo
-  - Cuando estamos en un plano bidimensional tus herramientas interactuaran levemente
-    distinto
-  - La regla solo podra escalar en 2 dimensiones y el transportador rotara en otro
-    eje
-  - Ademas habra objetos que son interactuables con el pincel o la goma solo en un
-    plano bidimensional
-  - Prueba modificar las plataformas en el plano bidimensional para llegar al otro
-    lado
-  triggerDialogueEnglish: []
+  - "Jajaja, perfecto. Por cierto, olvid\xE9 mencionarte que al cambiar de perspectiva
+    tambi\xE9n cambia ligeramente c\xF3mo funcionan nuestras herramientas.  "
+  - "La regla solo podr\xE1 escalar en 2 dimensiones, y el transportador rotar\xE1
+    en otro eje.  "
+  - "Adem\xE1s, habr\xE1 objetos que son interactuables con el pincel o la goma solo
+    en un plano bidimensional.  "
+  - 'Prueba modificar las plataformas en el plano bidimensional para llegar al otro
+    lado.  '
+  triggerDialogueEnglish:
+  - 'Haha, perfect! By the way, I forgot to mention that changing perspectives slightly
+    alters how our tools work.  '
+  - 'The ruler will only scale in 2 dimensions, and the protractor will rotate on
+    a different axis.  '
+  - 'Additionally, some objects can only be interacted with using the brush or the
+    eraser on a 2D plane.  '
+  - 'Try modifying the platforms in the 2D plane to reach the other side.       '
 --- !u!65 &2069439845
 BoxCollider:
   m_ObjectHideFlags: 0

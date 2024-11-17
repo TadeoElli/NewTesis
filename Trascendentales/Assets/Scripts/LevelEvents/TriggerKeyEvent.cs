@@ -8,13 +8,12 @@ public class TriggerKeyEvent : MonoBehaviour
     public UnityEvent onKeyCentered; // Evento que se activa cuando la clave cumple las condiciones
 
     [SerializeField]private Collider triggerCollider;
-    private bool isKeyCentered, wasActivated;
+    private bool  wasActivated;
     private float timer;
 
     private void Start()
     {
         timer = 0f;
-        isKeyCentered = false;
         wasActivated = false;
     }
 

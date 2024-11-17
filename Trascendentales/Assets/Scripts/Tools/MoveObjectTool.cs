@@ -28,7 +28,7 @@ public class MoveObjectTool : Tools
 
         if (!objective.TryGetComponent<IInteractable>(out IInteractable interactable) || !objective.TryGetComponent<IMovable>(out IMovable component))
             return;
-        if (!interactable.IsAtachableForCompass() || interactable.IsAtachedToCompass()|| interactable.IsAtachedToRuler() || interactable.IsAtachedToSquad())
+        if ( interactable.IsAtachedToCompass()|| interactable.IsAtachedToRuler() || interactable.IsAtachedToSquad())
             return;
         movable = component;
         movable.ShowOriginFeedback();
@@ -43,8 +43,11 @@ public class MoveObjectTool : Tools
         inputManager.OnToolSwitchCheck += DropInteractable;
         objectiveRb = objective.GetComponent<Rigidbody>();
         objectiveRb.useGravity = false;
-        objectiveRb.velocity = Vector3.zero;
-        objectiveRb.angularVelocity = Vector3.zero;
+        if (objectiveRb.isKinematic)
+        {
+            objectiveRb.velocity = Vector3.zero;
+            objectiveRb.angularVelocity = Vector3.zero;
+        }
         isDragging = true;
         
     }
@@ -88,11 +91,7 @@ public class MoveObjectTool : Tools
         float newDistanceToOrigin = Mathf.Clamp(currentDistanceToOrigin + mouseDelta, -maxRadius, maxRadius);
         Vector3 desiredPosition = currentOriginalPosition + selectedAxis * newDistanceToOrigin;
 
-        // Clamping para asegurar que no exceda el radio máximo
-        if (Vector3.Distance(originalPosition, desiredPosition) > maxRadius)
-        {
-            desiredPosition = originalPosition + (desiredPosition - originalPosition).normalized * maxRadius;
-        }
+
 
 
         // Determinar la dirección del Raycast basándose en si el desplazamiento es positivo o negativo
@@ -131,8 +130,9 @@ public class MoveObjectTool : Tools
     {
         isDragging = false;
         mouseState.DropRightClick();
-        if(movable.GetNeedGravity())
-            objectiveRb.useGravity = true;
+        if(movable != null)
+            if(movable.GetNeedGravity())
+                objectiveRb.useGravity = true;
         movable = null;
         objectiveRb = null;
         inputManager.OnRightClickDrop -= DropInteractable;

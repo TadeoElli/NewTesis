@@ -19,9 +19,6 @@ public class CameraManager : MonoBehaviour
     private Coroutine currentTransition;
 
     public bool isFrontView = true;
-    // Valores de offset para el eje Z
-    [SerializeField] private float frontViewOffsetZ = -14f;
-    [SerializeField] private float backViewOffsetZ = 14f;
     public event Action OnCameraSwitch;
 
     // Lista de objetos que pueden verse afectados por el cambio de perspectiva

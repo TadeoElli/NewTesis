@@ -4,7 +4,7 @@ public class PaintableDelete : PaintableObject
 {
 
 
-    private void Awake()
+    public override void Awake()
     {
         base.InteractionWithBrush();
     }

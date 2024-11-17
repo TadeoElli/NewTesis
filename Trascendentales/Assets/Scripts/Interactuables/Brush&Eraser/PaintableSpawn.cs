@@ -5,13 +5,12 @@ public class PaintableSpawn : PaintableObject
     [SerializeField] private GameObject prefab, spawnedObject;
     private Rigidbody spObjectRb;
     private Color feedbackColor;
-    private void Awake()
+    public override void Awake()
     {
         feedbackColor = Color.black;
     }
     public override void InteractionWithBrush()
     {
-        //base.InteractionWithBrush();
         if(spawnedObject == null)
         {
             spawnedObject = Instantiate(prefab);
@@ -34,7 +33,6 @@ public class PaintableSpawn : PaintableObject
     }
     public override void InteractionWithEraser()
     {
-        //base.InteractionWithEraser();
 
     }
     public override void HideFeedback()

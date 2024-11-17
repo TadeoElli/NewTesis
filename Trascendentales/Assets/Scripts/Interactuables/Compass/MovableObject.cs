@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Animations;
 [RequireComponent(typeof(InteractuableObject))]
 [RequireComponent(typeof(Rigidbody))]
 public class MovableObject : MonoBehaviour, IMovable,IFeedback
@@ -21,6 +23,11 @@ public class MovableObject : MonoBehaviour, IMovable,IFeedback
     public bool GetNeedGravity() => needGravity;
     public bool GetIsMovable() => isMovable;
 
+    public void ShowParticleFeedback()
+    {
+        particleFeedback.SetActive(true);
+    }
+
     private void Start()
     {
         m_feedbackCompass = ColorDictionary.GetColor("FeedbackCompass");
@@ -38,6 +45,14 @@ public class MovableObject : MonoBehaviour, IMovable,IFeedback
     private void Update()
     {
         lineRenderer.SetPosition(1, transform.position);
+        // Verifica la distancia desde la posición original
+        float distance = Vector3.Distance(transform.position, originalPosition);
+        if (distance > maxRadius)
+        {
+            // Calcula la posición máxima permitida dentro del radio
+            Vector3 direction = (transform.position - originalPosition).normalized;
+            transform.position = originalPosition + direction * maxRadius;
+        }
     }
     public void InteractWithEraser(bool isOn2D)
     {
@@ -76,15 +91,5 @@ public class MovableObject : MonoBehaviour, IMovable,IFeedback
         FeedbackManager.Instance.ClearFeedback(objRenderer);
     }
 
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.CompareTag("Player"))
-            isMovable = false;
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-            isMovable = true;
-    }*/
 
 }

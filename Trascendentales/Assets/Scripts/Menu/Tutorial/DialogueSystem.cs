@@ -31,7 +31,7 @@ public class DialogueSystem : MonoBehaviour
         }
 
         input = FindObjectOfType<InputManager>();
-        input.OnLeftClickPress += CheckDialogue;
+        input.OnInteract += CheckDialogue;
         tutorialHud.SetActive(false); // Mantener oculto al inicio
     }
     private void Start()
@@ -67,11 +67,16 @@ public class DialogueSystem : MonoBehaviour
     // Escribir línea actual de diálogo
     private IEnumerator WriteLine()
     {
+        int cantOfChars = 0;
         foreach (char dialogueChar in currentDialogue[index].ToCharArray())
         {
             _text.text += dialogueChar;
-            Debug.Log("Adding character: " + dialogueChar);
-            AudioManager.Instance.PlaySoundEffect(writeClip);
+            cantOfChars++;
+            if(cantOfChars >= 3)
+            {
+                AudioManager.Instance.PlaySoundEffect(writeClip);
+                cantOfChars = 0;
+            }
             yield return new WaitForSeconds(txtSpeed);
         }
     }

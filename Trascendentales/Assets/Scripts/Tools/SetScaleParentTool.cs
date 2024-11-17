@@ -20,6 +20,10 @@ public class SetScaleParentTool : Tools
 
     public override void Interact(GameObject interactable, bool isPerspective2D)
     {
+        if (isDragging)
+        {
+            ResetConstraint();
+        }
         if (!interactable.TryGetComponent<IEscalable>(out IEscalable scalableComponent))
             return;
 
@@ -27,10 +31,6 @@ public class SetScaleParentTool : Tools
 
         if (!scalable.CanAttachOthers())
             return;
-        if (isDragging)
-        {
-            ResetConstraint();
-        }
         compassTool.ResetConstraint();
         setRotationParentTool.ResetConstraint();
         mouseState.SetRightclickPress();

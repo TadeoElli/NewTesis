@@ -21,6 +21,10 @@ public class SetRotationParentTool : Tools
 
     public override void Interact(GameObject interactable, bool isPerspective2D)
     {
+        if (isDragging)
+        {
+            ResetConstraint();
+        }
         if (!interactable.TryGetComponent<IRotable>(out IRotable rotableComponent))
             return;
 
@@ -28,10 +32,6 @@ public class SetRotationParentTool : Tools
 
         if (!rotable.CanAttachOthers())
             return;
-        if (isDragging)
-        {
-            ResetConstraint();
-        }
         setScaleParentTool.ResetConstraint();
         compassTool.ResetConstraint();
         mouseState.SetRightclickPress();

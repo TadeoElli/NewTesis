@@ -8,12 +8,6 @@ public class ResetScaleObject : ScalableObject
     [SerializeField] private float resetSpeed = 1.0f; // Velocidad de retorno a la escala predeterminada
 
 
-    public override void Start()
-    {
-        // Al iniciar, guardamos la escala actual como escala predeterminada
-        base.Start(); // Aseguramos que el Start del padre también se ejecute
-    }
-
     private void Update()
     {
         // Si el objeto no se está escalando, vuelve gradualmente a la escala predeterminada
@@ -26,8 +20,7 @@ public class ResetScaleObject : ScalableObject
                 transform.localScale = defaultScale;
             }
         }
-        // Reseteamos el estado de escalado para el próximo frame
-        isScaling = false;
+
     }
 
 }

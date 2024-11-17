@@ -11,6 +11,7 @@ public class RotableObject : MonoBehaviour, IRotable, IFeedback
     [SerializeField] private float maxRadius;
     [SerializeField] private bool canAttachOthers;
     [SerializeField] private bool needToBeKinematic = false;
+    [SerializeField] public bool isRotating = false;
     [SerializeField] public Transform gimballRef;
     private Quaternion originalRotation;
     public event Action OnEraserInteract;
@@ -25,7 +26,12 @@ public class RotableObject : MonoBehaviour, IRotable, IFeedback
     public bool CanRotateInZ() => canRotateInZ;
     public bool CanAttachOthers() => canAttachOthers;
     public float GetMaxRadius() => maxRadius;
+    public bool IsRotating() => isRotating;
 
+    public void SetIsRotating(bool state)
+    {
+        isRotating = state;
+    }
 
     private void Start()
     {

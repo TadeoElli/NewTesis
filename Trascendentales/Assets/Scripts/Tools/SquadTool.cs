@@ -34,6 +34,7 @@ public class SquadTool : Tools
         inputManager.OnPerspectiveSwitch += DropInteractable;
         inputManager.OnLeftClickDrop += DropInteractable;
         inputManager.OnToolSwitchCheck += DropInteractable;
+        rotable.SetIsRotating(true);
         base.Interact(interactable, isPerspective2D); // Llama a la lógica común de interactuar
         canRotateInY = rotable.CanRotateInY();
         canRotateInZ = rotable.CanRotateInZ();
@@ -76,6 +77,7 @@ public class SquadTool : Tools
         if(!rotable.NeedToBeKinematic())
             objectiveRB.isKinematic = false;
         objectiveRB = null;
+        rotable.SetIsRotating(false);
         objectiveTr.SetParent(oldParent);
         oldParent = null;
         objectiveTr = null;

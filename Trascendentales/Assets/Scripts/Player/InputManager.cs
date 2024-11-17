@@ -35,6 +35,7 @@ public class InputManager : MonoBehaviour
     public event Action OnRightClickPress;
     public event Action OnRightClickDrop;
     public event Action OnChangeCameraAngle;
+    public event Action OnInteract;
 
     private void Awake()
     {
@@ -72,6 +73,7 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.RightClick.canceled += _ => RightClickReleased();
             playerControls.PlayerActions.Escape.performed += _ => TogglePause();
             playerControls.PlayerActions.Crouch.performed += _ => GrabInteraction();
+            playerControls.PlayerActions.Interact.performed += _ => Interact();
         }
         playerControls.Enable();
     }
@@ -252,6 +254,10 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    public void Interact()
+    {
+        OnInteract?.Invoke();
+    }
     #region Cooldown Coroutines
     private IEnumerator CameraAngleCooldown()
     {

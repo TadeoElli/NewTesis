@@ -254,6 +254,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""33de691a-71d3-4f43-bf3b-dc3fd5b65f1a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -388,6 +397,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""OpenAlternativeWheel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be8b49f7-0c0d-47b5-bc2d-7ed0179e07a1"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -415,6 +435,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerActions_OpenToolWheel = m_PlayerActions.FindAction("OpenToolWheel", throwIfNotFound: true);
         m_PlayerActions_OpenAlternativeWheel = m_PlayerActions.FindAction("OpenAlternativeWheel", throwIfNotFound: true);
         m_PlayerActions_Crouch = m_PlayerActions.FindAction("Crouch", throwIfNotFound: true);
+        m_PlayerActions_Interact = m_PlayerActions.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -588,6 +609,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_OpenToolWheel;
     private readonly InputAction m_PlayerActions_OpenAlternativeWheel;
     private readonly InputAction m_PlayerActions_Crouch;
+    private readonly InputAction m_PlayerActions_Interact;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -604,6 +626,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @OpenToolWheel => m_Wrapper.m_PlayerActions_OpenToolWheel;
         public InputAction @OpenAlternativeWheel => m_Wrapper.m_PlayerActions_OpenAlternativeWheel;
         public InputAction @Crouch => m_Wrapper.m_PlayerActions_Crouch;
+        public InputAction @Interact => m_Wrapper.m_PlayerActions_Interact;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -649,6 +672,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Crouch.started += instance.OnCrouch;
             @Crouch.performed += instance.OnCrouch;
             @Crouch.canceled += instance.OnCrouch;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IPlayerActionsActions instance)
@@ -689,6 +715,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Crouch.started -= instance.OnCrouch;
             @Crouch.performed -= instance.OnCrouch;
             @Crouch.canceled -= instance.OnCrouch;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IPlayerActionsActions instance)
@@ -729,5 +758,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnOpenToolWheel(InputAction.CallbackContext context);
         void OnOpenAlternativeWheel(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

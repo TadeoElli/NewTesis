@@ -138,6 +138,8 @@ GameObject:
   - component: {fileID: 31778177}
   - component: {fileID: 31778176}
   - component: {fileID: 31778174}
+  - component: {fileID: 31778182}
+  - component: {fileID: 31778181}
   m_Layer: 6
   m_Name: Cube (8)
   m_TagString: Untagged
@@ -155,7 +157,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 96.99, y: -0.99999976, z: -1.17}
-  m_LocalScale: {x: 1, y: 1, z: 4}
+  m_LocalScale: {x: 3, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1008379127}
@@ -216,7 +218,7 @@ MonoBehaviour:
   isAtacheableForCompass: 0
   isRotatingTowardsTheCompass: 0
   isAtacheableForRuler: 0
-  isAtacheableForSquad: 0
+  isAtacheableForSquad: 1
   isAtachedToCompass: 0
   isAtachedToRuler: 0
   isAtachedToSquad: 0
@@ -293,6 +295,48 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31778172}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &31778181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31778172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e54a3604759c44a92fbb4337f16604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRotateInY: 1
+  canRotateInZ: 0
+  canRotate: 1
+  maxRadius: 10
+  canAttachOthers: 1
+  needToBeKinematic: 0
+  isRotating: 0
+  gimballRef: {fileID: 0}
+  objRenderer: {fileID: 31778179}
+  defaultRotation: {x: 0, y: 0.008726535, z: 0, w: 0.9999619}
+  resetSpeed: 0.75
+--- !u!114 &31778182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31778172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c05f6b7e186c5e94898dd59ab8b3dd27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minScale: {x: 3, y: 1, z: 1}
+  maxScale: {x: 3, y: 1, z: 8}
+  maxRadius: 0
+  canAttachOthers: 0
+  canScale: 1
+  isScaling: 0
+  objRenderer: {fileID: 31778179}
 --- !u!1 &45780130
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,10 +394,13 @@ MonoBehaviour:
   interactionForEraser: 0
   objRenderer: {fileID: 45780140}
   col: {fileID: 45780139}
-  solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
-  render: {fileID: 45780140}
   startSolid: 1
+  OnInteractionWitBrush:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInteractionWithEraser:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &45780133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,6 +433,7 @@ MonoBehaviour:
   maxRadius: 20
   canAttachOthers: 0
   needToBeKinematic: 0
+  isRotating: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 45780140}
 --- !u!114 &45780135
@@ -1177,9 +1225,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerDialogue:
   - Empecemos con algo simple
-  - ves esa cajita de ahi? podemos modificar su escala!!
-  - Presiona "Q" para seleccionar la Regla o presiona directamente "2" para seleccionarla
-    y luego usala con "Click Inquierdo" sobre la caja para modificar su escala
+  - "Ves esa cajita de ah\xED? \xA1Podemos modificar su escala! "
+  - "Presiona \"Q\" para seleccionar la regla o presiona directamente \"2\" para
+    seleccionarla y luego \xFAsala con \"Click Izquierdo\" sobre la caja para modificar
+    su escala. "
+  triggerDialogueEnglish:
+  - Let's start with something simple
+  - 'Do you see that little box over there? We can modify its scale! '
+  - 'Press "Q" to select the ruler or press "2" directly to select it, then use it
+    with "Left Click" on the box to change its scale. '
 --- !u!33 &176678702
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1535,13 +1589,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerDialogue:
-  - Perfecto, vamos muy bien, ahora es momento de mostrarte un secreto
-  - A veces los objetos no se mantendran modificados todo el tiempo
-  - Pero eso no tiene porque ser un problema, por ejemplo
-  - Prueba equiparte la regla y presionar "Click Derecho" en uno de los objetos,
-    luego sin soltar el boton apunta a otro objeto que pueda ser modificable
-  - Esto los enlazara, por lo que cualquier cambio que hagas en el primero afectara
-    al segundo
+  - 'Perfecto, vamos muy bien. Ahora es momento de mostrarte un secreto. '
+  - "Cuando dejas de modificar alg\xFAn objeto, puede que este trate de volver a
+    su forma original. "
+  - "Pero eso no tiene por qu\xE9 ser un problema. Por ejemplo: "
+  - "Prueba equiparte la regla y presionar \"Click Derecho\" en uno de los objetos.
+    Luego, sin soltar el bot\xF3n, apunta a otro objeto para enlazarlo. "
+  - "De esta forma, cualquier cambio que hagas en el primero afectar\xE1 al segundo.  "
+  triggerDialogueEnglish:
+  - "Perfect, we\u2019re doing great. Now it's time to show you a secret. "
+  - 'When you stop modifying an object, it may try to return to its original shape. '
+  - 'But that doesn''t have to be a problem. For example: '
+  - 'Try equipping the ruler and pressing "Right Click" on one of the objects. Then,
+    without releasing the button, aim at another object to link them. '
+  - 'This way, any changes you make to the first one will affect the second.       '
 --- !u!65 &243354593
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1585,7 +1646,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &267879092
 Transform:
   m_ObjectHideFlags: 0
@@ -1689,8 +1750,9 @@ MonoBehaviour:
   canRotateInZ: 0
   canRotate: 1
   maxRadius: 15
-  canAttachOthers: 0
+  canAttachOthers: 1
   needToBeKinematic: 0
+  isRotating: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 267879095}
 --- !u!114 &267879097
@@ -1747,7 +1809,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267879091}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 004cd1bf4c8a84d4aac318a46d8830d5, type: 3}
   m_Name: 
@@ -2162,6 +2224,8 @@ GameObject:
   - component: {fileID: 309448238}
   - component: {fileID: 309448239}
   - component: {fileID: 309448240}
+  - component: {fileID: 309448242}
+  - component: {fileID: 309448241}
   m_Layer: 6
   m_Name: Flooe (11)
   m_TagString: Untagged
@@ -2268,7 +2332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f64c7de03efc38640b653ac3eb9dedb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAtacheableForCompass: 0
+  isAtacheableForCompass: 1
   isRotatingTowardsTheCompass: 0
   isAtacheableForRuler: 1
   isAtacheableForSquad: 0
@@ -2311,6 +2375,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInFront: 1
   isInBack: 1
+--- !u!114 &309448241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309448232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78a0fb736edc05147bb34ed983f6e4b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRadius: 10
+  needGravity: 0
+  objRenderer: {fileID: 309448235}
+  originParticle: {fileID: 7235251305826239643, guid: 0304948c45a3e3049a9d502fcbd4d427,
+    type: 3}
+--- !u!54 &309448242
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309448232}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &329143778
 GameObject:
   m_ObjectHideFlags: 0
@@ -3152,10 +3260,13 @@ MonoBehaviour:
   interactionForEraser: 0
   objRenderer: {fileID: 506431952}
   col: {fileID: 506431951}
-  solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
-  render: {fileID: 506431952}
   startSolid: 1
+  OnInteractionWitBrush:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInteractionWithEraser:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &506431945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3188,6 +3299,7 @@ MonoBehaviour:
   maxRadius: 20
   canAttachOthers: 0
   needToBeKinematic: 0
+  isRotating: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 506431952}
 --- !u!114 &506431947
@@ -3399,10 +3511,13 @@ MonoBehaviour:
   interactionForEraser: 0
   objRenderer: {fileID: 510571604}
   col: {fileID: 510571606}
-  solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
-  render: {fileID: 510571604}
   startSolid: 1
+  OnInteractionWitBrush:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInteractionWithEraser:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &510571597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3435,6 +3550,7 @@ MonoBehaviour:
   maxRadius: 20
   canAttachOthers: 0
   needToBeKinematic: 0
+  isRotating: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 510571604}
 --- !u!114 &510571599
@@ -3638,7 +3754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f64c7de03efc38640b653ac3eb9dedb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAtacheableForCompass: 0
+  isAtacheableForCompass: 1
   isRotatingTowardsTheCompass: 0
   isAtacheableForRuler: 1
   isAtacheableForSquad: 0
@@ -3736,7 +3852,7 @@ MonoBehaviour:
   canAttachOthers: 1
   canScale: 1
   isScaling: 0
-  objRenderer: {fileID: 309448235}
+  objRenderer: {fileID: 531165012}
   defaultScale: {x: 1, y: 1, z: 1}
   resetSpeed: 1
 --- !u!114 &531165015
@@ -4094,13 +4210,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerDialogue:
-  - A veces necesitaras llegar a lugares altos y no tendras ningun objeto cerca para
-    escalar
-  - Por suerte si tienes el pincel a mano podras crear un objeto que puede ser escalable
-  - Con el pincel equipado presiona "Click Derecho" para crear un cubo y llegar hasta
-    la plataforma
-  - Si mantienes presionado "Click Derecho" con el pincel podras elegir que tipo
-    de objeto crear
+  - "A veces necesitar\xE1s llegar a lugares altos y no tendr\xE1s ning\xFAn objeto
+    cerca para escalar. "
+  - "Por suerte, si tienes el pincel a mano, podr\xE1s crear un objeto que puede
+    ser escalable. "
+  - 'Con el pincel equipado, presiona "Click Derecho" para crear un cubo y llegar
+    hasta la plataforma. '
+  - "Si presionas la \"E\" con el pincel equipado, podr\xE1s elegir qu\xE9 tipo de
+    objeto crear.  "
+  triggerDialogueEnglish:
+  - "Sometimes you\u2019ll need to reach high places, and there won\u2019t be any
+    objects nearby to climb on. "
+  - 'Luckily, if you have the brush handy, you can create an object that is climbable. '
+  - 'With the brush equipped, press "Right Click" to create a cube and reach the
+    platform. '
+  - 'If you press "E" with the brush equipped, you can choose which type of object
+    to create.       '
 --- !u!65 &558569204
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4221,6 +4346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerDialogue:
   - Ya estas listo, presiona "Escape" cuando gustes para volver al menu principal
+  triggerDialogueEnglish: []
 --- !u!65 &594688392
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4295,6 +4421,7 @@ MonoBehaviour:
   - Selecciona el transportador con la "Q" o con el "3" y haz girar la valvula
   - Ademas, al igual que con la regla, puedes enlazar dos objetos con el transportador
     si usas el "Click Derecho"
+  triggerDialogueEnglish: []
 --- !u!65 &608634027
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4669,10 +4796,13 @@ MonoBehaviour:
   interactionForEraser: 0
   objRenderer: {fileID: 686952935}
   col: {fileID: 686952927}
-  solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
-  render: {fileID: 686952935}
   startSolid: 1
+  OnInteractionWitBrush:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInteractionWithEraser:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &686952929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4705,6 +4835,7 @@ MonoBehaviour:
   maxRadius: 20
   canAttachOthers: 0
   needToBeKinematic: 0
+  isRotating: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 686952935}
 --- !u!114 &686952931
@@ -5036,6 +5167,7 @@ GameObject:
   - component: {fileID: 697980876}
   - component: {fileID: 697980875}
   - component: {fileID: 697980873}
+  - component: {fileID: 697980880}
   m_Layer: 6
   m_Name: Cube (9)
   m_TagString: Untagged
@@ -5191,6 +5323,29 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 697980871}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &697980880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697980871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e54a3604759c44a92fbb4337f16604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRotateInY: 1
+  canRotateInZ: 0
+  canRotate: 1
+  maxRadius: 10
+  canAttachOthers: 1
+  needToBeKinematic: 0
+  isRotating: 0
+  gimballRef: {fileID: 0}
+  objRenderer: {fileID: 697980878}
+  defaultRotation: {x: 0, y: 0.008726535, z: 0, w: 0.9999619}
+  resetSpeed: 0.75
 --- !u!1 &702348814
 GameObject:
   m_ObjectHideFlags: 0
@@ -5470,10 +5625,13 @@ MonoBehaviour:
   interactionForEraser: 0
   objRenderer: {fileID: 733639698}
   col: {fileID: 733639697}
-  solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
-  render: {fileID: 733639698}
   startSolid: 1
+  OnInteractionWitBrush:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInteractionWithEraser:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &733639691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5506,6 +5664,7 @@ MonoBehaviour:
   maxRadius: 20
   canAttachOthers: 0
   needToBeKinematic: 0
+  isRotating: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 733639698}
 --- !u!114 &733639693
@@ -5674,8 +5833,8 @@ GameObject:
   - component: {fileID: 742982671}
   - component: {fileID: 742982670}
   - component: {fileID: 742982669}
-  - component: {fileID: 742982668}
   - component: {fileID: 742982667}
+  - component: {fileID: 742982674}
   m_Layer: 6
   m_Name: Cube (4)
   m_TagString: Untagged
@@ -5712,26 +5871,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInFront: 1
   isInBack: 1
---- !u!114 &742982668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 742982665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82a93fcbfab81bd4fa873df6fcc1169b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionForBrush: 0
-  interactionForEraser: 0
-  objRenderer: {fileID: 742982672}
-  col: {fileID: 742982671}
-  solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
-  render: {fileID: 742982672}
-  startSolid: 0
 --- !u!54 &742982669
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5851,6 +5990,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 742982665}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &742982674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742982665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c0a80a83f7e287418bd23302b53ca36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionForBrush: 0
+  interactionForEraser: 0
+  objRenderer: {fileID: 742982672}
+  col: {fileID: 742982671}
+  startSolid: 0
+  OnInteractionWitBrush:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 742982672}
+        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
+        m_MethodName: set_material
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnInteractionWithEraser:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 742982672}
+        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
+        m_MethodName: set_material
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  resetDelay: 3
+  state: 1
 --- !u!1 &815964184
 GameObject:
   m_ObjectHideFlags: 0
@@ -6169,6 +6359,7 @@ MonoBehaviour:
   - Asombroso, superaste mis expectativas
   - Ahora es momento de "Cambiar la forma de ver" las cosas
   - Intenta apretar "Tab" para pasar a un plano de 2 dimensiones
+  triggerDialogueEnglish: []
 --- !u!65 &861603940
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6968,12 +7159,12 @@ PrefabInstance:
     - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000016953926
+      value: 0.000000016953926
       objectReference: {fileID: 0}
     - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000029366534
+      value: -0.0000000029366534
       objectReference: {fileID: 0}
     - target: {fileID: 6323744800106687020, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
@@ -7033,12 +7224,17 @@ PrefabInstance:
     - target: {fileID: 6378466528603176896, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000016953926
+      value: 0.000000016953926
       objectReference: {fileID: 0}
     - target: {fileID: 6378466528603176896, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000029366534
+      value: -0.0000000029366534
+      objectReference: {fileID: 0}
+    - target: {fileID: 6736285431859821979, guid: c5ab43aafa20f35449c5d42d03d57854,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.86
       objectReference: {fileID: 0}
     - target: {fileID: 7192060455597761534, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
@@ -7197,6 +7393,7 @@ MonoBehaviour:
   maxRadius: 0
   canAttachOthers: 0
   needToBeKinematic: 0
+  isRotating: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 1092602778}
 --- !u!114 &1092602781
@@ -7365,8 +7562,8 @@ GameObject:
   - component: {fileID: 1122118690}
   - component: {fileID: 1122118689}
   - component: {fileID: 1122118688}
-  - component: {fileID: 1122118687}
   - component: {fileID: 1122118686}
+  - component: {fileID: 1122118693}
   m_Layer: 6
   m_Name: Cube (5)
   m_TagString: Untagged
@@ -7403,26 +7600,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInFront: 1
   isInBack: 1
---- !u!114 &1122118687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1122118684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82a93fcbfab81bd4fa873df6fcc1169b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionForBrush: 0
-  interactionForEraser: 0
-  objRenderer: {fileID: 1122118691}
-  col: {fileID: 1122118690}
-  solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
-  render: {fileID: 1122118691}
-  startSolid: 0
 --- !u!54 &1122118688
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7542,6 +7719,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122118684}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1122118693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122118684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c0a80a83f7e287418bd23302b53ca36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionForBrush: 0
+  interactionForEraser: 0
+  objRenderer: {fileID: 1122118691}
+  col: {fileID: 1122118690}
+  startSolid: 0
+  OnInteractionWitBrush:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1122118691}
+        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
+        m_MethodName: set_material
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnInteractionWithEraser:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1122118691}
+        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
+        m_MethodName: set_material
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  resetDelay: 3
+  state: 1
 --- !u!1 &1132955365
 GameObject:
   m_ObjectHideFlags: 0
@@ -8033,10 +8261,13 @@ MonoBehaviour:
   interactionForEraser: 0
   objRenderer: {fileID: 1200099264}
   col: {fileID: 1200099263}
-  solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
-  render: {fileID: 1200099264}
   startSolid: 1
+  OnInteractionWitBrush:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInteractionWithEraser:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1200099257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8069,6 +8300,7 @@ MonoBehaviour:
   maxRadius: 20
   canAttachOthers: 0
   needToBeKinematic: 0
+  isRotating: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 1200099264}
 --- !u!114 &1200099259
@@ -8327,6 +8559,7 @@ MonoBehaviour:
   - Si en algun momento crees que estas atascado, presiona "E" para "ver desde otro
     punto de vista"
   - Puede que haya partes escondidas que no estas viendo
+  triggerDialogueEnglish: []
 --- !u!65 &1228602836
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8735,7 +8968,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1268331002
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9412,7 +9645,7 @@ MonoBehaviour:
   _text: {fileID: 1578972775}
   writeClip: {fileID: 8300000, guid: 93d4a034a8d6a8645a1cf3406f391148, type: 3}
   tutorialHud: {fileID: 1685189548}
-  txtSpeed: 0.1
+  txtSpeed: 0.05
 --- !u!1 &1464827807
 GameObject:
   m_ObjectHideFlags: 0
@@ -10082,6 +10315,7 @@ MonoBehaviour:
   maxRadius: 0
   canAttachOthers: 0
   needToBeKinematic: 0
+  isRotating: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 1540896432}
 --- !u!114 &1540896428
@@ -10412,6 +10646,7 @@ MonoBehaviour:
   maxRadius: 20
   canAttachOthers: 1
   needToBeKinematic: 0
+  isRotating: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 1575703259}
 --- !u!114 &1575703256
@@ -10429,7 +10664,7 @@ MonoBehaviour:
   isAtacheableForCompass: 0
   isRotatingTowardsTheCompass: 0
   isAtacheableForRuler: 0
-  isAtacheableForSquad: 0
+  isAtacheableForSquad: 1
   isAtachedToCompass: 0
   isAtachedToRuler: 0
   isAtachedToSquad: 0
@@ -10923,10 +11158,13 @@ MonoBehaviour:
   interactionForEraser: 0
   objRenderer: {fileID: 1626984284}
   col: {fileID: 1626984286}
-  solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
-  render: {fileID: 1626984284}
   startSolid: 1
+  OnInteractionWitBrush:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInteractionWithEraser:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1626984277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10959,6 +11197,7 @@ MonoBehaviour:
   maxRadius: 20
   canAttachOthers: 0
   needToBeKinematic: 0
+  isRotating: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 1626984284}
 --- !u!114 &1626984279
@@ -11280,6 +11519,7 @@ MonoBehaviour:
   - Luego suelta el click sobre la plataforma y luego interactua con el "padre"
   - Ademas, si mantienes presionado "Click Derecho" sobre el hijo mientras esta enlazado,
     lo podras arrastrar hacia el "padre"
+  triggerDialogueEnglish: []
 --- !u!65 &1673529491
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11560,10 +11800,13 @@ MonoBehaviour:
   interactionForEraser: 0
   objRenderer: {fileID: 1673873578}
   col: {fileID: 1673873577}
-  solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
-  render: {fileID: 1673873578}
   startSolid: 1
+  OnInteractionWitBrush:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInteractionWithEraser:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1673873581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11596,6 +11839,7 @@ MonoBehaviour:
   maxRadius: 20
   canAttachOthers: 0
   needToBeKinematic: 0
+  isRotating: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 1673873578}
 --- !u!1 &1673999394
@@ -11965,11 +12209,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerDialogue:
-  - Venimos bien aprendiz? ahora veremos dos herramientas juntas
-  - En nuestro poder tenemos una goma y un pincel, usalos para volver intangibles
-    o tangibles algunas cosas
-  - Prueba seleccionar la goma con la "Q" o usando el numero "5" para borrar la pared
-    y luego selecciona el Pincel con la "Q" o el numero "1" para aparecer plataformas)
+  - "\xBFVenimos bien, aprendiz? Ahora veremos dos herramientas juntas. "
+  - "En nuestro poder tenemos una goma y un pincel. \xDAsalos para volver intangibles
+    o tangibles algunas cosas. "
+  - "Prueba seleccionar la goma con la \"Q\" o usando el n\xFAmero \"5\" para borrar
+    la pared y luego selecciona el pincel con la \"Q\" o el n\xFAmero \"1\" para
+    hacer aparecer las plataformas. "
+  - "Ten cuidado porque al cabo de un rato volver\xE1n a su estado original. "
+  triggerDialogueEnglish:
+  - "Are we doing well, apprentice? Now we\u2019ll look at two tools together. "
+  - 'We have an eraser and a brush in our arsenal. Use them to make some objects
+    intangible or tangible. '
+  - 'Try selecting the eraser with "Q" or using the number "5" to erase the wall,
+    and then select the brush with "Q" or the number "1" to make the platforms appear. '
+  - 'Be careful, because after a while, they will return to their original state. '
 --- !u!65 &1711173850
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12341,7 +12594,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: LeftClick to pass
+  m_text: Press F to continue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13204,11 +13457,40 @@ MonoBehaviour:
   interactionForEraser: 0
   objRenderer: {fileID: 1848644622}
   col: {fileID: 1848644621}
-  solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
-  render: {fileID: 1848644622}
   startSolid: 1
-  resetDelay: 2
+  OnInteractionWitBrush:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1848644622}
+        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
+        m_MethodName: set_material
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnInteractionWithEraser:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1848644622}
+        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
+        m_MethodName: set_material
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  resetDelay: 3
   state: 0
 --- !u!1 &1849840918
 GameObject:
@@ -13372,10 +13654,13 @@ MonoBehaviour:
   interactionForEraser: 0
   objRenderer: {fileID: 1865939357}
   col: {fileID: 1865939356}
-  solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
-  render: {fileID: 1865939357}
   startSolid: 1
+  OnInteractionWitBrush:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInteractionWithEraser:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1865939350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13408,6 +13693,7 @@ MonoBehaviour:
   maxRadius: 20
   canAttachOthers: 0
   needToBeKinematic: 0
+  isRotating: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 1865939357}
 --- !u!114 &1865939352
@@ -14152,6 +14438,7 @@ MonoBehaviour:
   maxRadius: 0
   canAttachOthers: 0
   needToBeKinematic: 0
+  isRotating: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 1957824789}
 --- !u!114 &1957824792
@@ -14850,6 +15137,7 @@ MonoBehaviour:
     plano bidimensional
   - Prueba modificar las plataformas en el plano bidimensional para llegar al otro
     lado
+  triggerDialogueEnglish: []
 --- !u!65 &2069439845
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15261,6 +15549,7 @@ MonoBehaviour:
   maxRadius: 15
   canAttachOthers: 0
   needToBeKinematic: 0
+  isRotating: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 0}
 --- !u!54 &2097130299
@@ -15389,8 +15678,8 @@ GameObject:
   - component: {fileID: 2143638666}
   - component: {fileID: 2143638665}
   - component: {fileID: 2143638664}
-  - component: {fileID: 2143638663}
   - component: {fileID: 2143638662}
+  - component: {fileID: 2143638669}
   m_Layer: 6
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -15427,26 +15716,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInFront: 1
   isInBack: 1
---- !u!114 &2143638663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143638660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82a93fcbfab81bd4fa873df6fcc1169b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionForBrush: 0
-  interactionForEraser: 0
-  objRenderer: {fileID: 2143638667}
-  col: {fileID: 2143638666}
-  solidMat: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
-  transparentMat: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d, type: 2}
-  render: {fileID: 2143638667}
-  startSolid: 0
 --- !u!54 &2143638664
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15566,6 +15835,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143638660}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2143638669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143638660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c0a80a83f7e287418bd23302b53ca36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionForBrush: 0
+  interactionForEraser: 0
+  objRenderer: {fileID: 2143638667}
+  col: {fileID: 2143638666}
+  startSolid: 0
+  OnInteractionWitBrush:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2143638667}
+        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
+        m_MethodName: set_material
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnInteractionWithEraser:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2143638667}
+        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
+        m_MethodName: set_material
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2100000, guid: df4865cbc89c0c54aa84fb2f4d24356d,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  resetDelay: 3
+  state: 1
 --- !u!1 &2145128583
 GameObject:
   m_ObjectHideFlags: 0

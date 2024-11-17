@@ -9,6 +9,7 @@ public class DialogueSystem : MonoBehaviour
 {
     public static DialogueSystem Instance { get; private set; } // Singleton
     [SerializeField] string[] firstDialogue;
+    [SerializeField] string[] firstDialogueEnglish;
 
     [SerializeField] TextMeshProUGUI _text;
     [SerializeField] AudioClip writeClip;
@@ -35,7 +36,11 @@ public class DialogueSystem : MonoBehaviour
         tutorialHud.SetActive(false); // Mantener oculto al inicio
     }
     private void Start()
-    { 
+    {
+        if (LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.Locales[0])
+            StartDialogue(firstDialogueEnglish);
+        else
+            StartDialogue(firstDialogue);
         StartDialogue(firstDialogue);
     }
 

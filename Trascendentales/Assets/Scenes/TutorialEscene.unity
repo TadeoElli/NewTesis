@@ -7191,12 +7191,12 @@ PrefabInstance:
     - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000016953926
+      value: 0.000000016953926
       objectReference: {fileID: 0}
     - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000029366534
+      value: -0.0000000029366534
       objectReference: {fileID: 0}
     - target: {fileID: 6323744800106687020, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
@@ -7256,12 +7256,12 @@ PrefabInstance:
     - target: {fileID: 6378466528603176896, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000016953926
+      value: 0.000000016953926
       objectReference: {fileID: 0}
     - target: {fileID: 6378466528603176896, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000029366534
+      value: -0.0000000029366534
       objectReference: {fileID: 0}
     - target: {fileID: 6736285431859821979, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
@@ -7271,12 +7271,12 @@ PrefabInstance:
     - target: {fileID: 7192060455597761534, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.000000016953926
+      value: -0.000000016953926
       objectReference: {fileID: 0}
     - target: {fileID: 7192060455597761534, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0000000029366534
+      value: -0.0000000029366534
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9734,9 +9734,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstDialogue:
-  - Bienvenido al taller de arte!!
-  - Te explicare como utilizar tus herramientas para que puedas usarlas
-  - Empieza tratando de moverte con WASD
+  - "\xA1Bienvenido al taller de arte!  "
+  - "Te explicar\xE9 c\xF3mo utilizar tus herramientas para que puedas usarlas.  "
+  - 'Empieza tratando de moverte con WASD.  '
+  firstDialogueEnglish:
+  - 'Welcome to the art workshop!  '
+  - 'I will explain how to use your tools so you can get started.  '
+  - 'Start by trying to move with WASD.       '
   _text: {fileID: 1578972775}
   writeClip: {fileID: 8300000, guid: 93d4a034a8d6a8645a1cf3406f391148, type: 3}
   tutorialHud: {fileID: 1685189548}
@@ -12622,6 +12626,7 @@ GameObject:
   - component: {fileID: 1731942457}
   - component: {fileID: 1731942459}
   - component: {fileID: 1731942458}
+  - component: {fileID: 1731942460}
   m_Layer: 0
   m_Name: DialogoText1
   m_TagString: Untagged
@@ -12745,6 +12750,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1731942456}
   m_CullTransparentMesh: 1
+--- !u!114 &1731942460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731942456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:cad0e2c50271f3a45b49742b83d71317
+    m_TableEntryReference:
+      m_KeyId: 14235674806276096
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1731942458}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1743651907
 GameObject:
   m_ObjectHideFlags: 0

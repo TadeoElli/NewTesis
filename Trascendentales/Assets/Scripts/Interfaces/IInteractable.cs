@@ -18,6 +18,8 @@ public interface IInteractable
     public void SetUnatachedToSquad();
     public void SetIsAtachableForRuler(bool isAtachable);
     public GameObject GetCompassParent();
+    public void InteractWithEraser(bool isOn2D);
+    public event Action OnEraserInteract;
 }
 
 public interface IEscalable
@@ -35,6 +37,8 @@ public interface IEscalable
 public interface IRotable
 {
     public bool CanRotate();
+    public bool IsRotating();
+    public void SetIsRotating(bool state);
     public bool NeedToBeKinematic();
     public bool CanRotateInY();
     public bool CanRotateInZ();
@@ -71,8 +75,10 @@ public interface ICompassable
 public interface IMovable
 {
     public float GetMaxRadius();
+    public void ShowParticleFeedback();
     public bool GetNeedGravity();
     public bool GetIsMovable();
+    public void ShowOriginFeedback();
     public Vector3 GetOriginalPosition();
     public event Action OnEraserInteract;
     public void InteractWithEraser(bool isOn2D);

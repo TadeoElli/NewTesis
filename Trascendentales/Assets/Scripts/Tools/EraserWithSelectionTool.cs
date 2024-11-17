@@ -3,24 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EraserTool : Tools
+public class EraserWithSelectionTool : Tools
 {
     private IPaintable currentPaintable;
     private ICompassable currentCompassable;
     private IEscalable currentEscalable;
     private IRotable currentRotable;
     private IMovable currentMovable;
-    private IInteractable currentInteractable;
-    
+
     [SerializeField] private GameObject chargeCursor;
     [SerializeField] private Image image;
     [SerializeField] private float holdTimeThreshold = 1f; // Tiempo necesario para activar la interacción
     [SerializeField] private bool isHolding = false;
     private float holdTime = 0f;
 
+    // Enum para seleccionar el modo de borrado
+    public enum EraserMode { Position, Rotation, Scale }
+    [SerializeField] private EraserMode eraserMode;
+
     public override void Awake()
     {
         base.Awake();
+        eraserMode = EraserMode.Position;
     }
 
     public override void Interact(GameObject objective, bool isPerspective2D)
@@ -35,10 +39,6 @@ public class EraserTool : Tools
         {
             currentCompassable = compassable;
         }
-        if (objective.TryGetComponent<IInteractable>(out IInteractable interactable))
-        {
-            currentInteractable = interactable;
-        }
         if (objective.TryGetComponent<IEscalable>(out IEscalable escalable))
         {
             currentEscalable = escalable;
@@ -51,9 +51,10 @@ public class EraserTool : Tools
         {
             currentMovable = movable;
         }
-        if (currentPaintable ==  null && currentCompassable == null && currentEscalable == null && currentRotable == null && currentMovable == null)
+        if (currentPaintable == null && currentCompassable == null && currentEscalable == null && currentRotable == null && currentMovable == null)
             return;
-        mouseState.SetLeftclickPress();
+
+        mouseState.SetRightclickPress();
         inputManager.OnPerspectiveSwitch += DropInteractable;
         inputManager.OnLeftClickDrop += DropInteractable;
         inputManager.OnToolSwitchCheck += DropInteractable;
@@ -67,8 +68,6 @@ public class EraserTool : Tools
 
     void Update()
     {
-
-        
         if (isHolding)
         {
             if (!IsMouseOverObject())
@@ -78,6 +77,7 @@ public class EraserTool : Tools
                 holdTime = 0f;
                 image.fillAmount = 0f;
                 chargeCursor.SetActive(false);
+                DropInteractable();
                 return;
             }
             holdTime += Time.deltaTime;
@@ -85,17 +85,49 @@ public class EraserTool : Tools
             // Si se cumple el tiempo de hold, se activa la interacción
             if (holdTime >= holdTimeThreshold)
             {
-                currentCompassable?.InteractWithEraser(isOn2D);
-                currentPaintable?.InteractWithEraser(isOn2D);
-                currentEscalable?.InteractWithEraser(isOn2D);
-                currentRotable?.InteractWithEraser(isOn2D);
-                currentMovable?.InteractWithEraser(isOn2D);
-                currentInteractable?.InteractWithEraser(isOn2D);
+                PerformEraseAction();
                 isHolding = false; // Detener el hold una vez que se activa
+                DropInteractable();
             }
         }
     }
 
+    private void PerformEraseAction()
+    {
+        switch (eraserMode)
+        {
+            case EraserMode.Position:
+                currentMovable?.InteractWithEraser(isOn2D); // Asegúrate de que IMovable tenga este método
+                break;
+
+            case EraserMode.Rotation:
+                currentRotable?.InteractWithEraser(isOn2D); // Asegúrate de que IRotable tenga este método
+                break;
+
+            case EraserMode.Scale:
+                currentEscalable?.InteractWithEraser(isOn2D); // Asegúrate de que IEscalable tenga este método
+                break;
+        }
+
+        // Opcional: Interactuar con otros tipos si es necesario
+       // currentCompassable?.InteractWithEraser(isOn2D);
+        //currentPaintable?.InteractWithEraser(isOn2D);
+    }
+    public void SetEraserModePosition()
+    {
+        eraserMode = EraserMode.Position;
+        MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.EraserPosition);
+    }
+    public void SetEraserModeRotation()
+    {
+        eraserMode = EraserMode.Rotation;
+        MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.EraserRotation);
+    }
+    public void SetEraserModeScale()
+    {
+        eraserMode = EraserMode.Scale;
+        MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.EraserScale);
+    }
     public override void DropInteractable()
     {
         base.DropInteractable();
@@ -105,6 +137,7 @@ public class EraserTool : Tools
         inputManager.OnLeftClickDrop -= DropInteractable;
         chargeCursor.SetActive(false);
         image.fillAmount = 0f;
+
         if (currentCompassable != null)
         {
             currentCompassable.DropWithEraser(isOn2D);
@@ -126,10 +159,23 @@ public class EraserTool : Tools
         {
             currentMovable = null;
         }
-        if (currentInteractable != null)
-        {
-            currentInteractable = null;
-        }
         isHolding = false;
+    }
+    public override void SetCurrentAlternativeTool()
+    {
+        switch (eraserMode)
+        {
+            case EraserMode.Position:
+                MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.EraserPosition);
+                break;
+            case EraserMode.Rotation:
+                MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.EraserRotation);
+                break;
+            case EraserMode.Scale:
+                MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.EraserScale);
+                break;
+            default:
+                break;
+        }
     }
 }

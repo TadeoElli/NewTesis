@@ -73,7 +73,7 @@ public class ValveController : MonoBehaviour,IRotableClamp
         // Modificamos la escala de la plataforma basándonos en el progreso
         platform.localScale = Vector3.Lerp(closedScale, openScale, progress);
         // Si la escala de la plataforma está cerca de openScale, eliminamos el componente RotableObject
-        float scaleThreshold = 0.1f; // Umbral para definir qué tan cerca está de openScale
+        //float scaleThreshold = 0.1f; // Umbral para definir qué tan cerca está de openScale
         /*if (Vector3.Distance(platform.localScale, openScale) < scaleThreshold)
         {
             // Eliminamos el componente RotableObject cuando la escala está lo suficientemente cerca de openScale

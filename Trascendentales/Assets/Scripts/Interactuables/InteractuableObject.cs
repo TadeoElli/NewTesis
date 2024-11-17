@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class InteractuableObject : MonoBehaviour, IInteractable, IFeedback
 {
@@ -11,6 +12,8 @@ public class InteractuableObject : MonoBehaviour, IInteractable, IFeedback
     [SerializeField] private bool isAtachedToSquad = false;
     [SerializeField] private Renderer rend;
     private GameObject compassParent = null;
+    public event Action OnEraserInteract;
+
     public bool IsAtachableForCompass() => isAtacheableForCompass;
     public bool IsRotatingTowardsTheCompass() => isRotatingTowardsTheCompass;
     public bool IsAtachableForRuler() => isAtacheableForRuler;
@@ -108,5 +111,11 @@ public class InteractuableObject : MonoBehaviour, IInteractable, IFeedback
     public void HideFeedback()
     {
         isMouseOver = false;
+    }
+
+    public void InteractWithEraser(bool isOn2D)
+    {
+        if (compassParent != null)
+            OnEraserInteract?.Invoke();
     }
 }

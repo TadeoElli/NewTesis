@@ -5,6 +5,14 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    // Tiempo de cooldown en segundos para cambios de cámara y ángulo
+    [SerializeField] private float cameraSwitchCooldown = 1f;
+    [SerializeField] private float angleSwitchCooldown = 1f;
+
+    // Estados para los cooldowns
+    private bool canSwitchCamera = true;
+    private bool canSwitchAngle = true;
+
     PlayerControls playerControls;
     PlayerLocomotion playerLocomotion;
     PlayerManager playerManager;
@@ -12,10 +20,10 @@ public class InputManager : MonoBehaviour
     MenuManager menuManager;
     Vector2 movementInput;
     private float moveAmount;
-    public float verticalInput;
-    public float horizontalInput;
-    public bool jump_input;
-    public bool isOn2D = false;
+    [HideInInspector] public float verticalInput;
+    [HideInInspector] public float horizontalInput;
+    [HideInInspector] public bool jump_input;
+    [HideInInspector] public bool isOn2D = false;
     private bool isGrabbing = false;
     private GameObject platform;
     //Events
@@ -27,6 +35,7 @@ public class InputManager : MonoBehaviour
     public event Action OnRightClickPress;
     public event Action OnRightClickDrop;
     public event Action OnChangeCameraAngle;
+    public event Action OnInteract;
 
     private void Awake()
     {
@@ -56,19 +65,23 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.Tool5.performed += _ => SetEraserTool();
             playerControls.PlayerActions.OpenToolWheel.performed += _ => ShowToolWheel();
             playerControls.PlayerActions.OpenToolWheel.canceled += _ => HideToolWheel();
+            playerControls.PlayerActions.OpenAlternativeWheel.performed += _ => ShowAlternativeWheel();
+            playerControls.PlayerActions.OpenAlternativeWheel.canceled += _ => HideAlternativeWheel();
             playerControls.PlayerActions.LeftClick.performed += _ => LeftClickPressed();
             playerControls.PlayerActions.LeftClick.canceled += _ => LeftClickReleased();
             playerControls.PlayerActions.RightClick.performed += _ => RightClickPressed();
             playerControls.PlayerActions.RightClick.canceled += _ => RightClickReleased();
             playerControls.PlayerActions.Escape.performed += _ => TogglePause();
             playerControls.PlayerActions.Crouch.performed += _ => GrabInteraction();
+            playerControls.PlayerActions.Interact.performed += _ => Interact();
         }
         playerControls.Enable();
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
-        playerControls.Disable();
+        if(playerControls != null)
+            playerControls.Disable();
     }
 
     public void HandleAllInputs()
@@ -99,18 +112,26 @@ public class InputManager : MonoBehaviour
 
     private void SwitchCameraAngle()
     {
-        OnChangeCameraAngle?.Invoke();
+        if (canSwitchAngle)
+        {
+            OnChangeCameraAngle?.Invoke();
+            StartCoroutine(CameraAngleCooldown());
+        }
     }
     private void SwitchCamera()
     {
-        isOn2D = !isOn2D;
-        if(isOn2D)
-            playerLocomotion.SwitchTo2D();
-        else
-            playerLocomotion.SwitchTo3D();
-        Debug.Log("Perspectiveswitch");
-        OnPerspectiveSwitch?.Invoke();
+        if (canSwitchCamera)
+        {
+            isOn2D = !isOn2D;
+            if (isOn2D)
+                playerLocomotion.SwitchTo2D();
+            else
+                playerLocomotion.SwitchTo3D();
 
+            Debug.Log("Perspective switch");
+            OnPerspectiveSwitch?.Invoke();
+            StartCoroutine(CameraSwitchCooldown());
+        }
     }
 
     #endregion
@@ -154,21 +175,30 @@ public class InputManager : MonoBehaviour
     {
         menuManager.HideToolWheel();
     }
-    public void ShowDrawObjectWheel()
+    public void ShowAlternativeWheel()
     {
-        menuManager.ShowDrawObjectWheel();
+        switch (MouseState.Instance.CurrentToolActive())
+        {
+            case ToolTypes.Brush:
+                menuManager.ShowDrawObjectWheel();
+                break;
+            case ToolTypes.Ruler:
+                break;
+            case ToolTypes.Squad:
+                break;
+            case ToolTypes.Compass:
+                menuManager.ShowDragObjectWheel();
+                break;
+            case ToolTypes.Eraser:
+                menuManager.ShowEraserWheel();
+                break;
+            default:
+                break;
+        }
     }
-    public void HideDrawObjectWheel()
+    public void HideAlternativeWheel()
     {
-        menuManager.HideDrawObjectWheel();
-    }
-    public void ShowDragObjectWheel()
-    {
-        menuManager.ShowDragObjectWheel();
-    }
-    public void HideDragObjectWheel()
-    {
-        menuManager.HideDragObjectWheel();
+        menuManager.HideAlternativeWheel();
     }
     #endregion
     #region MouseClick
@@ -224,4 +254,23 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    public void Interact()
+    {
+        OnInteract?.Invoke();
+    }
+    #region Cooldown Coroutines
+    private IEnumerator CameraAngleCooldown()
+    {
+        canSwitchAngle = false;
+        yield return new WaitForSeconds(angleSwitchCooldown);
+        canSwitchAngle = true;
+    }
+
+    private IEnumerator CameraSwitchCooldown()
+    {
+        canSwitchCamera = false;
+        yield return new WaitForSeconds(cameraSwitchCooldown);
+        canSwitchCamera = true;
+    }
+        #endregion
 }

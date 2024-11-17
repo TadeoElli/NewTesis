@@ -15,6 +15,7 @@ public class CompassTool : Tools
     private Vector3 initialMousePosition;
     private GameObject firstObject;
     private ICompassable compassable;
+    private IInteractable interactable;
     private GameObject secondObject;
     private float currentRadius;
     private bool isDragging = false;
@@ -25,29 +26,29 @@ public class CompassTool : Tools
         base.Awake();
     }
 
-    public override void Interact(GameObject interactable, bool isPerspective2D)
+    public override void Interact(GameObject objective, bool isPerspective2D)
     {
-        inputManager.OnLeftClickDrop += DropInteractable;
-        cameraManager.OnCameraSwitch += ResetDragging;
-        cameraManager.OnCameraSwitch += DropInteractable;
-        if(!interactable.TryGetComponent<ICompassable>(out ICompassable component))
-            return;
-        mouseState.SetLeftclickPress();
-        compassable = component;
-        compassable.OnEraserInteract += ResetDragging; // Accionar la interacción del primer objeto
-        compassable.OnEraserInteract += DropInteractable; // Accionar la interacción del primer objeto
         if (isDragging)
         {
             ResetConstraint();
         }
+        if (!objective.TryGetComponent<ICompassable>(out ICompassable component1))
+            return;
+        inputManager.OnLeftClickDrop += DropInteractable;
+        cameraManager.OnCameraSwitch += ResetDragging;
+        cameraManager.OnCameraSwitch += DropInteractable;
+        mouseState.SetLeftclickPress();
+        compassable = component1;
+        compassable.OnEraserInteract += ResetDragging; // Accionar la interacción del primer objeto
+        compassable.OnEraserInteract += DropInteractable; // Accionar la interacción del primer objeto
         setScaleParentTool.ResetConstraint();
         setRotationParentTool.ResetConstraint();
         ResetGimball();
-        gimball.position = interactable.transform.position;
-        gimball.SetParent(interactable.transform);
+        gimball.position = objective.transform.position;
+        gimball.SetParent(objective.transform);
         firstObject = gimball.gameObject;
-        maxRadius = component.GetMaxRadius();
-        base.Interact(interactable, isPerspective2D);
+        maxRadius = component1.GetMaxRadius();
+        base.Interact(objective, isPerspective2D);
         compassGizmo.SetActive(true);
         compassGizmo.transform.position = gimball.position;
         if(isOn2D) compassGizmo.transform.rotation = Quaternion.Euler(0,0,0);
@@ -104,7 +105,9 @@ public class CompassTool : Tools
                 isDragging = false;
                 return;
             }
-            component.SetIsAtachedToCompass(objective);
+            interactable = component;
+            interactable.SetIsAtachedToCompass(objective);
+            interactable.OnEraserInteract += ResetConstraint;
 
             secondObject = hit.collider.gameObject;
             //secondObject.GetComponent<Rigidbody>().isKinematic = true;
@@ -114,6 +117,10 @@ public class CompassTool : Tools
             {
                 isDragging = false;
                 return;
+            }
+            if (secondObject.TryGetComponent<IMovable>(out IMovable movable))
+            {
+                movable.ShowParticleFeedback();
             }
             ParentConstraint constraint = secondObject.AddComponent<ParentConstraint>();
             parentConstraint = constraint;
@@ -187,6 +194,9 @@ public class CompassTool : Tools
         parentConstraint.enabled = false;
         parentConstraint = null;
         Destroy(secondObject.GetComponent<ParentConstraint>());
+        if(interactable != null)
+            interactable.OnEraserInteract -= ResetConstraint;
+        interactable = null;
         if (firstObject != null)
         {
             firstObject = null;

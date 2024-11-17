@@ -6,6 +6,7 @@ public class MouseState : MonoBehaviour
 {
     private bool isLeftClickPress, isRightClickPress;
     private ToolTypes currentTool;
+    private AlternativeToolTypes currentAlternativeTool;
 
     // El singleton instance
     private static MouseState _instance;
@@ -28,10 +29,15 @@ public class MouseState : MonoBehaviour
     public bool IsLeftClickPress() => isLeftClickPress;
     public bool IsRightClickPress() => isRightClickPress;
     public ToolTypes CurrentToolActive() => currentTool;
+    public AlternativeToolTypes CurrentAlternativeTool() => currentAlternativeTool;
 
     public void SetCurrentToolType(ToolTypes toolType)
     {
         currentTool = toolType;
+    }
+    public void SetCurrentAlternativeToolType(AlternativeToolTypes alternativeTool)
+    {
+        currentAlternativeTool = alternativeTool;
     }
 
     public void SetLeftclickPress()
@@ -51,4 +57,26 @@ public class MouseState : MonoBehaviour
         isRightClickPress = false;
     }
 
+}
+public enum ToolTypes
+{
+    Brush = 0,
+    Ruler = 1,
+    Squad = 2,
+    Compass = 3,
+    Eraser = 4
+}
+public enum AlternativeToolTypes
+{
+    BrushBox = 0,
+    BrushSphere = 1,
+    BrushRectangle = 2,
+    RulerLink = 3,
+    SquadLink = 4,
+    CompassXAxis = 5,
+    CompassYAxis = 6,
+    CompassZAxis = 7,
+    EraserPosition = 8,
+    EraserRotation = 9,
+    EraserScale = 10
 }

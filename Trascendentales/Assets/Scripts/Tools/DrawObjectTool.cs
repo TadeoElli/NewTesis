@@ -10,10 +10,6 @@ public class DrawObjectTool : Tools
     private GameObject selectedPrefab,selectedFeedback, spawnedObject;
 
     private bool isDrawing = false;
-    private bool isShowing = false;
-    private bool isShowingSelectionWheel = false;
-    private float rightClickHoldTime = 0f;
-    private float holdThreshold = 0.5f; // Tiempo requerido para mostrar la rueda de selección
     // Variables para el temporizador
     [SerializeField] private float cooldown = 2f; // Tiempo de espera en segundos
     private bool canInteract = true;
@@ -21,8 +17,11 @@ public class DrawObjectTool : Tools
     public override void Awake()
     {
         base.Awake();
-        selectedPrefab = cubePrefab;
         //DeactivateAllFeedback(); // Desactivamos todos los feedbacks al inicio
+    }
+    private void Start()
+    {
+        SelectCube();
     }
 
 
@@ -38,7 +37,6 @@ public class DrawObjectTool : Tools
         inputManager.OnToolSwitchCheck += ResetDrawing;
         inputManager.OnToolSwitchCheck += DropInteractable;
         isDrawing = true;
-        rightClickHoldTime = 0f; // Reiniciar el temporizador al interactuar
         StartCoroutine(CooldownTimer()); // Iniciar el temporizador
 
     }
@@ -57,22 +55,24 @@ public class DrawObjectTool : Tools
     public void SelectCube()
     {
         selectedPrefab = cubePrefab;
+        MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.BrushBox);
         //ResetDrawing();
     }
     public void SelectSphere()
     {
         selectedPrefab = spherePrefab;
+        MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.BrushSphere);
         //ResetDrawing();
     }
     public void SelectPlatform()
     {
         selectedPrefab = rectanglePrefab;
+        MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.BrushRectangle);
         //ResetDrawing();
     }
     private void ResetDrawing()
     {
         isDrawing = false;
-        rightClickHoldTime = 0f;
         DeactivateAllFeedback();
     }
 
@@ -85,18 +85,7 @@ public class DrawObjectTool : Tools
         }
         if (isDrawing)
         {
-            rightClickHoldTime += Time.deltaTime;
-
-            // Muestra la rueda de selección si se mantiene presionado el clic derecho el tiempo suficiente
-            if (rightClickHoldTime >= holdThreshold && !isShowingSelectionWheel)
-            {
-                inputManager.ShowDrawObjectWheel();
-                isShowingSelectionWheel = true;
-            }
-            else
-            {
-                SelectShape();
-            }
+            SelectShape();
 
             if (selectedFeedback != null)
             {
@@ -111,16 +100,10 @@ public class DrawObjectTool : Tools
         if (isDrawing)
         {
             // Si el clic derecho se suelta antes de alcanzar el umbral, spawneamos el objeto seleccionado
-            if (rightClickHoldTime < holdThreshold && selectedPrefab != null)
+            if (selectedPrefab != null)
             {
                 FinishDrawing();
             }
-        }
-        // Asegúrate de ocultar la rueda de selección aquí
-        if (isShowingSelectionWheel)
-        {
-            inputManager.HideDrawObjectWheel();
-            isShowingSelectionWheel = false;
         }
         ResetDrawing();
         mouseState.DropRightClick();
@@ -205,6 +188,15 @@ public class DrawObjectTool : Tools
         canInteract = false;
         yield return new WaitForSeconds(cooldown);
         canInteract = true;
+    }
+    public override void SetCurrentAlternativeTool()
+    {
+        if(selectedPrefab == cubePrefab)
+            MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.BrushBox);
+        else if(selectedPrefab == spherePrefab)
+            MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.BrushSphere);
+        else if(selectedPrefab == rectanglePrefab)
+            MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.BrushRectangle);
     }
 
 }

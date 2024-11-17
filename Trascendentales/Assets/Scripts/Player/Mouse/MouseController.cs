@@ -30,6 +30,7 @@ public class MouseController : MonoBehaviour
     [SerializeField] private Tools setScaleParentTool;
     [SerializeField] private Tools setRotationParentTool;
     [SerializeField] private Tools dragAtachableObjectsTool;
+    [SerializeField] private Tools eraserSelectionTool;
 
     [SerializeField] Animator anim;
     private Tools leftClickTool, rightClickTool; // Herramienta activa
@@ -208,11 +209,12 @@ public class MouseController : MonoBehaviour
             case ToolTypes.Eraser:
                 spriteRenderer.sprite = eraserSprite;
                 leftClickTool = eraseTool;
-                rightClickTool = null;
+                rightClickTool = eraserSelectionTool;
                 break;
             default:
                 break;
         }
+        rightClickTool.SetCurrentAlternativeTool();
     }
     public void ShowToolWheel()
     {

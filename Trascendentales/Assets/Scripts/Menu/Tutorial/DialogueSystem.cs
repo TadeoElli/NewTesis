@@ -9,6 +9,7 @@ public class DialogueSystem : MonoBehaviour
 {
     public static DialogueSystem Instance { get; private set; } // Singleton
     [SerializeField] string[] firstDialogue;
+    [SerializeField] string[] firstDialogueEnglish;
 
     [SerializeField] TextMeshProUGUI _text;
     [SerializeField] AudioClip writeClip;
@@ -31,11 +32,15 @@ public class DialogueSystem : MonoBehaviour
         }
 
         input = FindObjectOfType<InputManager>();
-        input.OnLeftClickPress += CheckDialogue;
+        input.OnInteract += CheckDialogue;
         tutorialHud.SetActive(false); // Mantener oculto al inicio
     }
     private void Start()
-    { 
+    {
+        if (LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.Locales[0])
+            StartDialogue(firstDialogueEnglish);
+        else
+            StartDialogue(firstDialogue);
         StartDialogue(firstDialogue);
     }
 
@@ -67,11 +72,16 @@ public class DialogueSystem : MonoBehaviour
     // Escribir línea actual de diálogo
     private IEnumerator WriteLine()
     {
+        int cantOfChars = 0;
         foreach (char dialogueChar in currentDialogue[index].ToCharArray())
         {
             _text.text += dialogueChar;
-            Debug.Log("Adding character: " + dialogueChar);
-            AudioManager.Instance.PlaySoundEffect(writeClip);
+            cantOfChars++;
+            if(cantOfChars >= 3)
+            {
+                AudioManager.Instance.PlaySoundEffect(writeClip);
+                cantOfChars = 0;
+            }
             yield return new WaitForSeconds(txtSpeed);
         }
     }

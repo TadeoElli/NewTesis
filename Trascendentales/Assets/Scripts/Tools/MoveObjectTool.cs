@@ -7,40 +7,35 @@ public class MoveObjectTool : Tools
 {
     private bool isDragging = false;
     private Rigidbody objectiveRb;
-    //private GameObject parent;
     private float maxRadius;
     private float initialDistanceMouseToParent;
     private IMovable movable;
     private Vector3 selectedAxis; // Nuevo: Almacena el eje seleccionado
-    private bool isShowingAxisSelectionWheel = false; // Nuevo: para el temporizador de la rueda de selección
-    private bool isHoldingClick = false; 
-    private float rightClickHoldTime = 0f;
-    private float holdThreshold = 1f; // Tiempo requerido para mostrar la rueda de selección de ejes
-    [SerializeField] private LayerMask raycastLayer;
-    private Vector3 initialMousePosition;
-    private Vector3 initialObjectPosition;
     private Vector3 originalPosition;
-    //private bool hitDetected = false;
+    private Vector3 currentOriginalPosition;
+    private Vector3 currentOffset;
+    [SerializeField] private LayerMask raycastLayer;
+
     public override void Awake()
     {
         base.Awake();
-        SelectXAxis();
+        selectedAxis = new Vector3(1, 0, 0);
     }
     public override void Interact(GameObject objective, bool isPerspective2D)
     {
         mouseState.SetRightclickPress();
-        isHoldingClick = true;
         inputManager.OnRightClickDrop += DropInteractable; // Al soltar el clic derecho, limpiamos la interacción
 
         if (!objective.TryGetComponent<IInteractable>(out IInteractable interactable) || !objective.TryGetComponent<IMovable>(out IMovable component))
             return;
-        if (!interactable.IsAtachableForCompass() || interactable.IsAtachedToCompass()|| interactable.IsAtachedToRuler() || interactable.IsAtachedToSquad())
+        if ( interactable.IsAtachedToCompass()|| interactable.IsAtachedToRuler() || interactable.IsAtachedToSquad())
             return;
         movable = component;
-        isHoldingClick = false;
+        movable.ShowOriginFeedback();
         maxRadius = movable.GetMaxRadius();
         originalPosition = movable.GetOriginalPosition();
-        initialObjectPosition = objective.transform.position;
+        currentOriginalPosition = objective.transform.position;
+        currentOffset = Vector3.zero;
 
         base.Interact(objective, isPerspective2D);
 
@@ -48,26 +43,19 @@ public class MoveObjectTool : Tools
         inputManager.OnToolSwitchCheck += DropInteractable;
         objectiveRb = objective.GetComponent<Rigidbody>();
         objectiveRb.useGravity = false;
-        objectiveRb.velocity = Vector3.zero;
-        objectiveRb.angularVelocity = Vector3.zero;
+        if (objectiveRb.isKinematic)
+        {
+            objectiveRb.velocity = Vector3.zero;
+            objectiveRb.angularVelocity = Vector3.zero;
+        }
         isDragging = true;
-        rightClickHoldTime = 0f; // Reiniciar el temporizador al interactuar
-        initialMousePosition = Input.mousePosition;
         
-        //initialDistanceMouseToParent = Vector3.Distance(GetMouseWorldPosition(), movable.GetOriginalPosition());
     }
 
     private void FixedUpdate()
     {
-        if (isHoldingClick)
-        {
-            rightClickHoldTime += Time.deltaTime;
-            if (rightClickHoldTime >= holdThreshold && !isShowingAxisSelectionWheel)
-            {
-                inputManager.ShowDragObjectWheel(); // Mostrar la rueda de selección de ejes
-                isShowingAxisSelectionWheel = true;
-            }
-        }
+        if (cameraManager.is2D && selectedAxis == Vector3.forward)
+            SelectXAxis();
         if (!isDragging) return;
         if (movable.GetIsMovable())
         {
@@ -81,7 +69,7 @@ public class MoveObjectTool : Tools
     private void AdjustDistance()
     {
         // Calcular el desplazamiento actual y la distancia desde el origen en el eje seleccionado
-        Vector3 currentOffset = objective.transform.position - originalPosition;
+        Vector3 currentOffset = objective.transform.position - currentOriginalPosition;
         float currentDistanceToOrigin = Vector3.Dot(currentOffset, selectedAxis);
 
         // Obtener el desplazamiento del mouse en el eje seleccionado (positivo o negativo)
@@ -101,7 +89,10 @@ public class MoveObjectTool : Tools
 
         // Calcular la nueva distancia objetivo y clamping entre los límites
         float newDistanceToOrigin = Mathf.Clamp(currentDistanceToOrigin + mouseDelta, -maxRadius, maxRadius);
-        Vector3 desiredPosition = originalPosition + selectedAxis * newDistanceToOrigin;
+        Vector3 desiredPosition = currentOriginalPosition + selectedAxis * newDistanceToOrigin;
+
+
+
 
         // Determinar la dirección del Raycast basándose en si el desplazamiento es positivo o negativo
         Vector3 raycastDirection = (desiredPosition - originalPosition).normalized;
@@ -111,13 +102,14 @@ public class MoveObjectTool : Tools
         int originalLayer = objective.layer;
         objective.layer = LayerMask.NameToLayer("Ignore Raycast");
 
-        bool hitDetected = Physics.Raycast(originalPosition, raycastDirection, out RaycastHit hit, raycastDistance);
+        bool hitDetected = Physics.Raycast(originalPosition, raycastDirection, out RaycastHit hit, raycastDistance, raycastLayer);
 
         // Restaurar la capa original del objeto
         objective.layer = originalLayer;
 
         if (hitDetected)
         {
+            Debug.Log(hit.collider.gameObject);
             // Calcular un offset en dirección hacia la posición original
             float offsetDistance = 1.5f; // Puedes ajustar este valor para definir la distancia del offset
             Vector3 offsetDirection = (originalPosition - hit.point).normalized;
@@ -138,34 +130,46 @@ public class MoveObjectTool : Tools
     {
         isDragging = false;
         mouseState.DropRightClick();
-        rightClickHoldTime = 0;
-        if (isShowingAxisSelectionWheel)
-        {
-            inputManager.HideDragObjectWheel();
-            isShowingAxisSelectionWheel = false;
-        }
-        inputManager.OnRightClickDrop -= DropInteractable;
-        if (!isHoldingClick)
-        {
-            inputManager.OnPerspectiveSwitch -= DropInteractable;
-            inputManager.OnToolSwitchCheck -= DropInteractable;
+        if(movable != null)
             if(movable.GetNeedGravity())
                 objectiveRb.useGravity = true;
-            movable = null;
-            objectiveRb = null;
-        }
-        isHoldingClick = false;
+        movable = null;
+        objectiveRb = null;
+        inputManager.OnRightClickDrop -= DropInteractable;
+        inputManager.OnPerspectiveSwitch -= DropInteractable;
+        inputManager.OnToolSwitchCheck -= DropInteractable;
+
     }
     public void SelectXAxis()
     {
         selectedAxis = new Vector3(1,0,0);
+        MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.CompassXAxis);
     }
     public void SelectYAxis()
     {
         selectedAxis = new Vector3(0, 1, 0);
+        MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.CompassYAxis);
     }
     public void SelectZAxis()
     {
-        selectedAxis = new Vector3(0, 0, 1);
+        if (cameraManager.is2D)
+        {
+            selectedAxis = new Vector3(1, 0, 0);
+            MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.CompassXAxis);
+        }
+        else
+        {
+            selectedAxis = new Vector3(0, 0, 1);
+            MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.CompassZAxis);
+        }
+    }
+    public override void SetCurrentAlternativeTool()
+    {
+        if (selectedAxis == Vector3.right)
+            MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.CompassXAxis);
+        else if (selectedAxis == Vector3.up)
+            MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.CompassYAxis);
+        else if (selectedAxis == Vector3.forward)
+            MouseState.Instance.SetCurrentAlternativeToolType(AlternativeToolTypes.CompassZAxis);
     }
 }

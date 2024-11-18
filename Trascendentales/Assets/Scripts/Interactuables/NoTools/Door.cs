@@ -17,11 +17,23 @@ public class Door : MonoBehaviour
         if (isOpen)
             return;
         currentAccess++;
-        if(currentAccess >= cantOfAccess)
+        if (currentAccess >= cantOfAccess)
         {
             animator.SetTrigger("Open");
             gameObject.GetComponent<Collider>().enabled = false;
             isOpen = true;
+        }
+    }
+    public void TryToClose()
+    {
+        if (!isOpen)
+            return;
+        currentAccess--;
+        if (currentAccess <= 0)
+        {
+            animator.SetTrigger("Close");
+            gameObject.GetComponent<Collider>().enabled = true;
+            isOpen = false;
         }
     }
 }

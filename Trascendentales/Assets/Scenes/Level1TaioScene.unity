@@ -440,7 +440,7 @@ Transform:
   m_GameObject: {fileID: 36615275}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 146.5, y: 2, z: -6.56}
+  m_LocalPosition: {x: 134.62, y: 2, z: -6.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -3322,7 +3322,7 @@ Transform:
   m_GameObject: {fileID: 198192150}
   serializedVersion: 2
   m_LocalRotation: {x: 1, y: -0, z: -0, w: 0}
-  m_LocalPosition: {x: 146.5, y: -6.48, z: -6.56}
+  m_LocalPosition: {x: 134.62, y: -6.48, z: -6.56}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -6526,7 +6526,7 @@ Transform:
   m_GameObject: {fileID: 389841938}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 142.44472, y: 0.6474074, z: 0}
+  m_LocalPosition: {x: 139.92, y: 0.6474074, z: 0}
   m_LocalScale: {x: 6, y: 1, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12423,7 +12423,7 @@ PrefabInstance:
     - target: {fileID: 2917346337990088732, guid: 8cd520da72cd57740a104e675e8dd425,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -154.80858
+      value: -166.68858
       objectReference: {fileID: 0}
     - target: {fileID: 2917346337990088732, guid: 8cd520da72cd57740a104e675e8dd425,
         type: 3}
@@ -13997,17 +13997,17 @@ PrefabInstance:
     - target: {fileID: 897447408280094353, guid: 830457e7df1c8844395cd73dc026714a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -58.748318
+      value: -61.717384
       objectReference: {fileID: 0}
     - target: {fileID: 897447408280094353, guid: 830457e7df1c8844395cd73dc026714a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.40402937
+      value: 0.4045676
       objectReference: {fileID: 0}
     - target: {fileID: 897447408280094353, guid: 830457e7df1c8844395cd73dc026714a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.3214492
+      value: -1.3230274
       objectReference: {fileID: 0}
     - target: {fileID: 897447408280094353, guid: 830457e7df1c8844395cd73dc026714a,
         type: 3}
@@ -14790,7 +14790,7 @@ PrefabInstance:
     - target: {fileID: 3082492529659995783, guid: ea94a512820b7bc4db2b0f04f2f9a784,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 152.42
+      value: 140.54
       objectReference: {fileID: 0}
     - target: {fileID: 3082492529659995783, guid: ea94a512820b7bc4db2b0f04f2f9a784,
         type: 3}
@@ -18061,7 +18061,7 @@ Transform:
   m_GameObject: {fileID: 1283930612}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 146.019, y: 2, z: 4.92}
+  m_LocalPosition: {x: 134.13899, y: 2, z: 4.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -24357,7 +24357,7 @@ Transform:
   m_GameObject: {fileID: 1858393114}
   serializedVersion: 2
   m_LocalRotation: {x: 1, y: -0, z: -0, w: 0}
-  m_LocalPosition: {x: 146.019, y: -4.35, z: 4.91}
+  m_LocalPosition: {x: 134.13899, y: -4.35, z: 4.91}
   m_LocalScale: {x: 2, y: 6, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27365,6 +27365,7 @@ GameObject:
   - component: {fileID: 8943616004954328579}
   - component: {fileID: 1178425093735787486}
   - component: {fileID: 2124994994364769029}
+  - component: {fileID: 8943616004954328580}
   m_Layer: 6
   m_Name: SpawnSphere
   m_TagString: Key
@@ -28127,6 +28128,23 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8943616004954328580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3868375257000196438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d686f18e2c14777429cf255271e78be1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRadius: 5
+  needGravity: 1
+  objRenderer: {fileID: 6649980286923124845}
+  originParticle: {fileID: 7235251305826239643, guid: 0304948c45a3e3049a9d502fcbd4d427,
+    type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

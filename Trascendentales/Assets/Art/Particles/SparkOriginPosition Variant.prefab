@@ -141,10 +141,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4635190556095317556}
-    - targetCorrespondingSourceObject: {fileID: 758009923400892213, guid: e59f68119ee639a4e956d53be192c686,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3733028472494752316}
   m_SourcePrefab: {fileID: 100100000, guid: e59f68119ee639a4e956d53be192c686, type: 3}
 --- !u!1 &7235251305826239643 stripped
 GameObject:
@@ -256,30 +252,3 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!1773428102 &3733028472494752316
-ParentConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7235251305826239643}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Weight: 1
-  m_TranslationAtRest: {x: 39.70574, y: -5.410491, z: 0.39370584}
-  m_RotationAtRest: {x: -90, y: 0, z: 0}
-  m_TranslationOffsets:
-  - {x: -100.83425, y: -5.460491, z: 0.39370584}
-  m_RotationOffsets:
-  - {x: 270, y: 0, z: 0}
-  m_AffectTranslationX: 1
-  m_AffectTranslationY: 1
-  m_AffectTranslationZ: 1
-  m_AffectRotationX: 1
-  m_AffectRotationY: 1
-  m_AffectRotationZ: 1
-  m_Active: 1
-  m_IsLocked: 1
-  m_Sources:
-  - sourceTransform: {fileID: 0}
-    weight: 1

@@ -8,13 +8,13 @@ using UnityEngine.Animations;
 public class MovableObject : MonoBehaviour, IMovable,IFeedback
 {
     [SerializeField] private float maxRadius;
-    private Vector3 originalPosition;
-    private Color m_feedbackCompass, m_feedbackEraser;
+    protected Vector3 originalPosition;
+    protected Color m_feedbackCompass, m_feedbackEraser;
     [SerializeField] private bool needGravity = false;
     [SerializeField] private Renderer objRenderer;
-    [SerializeField] private GameObject originParticle;
-    private GameObject particleFeedback;
-    private LineRenderer lineRenderer;
+    [SerializeField] protected GameObject originParticle;
+    protected GameObject particleFeedback;
+    protected LineRenderer lineRenderer;
     private bool isMovable = true;
 
     public event Action OnEraserInteract;
@@ -23,12 +23,8 @@ public class MovableObject : MonoBehaviour, IMovable,IFeedback
     public bool GetNeedGravity() => needGravity;
     public bool GetIsMovable() => isMovable;
 
-    public void ShowParticleFeedback()
-    {
-        particleFeedback.SetActive(true);
-    }
 
-    private void Start()
+    protected virtual void Start()
     {
         m_feedbackCompass = ColorDictionary.GetColor("FeedbackCompass");
         m_feedbackEraser = ColorDictionary.GetColor("FeedbackEraser");
@@ -44,6 +40,8 @@ public class MovableObject : MonoBehaviour, IMovable,IFeedback
 
     private void Update()
     {
+        if(!particleFeedback.activeSelf)
+            return;
         lineRenderer.SetPosition(1, transform.position);
         // Verifica la distancia desde la posición original
         float distance = Vector3.Distance(transform.position, originalPosition);
@@ -58,7 +56,7 @@ public class MovableObject : MonoBehaviour, IMovable,IFeedback
     {
         OnEraserInteract?.Invoke();
     }
-    public void ShowOriginFeedback()
+    public virtual void ShowOriginFeedback()
     {
         particleFeedback.SetActive(true);
     }
@@ -78,7 +76,7 @@ public class MovableObject : MonoBehaviour, IMovable,IFeedback
 
 
     }
-    private void ResetPosition()
+    protected void ResetPosition()
     {
         transform.position = originalPosition;
     }
@@ -87,7 +85,6 @@ public class MovableObject : MonoBehaviour, IMovable,IFeedback
         if (MouseState.Instance.CurrentToolActive() == ToolTypes.Compass &&
             MouseState.Instance.IsRightClickPress())
             return;
-        Debug.Log("Sali");
         FeedbackManager.Instance.ClearFeedback(objRenderer);
     }
 

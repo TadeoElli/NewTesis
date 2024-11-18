@@ -75,7 +75,6 @@ public interface ICompassable
 public interface IMovable
 {
     public float GetMaxRadius();
-    public void ShowParticleFeedback();
     public bool GetNeedGravity();
     public bool GetIsMovable();
     public void ShowOriginFeedback();

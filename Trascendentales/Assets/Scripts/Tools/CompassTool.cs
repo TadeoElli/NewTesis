@@ -120,7 +120,7 @@ public class CompassTool : Tools
             }
             if (secondObject.TryGetComponent<IMovable>(out IMovable movable))
             {
-                movable.ShowParticleFeedback();
+                movable.ShowOriginFeedback();
             }
             ParentConstraint constraint = secondObject.AddComponent<ParentConstraint>();
             parentConstraint = constraint;

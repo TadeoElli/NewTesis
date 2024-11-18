@@ -19,9 +19,10 @@ GameObject:
   - component: {fileID: 8943616005531247208}
   - component: {fileID: 1178425094456346549}
   - component: {fileID: -1723611915544801549}
+  - component: {fileID: 7385373577835474001}
   m_Layer: 6
   m_Name: SpawnSphere
-  m_TagString: Key
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -157,6 +158,7 @@ MonoBehaviour:
   maxRadius: 0
   canAttachOthers: 0
   needToBeKinematic: 0
+  isRotating: 0
   gimballRef: {fileID: 0}
   objRenderer: {fileID: 6649980286205041670}
 --- !u!114 &2898222206795698952
@@ -240,3 +242,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e113ef43c09c3084d8cdff7d1ee67ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7385373577835474001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3868375256348824893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d686f18e2c14777429cf255271e78be1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRadius: 5
+  needGravity: 1
+  objRenderer: {fileID: 6649980286205041670}
+  originParticle: {fileID: 7235251305826239643, guid: 0304948c45a3e3049a9d502fcbd4d427,
+    type: 3}

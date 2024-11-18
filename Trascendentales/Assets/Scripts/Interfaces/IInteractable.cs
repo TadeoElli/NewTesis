@@ -87,6 +87,6 @@ public interface IMovable
 public interface IIlluminable
 {
     public void OnLightOn();
-    public void OnLightOff();
 }
+
 

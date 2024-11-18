@@ -6,6 +6,7 @@ public class PaintableDelete : PaintableObject
 
     public override void Awake()
     {
+        base.Awake();
         base.InteractionWithBrush();
     }
     public override void InteractionWithBrush()

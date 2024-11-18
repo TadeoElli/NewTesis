@@ -7,6 +7,7 @@ public class PaintableSpawn : PaintableObject
     private Color feedbackColor;
     public override void Awake()
     {
+        base.Awake();
         feedbackColor = Color.black;
     }
     public override void InteractionWithBrush()

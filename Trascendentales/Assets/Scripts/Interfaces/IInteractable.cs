@@ -84,3 +84,9 @@ public interface IMovable
     public void InteractWithEraser(bool isOn2D);
 
 }
+public interface IIlluminable
+{
+    public void OnLightOn();
+    public void OnLightOff();
+}
+

@@ -14,15 +14,13 @@ public class Balance_Attack_Method : MonoBehaviour
 
     [Header("Feedback")]
     [SerializeField] private GameObject attackRangeGizmo; // Indicador estático
-    [SerializeField] private GameObject attackIndicatorGizmo; // Indicador dinámico
     [SerializeField] private LayerMask groundLayer;
 
     private bool isFollowing = false;
     private bool isFalling = false;
     private Vector3 targetPosition;
 
-    private float dropTimer = 0f; // Temporizador exclusivo para el tiempo de caída
-    private bool isExpanding = false; // Flag para controlar la expansión del indicador dinámico
+
 
     void Start()
     {
@@ -89,28 +87,9 @@ public class Balance_Attack_Method : MonoBehaviour
                 attackRangeGizmo.transform.position = groundPosition;
             }
 
-            // Posicionar y manejar el indicador dinámico
-            if (attackIndicatorGizmo != null)
-            {
-                attackIndicatorGizmo.transform.position = groundPosition;
-                if(dropTimer > hoverDuration + dropWaitTime + resetWaitTime)
-                    ResetIndicatorScale();
-                dropTimer += Time.deltaTime;
-                float progress = Mathf.Clamp01(dropTimer / (dropWaitTime * speedMultiplier));
-                attackIndicatorGizmo.transform.localScale = Vector3.Lerp(Vector3.zero, new Vector3(4, 4, 4), progress);
-
-            }
         }
     }
 
-    private void ResetIndicatorScale()
-    {
-        if (attackIndicatorGizmo != null)
-        {
-            attackIndicatorGizmo.transform.localScale = Vector3.zero;
-            dropTimer = 0;
-        }
-    }
 
     // Funciones públicas para ajustar la velocidad
     public void IncreaseSpeed()

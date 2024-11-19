@@ -8,10 +8,10 @@ public class VolumeBar: MonoBehaviour
     /// </summary>
 
     public void SetMusicVolume(float amount){
-        AudioManager.Instance.SetMusicVolume(amount);
+        AudioManager.Instance.SetMusicVolume(amount /3);
     }
     public void SetEffectVolume(float amount){
-        AudioManager.Instance.SetEffectsVolume(amount);
+        AudioManager.Instance.SetEffectsVolume(amount / 3);
     }
     
 

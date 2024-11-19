@@ -9,6 +9,7 @@ public class MoveObjectTool : Tools
     private Rigidbody objectiveRb;
     private float maxRadius;
     private float initialDistanceMouseToParent;
+    [SerializeField] private float dragVelocity = 0.5f;
     private IMovable movable;
     private Vector3 selectedAxis; // Nuevo: Almacena el eje seleccionado
     private Vector3 originalPosition;
@@ -88,7 +89,7 @@ public class MoveObjectTool : Tools
             mouseDelta = Input.GetAxis("Mouse Y");
 
         // Calcular la nueva distancia objetivo y clamping entre los límites
-        float newDistanceToOrigin = Mathf.Clamp(currentDistanceToOrigin + mouseDelta, -maxRadius, maxRadius);
+        float newDistanceToOrigin = Mathf.Clamp(currentDistanceToOrigin + mouseDelta * dragVelocity, -maxRadius, maxRadius);
         Vector3 desiredPosition = currentOriginalPosition + selectedAxis * newDistanceToOrigin;
 
 

@@ -13,7 +13,7 @@ public class PlayerLocomotion : MonoBehaviour, IObjectAffectableByPerspective
     Vector3 moveDirection;
     [SerializeField] Transform cameraObject;
     Rigidbody playerRigidbody;
-
+    private bool isMovementDisabled = false;
     [Header("MovementSpeed Speed")]
     public float movementSpeed = 7;
     public float rotationSpeed = 15;
@@ -22,7 +22,7 @@ public class PlayerLocomotion : MonoBehaviour, IObjectAffectableByPerspective
     public bool isGrounded = false;
     public bool isJumping = false;
     public bool isNearEdge = false;  // Flag para detectar si el jugador está cerca de un borde
-    private bool isOn2D = false; 
+    private bool isOn2D = false;
 
     [Header("Falling")]
     public float inAirTimer;
@@ -82,7 +82,7 @@ public class PlayerLocomotion : MonoBehaviour, IObjectAffectableByPerspective
             // Solo permitir movimiento en el eje X
             currentVelocity.x = inputManager.horizontalInput * movementSpeed;
             currentVelocity.z = 0; // Mantener siempre el Z en 0 en modo 2D
-            if(!cameraManager.isFrontView)
+            if (!cameraManager.isFrontView)
                 currentVelocity.x = -currentVelocity.x;
             // Fijar la posición del jugador en el eje Z a 0
             playerRigidbody.position = new Vector3(playerRigidbody.position.x, playerRigidbody.position.y, 0);
@@ -132,7 +132,7 @@ public class PlayerLocomotion : MonoBehaviour, IObjectAffectableByPerspective
         Vector3 targetDirection = Vector3.zero;
 
         targetDirection = cameraObject.forward * inputManager.verticalInput;
-        targetDirection = targetDirection + cameraObject.right * inputManager.horizontalInput ;
+        targetDirection = targetDirection + cameraObject.right * inputManager.horizontalInput;
         targetDirection.Normalize();
         targetDirection.y = 0;
 
@@ -156,7 +156,7 @@ public class PlayerLocomotion : MonoBehaviour, IObjectAffectableByPerspective
         // Si  hay suelo debajo, verificar bordes
         if (isGroundDetected && !hit.collider.isTrigger)
         {
-            if(!isGrounded)
+            if (!isGrounded)
                 animatorManager.PlayTargetAnimation("Land", false);
             playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, 0, playerRigidbody.velocity.z);
             isGrounded = true;
@@ -173,10 +173,10 @@ public class PlayerLocomotion : MonoBehaviour, IObjectAffectableByPerspective
 
             //if (!isNearEdge)
             //{
-                // Si no hay suelo ni bordes, el jugador está cayendo
-                inAirTimer = inAirTimer + Time.deltaTime;
-                playerRigidbody.AddForce(transform.forward * leapingVelocity);
-                playerRigidbody.AddForce(-Vector3.up * fallingVelocity * inAirTimer);
+            // Si no hay suelo ni bordes, el jugador está cayendo
+            inAirTimer = inAirTimer + Time.deltaTime;
+            playerRigidbody.AddForce(transform.forward * leapingVelocity);
+            playerRigidbody.AddForce(-Vector3.up * fallingVelocity * inAirTimer);
             //}
         }
     }
@@ -273,6 +273,8 @@ public class PlayerLocomotion : MonoBehaviour, IObjectAffectableByPerspective
         {
             return;
         }
+        if(isMovementDisabled)
+            return;
         HandleFallingAndLanding();
         if (playerManager.isInteracting)
             return;
@@ -288,6 +290,16 @@ public class PlayerLocomotion : MonoBehaviour, IObjectAffectableByPerspective
     private void OnDisable()
     {
         cameraManager.UnregisterObject(this);
+    }
+
+    public void DisableMovement(float duration)
+    {
+        isMovementDisabled = true;
+        Invoke(nameof(EnableMovement), duration);
+    }
+    private void EnableMovement()
+    {
+        isMovementDisabled = false;
     }
     /*
 #region EdgeDetector

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Torbellino : MonoBehaviour
@@ -10,25 +11,32 @@ public class Torbellino : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Verificamos si el objeto que entra es el jugador
-        if (other.CompareTag("Player"))
+        if (other.gameObject.layer == 3 || other.gameObject.layer == 6)
         {
-            Rigidbody playerRb = other.GetComponent<Rigidbody>();
+            Rigidbody objectRb = other.GetComponent<Rigidbody>();
 
-            if (playerRb != null)
+
+            if (objectRb != null)
             {
+                if(other.TryGetComponent<PlayerLocomotion>(out PlayerLocomotion playerLm))
+                    playerLm.DisableMovement(0.25f);
                 // Calculamos la dirección del torbellino (hacia donde apunta)
                 Vector3 launchDirection = (pointDirection.position - transform.position).normalized;
 
                 // Calculamos la fuerza según la escala del torbellino
                 float scaleFactor = transform.localScale.magnitude; // Tamaño proporcional
                 currentForce = baseForce * scaleFactor;
+                if (playerLm == null)
+                    currentForce = currentForce * 5f;
 
                 // Aplicamos la fuerza al jugador
-                playerRb.AddForce(launchDirection * currentForce, ForceMode.Force);
+                objectRb.AddForce(launchDirection * currentForce, ForceMode.Force);
+
 
                 Debug.Log($"Jugador lanzado con fuerza {currentForce} en dirección {launchDirection}");
             }
         }
     }
+
 }
 

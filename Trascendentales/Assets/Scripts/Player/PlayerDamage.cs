@@ -11,6 +11,8 @@ public class PlayerDamage : MonoBehaviour, IDamagable
     [SerializeField] private int lives = 3;
     PlayerManager playerManager;
     public UnityEvent OnTakeDamage;
+    [SerializeField] private GameObject shieldBubble;
+    private bool isInvencible = false;
 
     private void Awake()
     {
@@ -18,6 +20,8 @@ public class PlayerDamage : MonoBehaviour, IDamagable
     }
     public void Takedmg(int dmg)
     {
+        if(isInvencible)
+            return;
         lives--;
         OnTakeDamage?.Invoke();
         if (lives <= 0 && isLive)
@@ -43,10 +47,11 @@ public class PlayerDamage : MonoBehaviour, IDamagable
 
     IEnumerator dmgVisual()
     {
-        this.GetComponent<Renderer>().material.color = Color.red;
-        yield return new WaitForSeconds(0.25f);
-        this.GetComponent<Renderer>().material.color = Color.yellow;
-
+        isInvencible = true;
+        shieldBubble.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        isInvencible = false;
+        shieldBubble.SetActive(false);
         yield return null;
     }
 }

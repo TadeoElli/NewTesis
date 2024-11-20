@@ -87,16 +87,16 @@ public class FSM_Attack : MonoBehaviour
         // Configurar el final del ataque después de la duración.
         Invoke(nameof(StartAttack), attack.durationtoStart);
     }
-    private void StartAttack(Attack attack)
+    private void StartAttack()
     {
-        Debug.Log($"Iniciando ataque: {attack.name}");
+        Debug.Log($"Iniciando ataque");
 
         // Disparar el evento de inicio del ataque.
-        attack.onAttackStart?.Invoke();
+        attacks[(int)currentState - 1].onAttackStart?.Invoke();
 
 
         // Configurar el final del ataque después de la duración.
-        Invoke(nameof(EndAttack), attack.duration);
+        Invoke(nameof(EndAttack), attacks[(int)currentState].duration);
     }
 
     private void EndAttack()
@@ -104,7 +104,7 @@ public class FSM_Attack : MonoBehaviour
         Debug.Log("Ataque finalizado.");
 
         // Disparar el evento de finalización del ataque.
-        attacks[(int)currentState].onAttackEnd?.Invoke();
+        attacks[(int)currentState - 1].onAttackEnd?.Invoke();
 
         // Volver al estado inactivo.
         currentState = AttackState.Idle;

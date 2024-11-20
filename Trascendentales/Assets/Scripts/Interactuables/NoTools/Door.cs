@@ -6,11 +6,17 @@ public class Door : MonoBehaviour
 {
     private Animator animator;
     [SerializeField] int cantOfAccess = 1;
+    [SerializeField] private bool openOnstart = false;
     private int currentAccess = 0;
     private bool isOpen = false;
     private void Awake()
     {
         animator = GetComponent<Animator>();
+    }
+    private void Start()
+    {
+        if (openOnstart)
+            TryToAccess();
     }
     public void TryToAccess()
     {

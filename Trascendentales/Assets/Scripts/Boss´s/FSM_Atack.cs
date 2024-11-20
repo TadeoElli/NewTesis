@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public class FSM_Attack : MonoBehaviour
 {
-    public enum AttackState { Idle, MeteorRain, ElectricFloor, HorizontalBurst }
+    public enum AttackState { Idle, ElectricFloor, HorizontalBurst }
 
     [System.Serializable]
     public class Attack
@@ -34,7 +34,6 @@ public class FSM_Attack : MonoBehaviour
 
     private void Start()
     {
-        UnlockAttack(0); // Desbloquea el primer ataque al inicio.
         ChooseNextAttack();
     }
 
@@ -92,11 +91,11 @@ public class FSM_Attack : MonoBehaviour
         Debug.Log($"Iniciando ataque");
 
         // Disparar el evento de inicio del ataque.
-        attacks[(int)currentState - 1].onAttackStart?.Invoke();
+        attacks[(int)currentState - 2].onAttackStart?.Invoke();
 
 
         // Configurar el final del ataque después de la duración.
-        Invoke(nameof(EndAttack), attacks[(int)currentState - 1].duration);
+        Invoke(nameof(EndAttack), attacks[(int)currentState - 2].duration);
     }
 
     private void EndAttack()
@@ -104,7 +103,7 @@ public class FSM_Attack : MonoBehaviour
         Debug.Log("Ataque finalizado.");
 
         // Disparar el evento de finalización del ataque.
-        attacks[(int)currentState - 1].onAttackEnd?.Invoke();
+        attacks[(int)currentState - 2].onAttackEnd?.Invoke();
 
         // Elegir el siguiente ataque.
         ChooseNextAttack();

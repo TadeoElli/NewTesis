@@ -77,7 +77,7 @@ public class Balance_Attack_Method : MonoBehaviour
 
     private void UpdateIndicators()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitInfo, 10, groundLayer))
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitInfo, 20, groundLayer))
         {
             Vector3 groundPosition = hitInfo.point;
 

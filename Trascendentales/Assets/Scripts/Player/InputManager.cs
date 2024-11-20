@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class InputManager : MonoBehaviour
 {
@@ -37,8 +38,13 @@ public class InputManager : MonoBehaviour
     public event Action OnChangeCameraAngle;
     public event Action OnInteract;
 
+    public VisualEffect _auraVfx;
+    public VisualEffect _shieldVfx;
+
     private void Awake()
     {
+        _auraVfx.Stop();
+        _shieldVfx.Stop();
         playerLocomotion = GetComponent<PlayerLocomotion>();
         animatorManager = GetComponent<AnimatorManager>();
         playerManager = GetComponent<PlayerManager>();

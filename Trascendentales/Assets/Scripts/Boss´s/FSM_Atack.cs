@@ -4,15 +4,18 @@ using UnityEngine.Events;
 
 public class FSM_Attack : MonoBehaviour
 {
-    private enum AttackState { Idle, MeteorRain, ElectricFloor, HorizontalBurst }
+    public enum AttackState { Idle, MeteorRain, ElectricFloor, HorizontalBurst }
 
     [System.Serializable]
     public class Attack
     {
+        public AttackState attackState;
         public string name;
+        public UnityEvent onAttackActivate;
         public UnityEvent onAttackStart;
         public UnityEvent onAttackEnd;
         public float duration;
+        public float durationtoStart;
         public bool isUnlocked;
     }
 
@@ -69,9 +72,21 @@ public class FSM_Attack : MonoBehaviour
 
         // Elegir un ataque aleatorio.
         Attack selectedAttack = unlockedAttacks[Random.Range(0, unlockedAttacks.Count)];
-        StartAttack(selectedAttack);
+        ActivateAttack(selectedAttack);
     }
+    private void ActivateAttack(Attack attack)
+    {
+        Debug.Log($"Activando ataque: {attack.name}");
 
+        // Disparar el evento de inicio del ataque.
+        attack.onAttackActivate?.Invoke();
+
+        // Cambiar al estado del ataque.
+        currentState = attack.attackState;
+
+        // Configurar el final del ataque después de la duración.
+        Invoke(nameof(StartAttack), attack.durationtoStart);
+    }
     private void StartAttack(Attack attack)
     {
         Debug.Log($"Iniciando ataque: {attack.name}");
@@ -79,8 +94,6 @@ public class FSM_Attack : MonoBehaviour
         // Disparar el evento de inicio del ataque.
         attack.onAttackStart?.Invoke();
 
-        // Cambiar al estado del ataque.
-        currentState = AttackState.Idle;
 
         // Configurar el final del ataque después de la duración.
         Invoke(nameof(EndAttack), attack.duration);

@@ -400,10 +400,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2917fd32a1606e47a8e3bf5ee81a3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraSwitchCooldown: 1
+  angleSwitchCooldown: 1
   verticalInput: 0
   horizontalInput: 0
   jump_input: 0
   isOn2D: 0
+  _auraVfx: {fileID: 6612519662760454922}
+  _shieldVfx: {fileID: 0}
 --- !u!54 &8055069782542264571
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -513,6 +517,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe6cc8b127afb3409a51583596bbbda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lives: 3
+  OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  shieldBubble: {fileID: 0}
 --- !u!2083052967 &6612519662760454922
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -685,6 +694,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 6854444571874735992, guid: 21c3f8aabeb2da34dbb75c12efbb2199,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bcfd93aff5f5fab4cb36a22cbd842e4c, type: 2}
     - target: {fileID: 8127435971155077815, guid: 21c3f8aabeb2da34dbb75c12efbb2199,
         type: 3}
       propertyPath: m_ApplyRootMotion

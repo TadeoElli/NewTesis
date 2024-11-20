@@ -96,7 +96,7 @@ public class FSM_Attack : MonoBehaviour
 
 
         // Configurar el final del ataque después de la duración.
-        Invoke(nameof(EndAttack), attacks[(int)currentState].duration);
+        Invoke(nameof(EndAttack), attacks[(int)currentState - 1].duration);
     }
 
     private void EndAttack()
@@ -106,11 +106,12 @@ public class FSM_Attack : MonoBehaviour
         // Disparar el evento de finalización del ataque.
         attacks[(int)currentState - 1].onAttackEnd?.Invoke();
 
+        // Elegir el siguiente ataque.
+        ChooseNextAttack();
+
         // Volver al estado inactivo.
         currentState = AttackState.Idle;
 
-        // Elegir el siguiente ataque.
-        ChooseNextAttack();
     }
 
     public void UnlockAttack(int attackIndex)

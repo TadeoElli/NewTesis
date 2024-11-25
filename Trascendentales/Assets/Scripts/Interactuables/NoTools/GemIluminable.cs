@@ -14,6 +14,9 @@ public class GemIluminable : MonoBehaviour, IIlluminable
     [Header("Eventos")]
     [SerializeField] private UnityEvent onActivated; // Evento al activarse
     [SerializeField] private UnityEvent onDeactivated; // Evento al desactivarse
+    [Header("Partículas")]
+    [SerializeField] private ParticleSystem chargeParticle; // Efecto al cargar
+    [SerializeField] private ParticleSystem dischargeParticle; // Efecto al descargar
 
     private float currentCharge = 0f; // Nivel actual de carga
     private bool isBeingIlluminated = false; // Indica si está siendo iluminada
@@ -21,47 +24,100 @@ public class GemIluminable : MonoBehaviour, IIlluminable
     private Renderer rend;
     private MaterialPropertyBlock block;
 
-    public void OnLightOn()
-    {
-        // Lógica de carga mientras se llama a OnLightOn
-        isBeingIlluminated = true;
-        currentCharge += chargeRate * Time.deltaTime;
-        currentCharge = Mathf.Clamp(currentCharge, 0.05f, maxCharge);
 
-        // Cambia a activo si se completa la carga
-        if (currentCharge >= maxCharge && !isActive)
-        {
-            isActive = true;
-            onActivated?.Invoke();
-        }
-    }
     private void Start()
     {
         rend = GetComponent<Renderer>();
         block = new MaterialPropertyBlock();
         rend.GetPropertyBlock(block, 0); // Obtiene el MaterialPropertyBlock para el segundo material (índice 1)
-
+        // Asegurar que los sistemas de partículas estén detenidos al inicio
+        if (chargeParticle != null) chargeParticle.Stop();
+        if (dischargeParticle != null) dischargeParticle.Stop();
     }
 
     private void Update()
     {
-        // Si no está siendo iluminada, disminuye la carga
-        block.SetFloat("_Brigtness", currentCharge); // Cambia el color del segundo material
-        rend.SetPropertyBlock(block, 0);         // Aplica los cambios al segundo material
-        if (!isBeingIlluminated)
-        {
-            currentCharge -= dischargeRate * Time.deltaTime;
-            currentCharge = Mathf.Clamp(currentCharge, 0.05f, maxCharge);
+        // Actualizar brillo del material según la carga
+        block.SetFloat("_Brigtness", currentCharge);
+        rend.SetPropertyBlock(block, 0);
 
-            // Cambia a inactivo si la carga llega a cero
-            if (currentCharge <= 0.1f && isActive)
-            {
-                isActive = false;
-                onDeactivated?.Invoke();
-            }
+        if (isBeingIlluminated)
+        {
+            HandleCharge();
+        }
+        else
+        {
+            HandleDischarge();
         }
 
-        // Resetea el flag para evitar acumulación de carga si no es iluminada en el próximo frame
+        // Resetear el flag de iluminación
         isBeingIlluminated = false;
+    }
+
+    public void OnLightOn()
+    {
+        isBeingIlluminated = true;
+    }
+
+    private void HandleCharge()
+    {
+        currentCharge += chargeRate * Time.deltaTime;
+        currentCharge = Mathf.Clamp(currentCharge, 0.01f, maxCharge);
+
+        if (currentCharge >= maxCharge && !isActive)
+        {
+            isActive = true;
+            onActivated?.Invoke();
+        }
+
+        // Manejar partículas
+        if (chargeParticle != null && !chargeParticle.isPlaying)
+        {
+            chargeParticle.Play();
+        }
+
+        if (dischargeParticle != null && dischargeParticle.isPlaying)
+        {
+            dischargeParticle.Stop();
+        }
+    }
+
+    private void HandleDischarge()
+    {
+        currentCharge -= dischargeRate * Time.deltaTime;
+        currentCharge = Mathf.Clamp(currentCharge, 0.01f, maxCharge);
+
+        if (currentCharge <= 0f && isActive)
+        {
+            isActive = false;
+            onDeactivated?.Invoke();
+        }
+
+        // Manejar partículas
+        if (currentCharge > 0.01f)
+        {
+            if (dischargeParticle != null && !dischargeParticle.isPlaying)
+            {
+                dischargeParticle.Play();
+            }
+
+            if (chargeParticle != null && chargeParticle.isPlaying)
+            {
+                chargeParticle.Stop();
+            }
+        }
+        else
+        {
+            // Detener ambos sistemas de partículas si no hay carga
+            if (chargeParticle != null && chargeParticle.isPlaying)
+            {
+                chargeParticle.Stop();
+            }
+
+            if (dischargeParticle != null && dischargeParticle.isPlaying)
+            {
+                dischargeParticle.Stop();
+            }
+        }
     }
 }

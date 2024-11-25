@@ -8,6 +8,7 @@ public class DrawObjectTool : Tools
     [SerializeField] private GameObject cubePrefab, spherePrefab, rectanglePrefab; // Prefab del cubo a spawnear
     [SerializeField] private GameObject cubeFeedback, sphereFeedback, rectangleFeedback; // Prefab del cubo a spawnear
     private GameObject selectedPrefab,selectedFeedback, spawnedObject;
+    private ObjectPool prefabsPool;
 
     private bool isDrawing = false;
     // Variables para el temporizador
@@ -17,6 +18,7 @@ public class DrawObjectTool : Tools
     public override void Awake()
     {
         base.Awake();
+        prefabsPool = FindObjectOfType<ObjectPool>();
         //DeactivateAllFeedback(); // Desactivamos todos los feedbacks al inicio
     }
     private void Start()
@@ -122,9 +124,14 @@ public class DrawObjectTool : Tools
         // Si hay un objeto seleccionado, spawnearlo
         if (selectedPrefab != null)
         {
-            if(spawnedObject != null)
-                Destroy(spawnedObject);
-            spawnedObject = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
+            if (prefabsPool != null)
+            {
+                prefabsPool.ActivateObject(selectedPrefab, spawnPosition, Quaternion.identity);
+            }
+            else
+            {
+                Debug.LogWarning("No se encontró un ObjectPool en la escena.");
+            }
         }
     }
     private Vector3 GetMouseWorldPosition()

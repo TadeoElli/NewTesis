@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: -1403896007804393028}
   - component: {fileID: 5951695141727294003}
   - component: {fileID: 8999957466376308809}
+  - component: {fileID: 8345364253329557141}
   m_Layer: 6
   m_Name: SpawnCube
   m_TagString: Untagged
@@ -49,7 +50,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2480493298415744116}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -7116826724970169445, guid: 6ae2d7f074ae59b48a8d233950e4421e, type: 3}
 --- !u!23 &5649012913557171223
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -70,7 +71,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d8a7239817ea1564993c4e6be8034709, type: 2}
+  - {fileID: 2100000, guid: 596891ae2fcdf414f9056ffef06ba586, type: 2}
   - {fileID: 2100000, guid: 947884d19a2b55c4f86a34081ee6c220, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -259,3 +260,24 @@ MonoBehaviour:
   objRenderer: {fileID: 5649012913557171223}
   originParticle: {fileID: 7235251305826239643, guid: 0304948c45a3e3049a9d502fcbd4d427,
     type: 3}
+--- !u!95 &8345364253329557141
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2480493298415744116}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fe7c645e13d675f48afd67f8e0bbfb00, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DestroyShader
+  m_Name: DestroyShaderPlatform
   m_Shader: {fileID: -6465566751694194690, guid: e3f6e127e21f2964a8587d51022ebedb,
     type: 3}
   m_Parent: {fileID: 0}
@@ -24,6 +24,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 1acc1a64b5ec89045bf41aad833d6ccc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 2800000, guid: a35dfede23a0c2b45a3f86f69fa3c3e1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -39,10 +47,16 @@ Material:
     m_Ints: []
     m_Floats:
     - _DisolveStrength: 0
+    - _Metalic: 0.341
+    - _NormalStrength: 0.665
+    - _Oclussion: 0.481
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Smoothness: 0.364
     m_Colors:
-    - _Color: {r: 0, g: 0.8430967, b: 1, a: 0}
+    - _Color: {r: 0, g: 0.84313726, b: 1, a: 0}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _Tilling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &3980633864555952312
 MonoBehaviour:

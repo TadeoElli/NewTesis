@@ -6,7 +6,7 @@ public class Balance_Interactions : MonoBehaviour
 {
     public int actualDmg;
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent<IBossActivable>(out IBossActivable y))
         {

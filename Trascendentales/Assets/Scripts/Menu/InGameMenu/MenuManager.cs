@@ -41,9 +41,10 @@ public class MenuManager : MonoBehaviour
         isGamePaused = false;
         pauseMenu.SetActive(false);
     }
-    // Función para alternar entre pausar y continuar el juego
     public void TogglePause()
     {
+        if (!canTogglePause) return;
+
         if (isGamePaused)
         {
             ResumeGame();
@@ -52,7 +53,10 @@ public class MenuManager : MonoBehaviour
         {
             PauseGame();
         }
+
+        StartCoroutine(DebounceTogglePause()); // Aplicar debounce
     }
+
 
     public void WinLevel()
     {
@@ -98,4 +102,14 @@ public class MenuManager : MonoBehaviour
         currentAlternativeWheel = null;
     }
     #endregion
+    private bool canTogglePause = true; // Bandera para evitar múltiples activaciones
+    [SerializeField] private float toggleDelay = 0.2f; // Retraso mínimo entre toggles
+
+    private IEnumerator DebounceTogglePause()
+    {
+        canTogglePause = false;
+        yield return new WaitForSecondsRealtime(toggleDelay); // Espera en tiempo real (no afectado por Time.timeScale)
+        canTogglePause = true;
+    }
+
 }

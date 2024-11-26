@@ -27,6 +27,7 @@ public class ObjectPool : MonoBehaviour
                 for (int i = 0; i < item.maxInstances; i++)
                 {
                     GameObject obj = Instantiate(item.prefab);
+                    obj.transform.parent = transform;
                     obj.SetActive(false);
                     poolDictionary[item.prefab].Add(obj);
                 }

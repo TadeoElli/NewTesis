@@ -87,7 +87,7 @@ public class GemIluminable : MonoBehaviour, IIlluminable
         currentCharge -= dischargeRate * Time.deltaTime;
         currentCharge = Mathf.Clamp(currentCharge, 0.01f, maxCharge);
 
-        if (currentCharge <= 0f && isActive)
+        if (currentCharge <= 0.01f && isActive)
         {
             isActive = false;
             onDeactivated?.Invoke();

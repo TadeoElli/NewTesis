@@ -1,20 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations;
 
 public class MoveObjectTool : Tools
 {
     private bool isDragging = false;
     private Rigidbody objectiveRb;
     private float maxRadius;
-    private float initialDistanceMouseToParent;
-    [SerializeField] private float dragVelocity = 0.5f;
     private IMovable movable;
     private Vector3 selectedAxis; // Nuevo: Almacena el eje seleccionado
-    private Vector3 originalPosition;
     private Vector3 currentOriginalPosition;
-    private Vector3 currentOffset;
     [SerializeField] private LayerMask raycastLayer;
 
     public override void Awake()
@@ -34,10 +27,7 @@ public class MoveObjectTool : Tools
         movable = component;
         movable.ShowOriginFeedback();
         maxRadius = movable.GetMaxRadius();
-        originalPosition = movable.GetOriginalPosition();
         currentOriginalPosition = objective.transform.position;
-        currentOffset = Vector3.zero;
-
         base.Interact(objective, isPerspective2D);
 
         inputManager.OnPerspectiveSwitch += DropInteractable;
@@ -69,61 +59,118 @@ public class MoveObjectTool : Tools
 
     private void AdjustDistance()
     {
-        // Calcular el desplazamiento actual y la distancia desde el origen en el eje seleccionado
-        Vector3 currentOffset = objective.transform.position - currentOriginalPosition;
-        float currentDistanceToOrigin = Vector3.Dot(currentOffset, selectedAxis);
+        // Obtener la posición del mouse en el mundo usando Raycast
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        // Obtener el desplazamiento del mouse en el eje seleccionado (positivo o negativo)
-        float mouseDelta;
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, raycastLayer))
+        {
+            // Posición del mouse en el mundo
+            Vector3 mouseWorldPosition = hit.point;
+
+            // Determinar la posición deseada en el eje seleccionado
+            float desiredAxisPosition = GetSnappedPosition(mouseWorldPosition);
+
+            // Calcular la nueva posición del objeto en el eje seleccionado
+            Vector3 desiredPosition = currentOriginalPosition;
+            if (selectedAxis == Vector3.right)
+            {
+                desiredPosition.x = desiredAxisPosition;
+            }
+            else if (selectedAxis == Vector3.up)
+            {
+                desiredPosition.y = desiredAxisPosition;
+            }
+            else if (selectedAxis == Vector3.forward)
+            {
+                desiredPosition.z = desiredAxisPosition;
+            }
+
+            // Limitar la posición deseada al radio máximo permitido
+            Vector3 clampedPosition = ClampToMaxRadius(desiredPosition);
+
+            // Calcular la dirección y distancia para el Raycast
+            Vector3 raycastDirection = (clampedPosition - currentOriginalPosition).normalized;
+            float raycastDistance = Vector3.Distance(currentOriginalPosition, clampedPosition);
+
+            // Ignorar el propio objeto en el Raycast
+            int originalLayer = objective.layer;
+            objective.layer = LayerMask.NameToLayer("Ignore Raycast");
+
+            bool hitDetected = Physics.Raycast(currentOriginalPosition, raycastDirection, out RaycastHit rayHit, raycastDistance, raycastLayer);
+
+            // Restaurar la capa original del objeto
+            objective.layer = originalLayer;
+
+            if (hitDetected)
+            {
+                // Ajustar la posición al punto de impacto más un offset hacia el origen
+                float offsetDistance = 1.5f; // Ajusta este valor según sea necesario
+                Vector3 offsetDirection = (currentOriginalPosition - rayHit.point).normalized;
+                Vector3 adjustedPosition = rayHit.point + offsetDirection * offsetDistance;
+
+                // Ajustar al snap más cercano al punto de impacto ajustado
+                objective.transform.position = GetSnappedPositionOnAxis(adjustedPosition);
+            }
+            else
+            {
+                // Si no hay colisión, mover el objeto al snap más cercano en el eje seleccionado
+                objective.transform.position = clampedPosition;
+            }
+        }
+    }
+
+    // Método para ajustar la posición del mouse al snap de la grilla en el eje seleccionado
+    private float GetSnappedPosition(Vector3 mouseWorldPosition)
+    {
+        float cellSize = 1f; // Tamaño de la celda de la grilla
+
         if (selectedAxis == Vector3.right)
-            if (!cameraManager.isFrontView)
-                mouseDelta = Input.GetAxis("Mouse X") * -1f;
-            else
-                mouseDelta = Input.GetAxis("Mouse X");
-        else if(selectedAxis == Vector3.forward)
-            if (!cameraManager.isFrontView)
-                mouseDelta = Input.GetAxis("Mouse Y") * -1f;
-            else
-                mouseDelta = Input.GetAxis("Mouse Y");
-        else
-            mouseDelta = Input.GetAxis("Mouse Y");
-
-        // Calcular la nueva distancia objetivo y clamping entre los límites
-        float newDistanceToOrigin = Mathf.Clamp(currentDistanceToOrigin + mouseDelta * dragVelocity, -maxRadius, maxRadius);
-        Vector3 desiredPosition = currentOriginalPosition + selectedAxis * newDistanceToOrigin;
-
-
-
-
-        // Determinar la dirección del Raycast basándose en si el desplazamiento es positivo o negativo
-        Vector3 raycastDirection = (desiredPosition - originalPosition).normalized;
-        float raycastDistance = Vector3.Distance(originalPosition, desiredPosition);
-
-        // Ignorar el propio objeto en el Raycast
-        int originalLayer = objective.layer;
-        objective.layer = LayerMask.NameToLayer("Ignore Raycast");
-
-        bool hitDetected = Physics.Raycast(originalPosition, raycastDirection, out RaycastHit hit, raycastDistance, raycastLayer);
-
-        // Restaurar la capa original del objeto
-        objective.layer = originalLayer;
-
-        if (hitDetected)
         {
-            Debug.Log(hit.collider.gameObject);
-            // Calcular un offset en dirección hacia la posición original
-            float offsetDistance = 1.5f; // Puedes ajustar este valor para definir la distancia del offset
-            Vector3 offsetDirection = (originalPosition - hit.point).normalized;
-            Vector3 newPosition = hit.point + offsetDirection * offsetDistance;
-
-            // Establecer la posición del objeto en el punto de impacto más el offset
-            objective.transform.position = newPosition;
+            return Mathf.Round(mouseWorldPosition.x / cellSize) * cellSize;
         }
-        else
+        else if (selectedAxis == Vector3.up)
         {
-            // Si no hay colisión, mover el objeto a la posición deseada
-            objective.transform.position = desiredPosition;
+            return Mathf.Round(mouseWorldPosition.y / cellSize) * cellSize;
         }
+        else if (selectedAxis == Vector3.forward)
+        {
+            return Mathf.Round(mouseWorldPosition.z / cellSize) * cellSize;
+        }
+
+        return 0f;
+    }
+
+    // Método para ajustar una posición cualquiera al snap de la grilla en el eje seleccionado
+    private Vector3 GetSnappedPositionOnAxis(Vector3 position)
+    {
+        float cellSize = 1f; // Tamaño de la celda de la grilla
+        Vector3 snappedPosition = position;
+
+        if (selectedAxis == Vector3.right)
+        {
+            snappedPosition.x = Mathf.Round(position.x / cellSize) * cellSize;
+        }
+        else if (selectedAxis == Vector3.up)
+        {
+            snappedPosition.y = Mathf.Round(position.y / cellSize) * cellSize;
+        }
+        else if (selectedAxis == Vector3.forward)
+        {
+            snappedPosition.z = Mathf.Round(position.z / cellSize) * cellSize;
+        }
+
+        return snappedPosition;
+    }
+
+    // Método para limitar la posición al radio máximo permitido
+    private Vector3 ClampToMaxRadius(Vector3 position)
+    {
+        Vector3 directionFromOrigin = position - currentOriginalPosition;
+        if (directionFromOrigin.magnitude > maxRadius)
+        {
+            directionFromOrigin = directionFromOrigin.normalized * maxRadius;
+        }
+        return currentOriginalPosition + directionFromOrigin;
     }
 
 

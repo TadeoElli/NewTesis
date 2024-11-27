@@ -73,11 +73,14 @@ public class ObjectPool : MonoBehaviour
     private System.Collections.IEnumerator DeactivateWithAnimation(GameObject obj)
     {
         // Disparar una animación si tiene un Animator
-        Animator animator = obj.GetComponent<Animator>();
-        if (animator != null)
+        if (obj.activeSelf)
         {
-            animator.Play("DespawnPlatform");
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            Animator animator = obj.GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.Play("DespawnPlatform");
+                yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            }
         }
 
         // Desactivar el objeto y restablecer su escala y rotación

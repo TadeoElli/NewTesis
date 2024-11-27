@@ -23,7 +23,7 @@ public class PaintableObject : MonoBehaviour, IPaintable, IFeedback
             return;
         InteractionWithBrush(); 
     }
-    public void InteractWithEraser(bool isOn2D)
+    public virtual void InteractWithEraser(bool isOn2D)
     {
         if (!wasInteracted)
             return;

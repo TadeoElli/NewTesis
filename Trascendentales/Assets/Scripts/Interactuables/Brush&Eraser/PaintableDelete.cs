@@ -2,20 +2,17 @@
 
 public class PaintableDelete : PaintableObject
 {
+    [SerializeField] private bool needToDestroy = false;
 
-
-    public override void Awake()
+    public override void InteractWithEraser(bool isOn2D)
     {
-        base.Awake();
-        base.InteractionWithBrush();
-    }
-    public override void InteractionWithBrush()
-    {
-
+        InteractionWithEraser();
     }
     public override void InteractionWithEraser()
     {
-        base.InteractionWithEraser();
-        Destroy(gameObject);
+        if (needToDestroy)
+            Destroy(gameObject);
+        else
+            gameObject.SetActive(false);
     }
 }

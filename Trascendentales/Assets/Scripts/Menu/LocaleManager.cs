@@ -12,8 +12,6 @@ public class LocaleManager : MonoBehaviour
     private int maxLocalesCount = 1;
     public int localeIndex = 1;
 
-    private void Start() {
-    }
     public void ChangeLocaleUp(){
         if(active == true)
             return;

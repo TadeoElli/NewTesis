@@ -22,7 +22,7 @@ public class Balance_Attack_Method : MonoBehaviour
 
 
 
-    void Start()
+    void OnEnable()
     {
         StartCoroutine(HoverCycle());
     }

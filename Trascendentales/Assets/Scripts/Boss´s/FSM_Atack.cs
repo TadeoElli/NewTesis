@@ -20,7 +20,6 @@ public class FSM_Attack : MonoBehaviour
     }
 
     [Header("General Settings")]
-    [SerializeField] private Transform player;
     [SerializeField] private float minDelayBetweenAttacks = 2f;
     [SerializeField] private float maxDelayBetweenAttacks = 5f;
 
@@ -28,7 +27,7 @@ public class FSM_Attack : MonoBehaviour
     [SerializeField] private List<Attack> attacks = new List<Attack>();
 
     private AttackState currentState = AttackState.Idle;
-    private int damageCounter = 0;
+    private int damageCounter = -1;
     private float attackTimer = 0f;
     private bool isChoosingAttack = false;
 
@@ -73,6 +72,7 @@ public class FSM_Attack : MonoBehaviour
         Attack selectedAttack = unlockedAttacks[Random.Range(0, unlockedAttacks.Count)];
         ActivateAttack(selectedAttack);
     }
+
     private void ActivateAttack(Attack attack)
     {
         Debug.Log($"Activando ataque: {attack.name}");
@@ -83,39 +83,54 @@ public class FSM_Attack : MonoBehaviour
         // Cambiar al estado del ataque.
         currentState = attack.attackState;
 
-        // Configurar el final del ataque después de la duración.
+        // Configurar el inicio del ataque después de `durationtoStart`.
         Invoke(nameof(StartAttack), attack.durationtoStart);
     }
+
     private void StartAttack()
     {
-        Debug.Log($"Iniciando ataque");
+        Debug.Log($"Iniciando ataque: {currentState}");
 
-        // Disparar el evento de inicio del ataque.
-        attacks[(int)currentState - 2].onAttackStart?.Invoke();
+        // Buscar el ataque correspondiente al estado actual.
+        Attack currentAttack = attacks.Find(a => a.attackState == currentState);
+        if (currentAttack == null)
+        {
+            Debug.LogError("No se encontró el ataque correspondiente al estado actual.");
+            EndAttack();
+            return;
+        }
 
+        // Disparar el evento de inicio.
+        currentAttack.onAttackStart?.Invoke();
 
-        // Configurar el final del ataque después de la duración.
-        Invoke(nameof(EndAttack), attacks[(int)currentState - 2].duration);
+        // Configurar el final del ataque después de `duration`.
+        Invoke(nameof(EndAttack), currentAttack.duration);
     }
 
     private void EndAttack()
     {
-        Debug.Log("Ataque finalizado.");
+        Debug.Log($"Finalizando ataque: {currentState}");
 
-        // Disparar el evento de finalización del ataque.
-        attacks[(int)currentState - 2].onAttackEnd?.Invoke();
+        // Buscar el ataque correspondiente al estado actual.
+        Attack currentAttack = attacks.Find(a => a.attackState == currentState);
+        if (currentAttack != null)
+        {
+            // Disparar el evento de finalización.
+            currentAttack.onAttackEnd?.Invoke();
+        }
+        else
+        {
+            Debug.LogError("No se encontró el ataque correspondiente al estado actual.");
+        }
 
-        // Elegir el siguiente ataque.
+        // Elegir el siguiente ataque y volver al estado inactivo.
         ChooseNextAttack();
-
-        // Volver al estado inactivo.
         currentState = AttackState.Idle;
-
     }
 
     public void UnlockAttack(int attackIndex)
     {
-        if (attackIndex >= 0 && attackIndex < attacks.Count)
+        if (attackIndex >= 0 && attackIndex < 3)
         {
             attacks[attackIndex].isUnlocked = true;
             Debug.Log($"Ataque desbloqueado: {attacks[attackIndex].name}");

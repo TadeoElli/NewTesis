@@ -8,12 +8,14 @@ public class ObjectPool : MonoBehaviour
     {
         public GameObject prefab;
         public int maxInstances = 2;
+        public Vector3 spawnScale = Vector3.one; // Escala inicial predeterminada
     }
 
     [Header("Pool Configuration")]
     public List<PoolItem> poolItems;
 
     private Dictionary<GameObject, List<GameObject>> poolDictionary = new Dictionary<GameObject, List<GameObject>>();
+    private Dictionary<GameObject, Vector3> prefabScales = new Dictionary<GameObject, Vector3>(); // Escalas de cada prefab
     private GameObject lastActiveObject = null; // Último objeto activado
 
     private void Start()
@@ -24,10 +26,13 @@ public class ObjectPool : MonoBehaviour
             if (!poolDictionary.ContainsKey(item.prefab))
             {
                 poolDictionary[item.prefab] = new List<GameObject>();
+                prefabScales[item.prefab] = item.spawnScale; // Guardar la escala inicial del prefab
+
                 for (int i = 0; i < item.maxInstances; i++)
                 {
                     GameObject obj = Instantiate(item.prefab);
                     obj.transform.parent = transform;
+                    obj.transform.localScale = item.spawnScale; // Establecer escala inicial
                     obj.SetActive(false);
                     poolDictionary[item.prefab].Add(obj);
                 }
@@ -41,12 +46,12 @@ public class ObjectPool : MonoBehaviour
     /// </summary>
     public void ActivateObject(GameObject prefab, Vector3 position, Quaternion rotation)
     {
-
         if (!poolDictionary.ContainsKey(prefab))
         {
             Debug.LogWarning($"Prefab {prefab.name} no está configurado en el pool.");
             return;
         }
+
         // Desactivar el último objeto activado, si existe
         if (lastActiveObject != null)
         {
@@ -62,7 +67,7 @@ public class ObjectPool : MonoBehaviour
                 // Configurar el objeto y activarlo
                 obj.transform.position = position;
                 obj.transform.rotation = rotation;
-                obj.transform.localScale = Vector3.one; // Restablecer escala
+                obj.transform.localScale = prefabScales[prefab]; // Restablecer escala
                 obj.SetActive(true);
                 lastActiveObject = obj; // Guardar referencia al objeto activado
                 return;

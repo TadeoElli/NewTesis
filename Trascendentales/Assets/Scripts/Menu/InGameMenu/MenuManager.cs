@@ -29,6 +29,7 @@ public class MenuManager : MonoBehaviour
         if (isCompleted) return; // Si ya está pausado, no hacemos nada
 
         Time.timeScale = 0; // Pausar el tiempo
+        Cursor.visible = true;
         isGamePaused = true;
         pauseMenu.SetActive(true);
     }
@@ -38,6 +39,7 @@ public class MenuManager : MonoBehaviour
         if (isCompleted) return; // Si no está pausado, no hacemos nada
 
         Time.timeScale = 1; // Restaurar el tiempo
+        Cursor.visible = false;
         isGamePaused = false;
         pauseMenu.SetActive(false);
     }

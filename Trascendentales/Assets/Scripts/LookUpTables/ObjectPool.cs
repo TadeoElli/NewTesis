@@ -80,11 +80,10 @@ public class ObjectPool : MonoBehaviour
         // Disparar una animación si tiene un Animator
         if (obj.activeSelf)
         {
-            Animator animator = obj.GetComponent<Animator>();
-            if (animator != null)
+            if(obj.TryGetComponent<Animator>(out Animator anim))
             {
-                animator.Play("DespawnPlatform");
-                yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+                    anim.Play("DespawnPlatform");
+                yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
             }
         }
 

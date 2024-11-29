@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BalancePlate : MonoBehaviour
 {
+    private bool isActive = false;
     public Balance balance; // Referencia al script principal de la balanza
     [SerializeField] float plateWeight;
     private List<Rigidbody> objectsOnPlate = new List<Rigidbody>();
@@ -19,6 +21,11 @@ public class BalancePlate : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if(!isActive)
+        {
+            StartCoroutine(CheckObjectsOnPlate());
+            isActive = true;
+        }
         Rigidbody weightedObject = other.GetComponent<Rigidbody>();
         if (weightedObject != null)
         {
@@ -56,11 +63,12 @@ public class BalancePlate : MonoBehaviour
             // Recorrer la lista al revés para eliminar objetos de manera segura
             for (int i = objectsOnPlate.Count - 1; i >= 0; i--)
             {
-                if (objectsOnPlate[i] == null)
+                if (objectsOnPlate[i] == null || !objectsOnPlate[i].gameObject.activeSelf)
                 {
                     objectsOnPlate.RemoveAt(i);
                 }
             }
         }
     }
+
 }

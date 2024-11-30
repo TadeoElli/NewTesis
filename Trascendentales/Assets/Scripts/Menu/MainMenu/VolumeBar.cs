@@ -13,6 +13,5 @@ public class VolumeBar: MonoBehaviour
     public void SetEffectVolume(float amount){
         AudioManager.Instance.SetEffectsVolume(amount / 3);
     }
-    
 
 }

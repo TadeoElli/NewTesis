@@ -6,7 +6,7 @@ public class Torbellino : MonoBehaviour
     [SerializeField] private float baseForce = 10f; // Fuerza base del torbellino
     [SerializeField] private Transform pointDirection;
     private float currentForce = 0f;
-
+    [SerializeField] AudioClip tornadoClip;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -32,7 +32,7 @@ public class Torbellino : MonoBehaviour
                 // Aplicamos la fuerza al jugador
                 objectRb.AddForce(launchDirection * currentForce, ForceMode.Force);
 
-
+                AudioManager.Instance.PlaySoundEffect(tornadoClip);
                 Debug.Log($"Jugador lanzado con fuerza {currentForce} en dirección {launchDirection}");
             }
         }

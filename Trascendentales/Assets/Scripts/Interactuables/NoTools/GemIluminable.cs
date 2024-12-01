@@ -14,6 +14,9 @@ public class GemIluminable : MonoBehaviour, IIlluminable
     [Header("Eventos")]
     [SerializeField] private UnityEvent onActivated; // Evento al activarse
     [SerializeField] private UnityEvent onDeactivated; // Evento al desactivarse
+    [SerializeField] private AudioClip dischargeSound; // Evento al desactivarse
+    [SerializeField] private AudioSource loopSource, oneShotSource; // Evento al desactivarse
+
     [Header("Partículas")]
     [SerializeField] private ParticleSystem chargeParticle; // Efecto al cargar
     [SerializeField] private ParticleSystem dischargeParticle; // Efecto al descargar
@@ -33,6 +36,9 @@ public class GemIluminable : MonoBehaviour, IIlluminable
         // Asegurar que los sistemas de partículas estén detenidos al inicio
         if (chargeParticle != null) chargeParticle.Stop();
         if (dischargeParticle != null) dischargeParticle.Stop();
+        loopSource.volume = AudioManager.Instance.GetEffectsVolume();
+        oneShotSource.volume = AudioManager.Instance.GetEffectsVolume();
+
     }
 
     private void Update()
@@ -63,6 +69,7 @@ public class GemIluminable : MonoBehaviour, IIlluminable
     {
         currentCharge += chargeRate * Time.deltaTime;
         currentCharge = Mathf.Clamp(currentCharge, 0.01f, maxCharge);
+        oneShotSource.Stop();
 
         if (currentCharge >= maxCharge && !isActive)
         {
@@ -74,6 +81,7 @@ public class GemIluminable : MonoBehaviour, IIlluminable
         if (chargeParticle != null && !chargeParticle.isPlaying)
         {
             chargeParticle.Play();
+            loopSource.Play();
         }
 
         if (dischargeParticle != null && dischargeParticle.isPlaying)
@@ -86,12 +94,12 @@ public class GemIluminable : MonoBehaviour, IIlluminable
     {
         currentCharge -= dischargeRate * Time.deltaTime;
         currentCharge = Mathf.Clamp(currentCharge, 0.01f, maxCharge);
-
         if (currentCharge <= 0.01f && isActive)
         {
             isActive = false;
             onDeactivated?.Invoke();
         }
+        loopSource.Stop();
 
         // Manejar partículas
         if (currentCharge > 0.01f)
@@ -99,6 +107,8 @@ public class GemIluminable : MonoBehaviour, IIlluminable
             if (dischargeParticle != null && !dischargeParticle.isPlaying)
             {
                 dischargeParticle.Play();
+                oneShotSource.Stop();
+                oneShotSource.PlayOneShot(dischargeSound);
             }
 
             if (chargeParticle != null && chargeParticle.isPlaying)

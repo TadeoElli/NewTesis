@@ -7,6 +7,7 @@ public class BalancePlate : MonoBehaviour
 {
     private bool isActive = false;
     public Balance balance; // Referencia al script principal de la balanza
+    public GameObject collider; // Referencia al script principal de la balanza
     [SerializeField] float plateWeight;
     private List<Rigidbody> objectsOnPlate = new List<Rigidbody>();
 
@@ -68,6 +69,7 @@ public class BalancePlate : MonoBehaviour
                     objectsOnPlate.RemoveAt(i);
                 }
             }
+            collider.SetActive((objectsOnPlate.Count > 1) ? true : false);
         }
     }
 

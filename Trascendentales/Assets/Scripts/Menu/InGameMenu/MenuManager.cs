@@ -63,12 +63,14 @@ public class MenuManager : MonoBehaviour
     public void WinLevel()
     {
         if (isCompleted) return;
+        Cursor.visible = true;
         isCompleted = true;
         winMenu.SetActive(true);
     }
     public void LoseLevel()
     {
         if (isCompleted) return;
+        Cursor.visible = true;
         isCompleted = true;
         loseMenu.SetActive(true);
     }

@@ -25,15 +25,17 @@ Material:
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 3000
   stringTagMap:
-    RenderType: Opaque
-  disabledShaderPasses: []
+    RenderType: Transparent
+  disabledShaderPasses:
+  - DepthOnly
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -65,19 +67,19 @@ Material:
     - _Blend: 0
     - _CastShadows: 1
     - _Cull: 0
-    - _DstBlend: 0
-    - _FresnelPower: 0.01
+    - _DstBlend: 10
+    - _FresnelPower: -5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _SrcBlend: 1
-    - _Surface: 0
-    - _VertexOffset: 0.01
+    - _SrcBlend: 5
+    - _Surface: 1
+    - _VertexOffset: 0.49
     - _ZTest: 4
-    - _ZWrite: 1
+    - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _FresnelColor: {r: 0, g: 0.8603977, b: 0.4718482, a: 1}
-    - _ScanLinesSpeed: {r: 0, g: 0.01, b: 0, a: 0}
-    - _ScanLinesTiling: {r: 1, g: 2, b: 0, a: 0}
+    - _FresnelColor: {r: 0, g: 12.996038, b: 7.0395217, a: 1}
+    - _ScanLinesSpeed: {r: 0.05, g: 0.05, b: 0, a: 0}
+    - _ScanLinesTiling: {r: 0.2, g: 0.01, b: 0, a: 0}
     - _ScnaLinesSpeed: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

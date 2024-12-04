@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 public class FSM_Attack : MonoBehaviour
 {
+    [SerializeField] AudioClip bossMusic;
     public enum AttackState { Idle, ElectricFloor, HorizontalBurst }
 
     [System.Serializable]
@@ -33,6 +34,7 @@ public class FSM_Attack : MonoBehaviour
 
     private void Start()
     {
+        AudioManager.Instance.PlayMusic(bossMusic);
         ChooseNextAttack();
     }
 

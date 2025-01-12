@@ -28,11 +28,36 @@ public class Torbellino : MonoBehaviour
                 currentForce = baseForce * scaleFactor;
                 if (playerLm == null)
                     currentForce = currentForce * 5f;
+                else
+                    objectRb.velocity = new Vector3(objectRb.velocity.x,0,objectRb.velocity.z);
+                // Aplicamos la fuerza al jugador
+                objectRb.AddForce(launchDirection * currentForce, ForceMode.Force);
+
+                //AudioManager.Instance.PlaySoundEffect(tornadoClip);
+                Debug.Log($"Jugador lanzado con fuerza {currentForce} en dirección {launchDirection}");
+            }
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        // Verificamos si el objeto que entra es el jugador
+        if (other.gameObject.layer == 3) 
+        {
+            Rigidbody objectRb = other.GetComponent<Rigidbody>();
+
+            if (objectRb != null)
+            {
+                objectRb.velocity = new Vector3(objectRb.velocity.x,0,objectRb.velocity.z);
+                Vector3 launchDirection = (pointDirection.position - transform.position).normalized;
+
+                // Calculamos la fuerza según la escala del torbellino
+                float scaleFactor = transform.localScale.magnitude; // Tamaño proporcional
+                currentForce = baseForce * scaleFactor;
 
                 // Aplicamos la fuerza al jugador
                 objectRb.AddForce(launchDirection * currentForce, ForceMode.Force);
 
-                AudioManager.Instance.PlaySoundEffect(tornadoClip);
+                //AudioManager.Instance.PlaySoundEffect(tornadoClip);
                 Debug.Log($"Jugador lanzado con fuerza {currentForce} en dirección {launchDirection}");
             }
         }

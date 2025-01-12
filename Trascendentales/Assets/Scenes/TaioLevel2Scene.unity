@@ -852,12 +852,12 @@ PrefabInstance:
     - target: {fileID: 2510775611644852232, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: orthographic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2510775611644852232, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: orthographic size
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3137706336384100565, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
@@ -877,32 +877,32 @@ PrefabInstance:
     - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.98532784
       objectReference: {fileID: 0}
     - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.17067231
       objectReference: {fileID: 0}
     - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.000000016953926
       objectReference: {fileID: 0}
     - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.0000000029366534
       objectReference: {fileID: 0}
     - target: {fileID: 5026767376265632637, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
@@ -994,6 +994,16 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1347961900}
+    - target: {fileID: 7779308118228087952, guid: c5ab43aafa20f35449c5d42d03d57854,
+        type: 3}
+      propertyPath: rotationSteps
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779308118228087952, guid: c5ab43aafa20f35449c5d42d03d57854,
+        type: 3}
+      propertyPath: rotationThreshold
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7825494343710028672, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_UseGravity

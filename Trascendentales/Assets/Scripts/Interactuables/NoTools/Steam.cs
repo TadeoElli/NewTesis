@@ -4,8 +4,8 @@ using UnityEngine;
 public class Steam : MonoBehaviour
 {
     [SerializeField] private float baseForce = 10f; // Fuerza base del torbellino
-    [SerializeField] private Transform pointDirection;
-    [SerializeField] private ParticleSystem gasParticles;
+    public Transform pointDirection;
+    public ParticleSystem gasParticles,steamParticles;
     [SerializeField] private AudioSource loopSource; // Evento al desactivarse
     private bool canApplyForce = true; // Flag to control force application
 
@@ -34,13 +34,13 @@ public class Steam : MonoBehaviour
                 {
                     canApplyForce = false; // Disable force application
 
-                    // Deactivate other particle system if needed
+                    /*// Deactivate other particle system if needed
                     if (gasParticles != null)
                     {
                         gasParticles.Stop(); // Stop or deactivate other particles
                     }
-
-                    Debug.Log("Raycast hit Pipes: No force applied.");
+                    */
+                    //Debug.Log("Raycast hit Pipes: No force applied.");
                 }
             }
             else
@@ -48,14 +48,24 @@ public class Steam : MonoBehaviour
                 canApplyForce = true; // Enable force application
 
                 // Activate other particle system if needed
-                if (gasParticles != null)
+                /*if (gasParticles != null)
                 {
                     gasParticles.Play(); // Start or activate other particles
                 }
-
-                Debug.Log("Raycast did not hit Pipes: Force can be applied.");
+                */
+                //Debug.Log("Raycast did not hit Pipes: Force can be applied.");
             }
         }
+    }
+    public void ActivateParticles()
+    {
+        gasParticles.Play(true);
+        steamParticles.Play(true);
+    }
+    public void DesactivateParticles()
+    {
+        gasParticles.Stop();
+        steamParticles.Stop();
     }
     private void OnParticleCollision(GameObject other)
     {

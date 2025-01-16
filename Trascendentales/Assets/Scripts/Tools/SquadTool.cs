@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 
 public class SquadTool : Tools
@@ -12,10 +9,9 @@ public class SquadTool : Tools
     [SerializeField] private IRotableClamp clamp;
     [SerializeField] private GameObject gimballGizmo2D, gimballGizmoPerspective;
     [Header("Parameters")]
-    [SerializeField] private float rotationSpeed = 1f;  // Sensibilidad de rotación
-    private Vector3 lastMousePosition;                  // Última posición del mouse para calcular el movimiento
+    private Vector3 initialMousePosition;                  // Última posición del mouse para calcular el movimiento
     private bool canRotateInY, canRotateInZ;
-
+    [SerializeField] private float rotationSteps, rotationThreshold;
     public override void Awake()
     {
         base.Awake();
@@ -69,7 +65,7 @@ public class SquadTool : Tools
         }
         oldParent = objectiveTr.parent;
         objectiveTr.SetParent(gimball);
-        lastMousePosition = Input.mousePosition;  // Guarda la posición actual del mouse al iniciar la interacción
+        initialMousePosition = Input.mousePosition;  // Guarda la posición actual del mouse al iniciar la interacción
     }
     public override void DropInteractable()
     {
@@ -117,43 +113,53 @@ public class SquadTool : Tools
     }
     private void RotateObject()
     {
-        Vector3 currentMousePosition = Input.mousePosition;
-        Vector3 mouseDelta = currentMousePosition - lastMousePosition; // Diferencia de movimiento del mouse
-        lastMousePosition = currentMousePosition; // Actualiza la última posición del mouse
+        Vector3 currentMousePosition = Input.mousePosition; // Current mouse position
 
-        float rotationAmount = mouseDelta.x * rotationSpeed; // Calcula la cantidad de rotación basada en el movimiento del mouse
-        if (isOn2D)
+        // Calculate the distance moved by the mouse from the initial position
+        float distanceMoved = (currentMousePosition - initialMousePosition).magnitude;
+
+        // Check if the distance moved exceeds the threshold
+        if (distanceMoved > rotationThreshold)
         {
-            if (!cameraManager.isFrontView)
-                rotationAmount = rotationAmount * -1;
-            if (canRotateInZ)
+            // Determine how many steps to rotate based on distance moved
+            int stepsToRotate = Mathf.FloorToInt(distanceMoved / rotationThreshold); // Calculate steps based on threshold
+
+            float rotationAmount = stepsToRotate * rotationSteps; // Rotate by 15 degrees per step
+            rotationAmount = currentMousePosition.x > initialMousePosition.x ? rotationAmount : rotationAmount * -1;
+            if (isOn2D)
             {
-                if (clamp != null && clamp.IsClamped())
+                if (!cameraManager.isFrontView)
+                    rotationAmount *= -1;
+
+                if (canRotateInZ)
                 {
-                    float newZRotation = gimball.localEulerAngles.z - rotationAmount; // Obtener la rotación actual en Z
-                    newZRotation = ClampRotationAngle(newZRotation, clamp.GetMinRotationZ(), clamp.GetMaxRotationZ());
-                    gimball.localEulerAngles = new Vector3(gimball.localEulerAngles.x, gimball.localEulerAngles.y, newZRotation);
-                }
-                else
-                {
-                    gimball.Rotate(0, 0, -rotationAmount); // El eje Z es para rotación en 2D
+                    if (clamp != null && clamp.IsClamped())
+                    {
+                        float newZRotation = gimball.localEulerAngles.z - rotationAmount; // Get current Z rotation
+                        newZRotation = ClampRotationAngle(newZRotation, clamp.GetMinRotationZ(), clamp.GetMaxRotationZ());
+                        gimball.localEulerAngles = new Vector3(gimball.localEulerAngles.x, gimball.localEulerAngles.y, newZRotation);
+                    }
+                    else
+                    {
+                        gimball.rotation = Quaternion.Euler(0, 0, -rotationAmount); // Rotate around Z axis for 2D
+                    }
                 }
             }
-        }
-        else
-        {
-            // En 2.5D, rota alrededor del eje Y
-            if (canRotateInY)
+            else
             {
-                if (clamp != null && clamp.IsClamped())
+                // In 2.5D, rotate around Y axis
+                if (canRotateInY)
                 {
-                    float newYRotation = gimball.localEulerAngles.y - rotationAmount; // Obtener la rotación actual en Y
-                    newYRotation = ClampRotationAngle(newYRotation, clamp.GetMinRotationY(), clamp.GetMaxRotationY());
-                    gimball.localEulerAngles = new Vector3(gimball.localEulerAngles.x, newYRotation, gimball.localEulerAngles.z);
-                }
-                else
-                {
-                    gimball.Rotate(0, -rotationAmount, 0); // El eje Y es para rotación en 3D
+                    if (clamp != null && clamp.IsClamped())
+                    {
+                        float newYRotation = gimball.localEulerAngles.y - rotationAmount; // Get current Y rotation
+                        newYRotation = ClampRotationAngle(newYRotation, clamp.GetMinRotationY(), clamp.GetMaxRotationY());
+                        gimball.localEulerAngles = new Vector3(gimball.localEulerAngles.x, newYRotation, gimball.localEulerAngles.z);
+                    }
+                    else
+                    {
+                        gimball.rotation = Quaternion.Euler(0, -rotationAmount, 0); // Rotate around Y axis for 3D
+                    }
                 }
             }
         }

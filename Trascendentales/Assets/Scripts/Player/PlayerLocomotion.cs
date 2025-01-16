@@ -176,7 +176,13 @@ public class PlayerLocomotion : MonoBehaviour, IObjectAffectableByPerspective
             // Si no hay suelo ni bordes, el jugador está cayendo
             inAirTimer = inAirTimer + Time.deltaTime;
             playerRigidbody.AddForce(transform.forward * leapingVelocity);
-            playerRigidbody.AddForce(-Vector3.up * fallingVelocity * inAirTimer);
+            // Calculate the desired force
+            Vector3 force = -Vector3.up * fallingVelocity * inAirTimer;
+            // Clamp the force between a minimum and maximum value
+            Vector3 clampedForce = Vector3.ClampMagnitude(force, 100f); // Adjust 300f as needed
+
+            // Apply the force to the Rigidbody
+            playerRigidbody.AddForce(clampedForce);
             //}
         }
     }

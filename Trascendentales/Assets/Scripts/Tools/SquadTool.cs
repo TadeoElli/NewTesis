@@ -152,9 +152,8 @@ public class SquadTool : Tools
                 {
                     if (clamp != null && clamp.IsClamped())
                     {
-                        float newYRotation = gimball.localEulerAngles.y - rotationAmount; // Get current Y rotation
-                        newYRotation = ClampRotationAngle(newYRotation, clamp.GetMinRotationY(), clamp.GetMaxRotationY());
-                        gimball.localEulerAngles = new Vector3(gimball.localEulerAngles.x, newYRotation, gimball.localEulerAngles.z);
+                        float newYRotation = ClampRotationAngle(-rotationAmount, clamp.GetMinRotationY(), clamp.GetMaxRotationY()); // Get current Y rotation
+                        gimball.rotation = Quaternion.Euler(0, -newYRotation, 0); // Rotate around Y axis for 3D
                     }
                     else
                     {
@@ -167,7 +166,7 @@ public class SquadTool : Tools
     // Función auxiliar para clamping de ángulos de rotación entre un rango
     private float ClampRotationAngle(float angle, float min, float max)
     {
-        if (angle > 180f) angle -= 360f; // Convertir el ángulo a un rango [-180, 180]
+        //if (angle > 180f) angle -= 360f; // Convertir el ángulo a un rango [-180, 180]
         return Mathf.Clamp(angle, min, max);
     }
 

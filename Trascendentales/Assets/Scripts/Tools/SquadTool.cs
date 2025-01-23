@@ -162,6 +162,10 @@ public class SquadTool : Tools
                 }
             }
         }
+        else
+        {
+            gimball.rotation = Quaternion.identity;
+        }
     }
     // Función auxiliar para clamping de ángulos de rotación entre un rango
     private float ClampRotationAngle(float angle, float min, float max)

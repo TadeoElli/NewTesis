@@ -11,6 +11,7 @@ public class CoinManager : MonoBehaviour
     [SerializeField] private GameObject coinPrefab; // Prefab de la moneda
     [SerializeField] private List<CoinData> coins; // Lista de monedas
     [SerializeField] private TextMeshProUGUI coinCountText; // UI para mostrar el conteo de monedas
+    [SerializeField] private Animator hudAnimator;
     private int coinCount = 0;
 
     private string coinPath;
@@ -41,6 +42,8 @@ public class CoinManager : MonoBehaviour
     private void UpdateCoinCountText()
     {
         coinCountText.text = "Coins: " + coinCount.ToString();
+        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "MenuScene")
+            hudAnimator.SetTrigger("ShowHud");
     }
 
     private void LoadCoinData()

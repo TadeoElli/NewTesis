@@ -55,16 +55,16 @@ public class GemIluminable : MonoBehaviour, IIlluminable
         {
             HandleDischarge();
         }
-
-        // Resetear el flag de iluminación
-        isBeingIlluminated = false;
     }
 
     public void OnLightOn()
     {
         isBeingIlluminated = true;
     }
-
+    public void OnLightOff()
+    {
+        isBeingIlluminated = false;
+    }
     private void HandleCharge()
     {
         currentCharge += chargeRate * Time.deltaTime;
@@ -130,4 +130,6 @@ public class GemIluminable : MonoBehaviour, IIlluminable
             }
         }
     }
+
+    
 }

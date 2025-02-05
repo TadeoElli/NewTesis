@@ -75,7 +75,7 @@ public class FeedbackManager : MonoBehaviour
         if (rend != null && rend.materials.Length > 1) // Asegurarse de que hay más de un material
         {
             MaterialPropertyBlock block = new MaterialPropertyBlock();
-            rend.GetPropertyBlock(block, 1); // Obtiene el MaterialPropertyBlock para el segundo material (índice 1)
+            rend.GetPropertyBlock(block, rend.materials.Length - 1); // Obtiene el MaterialPropertyBlock para el segundo material (índice 1)
 
             block.SetColor("_LineColor", feedbackColor); // Cambia el color del segundo material
             rend.SetPropertyBlock(block, 1);         // Aplica los cambios al segundo material

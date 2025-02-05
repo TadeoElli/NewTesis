@@ -9,6 +9,7 @@ public class NewGameButton : MonoBehaviour
     public void StartNewGame()
     {
         SaveSystem.DeletePlayerData();
+        CoinManager.Instance.ResetCoins();
     }
     private void Awake()
     {

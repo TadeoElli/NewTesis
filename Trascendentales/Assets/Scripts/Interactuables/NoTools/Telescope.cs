@@ -77,6 +77,14 @@ public class Telescope : MonoBehaviour
     public void SetCharged(bool state)
     {
         isActive = state;
+        if(!isActive)
+        {
+            if (objectIluminated != null)
+            {
+                objectIluminated.OnLightOff();
+                objectIluminated = null;
+            }
+        }
     }
 
 }

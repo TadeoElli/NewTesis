@@ -180,15 +180,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Escape",
-                    "type": "Button",
-                    "id": "988bc3d6-4e79-4bb7-9d27-1e481122567e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "LeftClick",
                     "type": "Button",
                     "id": "53ae44ab-1acf-40d0-b68b-7c7d639825fb",
@@ -228,15 +219,6 @@
                     "name": "Crouch",
                     "type": "Button",
                     "id": "96f16d0d-97a9-4e96-beaa-eee2e3835917",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "33de691a-71d3-4f43-bf3b-dc3fd5b65f1a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -312,17 +294,6 @@
                 },
                 {
                     "name": "",
-                    "id": "10e5fc0f-c402-4863-a6ca-88f1b45400cf",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Escape",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "70987817-3167-43fe-8d1f-b812aca5031a",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -375,15 +346,52 @@
                     "action": "OpenAlternativeWheel",
                     "isComposite": false,
                     "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PlayerInteractions",
+            "id": "9f578879-f021-4431-9eb3-5bebc89da72d",
+            "actions": [
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "6febd67e-e183-4b15-8e12-f9ff6777f493",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
+                    "name": "Escape",
+                    "type": "Button",
+                    "id": "36ab6e71-fdfe-46ed-9601-c46f5765cec8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
                     "name": "",
-                    "id": "be8b49f7-0c0d-47b5-bc2d-7ed0179e07a1",
+                    "id": "2865e822-1d63-4fe1-ad43-b5070c4c392a",
                     "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eb15b426-6793-425f-b6e0-480cf919d2ef",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Escape",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

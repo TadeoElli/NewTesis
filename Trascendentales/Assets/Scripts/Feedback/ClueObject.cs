@@ -5,7 +5,7 @@ using UnityEngine;
 public class ClueObject : MonoBehaviour
 {
     [SerializeField] private float range = 5f;
-    [SerializeField] private Animator popupPanel;
+    [SerializeField] private Animator popupPanel, clueIcon;
     [SerializeField] private float checkInterval = 0.5f; // Intervalo de tiempo para la corutina
     private InputManager playerManager;
     private Transform playerTransform;
@@ -42,6 +42,7 @@ public class ClueObject : MonoBehaviour
                 if (!isPlayerInRange)
                 {
                     isPlayerInRange = true;
+                    clueIcon.SetBool("Show",true);
                     playerManager.OnInteract += ManageClue; // Suscribe al evento OnInteract
                 }
             }
@@ -50,6 +51,7 @@ public class ClueObject : MonoBehaviour
                 if (isPlayerInRange)
                 {
                     isPlayerInRange = false;
+                    clueIcon.SetBool("Show", false);
                     playerManager.OnInteract -= ManageClue; // Suscribe al evento OnInteract
                     HidePopUp();
                 }

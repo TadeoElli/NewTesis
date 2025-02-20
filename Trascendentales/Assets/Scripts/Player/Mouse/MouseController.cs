@@ -72,6 +72,12 @@ public class MouseController : MonoBehaviour
         // Obtener la posición del mouse en el mundo
         Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, mainCamera.nearClipPlane + planeOffset));
 
+        // Obtiene la dirección hacia la cámara
+        Vector3 directionToCamera = mainCamera.transform.position - transform.position;
+
+        // Calcula la rotación necesaria para mirar hacia la cámara
+        Quaternion rotation = Quaternion.LookRotation(Vector3.forward, directionToCamera);
+
         // En 2.5D (Perspectiva), queremos que el cursor esté en un plano específico (por ejemplo, Z = 0)
         if (is2DView)  // Si la cámara no está en modo ortográfico (está en 2.5D)
         {
@@ -79,7 +85,7 @@ public class MouseController : MonoBehaviour
         }
 
         // Actualiza la posición del transform del cursor para que siga al mouse
-        transform.position = mouseWorldPosition;
+        transform.SetPositionAndRotation(mouseWorldPosition, mainCamera.transform.rotation);
     }
 
 

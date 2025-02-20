@@ -202,15 +202,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Escape"",
-                    ""type"": ""Button"",
-                    ""id"": ""988bc3d6-4e79-4bb7-9d27-1e481122567e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""LeftClick"",
                     ""type"": ""Button"",
                     ""id"": ""53ae44ab-1acf-40d0-b68b-7c7d639825fb"",
@@ -250,15 +241,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""Crouch"",
                     ""type"": ""Button"",
                     ""id"": ""96f16d0d-97a9-4e96-beaa-eee2e3835917"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Interact"",
-                    ""type"": ""Button"",
-                    ""id"": ""33de691a-71d3-4f43-bf3b-dc3fd5b65f1a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -334,17 +316,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""10e5fc0f-c402-4863-a6ca-88f1b45400cf"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Escape"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""70987817-3167-43fe-8d1f-b812aca5031a"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -397,15 +368,52 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""OpenAlternativeWheel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""PlayerInteractions"",
+            ""id"": ""9f578879-f021-4431-9eb3-5bebc89da72d"",
+            ""actions"": [
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""6febd67e-e183-4b15-8e12-f9ff6777f493"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""36ab6e71-fdfe-46ed-9601-c46f5765cec8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
                     ""name"": """",
-                    ""id"": ""be8b49f7-0c0d-47b5-bc2d-7ed0179e07a1"",
+                    ""id"": ""2865e822-1d63-4fe1-ad43-b5070c4c392a"",
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eb15b426-6793-425f-b6e0-480cf919d2ef"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -429,13 +437,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerActions_Tool3 = m_PlayerActions.FindAction("Tool3", throwIfNotFound: true);
         m_PlayerActions_Tool4 = m_PlayerActions.FindAction("Tool4", throwIfNotFound: true);
         m_PlayerActions_Tool5 = m_PlayerActions.FindAction("Tool5", throwIfNotFound: true);
-        m_PlayerActions_Escape = m_PlayerActions.FindAction("Escape", throwIfNotFound: true);
         m_PlayerActions_LeftClick = m_PlayerActions.FindAction("LeftClick", throwIfNotFound: true);
         m_PlayerActions_RightClick = m_PlayerActions.FindAction("RightClick", throwIfNotFound: true);
         m_PlayerActions_OpenToolWheel = m_PlayerActions.FindAction("OpenToolWheel", throwIfNotFound: true);
         m_PlayerActions_OpenAlternativeWheel = m_PlayerActions.FindAction("OpenAlternativeWheel", throwIfNotFound: true);
         m_PlayerActions_Crouch = m_PlayerActions.FindAction("Crouch", throwIfNotFound: true);
-        m_PlayerActions_Interact = m_PlayerActions.FindAction("Interact", throwIfNotFound: true);
+        // PlayerInteractions
+        m_PlayerInteractions = asset.FindActionMap("PlayerInteractions", throwIfNotFound: true);
+        m_PlayerInteractions_Interact = m_PlayerInteractions.FindAction("Interact", throwIfNotFound: true);
+        m_PlayerInteractions_Escape = m_PlayerInteractions.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -603,13 +613,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_Tool3;
     private readonly InputAction m_PlayerActions_Tool4;
     private readonly InputAction m_PlayerActions_Tool5;
-    private readonly InputAction m_PlayerActions_Escape;
     private readonly InputAction m_PlayerActions_LeftClick;
     private readonly InputAction m_PlayerActions_RightClick;
     private readonly InputAction m_PlayerActions_OpenToolWheel;
     private readonly InputAction m_PlayerActions_OpenAlternativeWheel;
     private readonly InputAction m_PlayerActions_Crouch;
-    private readonly InputAction m_PlayerActions_Interact;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -620,13 +628,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Tool3 => m_Wrapper.m_PlayerActions_Tool3;
         public InputAction @Tool4 => m_Wrapper.m_PlayerActions_Tool4;
         public InputAction @Tool5 => m_Wrapper.m_PlayerActions_Tool5;
-        public InputAction @Escape => m_Wrapper.m_PlayerActions_Escape;
         public InputAction @LeftClick => m_Wrapper.m_PlayerActions_LeftClick;
         public InputAction @RightClick => m_Wrapper.m_PlayerActions_RightClick;
         public InputAction @OpenToolWheel => m_Wrapper.m_PlayerActions_OpenToolWheel;
         public InputAction @OpenAlternativeWheel => m_Wrapper.m_PlayerActions_OpenAlternativeWheel;
         public InputAction @Crouch => m_Wrapper.m_PlayerActions_Crouch;
-        public InputAction @Interact => m_Wrapper.m_PlayerActions_Interact;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -654,9 +660,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Tool5.started += instance.OnTool5;
             @Tool5.performed += instance.OnTool5;
             @Tool5.canceled += instance.OnTool5;
-            @Escape.started += instance.OnEscape;
-            @Escape.performed += instance.OnEscape;
-            @Escape.canceled += instance.OnEscape;
             @LeftClick.started += instance.OnLeftClick;
             @LeftClick.performed += instance.OnLeftClick;
             @LeftClick.canceled += instance.OnLeftClick;
@@ -672,9 +675,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Crouch.started += instance.OnCrouch;
             @Crouch.performed += instance.OnCrouch;
             @Crouch.canceled += instance.OnCrouch;
-            @Interact.started += instance.OnInteract;
-            @Interact.performed += instance.OnInteract;
-            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IPlayerActionsActions instance)
@@ -697,9 +697,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Tool5.started -= instance.OnTool5;
             @Tool5.performed -= instance.OnTool5;
             @Tool5.canceled -= instance.OnTool5;
-            @Escape.started -= instance.OnEscape;
-            @Escape.performed -= instance.OnEscape;
-            @Escape.canceled -= instance.OnEscape;
             @LeftClick.started -= instance.OnLeftClick;
             @LeftClick.performed -= instance.OnLeftClick;
             @LeftClick.canceled -= instance.OnLeftClick;
@@ -715,9 +712,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Crouch.started -= instance.OnCrouch;
             @Crouch.performed -= instance.OnCrouch;
             @Crouch.canceled -= instance.OnCrouch;
-            @Interact.started -= instance.OnInteract;
-            @Interact.performed -= instance.OnInteract;
-            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IPlayerActionsActions instance)
@@ -735,6 +729,60 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActionsActions @PlayerActions => new PlayerActionsActions(this);
+
+    // PlayerInteractions
+    private readonly InputActionMap m_PlayerInteractions;
+    private List<IPlayerInteractionsActions> m_PlayerInteractionsActionsCallbackInterfaces = new List<IPlayerInteractionsActions>();
+    private readonly InputAction m_PlayerInteractions_Interact;
+    private readonly InputAction m_PlayerInteractions_Escape;
+    public struct PlayerInteractionsActions
+    {
+        private @PlayerControls m_Wrapper;
+        public PlayerInteractionsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Interact => m_Wrapper.m_PlayerInteractions_Interact;
+        public InputAction @Escape => m_Wrapper.m_PlayerInteractions_Escape;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerInteractions; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerInteractionsActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerInteractionsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PlayerInteractionsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerInteractionsActionsCallbackInterfaces.Add(instance);
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
+        }
+
+        private void UnregisterCallbacks(IPlayerInteractionsActions instance)
+        {
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
+        }
+
+        public void RemoveCallbacks(IPlayerInteractionsActions instance)
+        {
+            if (m_Wrapper.m_PlayerInteractionsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPlayerInteractionsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PlayerInteractionsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PlayerInteractionsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PlayerInteractionsActions @PlayerInteractions => new PlayerInteractionsActions(this);
     public interface IPlayerMovementActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -752,12 +800,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnTool3(InputAction.CallbackContext context);
         void OnTool4(InputAction.CallbackContext context);
         void OnTool5(InputAction.CallbackContext context);
-        void OnEscape(InputAction.CallbackContext context);
         void OnLeftClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
         void OnOpenToolWheel(InputAction.CallbackContext context);
         void OnOpenAlternativeWheel(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
+    }
+    public interface IPlayerInteractionsActions
+    {
         void OnInteract(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
     }
 }

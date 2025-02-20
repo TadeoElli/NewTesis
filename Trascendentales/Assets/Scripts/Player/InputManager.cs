@@ -6,6 +6,7 @@ using UnityEngine.VFX;
 
 public class InputManager : MonoBehaviour
 {
+    public static InputManager Instance { get; private set; }
     // Tiempo de cooldown en segundos para cambios de cámara y ángulo
     [SerializeField] private float cameraSwitchCooldown = 1f;
     [SerializeField] private float angleSwitchCooldown = 1f;
@@ -14,7 +15,7 @@ public class InputManager : MonoBehaviour
     private bool canSwitchCamera = true;
     private bool canSwitchAngle = true;
 
-    PlayerControls playerControls;
+    PlayerControls playerActions, playerControls;
     PlayerLocomotion playerLocomotion;
     PlayerManager playerManager;
     AnimatorManager animatorManager;
@@ -42,6 +43,9 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject); // Asegurarse de que solo haya una instancia
+
         _shieldVfx.Stop();
         playerLocomotion = GetComponent<PlayerLocomotion>();
         animatorManager = GetComponent<AnimatorManager>();
@@ -53,31 +57,36 @@ public class InputManager : MonoBehaviour
     }
     private void OnEnable()
     {
+        if (playerActions == null)
+        {
+            playerActions = new PlayerControls();
+
+            playerActions.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
+
+            playerActions.PlayerCamera.SwitchCameraAngle.performed += _ => SwitchCameraAngle();
+            playerActions.PlayerCamera.SwitchCamera.performed += _ => SwitchCamera();
+            playerActions.PlayerActions.Jump.performed += _ => jump_input = true;
+            playerActions.PlayerActions.Tool1.performed += _ => SetBrushTool();
+            playerActions.PlayerActions.Tool2.performed += _ => SetRulerTool();
+            playerActions.PlayerActions.Tool3.performed += _ => SetSquadTool();
+            playerActions.PlayerActions.Tool4.performed += _ => SetCompassTool();
+            playerActions.PlayerActions.Tool5.performed += _ => SetEraserTool();
+            playerActions.PlayerActions.OpenToolWheel.performed += _ => ShowToolWheel();
+            playerActions.PlayerActions.OpenToolWheel.canceled += _ => HideToolWheel();
+            playerActions.PlayerActions.OpenAlternativeWheel.performed += _ => ShowAlternativeWheel();
+            playerActions.PlayerActions.OpenAlternativeWheel.canceled += _ => HideAlternativeWheel();
+            playerActions.PlayerActions.LeftClick.performed += _ => LeftClickPressed();
+            playerActions.PlayerActions.LeftClick.canceled += _ => LeftClickReleased();
+            playerActions.PlayerActions.RightClick.performed += _ => RightClickPressed();
+            playerActions.PlayerActions.RightClick.canceled += _ => RightClickReleased();
+            playerActions.PlayerActions.Crouch.performed += _ => GrabInteraction();
+        }
+        playerActions.Enable();
         if (playerControls == null)
         {
             playerControls = new PlayerControls();
-
-            playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
-
-            playerControls.PlayerCamera.SwitchCameraAngle.performed += _ => SwitchCameraAngle();
-            playerControls.PlayerCamera.SwitchCamera.performed += _ => SwitchCamera();
-            playerControls.PlayerActions.Jump.performed += _ => jump_input = true;
-            playerControls.PlayerActions.Tool1.performed += _ => SetBrushTool();
-            playerControls.PlayerActions.Tool2.performed += _ => SetRulerTool();
-            playerControls.PlayerActions.Tool3.performed += _ => SetSquadTool();
-            playerControls.PlayerActions.Tool4.performed += _ => SetCompassTool();
-            playerControls.PlayerActions.Tool5.performed += _ => SetEraserTool();
-            playerControls.PlayerActions.OpenToolWheel.performed += _ => ShowToolWheel();
-            playerControls.PlayerActions.OpenToolWheel.canceled += _ => HideToolWheel();
-            playerControls.PlayerActions.OpenAlternativeWheel.performed += _ => ShowAlternativeWheel();
-            playerControls.PlayerActions.OpenAlternativeWheel.canceled += _ => HideAlternativeWheel();
-            playerControls.PlayerActions.LeftClick.performed += _ => LeftClickPressed();
-            playerControls.PlayerActions.LeftClick.canceled += _ => LeftClickReleased();
-            playerControls.PlayerActions.RightClick.performed += _ => RightClickPressed();
-            playerControls.PlayerActions.RightClick.canceled += _ => RightClickReleased();
-            playerControls.PlayerActions.Escape.performed += _ => TogglePause();
-            playerControls.PlayerActions.Crouch.performed += _ => GrabInteraction();
-            playerControls.PlayerActions.Interact.performed += _ => Interact();
+            playerControls.PlayerInteractions.Interact.performed += _ => Interact();
+            playerControls.PlayerInteractions.Escape.performed += _ => TogglePause();
         }
         playerControls.Enable();
     }
@@ -85,7 +94,7 @@ public class InputManager : MonoBehaviour
     public void OnDisable()
     {
         if(playerControls != null)
-            playerControls.Disable();
+            playerActions.Disable();
     }
 
     public void HandleAllInputs()
@@ -240,8 +249,8 @@ public class InputManager : MonoBehaviour
         movementInput = Vector2.zero;
         GetComponent<Rigidbody>().velocity = Vector2.zero;
         HandleMovementInput();
-        playerControls.Disable();
-        playerControls = null;
+        playerActions.Disable();
+        playerActions = null;
     }
     public void GrabInteraction()
     {

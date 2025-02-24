@@ -10,6 +10,7 @@ public class CheckPositionEvent : MonoBehaviour
     public UnityEvent OnBreak;
     private bool isCompleted = false;
     [SerializeField] private bool blockAfterComplete = false;
+    [SerializeField] private float tolerance;
 
     void Update()
     {
@@ -17,6 +18,11 @@ public class CheckPositionEvent : MonoBehaviour
             return;
 
         CheckPositions();
+    }
+    private void OnDisable()
+    {
+        OnBreak?.Invoke();
+        isCompleted = false;
     }
 
     private void CheckPositions()
@@ -61,7 +67,7 @@ public class CheckPositionEvent : MonoBehaviour
             Vector3.Distance(
                 obj.prefab.transform.position, new Vector3(obj.goalPositionX, obj.prefab.transform.position.y, obj.prefab.transform.position.z)
             )
-            <= 1
+            <= tolerance
         );
     }
 
@@ -79,7 +85,7 @@ public class CheckPositionEvent : MonoBehaviour
             Vector3.Distance(
                 obj.prefab.transform.position, new Vector3(obj.prefab.transform.position.x, obj.goalPositionY, obj.prefab.transform.position.z)
             )
-            <= 1
+            <= tolerance
         );
     }
 
@@ -97,7 +103,7 @@ public class CheckPositionEvent : MonoBehaviour
             Vector3.Distance(
                 obj.prefab.transform.position, new Vector3(obj.prefab.transform.position.x, obj.prefab.transform.position.y, obj.goalPositionZ)
             )
-            <= 1
+            <= tolerance
         );
     }
 }

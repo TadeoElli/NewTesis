@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 3199207343479281040}
   - component: {fileID: 7703901826674377112}
   - component: {fileID: 4682111372451424535}
-  - component: {fileID: 8102781578546525128}
-  - component: {fileID: 4263513681883203335}
   m_Layer: 0
   m_Name: PlatformMovementLevel
   m_TagString: Untagged
@@ -29,9 +27,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4143379307318449786}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 114.9, y: -3.398412, z: -57.77}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4.1683373, y: 4.1683373, z: 4.1683373}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -107,45 +105,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.6515713, y: 0.93, z: 2.6476529}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &8102781578546525128
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4143379307318449786}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.6515713, y: 1.325424, z: 0.14}
-  m_Center: {x: 0, y: 0.5, z: 1.15}
---- !u!65 &4263513681883203335
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4143379307318449786}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.6515713, y: 1.325424, z: 0.14}
-  m_Center: {x: 0, y: 0.5, z: -1.15}

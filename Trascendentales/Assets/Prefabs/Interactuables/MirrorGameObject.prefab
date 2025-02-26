@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 173622313164993397}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.638186}
+  m_LocalPosition: {x: 0, y: 0, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -180,7 +180,7 @@ Transform:
   m_GameObject: {fileID: 6430128967383470040}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -239,8 +239,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.2738521}
-  m_Center: {x: 0, y: 0, z: -0.36307395}
+  m_Size: {x: 1, y: 1.317298, z: 0.05617298}
+  m_Center: {x: -3.7070482e-16, y: -0.15864913, z: -0.028086487}
 --- !u!114 &5457277487652179461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,7 +266,12 @@ GameObject:
   - component: {fileID: 6830799231236734851}
   - component: {fileID: 8291018753177096302}
   - component: {fileID: 6453458756054104670}
-  m_Layer: 0
+  - component: {fileID: 1924046822409375705}
+  - component: {fileID: 1164618388289211227}
+  - component: {fileID: 9163455669242249921}
+  - component: {fileID: 5530003663308921047}
+  - component: {fileID: 3974828885653594356}
+  m_Layer: 6
   m_Name: MirrorGameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,8 +288,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -17.5, y: 1, z: 2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 6.303202, y: 6.3032, z: 6.303202}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5369216711389247202}
   - {fileID: 4780993721006401541}
@@ -319,6 +324,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 947884d19a2b55c4f86a34081ee6c220, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -359,8 +365,105 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.5147921}
-  m_Center: {x: 0, y: 0, z: 0.24260396}
+  m_Size: {x: 1.6345978, y: 1.9518983, z: 0.066990726}
+  m_Center: {x: -4.70671e-16, y: -0.1586492, z: 0.021617262}
+--- !u!114 &1924046822409375705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9160601259328176908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f64c7de03efc38640b653ac3eb9dedb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAtacheableForCompass: 1
+  isRotatingTowardsTheCompass: 0
+  isAtacheableForRuler: 0
+  isAtacheableForSquad: 0
+  isAtachedToCompass: 0
+  isAtachedToRuler: 0
+  isAtachedToSquad: 0
+  rend: {fileID: 0}
+--- !u!114 &1164618388289211227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9160601259328176908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79143a0e63bb4fc488b8f5f564d1aa9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRotateInY: 1
+  canRotateInZ: 1
+  canRotate: 1
+  maxRadius: 0
+  canAttachOthers: 0
+  needToBeKinematic: 0
+  isRotating: 0
+  gimballRef: {fileID: 0}
+  objRenderer: {fileID: 8291018753177096302}
+--- !u!114 &9163455669242249921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9160601259328176908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78a0fb736edc05147bb34ed983f6e4b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRadius: 5
+  needGravity: 0
+  objRenderer: {fileID: 8291018753177096302}
+  originParticle: {fileID: 7235251305826239643, guid: 0304948c45a3e3049a9d502fcbd4d427,
+    type: 3}
+--- !u!114 &5530003663308921047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9160601259328176908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0593fb6d54f4044fa5cb316cc726439, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &3974828885653594356
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9160601259328176908}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1001 &96708804353473609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -387,17 +490,17 @@ PrefabInstance:
     - target: {fileID: 4831821786055283788, guid: 5f578246cb280d043897417c26e10601,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.031
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4831821786055283788, guid: 5f578246cb280d043897417c26e10601,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.084
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4831821786055283788, guid: 5f578246cb280d043897417c26e10601,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.529
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4831821786055283788, guid: 5f578246cb280d043897417c26e10601,
         type: 3}

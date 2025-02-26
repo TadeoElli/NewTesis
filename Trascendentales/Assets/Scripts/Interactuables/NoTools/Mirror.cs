@@ -9,13 +9,13 @@ public class Mirror : MonoBehaviour, IIlluminable
     public void OnLightOff()
     {
         telescope.SetCharged(false);
-        Debug.Log("LightOff");
+        //Debug.Log("LightOff");
     }
 
     public void OnLightOn()
     {
         telescope.SetCharged(true);
-        Debug.Log("LightOn");
+        //Debug.Log("LightOn");
     }
     
 }

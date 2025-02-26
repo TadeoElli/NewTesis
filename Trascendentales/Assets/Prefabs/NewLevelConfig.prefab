@@ -8379,8 +8379,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5026767376265632637}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0000000029366534, y: 0.98532784, z: -0.17067231, w: -0.000000016953926}
-  m_LocalPosition: {x: 0, y: 5, z: 14}
+  m_LocalRotation: {x: 0.17067231, y: -0.000000016953926, z: 0.0000000029366534, w: 0.98532784}
+  m_LocalPosition: {x: 0, y: 5, z: -14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10584,7 +10584,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6721647073107393115}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17067231, y: 0.000000016953926, z: -0.0000000029366534, w: 0.98532784}
+  m_LocalRotation: {x: 0.17067231, y: -0.000000016953926, z: 0.0000000029366534, w: 0.98532784}
   m_LocalPosition: {x: 0, y: 5, z: -14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14052,6 +14052,11 @@ PrefabInstance:
       propertyPath: setRotationParentTool
       value: 
       objectReference: {fileID: 8388738762509102311}
+    - target: {fileID: 140704549958735483, guid: a020c8bd42b67ca459ae45cd617d6ac1,
+        type: 3}
+      propertyPath: interactableLayer.m_Bits
+      value: 4160
+      objectReference: {fileID: 0}
     - target: {fileID: 605190015852883773, guid: a020c8bd42b67ca459ae45cd617d6ac1,
         type: 3}
       propertyPath: m_Name
@@ -14090,7 +14095,7 @@ PrefabInstance:
     - target: {fileID: 1417980483513327565, guid: a020c8bd42b67ca459ae45cd617d6ac1,
         type: 3}
       propertyPath: interactableLayer.m_Bits
-      value: 65
+      value: 4161
       objectReference: {fileID: 0}
     - target: {fileID: 2290954574694791121, guid: a020c8bd42b67ca459ae45cd617d6ac1,
         type: 3}
@@ -14101,6 +14106,11 @@ PrefabInstance:
         type: 3}
       propertyPath: holdTimeThreshold
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290954574694791121, guid: a020c8bd42b67ca459ae45cd617d6ac1,
+        type: 3}
+      propertyPath: interactableLayer.m_Bits
+      value: 4160
       objectReference: {fileID: 0}
     - target: {fileID: 2519444888325775714, guid: a020c8bd42b67ca459ae45cd617d6ac1,
         type: 3}
@@ -14132,6 +14142,11 @@ PrefabInstance:
       propertyPath: dragAtachableObjectsTool
       value: 
       objectReference: {fileID: 8801040676316289144}
+    - target: {fileID: 2519444888325775714, guid: a020c8bd42b67ca459ae45cd617d6ac1,
+        type: 3}
+      propertyPath: interactableLayer.m_Bits
+      value: 4160
+      objectReference: {fileID: 0}
     - target: {fileID: 2613149806191447365, guid: a020c8bd42b67ca459ae45cd617d6ac1,
         type: 3}
       propertyPath: gimball
@@ -14152,6 +14167,11 @@ PrefabInstance:
       propertyPath: gimballGizmoPerspective
       value: 
       objectReference: {fileID: 4499433856033037752}
+    - target: {fileID: 2613149806191447365, guid: a020c8bd42b67ca459ae45cd617d6ac1,
+        type: 3}
+      propertyPath: interactableLayer.m_Bits
+      value: 4160
+      objectReference: {fileID: 0}
     - target: {fileID: 2656691352042560701, guid: a020c8bd42b67ca459ae45cd617d6ac1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14177,6 +14197,11 @@ PrefabInstance:
       propertyPath: setRotationParentTool
       value: 
       objectReference: {fileID: 8388738762509102311}
+    - target: {fileID: 3372142096089564645, guid: a020c8bd42b67ca459ae45cd617d6ac1,
+        type: 3}
+      propertyPath: interactableLayer.m_Bits
+      value: 4160
+      objectReference: {fileID: 0}
     - target: {fileID: 4872339832566942274, guid: a020c8bd42b67ca459ae45cd617d6ac1,
         type: 3}
       propertyPath: mainCamera
@@ -14186,6 +14211,11 @@ PrefabInstance:
         type: 3}
       propertyPath: holdTimeThreshold
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4872339832566942274, guid: a020c8bd42b67ca459ae45cd617d6ac1,
+        type: 3}
+      propertyPath: interactableLayer.m_Bits
+      value: 4160
       objectReference: {fileID: 0}
     - target: {fileID: 6165654701097406847, guid: a020c8bd42b67ca459ae45cd617d6ac1,
         type: 3}
@@ -14247,6 +14277,11 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 2510775611644852232}
+    - target: {fileID: 7039775328774301397, guid: a020c8bd42b67ca459ae45cd617d6ac1,
+        type: 3}
+      propertyPath: interactableLayer.m_Bits
+      value: 4160
+      objectReference: {fileID: 0}
     - target: {fileID: 7500145944813371781, guid: a020c8bd42b67ca459ae45cd617d6ac1,
         type: 3}
       propertyPath: mainCamera
@@ -14262,6 +14297,11 @@ PrefabInstance:
       propertyPath: setScaleParentTool
       value: 
       objectReference: {fileID: 3653359195175577735}
+    - target: {fileID: 7500145944813371781, guid: a020c8bd42b67ca459ae45cd617d6ac1,
+        type: 3}
+      propertyPath: interactableLayer.m_Bits
+      value: 4160
+      objectReference: {fileID: 0}
     - target: {fileID: 8455633982575144168, guid: a020c8bd42b67ca459ae45cd617d6ac1,
         type: 3}
       propertyPath: m_Material
@@ -14285,7 +14325,7 @@ PrefabInstance:
     - target: {fileID: 8613890811636718066, guid: a020c8bd42b67ca459ae45cd617d6ac1,
         type: 3}
       propertyPath: rotationSteps
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8613890811636718066, guid: a020c8bd42b67ca459ae45cd617d6ac1,
         type: 3}
@@ -14302,6 +14342,11 @@ PrefabInstance:
       propertyPath: gimballGizmoPerspective
       value: 
       objectReference: {fileID: 7511709978351467278}
+    - target: {fileID: 8613890811636718066, guid: a020c8bd42b67ca459ae45cd617d6ac1,
+        type: 3}
+      propertyPath: interactableLayer.m_Bits
+      value: 4160
+      objectReference: {fileID: 0}
     - target: {fileID: 8948166519887790638, guid: a020c8bd42b67ca459ae45cd617d6ac1,
         type: 3}
       propertyPath: m_SortingLayer
@@ -14419,10 +14464,10 @@ MonoBehaviour:
   mainCamera: {fileID: 2510775611644852232}
   interactableLayer:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 4161
   raycastLayer:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 4161
 --- !u!114 &8388738762509102311 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7500145944813371781, guid: a020c8bd42b67ca459ae45cd617d6ac1,
@@ -14457,7 +14502,7 @@ MonoBehaviour:
   mainCamera: {fileID: 2510775611644852232}
   interactableLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4160
   chargeCursor: {fileID: 1384623588859283673}
   image: {fileID: 7577136794769768842}
   holdTimeThreshold: 0.5

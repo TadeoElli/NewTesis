@@ -24,7 +24,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -46,9 +46,9 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
@@ -110,8 +110,314 @@ ModelImporter:
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
-    human: []
-    skeleton: []
+    human:
+    - boneName: RetopoPJ_SinRopa:Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:LeftUpLeg
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:RightUpLeg
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:LeftLeg
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:RightLeg
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:LeftFoot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:RightFoot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:Spine1
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:LeftShoulder
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:RightShoulder
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:LeftArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:RightArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:LeftForeArm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:RightForeArm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:LeftHand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:RightHand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:LeftToeBase
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:RightToeBase
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RetopoPJ_SinRopa:Spine2
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Pain Gesture(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:Hips
+      parentName: Pain Gesture(Clone)
+      position: {x: 0.005042187, y: 11.806814, z: -0.107118964}
+      rotation: {x: -0.12274207, y: -0.040180497, z: 0.012988574, w: 0.99153984}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:Spine
+      parentName: RetopoPJ_SinRopa:Hips
+      position: {x: -0, y: 0.878788, z: -0.058972996}
+      rotation: {x: 0.14045186, y: 0.0027917004, z: -0.012202325, w: 0.9900084}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:Spine1
+      parentName: RetopoPJ_SinRopa:Spine
+      position: {x: -0, y: 1.0275589, z: 0}
+      rotation: {x: 0.060744837, y: 0.0036772874, z: -0.005505815, w: 0.9981314}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:Spine2
+      parentName: RetopoPJ_SinRopa:Spine1
+      position: {x: -0, y: 1.174353, z: 0}
+      rotation: {x: 0.0607469, y: 0.003670267, z: -0.005488654, w: 0.9981314}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:Neck
+      parentName: RetopoPJ_SinRopa:Spine2
+      position: {x: -0, y: 1.321147, z: 0}
+      rotation: {x: -0.07642142, y: 0.003446883, z: 0.0019465107, w: 0.99706775}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:Head
+      parentName: RetopoPJ_SinRopa:Neck
+      position: {x: -0, y: 0.454119, z: 0.173306}
+      rotation: {x: -0.035606913, y: 0.0037704972, z: 0.0010488858, w: 0.99935824}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:HeadTop_End
+      parentName: RetopoPJ_SinRopa:Head
+      position: {x: -0, y: 2.8792958, z: 1.0988289}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:LeftShoulder
+      parentName: RetopoPJ_SinRopa:Spine2
+      position: {x: -0.67299694, y: 1.097719, z: -0.021124}
+      rotation: {x: 0.61630476, y: -0.41156632, z: 0.5254783, w: 0.41791642}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:LeftArm
+      parentName: RetopoPJ_SinRopa:LeftShoulder
+      position: {x: -0, y: 1.165954, z: 0}
+      rotation: {x: -0.14532478, y: 0.07058654, z: 0.011916603, w: 0.98679096}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:LeftForeArm
+      parentName: RetopoPJ_SinRopa:LeftArm
+      position: {x: -0, y: 2.8186388, z: 0}
+      rotation: {x: -0.016896872, y: -0.17276086, z: -0.0020298564, w: 0.9848168}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:LeftHand
+      parentName: RetopoPJ_SinRopa:LeftForeArm
+      position: {x: -0, y: 3.5486608, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:RightShoulder
+      parentName: RetopoPJ_SinRopa:Spine2
+      position: {x: 0.67299694, y: 1.0969, z: -0.008917999}
+      rotation: {x: 0.5862364, y: 0.46825054, z: -0.559362, w: 0.35239536}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:RightArm
+      parentName: RetopoPJ_SinRopa:RightShoulder
+      position: {x: -0, y: 1.165954, z: 0}
+      rotation: {x: -0.13842194, y: -0.12317145, z: 0.031064648, w: 0.98219305}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:RightForeArm
+      parentName: RetopoPJ_SinRopa:RightArm
+      position: {x: -0, y: 2.812352, z: 0}
+      rotation: {x: -0.01757952, y: 0.2203856, z: -0.00028189263, w: 0.97525436}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:RightHand
+      parentName: RetopoPJ_SinRopa:RightForeArm
+      position: {x: -0, y: 3.5121481, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:LeftUpLeg
+      parentName: RetopoPJ_SinRopa:Hips
+      position: {x: -1.066836, y: -0.48820597, z: 0.049949996}
+      rotation: {x: -0.024690982, y: -0.0120267775, z: 0.995181, w: 0.09413038}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:LeftLeg
+      parentName: RetopoPJ_SinRopa:LeftUpLeg
+      position: {x: -0, y: 5.4497337, z: 0}
+      rotation: {x: -0.3322611, y: 0.0030212128, z: 0.045203503, w: 0.9420988}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:LeftFoot
+      parentName: RetopoPJ_SinRopa:LeftLeg
+      position: {x: -0, y: 4.983345, z: 0}
+      rotation: {x: 0.6130326, y: 0.095074296, z: -0.0008316447, w: 0.7843157}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:LeftToeBase
+      parentName: RetopoPJ_SinRopa:LeftFoot
+      position: {x: -0, y: 1.977719, z: 0}
+      rotation: {x: 0.31313637, y: 0.037341118, z: -0.012322567, w: 0.94889385}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:LeftToe_End
+      parentName: RetopoPJ_SinRopa:LeftToeBase
+      position: {x: -0, y: 0.73379993, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:RightUpLeg
+      parentName: RetopoPJ_SinRopa:Hips
+      position: {x: 1.066836, y: -0.48820597, z: -0.033317}
+      rotation: {x: 0.1225592, y: -0.019256715, z: 0.98896503, w: -0.08097254}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:RightLeg
+      parentName: RetopoPJ_SinRopa:RightUpLeg
+      position: {x: -0, y: 5.4646945, z: 0}
+      rotation: {x: -0.33324102, y: -0.005421015, z: -0.04412829, w: 0.9417929}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:RightFoot
+      parentName: RetopoPJ_SinRopa:RightLeg
+      position: {x: -0, y: 4.9777646, z: 0}
+      rotation: {x: 0.6680031, y: -0.0818821, z: -0.003001842, w: 0.7396338}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:RightToeBase
+      parentName: RetopoPJ_SinRopa:RightFoot
+      position: {x: -0, y: 2.42148, z: 0}
+      rotation: {x: 0.2508649, y: -0.033281583, z: 0.008629762, w: 0.96741134}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RetopoPJ_SinRopa:RightToe_End
+      parentName: RetopoPJ_SinRopa:RightToeBase
+      position: {x: -0, y: 0.97427803, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -122,13 +428,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 2
+  animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0

@@ -5264,12 +5264,12 @@ PrefabInstance:
     - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000016953926
+      value: -0.000000016953926
       objectReference: {fileID: 0}
     - target: {fileID: 3579820922054934007, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000029366534
+      value: 0.0000000029366534
       objectReference: {fileID: 0}
     - target: {fileID: 3653359195175577735, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
@@ -5339,12 +5339,12 @@ PrefabInstance:
     - target: {fileID: 6378466528603176896, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000016953926
+      value: -0.000000016953926
       objectReference: {fileID: 0}
     - target: {fileID: 6378466528603176896, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000029366534
+      value: 0.0000000029366534
       objectReference: {fileID: 0}
     - target: {fileID: 6736285431859821979, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
@@ -5374,12 +5374,12 @@ PrefabInstance:
     - target: {fileID: 7192060455597761534, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.000000016953926
+      value: -0.000000016953926
       objectReference: {fileID: 0}
     - target: {fileID: 7192060455597761534, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0000000029366534
+      value: -0.0000000029366534
       objectReference: {fileID: 0}
     - target: {fileID: 7779308118228087952, guid: c5ab43aafa20f35449c5d42d03d57854,
         type: 3}
@@ -5416,6 +5416,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5ab43aafa20f35449c5d42d03d57854, type: 3}
+--- !u!114 &362188136 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3884639746195032229, guid: c5ab43aafa20f35449c5d42d03d57854,
+    type: 3}
+  m_PrefabInstance: {fileID: 362188135}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355bb70b8db17c447b03bb1ab38e80c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &362640587 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 320928760605139527, guid: 3313f48df41b0a142a26c070e18584d7,
@@ -32927,6 +32939,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 35049032424743292, guid: a50aa2591916923438c9e7770459e0c4,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7316727620347110568, guid: a50aa2591916923438c9e7770459e0c4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -32985,8 +33002,48 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8425596979419615070, guid: a50aa2591916923438c9e7770459e0c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3978378629314465585}
   m_SourcePrefab: {fileID: 100100000, guid: a50aa2591916923438c9e7770459e0c4, type: 3}
+--- !u!1 &3978378629314465584 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8425596979419615070, guid: a50aa2591916923438c9e7770459e0c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 3978378629314465583}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3978378629314465585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3978378629314465584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ab9c2a14ef052408080940a866343f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnTriggerBoxEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 362188136}
+        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
+        m_MethodName: SetScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: LevelProportion
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTriggerBoxExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &4650961938083085781
 PrefabInstance:
   m_ObjectHideFlags: 0

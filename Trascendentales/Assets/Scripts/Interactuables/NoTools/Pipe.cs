@@ -42,6 +42,27 @@ public class Pipe : MonoBehaviour
             isBlocked = false;
         }
     }
+   /* public bool DrawRaycast2(Pipes parentPipe)
+    {
+        RaycastHit hit;
+        float rayDistance = Vector3.Distance(pipeSteam.transform.position, pipeSteam.pointDirection.position);
+        if (Physics.Raycast(pipeSteam.transform.position, pipeSteam.pointDirection.position - pipeSteam.transform.position, out hit, rayDistance, parentPipe.layerMask))
+        {
+            // Check if the hit object is on the "Pipes" layer
+            if (hit.collider.gameObject.TryGetComponent<Pipes>(out Pipes pipeComponent))
+            {
+                if(pipeComponent == parentPipe)
+                    return true;
+                else
+                    return false;
+            }
+            else return false;
+        }
+        else
+        {
+            return false;
+        }
+    }*/
 
     public void EnableSteam(Pipe source)
     {

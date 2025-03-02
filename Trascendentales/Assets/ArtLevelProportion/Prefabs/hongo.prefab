@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 6007693618077588254}
   - component: {fileID: 5794506178201612031}
   - component: {fileID: 8701747419350282782}
-  - component: {fileID: 2136084792509709954}
   - component: {fileID: 4955496760704654659}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: hongo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,9 +29,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5736984027745522492}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 49.86946, y: 20.348232, z: 45.386696}
-  m_LocalScale: {x: 0.5, y: 0.3, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -65,7 +64,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e31399325c2d2ac48909f2711b299013, type: 2}
+  - {fileID: 2100000, guid: afb5d1693e1248a499f01c669a385214, type: 2}
+  - {fileID: 2100000, guid: 947884d19a2b55c4f86a34081ee6c220, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -129,21 +129,6 @@ MonoBehaviour:
   isAtachedToRuler: 0
   isAtachedToSquad: 0
   rend: {fileID: 0}
---- !u!114 &2136084792509709954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5736984027745522492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cf732279fa87b142938982810849f54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionForBrush: 0
-  interactionForEraser: 0
-  objRenderer: {fileID: 0}
 --- !u!114 &4955496760704654659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,10 +141,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05f6b7e186c5e94898dd59ab8b3dd27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minScale: {x: 0, y: 0, z: 0}
-  maxScale: {x: 0, y: 0, z: 0}
+  minScale: {x: 0.5, y: 0.5, z: 0.5}
+  maxScale: {x: 1, y: 1, z: 1}
   maxRadius: 1
   canAttachOthers: 0
   canScale: 1
   isScaling: 0
-  objRenderer: {fileID: 0}
+  objRenderer: {fileID: 6007693618077588254}

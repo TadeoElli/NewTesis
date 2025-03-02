@@ -5,6 +5,7 @@ using UnityEngine;
 public class Pipes : MonoBehaviour
 {
     [SerializeField] private List<Pipe> pipes; // List of all pipes
+    [SerializeField] private List<Pipe> needPipesToActivate; // List of all pipes
     public bool startActive = false; // Initial state of pipes
     public LayerMask layerMask; // Layer For the colliders of the steam
 
@@ -22,6 +23,17 @@ public class Pipes : MonoBehaviour
 
     void Update()
     {
+        /*if(startActive)
+            return;
+        foreach (var pipe in needPipesToActivate.Where(x => x.isActive))
+        {
+            if (pipe.DrawRaycast2(this))
+            {
+                Activate(null);
+                return;
+            }
+        }
+        DeactivateAllPipes();*/
         foreach (var pipe in pipes)
         {
             if (pipe.isActive)

@@ -5,6 +5,7 @@ using UnityEngine;
 public class VoidCollider : MonoBehaviour
 {
     [SerializeField] Vector3 newPosition;
+
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.layer == 6)

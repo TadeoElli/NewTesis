@@ -20,4 +20,12 @@ public class ElectricDamage : MonoBehaviour
             Debug.Log("particle damage");
         }
     }
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.TryGetComponent<IDamagable>(out IDamagable x))
+        {
+            x.Takedmg(1);
+            Debug.Log("particle damage");
+        }
+    }
 }

@@ -30,16 +30,16 @@ public class Steam : MonoBehaviour
             if (Physics.Raycast(transform.position, pointDirection.position - transform.position, out hit, rayDistance))
             {
                 // Check if the hit object is on the "Pipes" layer (layer 8 is typically used for "Pipes")
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Pipes"))
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Pipes") || hit.collider.gameObject.layer == LayerMask.NameToLayer("Default"))
                 {
                     canApplyForce = false; // Disable force application
 
-                    /*// Deactivate other particle system if needed
+                    // Deactivate other particle system if needed
                     if (gasParticles != null)
                     {
                         gasParticles.Stop(); // Stop or deactivate other particles
                     }
-                    */
+                    
                     //Debug.Log("Raycast hit Pipes: No force applied.");
                 }
             }
@@ -48,11 +48,11 @@ public class Steam : MonoBehaviour
                 canApplyForce = true; // Enable force application
 
                 // Activate other particle system if needed
-                /*if (gasParticles != null)
+                if (gasParticles != null)
                 {
                     gasParticles.Play(); // Start or activate other particles
                 }
-                */
+                
                 //Debug.Log("Raycast did not hit Pipes: Force can be applied.");
             }
         }

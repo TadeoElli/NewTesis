@@ -16,7 +16,8 @@ public class ParticleDamage : MonoBehaviour
     }
     private void OnEnable()
     {
-        StartCoroutine(ReproduceSound());
+        if(fireballSound != null)
+            StartCoroutine(ReproduceSound());
     }
 
     private IEnumerator ReproduceSound()

@@ -20,6 +20,7 @@ public class PlatformSwapper : MonoBehaviour
 
     private IEnumerator SwapPlatformsRoutine()
     {
+        yield return new WaitForSeconds(3);
         while (true)
         {
             // Seleccionar dos plataformas al azar con X y Z distintos
@@ -46,7 +47,7 @@ public class PlatformSwapper : MonoBehaviour
             yield return MoveToY(platformB, originalPositionB.y);
 
             // Esperar un momento antes de repetir el proceso
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(3f);
         }
     }
 

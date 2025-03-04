@@ -10,13 +10,18 @@ public class CheckRotationEvent : MonoBehaviour
     public UnityEvent OnBreak;
     private bool isCompleted = false;
     [SerializeField] private bool blockAfterComplete = false;
+    public float angleOfObject;
 
     void Update()
     {
         if (isCompleted && blockAfterComplete)
             return;
+        angleOfObject = objects[0].prefab.transform.rotation.eulerAngles.y;
 
         CheckRotations();
+    }
+    private void Start()
+    {
     }
 
     private void CheckRotations()
@@ -54,10 +59,9 @@ public class CheckRotationEvent : MonoBehaviour
             return true;
 
         // Verificar si TODOS los objetos con rotación Y cumplen
-        return yRotationObjects.TrueForAll(obj =>
-            Mathf.Approximately(
-                NormalizeAngle(obj.prefab.transform.rotation.eulerAngles.y),
-                NormalizeAngle(obj.goalRotationY)
+        return yRotationObjects.TrueForAll(obj =>(
+            (obj.prefab.transform.rotation.eulerAngles.y >= obj.goalRotationY - 0.01) &&
+            (obj.prefab.transform.rotation.eulerAngles.y <= obj.goalRotationY + 0.01)
             )
         );
     }

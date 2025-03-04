@@ -14,6 +14,8 @@ public class PlayerManager : MonoBehaviour
     private Transform currentPlatform;
     public bool isInteracting;
     private bool isAlive = true;
+    [SerializeField] Vector3 originPosition;
+
     private void Awake()
     {
         inputManager = GetComponent<InputManager>();
@@ -31,6 +33,10 @@ public class PlayerManager : MonoBehaviour
         if (savedPosition != Vector3.zero)
         {
             transform.position = savedPosition;
+        }
+        else
+        {
+            transform.position = originPosition;
         }
     }
 

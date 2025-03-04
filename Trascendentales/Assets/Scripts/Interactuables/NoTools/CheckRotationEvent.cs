@@ -60,8 +60,8 @@ public class CheckRotationEvent : MonoBehaviour
 
         // Verificar si TODOS los objetos con rotación Y cumplen
         return yRotationObjects.TrueForAll(obj =>(
-            (obj.prefab.transform.rotation.eulerAngles.y >= obj.goalRotationY - 0.01) &&
-            (obj.prefab.transform.rotation.eulerAngles.y <= obj.goalRotationY + 0.01)
+            (NormalizeAngle(obj.prefab.transform.rotation.eulerAngles.y) >= NormalizeAngle(obj.goalRotationY - 0.01f)) &&
+            (NormalizeAngle(obj.prefab.transform.rotation.eulerAngles.y) <= NormalizeAngle(obj.goalRotationY + 0.01f))
             )
         );
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.Events;
 [RequireComponent(typeof(InteractuableObject))]
 [RequireComponent(typeof(Rigidbody))]
 public class MovableObject : MonoBehaviour, IMovable,IFeedback
@@ -18,6 +19,7 @@ public class MovableObject : MonoBehaviour, IMovable,IFeedback
     private bool isMovable = true;
 
     public event Action OnEraserInteract;
+    public UnityEvent OnCompassInteract,OnCompassDrop;
 
     public float GetMaxRadius() => maxRadius;
     public bool GetNeedGravity() => needGravity;
@@ -55,6 +57,14 @@ public class MovableObject : MonoBehaviour, IMovable,IFeedback
     public void InteractWithEraser(bool isOn2D)
     {
         OnEraserInteract?.Invoke();
+    }
+    public void InteractWithCompass()
+    {
+        OnCompassInteract?.Invoke();
+    }
+    public void DropWithCompass()
+    {
+        OnCompassDrop?.Invoke();
     }
     public virtual void ShowOriginFeedback()
     {

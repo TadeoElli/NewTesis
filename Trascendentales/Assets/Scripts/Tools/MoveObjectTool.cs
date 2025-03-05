@@ -40,6 +40,7 @@ public class MoveObjectTool : Tools
             objectiveRb.angularVelocity = Vector3.zero;
         }
         isDragging = true;
+        movable.InteractWithCompass();
         
     }
 
@@ -179,8 +180,11 @@ public class MoveObjectTool : Tools
         isDragging = false;
         mouseState.DropRightClick();
         if(movable != null)
+        {
+            movable.DropWithCompass();
             if(movable.GetNeedGravity())
                 objectiveRb.useGravity = true;
+        }
         movable = null;
         objectiveRb = null;
         inputManager.OnRightClickDrop -= DropInteractable;

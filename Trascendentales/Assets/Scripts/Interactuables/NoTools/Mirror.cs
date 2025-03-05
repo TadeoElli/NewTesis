@@ -6,6 +6,11 @@ public class Mirror : MonoBehaviour, IIlluminable
 {
     [SerializeField] Telescope telescope;
 
+    public GameObject GetParentObject()
+    {
+        return gameObject;
+    }
+
     public void OnLightOff()
     {
         telescope.SetCharged(false);

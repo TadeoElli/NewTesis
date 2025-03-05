@@ -80,6 +80,8 @@ public interface IMovable
     public void ShowOriginFeedback();
     public Vector3 GetOriginalPosition();
     public event Action OnEraserInteract;
+    public void InteractWithCompass();
+    public void DropWithCompass();
     public void InteractWithEraser(bool isOn2D);
 
 }
@@ -87,6 +89,7 @@ public interface IIlluminable
 {
     public void OnLightOn();
     public void OnLightOff();
+    public GameObject GetParentObject();
 }
 
 

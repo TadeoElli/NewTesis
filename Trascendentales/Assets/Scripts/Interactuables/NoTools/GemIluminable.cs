@@ -131,5 +131,8 @@ public class GemIluminable : MonoBehaviour, IIlluminable
         }
     }
 
-    
+    public GameObject GetParentObject()
+    {
+        return gameObject;
+    }
 }

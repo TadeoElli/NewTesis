@@ -10,6 +10,7 @@ public class Telescope : MonoBehaviour
     [SerializeField] private bool needCharge = true;
     [SerializeField] private bool startsOnOrigin = false;
     private IIlluminable objectIluminated;
+    [SerializeField] private GameObject parentIluminable;
     private bool isActive = false; // Flag para determinar si está activado
 
 
@@ -79,7 +80,7 @@ public class Telescope : MonoBehaviour
         isActive = state;
         if(!isActive)
         {
-            if (objectIluminated != null)
+            if (objectIluminated != null && objectIluminated.GetParentObject() != parentIluminable)
             {
                 objectIluminated.OnLightOff();
                 objectIluminated = null;

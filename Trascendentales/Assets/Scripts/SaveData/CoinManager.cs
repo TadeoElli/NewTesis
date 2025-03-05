@@ -57,7 +57,7 @@ public class CoinManager : MonoBehaviour
             {
                 if (!coin.collected && coin.levelName == UnityEngine.SceneManagement.SceneManager.GetActiveScene().name)
                 {
-                    Instantiate(coinPrefab, coin.position, Quaternion.identity);
+                    Instantiate(coinPrefab, coin.position, Quaternion.Euler(-90,0,0));
                     Debug.Log("Se instancio una moneda");
                 }
                 else if (coin.collected)

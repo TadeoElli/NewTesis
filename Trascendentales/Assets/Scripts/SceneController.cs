@@ -43,6 +43,10 @@ public class SceneController : MonoBehaviour
         Time.timeScale = 1; // Restaurar el tiempo
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+    public void DeleteLoadData()
+    {
+        SaveSystem.DeletePlayerData();
+    }
 
 }
 

@@ -39,7 +39,7 @@ public class Telescope : MonoBehaviour
             }
             else
             {
-                if (objectIluminated != null)
+                if (objectIluminated != null && objectIluminated.GetParentObject() != parentIluminable)
                 {
                     objectIluminated.OnLightOff();
                     objectIluminated = null;
@@ -68,7 +68,7 @@ public class Telescope : MonoBehaviour
                 lineRenderer.SetPosition(0, rayTarget.position);
                 lineRenderer.SetPosition(1, rayTarget.position + direction * maxRayLength);
             }
-            if(objectIluminated != null)
+            if(objectIluminated != null && objectIluminated.GetParentObject() != parentIluminable)
             {
                 objectIluminated.OnLightOff();
                 objectIluminated = null;

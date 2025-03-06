@@ -20,7 +20,7 @@ public class PlayerDamage : MonoBehaviour, IDamagable
     }
     public void Takedmg(int dmg)
     {
-        if(isInvencible)
+        if(isInvencible || lives == 0)
             return;
         lives--;
         OnTakeDamage?.Invoke();
